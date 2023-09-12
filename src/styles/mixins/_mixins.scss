@@ -1,0 +1,23 @@
+@mixin media-query($breakpoint) {
+	@if $breakpoint == smallScreen {
+		@media (min-width: #{$smallScreen}) {
+			@content;
+		}
+	} @else if $breakpoint == mediumScreen {
+		@media (min-width: #{$mediumScreen}) {
+			@content;
+		}
+	} @else if $breakpoint == largeScreen {
+		@media (min-width: #{$largeScreen}) {
+			@content;
+		}
+	} @else if $breakpoint == x-largeScreen {
+		@media (min-width: #{$x-largeScreen}) {
+			@content;
+		}
+	} @else if $breakpoint == xx-largeScreen {
+		@media (min-width: #{$xx-largeScreen}) {
+			@content;
+		}
+	}
+}

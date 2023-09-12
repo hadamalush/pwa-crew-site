@@ -1,0 +1,15 @@
+@import "../../../transitions/variables";
+
+.tooltip-item {
+	a {
+		padding: 1.5em 2em;
+		width: 100%;
+		height: 100%;
+		display: block;
+		color: $link-color-primary;
+	}
+
+	&:hover a {
+		color: $secondary-color;
+	}
+}

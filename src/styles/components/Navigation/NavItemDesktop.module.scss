@@ -1,0 +1,46 @@
+@import "../../transitions/variables";
+
+.nav {
+	&__item {
+		position: relative;
+		color: $link-color-primary;
+		width: 100%;
+		fill: $link-color-primary;
+		transition: color 0.3s, fill 0.3s;
+
+		&:first-child:hover {
+			background-color: $background-nav;
+			border-top-right-radius: 10px;
+		}
+
+		&--bottom {
+			margin-top: auto;
+			transition: color 0.3s;
+		}
+	}
+
+	&__item:first-child:hover {
+		background-color: $background-nav;
+		border-top-right-radius: 10px;
+	}
+
+	&__link {
+		width: 100%;
+		padding: 1.6em 0;
+		text-align: center;
+		display: block;
+		margin: 0 auto;
+
+		color: $link-color-primary;
+		fill: $link-color-primary;
+
+		&:hover {
+			color: $secondary-color;
+			fill: $secondary-color;
+		}
+
+		&--bottom:hover {
+			color: $danger-color;
+		}
+	}
+}

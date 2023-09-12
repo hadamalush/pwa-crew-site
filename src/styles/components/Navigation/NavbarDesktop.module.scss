@@ -1,0 +1,69 @@
+@import "../../transitions/variables";
+
+.nav {
+	position: fixed;
+	right: 2em;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 80vh;
+	width: 10em;
+	border-radius: 10px;
+	background-color: $background-nav;
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__item {
+		position: relative;
+		width: 100%;
+
+		&:hover {
+			color: $secondary-color;
+			fill: $secondary-color;
+		}
+
+		&:first-child:hover {
+			background-color: $background-nav;
+			border-top-right-radius: 10px;
+		}
+
+		&:hover .tooltip {
+			display: block;
+		}
+
+		&--bottom {
+			margin-top: auto;
+			transition: color 0.3s;
+		}
+	}
+
+	&__item:first-child:hover {
+		background-color: $background-nav;
+		border-top-right-radius: 10px;
+	}
+
+	&__link {
+		width: 100%;
+		padding: 1.6em 0;
+		text-align: center;
+		display: block;
+		margin: 0 auto;
+		color: $link-color-primary;
+		fill: $link-color-primary;
+		transition: color 0.3s, fill 0.3s;
+
+		&:hover {
+			color: $secondary-color;
+			fill: $secondary-color;
+		}
+
+		&--bottom:hover {
+			color: $danger-color;
+		}
+	}
+}
