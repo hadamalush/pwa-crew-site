@@ -21,3 +21,13 @@
 		}
 	}
 }
+
+@mixin pointer($icon) {
+	content: $icon;
+	position: absolute;
+	transform: translateY(-50%);
+	right: 0;
+	font-size: 3rem;
+	opacity: 0;
+	transition: opacity 0.5s;
+}

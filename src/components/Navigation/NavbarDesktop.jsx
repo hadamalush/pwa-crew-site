@@ -9,11 +9,15 @@ import { usePathname } from "next/navigation";
 const NavbarDesktop = () => {
 	const pathname = usePathname();
 
+	const isActive = `${styles["nav__link"]} ${styles["nav__link--isActive"]}`;
+
 	return (
 		<nav className={styles["nav"]}>
 			<ul className={styles["nav__list"]}>
 				<li className={styles["nav__item"]}>
-					<Link href='/admin' className={styles["nav__link"]}>
+					<Link
+						href='/'
+						className={pathname === "/" ? isActive : styles["nav__link"]}>
 						<IconRender variant='user' />
 					</Link>
 					<TooltipMenuItems className={styles.tooltip}>
@@ -23,13 +27,21 @@ const NavbarDesktop = () => {
 				</li>
 
 				<li className={styles["nav__item"]}>
-					<Link href='/' className={styles["nav__link"]}>
+					<Link
+						href='/kolekcja'
+						className={
+							pathname === "/kolekcja" ? isActive : styles["nav__link"]
+						}>
 						<IconRender variant='film' />
 					</Link>
 				</li>
 
 				<li className={styles["nav__item"]}>
-					<Link href='/' className={styles["nav__link"]}>
+					<Link
+						href='/wydarzenia'
+						className={
+							pathname === "/wydarzenia" ? isActive : styles["nav__link"]
+						}>
 						<IconRender variant='event' />
 					</Link>
 					<TooltipMenuItems className={styles.tooltip}>
@@ -39,13 +51,19 @@ const NavbarDesktop = () => {
 				</li>
 
 				<li className={styles["nav__item"]}>
-					<Link href='/' className={styles["nav__link"]}>
+					<Link
+						href='/faq'
+						className={pathname === "/faq" ? isActive : styles["nav__link"]}>
 						<IconRender variant='info' />
 					</Link>
 				</li>
 
 				<li className={styles["nav__item"]}>
-					<Link href='/' className={styles["nav__link"]}>
+					<Link
+						href='/ustawienia'
+						className={
+							pathname === "/ustawienia" ? isActive : styles["nav__link"]
+						}>
 						<IconRender variant='settings' />
 					</Link>
 				</li>

@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navigation/NavbarDesktop";
+import NavbarDesktop from "@/components/Navigation/NavbarDesktop";
 import "./globals.scss";
 
 export const metadata = {
@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='pl'>
 			<body>
-				<Navbar />
+				<NavbarDesktop />
 				{children}
 			</body>
 		</html>

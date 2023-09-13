@@ -1,7 +1,8 @@
 @import "../../transitions/variables";
-
+@import "../../mixins/mixins";
 .nav {
 	position: fixed;
+	display: none;
 	right: 2em;
 	top: 50%;
 	transform: translateY(-50%);
@@ -14,26 +15,40 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		width: 100%;
+
 		height: 100%;
+	}
+
+	&__list,
+	&__item,
+	&__link {
+		width: 100%;
+	}
+
+	&__item:hover,
+	&__link:hover,
+	&__link--isActive {
+		color: $secondary-color;
+		fill: $secondary-color;
 	}
 
 	&__item {
 		position: relative;
-		width: 100%;
-
-		&:hover {
-			color: $secondary-color;
-			fill: $secondary-color;
-		}
 
 		&:first-child:hover {
 			background-color: $background-nav;
 			border-top-right-radius: 10px;
 		}
 
+		.tooltip {
+			transform: scale(0);
+			transition: opacity 0.3s, transform 0.3s;
+			transform-origin: 100% 20%;
+		}
+
 		&:hover .tooltip {
-			display: block;
+			transform: scale(1);
+			opacity: 1;
 		}
 
 		&--bottom {
@@ -48,7 +63,6 @@
 	}
 
 	&__link {
-		width: 100%;
 		padding: 1.6em 0;
 		text-align: center;
 		display: block;
@@ -57,13 +71,23 @@
 		fill: $link-color-primary;
 		transition: color 0.3s, fill 0.3s;
 
-		&:hover {
-			color: $secondary-color;
-			fill: $secondary-color;
+		&:before {
+			@include pointer("🖍️");
+			top: -20%;
+			right: -20%;
+			transform: none;
+		}
+
+		&:hover:before {
+			opacity: 1;
 		}
 
 		&--bottom:hover {
 			color: $danger-color;
 		}
+	}
+
+	@include media-query(mediumScreen) {
+		display: block;
 	}
 }
