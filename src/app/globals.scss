@@ -2,3 +2,11 @@
 @import "../styles/transitions/variables";
 @import "../styles/base/topography";
 @import "../styles/mixins/mixins";
+
+html:has-scrolled body {
+	background-color: #fff;
+}
+
+html:not(:has-scrolled) body {
+	background-color: #fff;
+}

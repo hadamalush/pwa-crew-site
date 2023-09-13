@@ -2,8 +2,10 @@
 import { IconsBase } from "./IconsBase";
 import styles from "../../styles/components/transitions/Icons/IconRender.module.scss";
 
-const IconRender = ({ variant }) => {
+const IconRender = props => {
 	const icons = IconsBase();
+	const variant = props.variant;
+	const classes = `${styles.icon} ${props.className}`;
 
 	const iconsSwitch = variant => {
 		switch (variant) {
@@ -30,7 +32,7 @@ const IconRender = ({ variant }) => {
 
 	const selectedIcon = iconsSwitch(variant);
 
-	return <div className={styles.icon}>{selectedIcon}</div>;
+	return <div className={classes}>{selectedIcon}</div>;
 };
 
 export default IconRender;

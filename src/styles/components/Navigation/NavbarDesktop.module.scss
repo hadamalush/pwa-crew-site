@@ -87,6 +87,13 @@
 		}
 	}
 
+	// &:not([data-scroll="0"]) {
+	// 	background-color: #fff;
+	// }
+	// &:not([data-scroll="0"]) .nav {
+	// 	// background-color: #fff;
+	// }
+
 	@include media-query(mediumScreen) {
 		display: block;
 	}

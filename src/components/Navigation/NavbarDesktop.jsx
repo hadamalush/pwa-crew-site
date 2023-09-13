@@ -21,7 +21,7 @@ const NavbarDesktop = () => {
 						<IconRender variant='user' />
 					</Link>
 					<TooltipMenuItems className={styles.tooltip}>
-						<TooltipMenuItem href='/'>Zaloguj</TooltipMenuItem>
+						<TooltipMenuItem href='/zaloguj'>Zaloguj</TooltipMenuItem>
 						<TooltipMenuItem href='/'>Zarejestruj</TooltipMenuItem>
 					</TooltipMenuItems>
 				</li>

@@ -1,0 +1,73 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+.nav {
+	position: fixed;
+	width: 100vw;
+	height: 6em;
+	bottom: 0;
+	left: 0;
+	background-color: $background-nav;
+	opacity: 1;
+	animation: show 1s;
+
+	&__list {
+		display: flex;
+		height: 100%;
+	}
+
+	&__item {
+		flex: 1;
+	}
+
+	&__item:hover,
+	&__link:hover,
+	&__link--isActive {
+		color: $secondary-color;
+		fill: $secondary-color;
+	}
+
+	&__item {
+		height: 100%;
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		color: $link-color-primary;
+		fill: $link-color-primary;
+		transition: color 0.3s, fill 0.3s;
+	}
+
+	@include media-query(mediumScreen) {
+		display: none;
+	}
+}
+
+//Handling opacity navbar during scrolling 
+.isShow {
+	opacity: 0;
+	animation: hide 1s;
+}
+
+@keyframes hide {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+}
+
+@keyframes show {
+	from {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
