@@ -7,7 +7,7 @@
 	top: 50%;
 	transform: translateY(-50%);
 	height: 80vh;
-	width: 10em;
+	width: 6em;
 	border-radius: 10px;
 	background-color: $background-nav;
 
@@ -87,6 +87,10 @@
 		}
 	}
 
+	&__icon {
+		width: 1.5em;
+	}
+
 	// &:not([data-scroll="0"]) {
 	// 	background-color: #fff;
 	// }
@@ -96,5 +100,13 @@
 
 	@include media-query(mediumScreen) {
 		display: block;
+	}
+
+	@include media-query(largeScreen) {
+		width: 10em;
+
+		&__icon {
+			width: 2em;
+		}
 	}
 }

@@ -25,6 +25,8 @@ const IconRender = props => {
 				return icons.calendar;
 			case "info":
 				return icons.info;
+			case "logo":
+				return icons.logo;
 			default:
 				return null;
 		}

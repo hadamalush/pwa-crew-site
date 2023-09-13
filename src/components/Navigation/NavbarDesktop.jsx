@@ -18,7 +18,7 @@ const NavbarDesktop = () => {
 					<Link
 						href='/'
 						className={pathname === "/" ? isActive : styles["nav__link"]}>
-						<IconRender variant='user' />
+						<IconRender variant='user' className={styles["nav__icon"]} />
 					</Link>
 					<TooltipMenuItems className={styles.tooltip}>
 						<TooltipMenuItem href='/zaloguj'>Zaloguj</TooltipMenuItem>
@@ -32,7 +32,7 @@ const NavbarDesktop = () => {
 						className={
 							pathname === "/kolekcja" ? isActive : styles["nav__link"]
 						}>
-						<IconRender variant='film' />
+						<IconRender variant='film' className={styles["nav__icon"]} />
 					</Link>
 				</li>
 
@@ -42,7 +42,7 @@ const NavbarDesktop = () => {
 						className={
 							pathname === "/wydarzenia" ? isActive : styles["nav__link"]
 						}>
-						<IconRender variant='event' />
+						<IconRender variant='event' className={styles["nav__icon"]} />
 					</Link>
 					<TooltipMenuItems className={styles.tooltip}>
 						<TooltipMenuItem href='/'>Utwórz wydarzenie</TooltipMenuItem>
@@ -54,7 +54,7 @@ const NavbarDesktop = () => {
 					<Link
 						href='/faq'
 						className={pathname === "/faq" ? isActive : styles["nav__link"]}>
-						<IconRender variant='info' />
+						<IconRender variant='info' className={styles["nav__icon"]} />
 					</Link>
 				</li>
 
@@ -64,7 +64,7 @@ const NavbarDesktop = () => {
 						className={
 							pathname === "/ustawienia" ? isActive : styles["nav__link"]
 						}>
-						<IconRender variant='settings' />
+						<IconRender variant='settings' className={styles["nav__icon"]} />
 					</Link>
 				</li>
 
@@ -72,7 +72,7 @@ const NavbarDesktop = () => {
 					<Link
 						href='/'
 						className={`${styles["nav__link"]} ${styles["nav__link--bottom"]}`}>
-						<IconRender variant='powerOff' />
+						<IconRender variant='powerOff' className={styles["nav__icon"]} />
 					</Link>
 				</li>
 			</ul>
