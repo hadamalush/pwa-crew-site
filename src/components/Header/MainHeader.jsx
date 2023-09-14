@@ -3,6 +3,8 @@ import styles from "../../styles/components/Header/MainHeader.module.scss";
 import Image from "next/image";
 import IconRender from "../Icons/IconRender";
 import Link from "next/link";
+import Logo from "../transitions/Logo/Logo";
+import NavbarTop from "../Navigation/NavbarTop";
 
 const MainHeader = props => {
 	return (
@@ -17,35 +19,9 @@ const MainHeader = props => {
 				className={styles["header__image"]}
 			/>
 			<div className={styles["header__top"]}>
-				<Link href='/' className={styles["header__logo"]}>
-					<IconRender variant='logo' className={styles["header__logo-icon"]} />
-					<h2 className={styles["header__logo-text"]}>
-						Pwa
-						<span className={styles["header__logo-text--awarded"]}>crew</span>
-					</h2>
-				</Link>
-				<ul className={styles["header__nav"]}>
-					<li className={styles["header__nav-item"]}>
-						<Link href='/' className={styles["header__nav-link"]}>
-							Home
-						</Link>
-					</li>
-					<li className={styles["header__nav-item"]}>
-						<Link href='/' className={styles["header__nav-link"]}>
-							O nas
-						</Link>
-					</li>
-					<li className={styles["header__nav-item"]}>
-						<Link href='/' className={styles["header__nav-link"]}>
-							Sklep
-						</Link>
-					</li>
-					<li className={styles["header__nav-item"]}>
-						<Link href='/' className={styles["header__nav-link"]}>
-							Kontakt
-						</Link>
-					</li>
-				</ul>
+				<Logo size='5' className={styles.icon} />
+				<NavbarTop />
+
 			</div>
 			<form className={styles["header__newsletter"]}>
 				<div className={styles["header__newsletter-box"]}>

@@ -34,7 +34,11 @@ const IconRender = props => {
 
 	const selectedIcon = iconsSwitch(variant);
 
-	return <div className={classes}>{selectedIcon}</div>;
+	return (
+		<div className={classes} style={props.style}>
+			{selectedIcon}
+		</div>
+	);
 };
 
 export default IconRender;

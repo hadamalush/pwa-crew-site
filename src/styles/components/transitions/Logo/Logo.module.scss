@@ -1,0 +1,24 @@
+@import "../../../../styles/transitions/variables";
+
+.logo {
+	display: flex;
+	margin: 0;
+	justify-self: flex-end;
+
+	&__icon {
+		display: flex;
+		align-items: center;
+	}
+
+	&__text {
+		display: flex;
+		margin-left: 0.2em;
+		text-transform: uppercase;
+		align-items: center;
+
+		&--awarded {
+			text-transform: lowercase;
+			color: $secondary-color;
+		}
+	}
+}
