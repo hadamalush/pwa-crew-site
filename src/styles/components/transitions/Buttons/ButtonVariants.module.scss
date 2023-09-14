@@ -1,0 +1,38 @@
+@import "../../../transitions/variables";
+
+.default {
+	position: relative;
+	overflow: hidden;
+	z-index: 0;
+
+	&:hover {
+		color: $link-color-primary;
+	}
+
+	&:before,
+	&:after {
+		content: "";
+		position: absolute;
+		width: 30px;
+		height: 10px;
+		background-color: $secondary-color;
+		z-index: -5;
+		transform: scale(1);
+		transition: transform 0.3s;
+	}
+	&:before {
+		top: 0;
+		left: 0;
+		border-bottom-right-radius: 70%;
+	}
+	&:after {
+		bottom: 0;
+		right: 0;
+		border-top-left-radius: 70%;
+	}
+
+	&:hover:before,
+	&:hover:after {
+		transform: scale(7.6);
+	}
+}

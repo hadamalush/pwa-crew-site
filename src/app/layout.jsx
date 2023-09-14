@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='pl'>
 			<body>
-				<MainHeader>
+				<MainHeader newsletter={true}>
 					<NavbarDesktop />
 					<NavbarMobile />
 				</MainHeader>

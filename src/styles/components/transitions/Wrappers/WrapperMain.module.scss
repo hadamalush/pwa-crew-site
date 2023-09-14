@@ -1,0 +1,14 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.wrapper {
+	width: 100%;
+
+	@include media-query(mediumScreen) {
+		width: calc(100% - 80px);
+	}
+
+	@include media-query(largeScreen) {
+		width: calc(100% - 120px);
+	}
+}

@@ -1,0 +1,29 @@
+@import "../../../../transitions/variables";
+@import "../../../../mixins/mixins";
+
+.newsletter {
+	display: block;
+	width: 50%;
+	height: 80%;
+	border-radius: 20px;
+	text-align: center;
+	padding: 2em;
+
+	&__text {
+		margin: 1em 0;
+	}
+
+	&__btn {
+		width: min-content;
+		width: 100%;
+	}
+
+	em {
+		font-size: 1.4rem;
+	}
+
+	&__title {
+		font-size: 3.5rem;
+		color: $secondary-color;
+	}
+}
