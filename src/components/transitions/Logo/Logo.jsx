@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import styles from "../../../styles/components/transitions/Logo/Logo.module.scss";
 import IconRender from "@/components/Icons/IconRender";

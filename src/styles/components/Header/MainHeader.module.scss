@@ -2,97 +2,103 @@
 @import "../../../styles/mixins/mixins";
 
 .header {
-	display: flex;
-	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-rows: 1fr 1fr;
 	width: 100%;
-	height: 100vh;
-
-	&__image {
-		position: absolute;
-		z-index: -5;
-		object-fit: cover;
-	}
-
-	&__top {
-		display: grid;
-		width: 100%;
-		height: 30em;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-template-rows: 1fr 1fr 1fr;
-	}
-
-	&__box {
-		display: grid;
-		grid-column: 1/4;
-		grid-row: 1/3;
-		justify-content: center;
-	}
-
+	height: 25vh;
+	background-image: $header-mobile-gradient;
 	&__logo {
 		margin: 0 auto;
-		grid-column: 1/3;
-	}
-
-	&__newsletter-box {
-		display: none;
 		grid-column: 2/3;
-		grid-row: 1/4;
-		align-items: center;
-		justify-content: center;
+		grid-row: 1/3;
 	}
 
+	&__nav {
+		display: none;
+		justify-content: center;
+		align-items: flex-start;
+		grid-column: 2/3;
+		grid-row: 2/3;
+		font-size: 1.6rem;
+	}
 	&__newsletter {
-		padding: 2em 0;
-		background-image: none;
+		display: none;
+		flex-direction: column;
+		grid-column: 3/4;
+		grid-row: 1/4;
+		justify-content: center;
+		width: 80%;
+		max-width: 30em;
+		margin: 0 auto;
 	}
 
 	@include media-query(mediumScreen) {
-		.header {
-			&__top {
-				grid-template-columns: 2fr 3fr;
-			}
+		grid-template-columns: 50px 2fr 50px;
+		grid-template-rows: 1fr 1fr;
+		background-image: $header-medium-gradient;
 
-			&__box {
-				grid-column: 1/2;
-				padding-left: 2em;
-			}
+		&__logo {
+			grid-row: 1/2;
+		}
 
-			&__newsletter-box {
-				display: flex;
-			}
+		&__nav {
+			display: flex;
 		}
 	}
+
 	@include media-query(largeScreen) {
-		.header__newsletter {
-			padding: 2em;
-			background-image: linear-gradient(
-				181deg,
-				rgba(15, 25, 17, 0.8) 3%,
-				rgba(44, 67, 37, 0.2) 25%,
-				rgba(58, 80, 74, 0.2) 66%,
-				rgba(172, 194, 200, 0.2) 100%
-			);
+		grid-template-rows: 1fr 1fr 1fr;
+		background-image: $header-large-gradient;
+
+		&__logo {
+			grid-row: 1/3;
+		}
+
+		&__nav {
+			grid-row: 3/4;
+			font-size: 2.3rem;
 		}
 	}
+
 	@include media-query(x-largeScreen) {
-		.header {
-			&__top {
-				grid-template-columns: 3fr 2fr;
-			}
+		grid-template-columns: 50px 1fr 1fr 50px;
+		grid-template-rows: 1fr 1fr 1fr 1fr;
+		height: 30vh;
+		&__logo {
+			grid-column: 1/3;
+		}
+		&__nav {
+			grid-column: 2/4;
+			grid-row: 4/5;
+		}
 
-			&__logo {
-				grid-column: 1/2;
-			}
-
-			&__nav {
-				grid-column: 2/3;
-				display: flex;
-			}
+		&__newsletter {
+			display: flex;
+			letter-spacing: 4px;
 		}
 	}
-	@include media-query(xx-largeScreen) {
-		.header {
-			font-size: 6rem;
+
+	@include media-query(hugeScreen) {
+		grid-template-columns: 50px 1fr 2fr 1fr 50px;
+		grid-template-rows: 1fr 1fr 1fr;
+		background-image: $header-huge-gradient;
+		&__logo {
+			grid-column: 1/3;
+			grid-row: 1/3;
+			align-items: center;
+		}
+
+		&__nav {
+			grid-column: 3/4;
+			grid-row: 1/3;
+			align-items: center;
+		}
+
+		&__newsletter {
+			grid-column: 4/5;
+			padding: 0 2em;
+			background-image: url();
 		}
 	}
 }

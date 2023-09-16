@@ -6,7 +6,7 @@
 	z-index: 0;
 
 	&:hover {
-		color: $link-color-primary;
+		color: $btn-hover-primary-c;
 	}
 
 	&:before,
@@ -33,6 +33,6 @@
 
 	&:hover:before,
 	&:hover:after {
-		transform: scale(7.6);
+		transform: scale(5.5);
 	}
 }

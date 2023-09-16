@@ -43,7 +43,6 @@ h3 {
 }
 
 a {
-	font-size: 1.6rem;
 	color: $primary-color;
 	text-decoration: none;
 }
@@ -61,6 +60,7 @@ body {
 	// background-color: #050709;
 	background-color: $background-primary;
 	color: $primary-color;
+	overflow-x: hidden;
 }
 
 @media screen and (max-width: 73.6rem) {

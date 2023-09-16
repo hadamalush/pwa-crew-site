@@ -19,6 +19,10 @@
 		@media (min-width: #{$xx-largeScreen}) {
 			@content;
 		}
+	} @else if $breakpoint == hugeScreen {
+		@media (min-width: #{$hugeScreen}) {
+			@content;
+		}
 	}
 }
 

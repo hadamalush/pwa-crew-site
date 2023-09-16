@@ -1,9 +1,7 @@
 @import "../../../styles/transitions/variables";
 @import "../../../styles/mixins/mixins";
 .nav {
-	display: none;
-	width: max-content;
-	margin-left: 2em;
+	display: flex;
 
 	&__list {
 		display: flex;

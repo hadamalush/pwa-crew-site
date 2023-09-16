@@ -1,4 +1,5 @@
 // Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools (logo icon)
+"use client";
 
 export function IconsBase() {
 	const ALL_ICONS = {
