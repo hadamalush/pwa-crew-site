@@ -15,32 +15,30 @@
 	&__text {
 		display: flex;
 		margin-left: 0.2em;
-		text-transform: uppercase;
 		align-items: center;
 		font-size: 4rem;
 
 		&--awarded {
-			text-transform: lowercase;
 			color: $secondary-color;
 		}
 	}
 
 	@include media-query(smallScreen) {
 		&__icon {
-			width: 5rem;
+			width: 4rem;
 		}
 
 		&__text {
-			font-size: 5rem;
+			font-size: 4rem;
 		}
 	}
 	@include media-query(largeScreen) {
 		&__icon {
-			width: 7rem;
+			width: 4rem;
 		}
 
 		&__text {
-			font-size: 7rem;
+			font-size: 4rem;
 		}
 	}
 }

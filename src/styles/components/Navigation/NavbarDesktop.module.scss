@@ -2,13 +2,16 @@
 @import "../../../styles/mixins/mixins";
 .nav {
 	display: flex;
+	height: 100%;
 
 	&__list {
 		display: flex;
 		&-link {
 			position: relative;
 			display: flex;
+			flex-direction: column;
 			align-items: center;
+			justify-content: center;
 			height: 100%;
 			width: 100%;
 			font-weight: bold;
@@ -36,9 +39,9 @@
 				transform: rotate(45deg);
 			}
 		}
-	}
 
-	@include media-query(x-largeScreen) {
-		display: flex;
+		&__icon {
+			display: block;
+		}
 	}
 }

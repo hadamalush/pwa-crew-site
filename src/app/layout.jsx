@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
 				<div className='hero'>
 					<Image
 						alt='dasd'
-						src='/images/header/header-img.jpg'
+						src='/images/header/concert.jpg'
 						width={0}
 						height={0}
 						fill

@@ -27,6 +27,14 @@ const IconRender = props => {
 				return icons.info;
 			case "logo":
 				return icons.logo;
+			case "contact":
+				return icons.contact;
+			case "shop":
+				return icons.shop;
+			case "home":
+				return icons.home;
+			case "users":
+				return icons.users;
 			default:
 				return null;
 		}

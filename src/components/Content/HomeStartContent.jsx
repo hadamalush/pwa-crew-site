@@ -10,7 +10,7 @@ const HomeStartContent = () => {
 			<ButtonMain variant='default' className={styles["introduction__btn"]}>
 				Dołącz do nas
 			</ButtonMain>
-			<ImageLoader src='/images/mainContent/rap.png' alt='Raperzy z płytą' />
+			{/* <ImageLoader src='/images/mainContent/rap.png' alt='Raperzy z płytą' /> */}
 		</section>
 	);
 };

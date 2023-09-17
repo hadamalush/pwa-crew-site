@@ -153,6 +153,74 @@ export function IconsBase() {
 				/>
 			</svg>
 		),
+		contact: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-address-book'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+				<path d='M20 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z' />
+				<path d='M10 16h6' />
+				<path d='M13 11m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' />
+				<path d='M4 8h3' />
+				<path d='M4 12h3' />
+				<path d='M4 16h3' />
+			</svg>
+		),
+		shop: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-brand-shopee'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+				<path d='M4 7l.867 12.143a2 2 0 0 0 2 1.857h10.276a2 2 0 0 0 2 -1.857l.867 -12.143h-16z' />
+				<path d='M8.5 7c0 -1.653 1.5 -4 3.5 -4s3.5 2.347 3.5 4' />
+				<path d='M9.5 17c.413 .462 1 1 2.5 1s2.5 -.897 2.5 -2s-1 -1.5 -2.5 -2s-2 -1.47 -2 -2c0 -1.104 1 -2 2 -2s1.5 0 2.5 1' />
+			</svg>
+		),
+		users: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-users'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+				<path d='M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0' />
+				<path d='M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' />
+				<path d='M16 3.13a4 4 0 0 1 0 7.75' />
+				<path d='M21 21v-2a4 4 0 0 0 -3 -3.85' />
+			</svg>
+		),
+		home: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-home-2'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+				<path d='M5 12l-2 0l9 -9l9 9l-2 0' />
+				<path d='M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7' />
+				<path d='M10 12h4v4h-4z' />
+			</svg>
+		),
 	};
 
 	return ALL_ICONS;
