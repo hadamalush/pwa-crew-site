@@ -6,39 +6,49 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 70vh;
+	height: 75vh;
+	min-height: 20rem;
+
 	width: 100vw;
 	position: relative;
 
-	p {
+	&__h1 {
+		width: 100%;
+		// margin-top: 1em;
+		text-align: center;
+		font-size: 2.5rem;
+		margin-top: 1em;
+		color: $secondary-color;
+		// @media ((max-width: 900px) and (max-height: 420px) and (orientation: portrait)) {
+		// 	margin-top: 2em;
+		// }
+	}
+
+	&__text {
 		padding: 1em 0;
 	}
-	.btn {
-		width: 30rem;
-		max-width: 60%;
+
+	&__btn {
+		width: 50%;
+		max-width: 20rem;
 		margin-bottom: auto;
 	}
-}
 
-.h1 {
-	width: 100%;
-	text-align: center;
-	font-size: 2.5rem;
-}
-
-.img {
-	object-fit: cover;
-	object-position: top;
-}
-
-.img1 {
-	position: relative;
-	margin-top: auto;
-	width: 100%;
-	max-width: 50rem;
-	height: 60%;
-	max-height: 50rem;
-
-	@include media-query($mediumScreen) {
+	@include media-query(smallScreen) {
+		height: 75vh;
 	}
+
+	@include media-query(x-largeScreen) {
+		height: 70vh;
+	}
+
+	// @include media-query(largeScreen) {
+	// 	&__btn {
+	// 		margin: 0;
+	// 	}
+
+	// 	&__h1 {
+	// 		margin: 0;
+	// 	}
+	// }
 }

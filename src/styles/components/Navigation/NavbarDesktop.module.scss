@@ -1,105 +1,44 @@
-@import "../../transitions/variables";
-@import "../../mixins/mixins";
+@import "../../../styles/transitions/variables";
+@import "../../../styles/mixins/mixins";
 .nav {
-	position: fixed;
-	display: none;
-	right: 2em;
-	top: 50%;
-	transform: translateY(-50%);
-	height: 80vh;
-	width: 6em;
-	border-radius: 10px;
-	background-color: $background-nav;
+	display: flex;
 
 	&__list {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-		height: 100%;
-	}
-
-	&__list,
-	&__item,
-	&__link {
-		width: 100%;
-	}
-
-	&__item:hover,
-	&__link:hover,
-	&__link--isActive {
-		color: $secondary-color;
-		fill: $secondary-color;
-	}
-
-	&__item {
-		position: relative;
-
-		&:first-child:hover {
-			background-color: $background-nav;
-			border-top-right-radius: 10px;
-		}
-
-		.tooltip {
-			transform: scale(0);
-			transition: opacity 0.3s, transform 0.3s;
-			transform-origin: 100% 20%;
-		}
-
-		&:hover .tooltip {
-			transform: scale(1);
-			opacity: 1;
-		}
-
-		&--bottom {
-			margin-top: auto;
+		&-link {
+			position: relative;
+			display: flex;
+			align-items: center;
+			height: 100%;
+			width: 100%;
+			font-weight: bold;
+			padding: 0 1.5em;
 			transition: color 0.3s;
+			transition: opacity 0.3s;
+
+			&:hover {
+				color: $secondary-color;
+			}
+
+			&:before {
+				content: "";
+				position: absolute;
+				transform: rotate(30deg);
+				width: 50%;
+				height: 1px;
+				background-color: $secondary-color;
+				opacity: 0;
+				transition: opacity 0.3s, transform 0.3s;
+			}
+
+			&:hover:before {
+				opacity: 1;
+				transform: rotate(45deg);
+			}
 		}
 	}
 
-	&__item:first-child:hover {
-		background-color: $background-nav;
-		border-top-right-radius: 10px;
-	}
-
-	&__link {
-		padding: 1.6em 0;
-		text-align: center;
-		display: block;
-		margin: 0 auto;
-		color: $link-color-primary;
-		fill: $link-color-primary;
-		transition: color 0.3s, fill 0.3s;
-
-		&:before {
-			@include pointer("🖍️");
-			top: -20%;
-			right: -20%;
-			transform: none;
-		}
-
-		&:hover:before {
-			opacity: 1;
-		}
-
-		&--bottom:hover {
-			color: $danger-color;
-		}
-	}
-
-	&__icon {
-		width: 1.5em;
-	}
-
-	@include media-query(mediumScreen) {
-		display: block;
-	}
-
-	@include media-query(largeScreen) {
-		width: 10em;
-
-		&__icon {
-			width: 2em;
-		}
+	@include media-query(x-largeScreen) {
+		display: flex;
 	}
 }

@@ -1,0 +1,23 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+.img__loader {
+	display: none;
+	position: relative;
+	margin-top: auto;
+	
+	width: 100%;
+	max-width: 60rem;
+
+	height: 60%;
+	min-height: 20rem;
+	max-height: 50rem;
+
+	&__img {
+		object-fit: cover;
+		object-position: top;
+	}
+
+	@include media-queryLS(smallScreen) {
+		display: block;
+	}
+}

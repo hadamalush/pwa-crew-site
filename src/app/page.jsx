@@ -6,7 +6,16 @@ export default function Home() {
 			<HomeStartContent />
 
 			<br></br>
-			
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
 		</main>
 	);
 }

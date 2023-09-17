@@ -26,6 +26,25 @@
 	}
 }
 
+//landscape
+@mixin media-queryLS($breakpoint) {
+	@if $breakpoint == smallScreen {
+		@media (min-height: #{$smallScreen}) {
+			@content;
+		}
+	} @else if $breakpoint == mediumScreen {
+		@media (min-height: #{$mediumScreen}) {
+			@content;
+		}
+	}
+	 @else if $breakpoint == smallScreenMax {
+		@media (max-height: #{$mediumScreen}) {
+			@content;
+		}
+	}
+	
+}
+
 @mixin pointer($icon) {
 	content: $icon;
 	position: absolute;
