@@ -1,0 +1,44 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+
+.introduction {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 70vh;
+	width: 100vw;
+	position: relative;
+
+	p {
+		padding: 1em 0;
+	}
+	.btn {
+		width: 30rem;
+		max-width: 60%;
+		margin-bottom: auto;
+	}
+}
+
+.h1 {
+	width: 100%;
+	text-align: center;
+	font-size: 2.5rem;
+}
+
+.img {
+	object-fit: cover;
+	object-position: top;
+}
+
+.img1 {
+	position: relative;
+	margin-top: auto;
+	width: 100%;
+	max-width: 50rem;
+	height: 60%;
+	max-height: 50rem;
+
+	@include media-query($mediumScreen) {
+	}
+}

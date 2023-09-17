@@ -22,13 +22,13 @@
 	}
 
 	&__title {
-		font-size: 3.5rem;
+		font-size: 3rem;
 		color: $secondary-color;
 	}
 
 	@include media-query(hugeScreen) {
 		&__title {
-			font-size: 5rem;
+			font-size: 4rem;
 		}
 
 		&__btn {

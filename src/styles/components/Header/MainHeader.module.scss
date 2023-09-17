@@ -75,7 +75,7 @@
 
 		&__newsletter {
 			display: flex;
-			letter-spacing: 4px;
+			letter-spacing: 2px;
 		}
 	}
 
@@ -98,7 +98,6 @@
 		&__newsletter {
 			grid-column: 4/5;
 			padding: 0 2em;
-			background-image: url();
 		}
 	}
 }
