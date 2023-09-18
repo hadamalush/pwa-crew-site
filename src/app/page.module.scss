@@ -2,10 +2,6 @@
 @import "../styles/mixins/mixins";
 
 .main {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
 	min-height: 100vh;
 }
 
@@ -46,6 +42,7 @@
 	}
 
 	> div > h4 {
+		color: $secondary-color;
 		padding: 0.2em 0 2em;
 		letter-spacing: 0.2rem;
 	}
@@ -60,6 +57,25 @@
 	@include media-query(largeScreen) {
 		> div:nth-child(3) {
 			margin: 0 2em;
+		}
+	}
+
+	@include media-query(hugeScreen) {
+		padding: 15em 10em 10em;
+		> div {
+			padding: 3em 3em;
+		}
+		> h3 {
+			font-size: 3.2rem;
+		}
+
+		> div > h4 {
+			font-size: 2.4rem;
+		}
+
+		> div > p {
+			font-size: 1.6rem;
+			padding: 0 5em 2em;
 		}
 	}
 }
@@ -120,7 +136,6 @@
 
 	> div > p {
 		position: relative;
-
 		font-size: 1.3rem;
 		z-index: 5;
 		height: max-content;
@@ -136,7 +151,31 @@
 		}
 	}
 
+	@include media-query(x-largeScreen) {
+		> div > h5 {
+			font-size: 2rem;
+			margin-top: 0.6em;
+		}
+
+		> div > p {
+			font-size: 1.6rem;
+			padding: 0 1em 1em;
+		}
+	}
+
 	@include media-query(hugeScreen) {
+		> h3 {
+			font-size: 3.2rem;
+		}
+
+		> div > h4 {
+			font-size: 2.8rem;
+		}
+
+		> div > p {
+			font-size: 1.6rem;
+			padding: 0 5em 2em;
+		}
 		> div {
 			min-height: 50rem;
 		}

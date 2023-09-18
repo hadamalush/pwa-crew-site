@@ -21,7 +21,6 @@
 
 .normal {
 	text-align: center;
-	
 
 	&:before {
 		content: "";
@@ -44,6 +43,6 @@
 		width: 100%;
 		background-color: $background-primary;
 		z-index: 2;
-		box-shadow: 0 0 
+		box-shadow: $card-sh-primary;
 	}
 }

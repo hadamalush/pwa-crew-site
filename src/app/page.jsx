@@ -4,19 +4,16 @@ import Cards from "@/components/transitions/Cards/Cards";
 import Card from "@/components/transitions/Cards/Card";
 import styles from "./page.module.scss";
 import ImageLoader from "@/components/transitions/Image/ImageRender";
-import HeadingTag from "@/components/transitions/Topography/HeadingTag";
 
 export default function Home() {
 	return (
 		<main>
 			<HomeStartContent />
 			<Cards id='history' className={styles.history}>
-				<HeadingTag type='h3'>Trochę o Hip-hopie</HeadingTag>
+				<h3>Trochę o Hip-hopie</h3>
 				<Card variant={"skew"}>
 					<IconRender variant='history' />
-					<HeadingTag type='h4' size='1'>
-						Historia Hip-Hopu
-					</HeadingTag>
+					<h4>Historia Hip-Hopu</h4>
 
 					<p className={styles["history__text"]}>
 						Hip-hop narodził się w Bronksie w latach 70. jako subkultura młodych
@@ -26,9 +23,7 @@ export default function Home() {
 				</Card>
 				<Card variant={"skew"}>
 					<IconRender variant='chartRadar' />
-					<HeadingTag type='h4' size='1'>
-						Wartości Hip-Hopu
-					</HeadingTag>
+					<h4>Wartości Hip-Hopu</h4>
 					<p className={styles["history__text"]}>
 						Hip-hop to nie tylko muzyka, to także filozofia życia. Obejmuje
 						wartości takie jak samowiedza, wyrażanie siebie i walka z
@@ -37,9 +32,7 @@ export default function Home() {
 				</Card>
 				<Card variant={"skew"}>
 					<IconRender variant='chartRadar' />
-					<HeadingTag type='h4' size='1'>
-						Wielcy Hip-Hopowi Artyści
-					</HeadingTag>
+					<h4>Wielcy Hip-Hopowi Artyści</h4>
 					<p className={styles["history__text"]}>
 						Hip-hop to gatunek, który wydał na świat wielu niezapomnianych
 						artystów, od Tupaca Shakura i Notorious B.I.G. po Kendricka Lamara i
@@ -48,7 +41,7 @@ export default function Home() {
 				</Card>
 			</Cards>
 			<Cards id='aboutus' className={styles["aboutus"]}>
-				<HeadingTag type='h3'>Nasz team</HeadingTag>
+				<h3>Nasz team</h3>
 				<Card variant={"normal"}>
 					<h4>Baker</h4>
 					<ImageLoader
