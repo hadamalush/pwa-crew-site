@@ -61,7 +61,7 @@ body {
 	background-color: $background-primary;
 	color: $primary-color;
 	overflow-x: hidden;
-	width: 100vw;
+	max-width: 100vw;
 }
 
 @media screen and (max-width: 73.6rem) {
