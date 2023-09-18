@@ -23,6 +23,32 @@
 	color: $secondary-color;
 }
 
-.cards__aboutus {
-	background-color: #212529;
+.aboutus {
+	position: relative;
+	flex-wrap: wrap;
+	background-color: $section-bg-primary;
+	justify-content: center;
+	padding: 10rem 2em;
+	gap: 5rem;
+
+	&__card {
+		min-height: 40rem;
+		min-width: 25rem;
+		margin-bottom: 5rem;
+		padding: 0;
+		margin: 0;
+	}
+
+	&__image {
+		position: absolute;
+		z-index: 5;
+	}
+
+	@include media-query(mediumScreen) {
+		flex-direction: row;
+
+		&__card {
+			flex-basis: 40%;
+		}
+	}
 }
