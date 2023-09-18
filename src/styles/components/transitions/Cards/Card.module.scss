@@ -1,0 +1,40 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.card {
+	position: relative;
+	padding: 3em 3em;
+	min-height: 25rem;
+	text-align: center;
+
+	&::before {
+		content: "";
+		position: absolute;
+		background-color: $card-color-primary;
+		transform: skew(-7deg);
+		z-index: -10;
+
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+	}
+
+	&:hover {
+		transform: scale(1.05);
+	}
+
+	&__title {
+		color: $secondary-color;
+		padding: 0.2em 0 2em;
+		letter-spacing: 0.2rem;
+	}
+	&__text {
+		font-size: 1.4rem;
+		line-height: 2rem;
+	}
+
+	@include media-query(hugeScreen) {
+		padding: 5em 10em;
+	}
+}

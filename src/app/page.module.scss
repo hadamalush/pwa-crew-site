@@ -1,0 +1,28 @@
+@import "../styles/transitions/variables";
+@import "../styles/mixins/mixins";
+
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 6rem;
+	min-height: 100vh;
+}
+
+.second-card {
+	margin: 5em 0;
+
+	@include media-query(largeScreen) {
+		margin: 0 5em;
+	}
+}
+
+.card-icon {
+	width: 4rem;
+	color: $secondary-color;
+}
+
+.cards__aboutus {
+	background-color: #212529;
+}

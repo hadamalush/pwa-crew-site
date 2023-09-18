@@ -35,6 +35,12 @@ const IconRender = props => {
 				return icons.home;
 			case "users":
 				return icons.users;
+			case "history":
+				return icons.history;
+			case "chartRadar":
+				return icons.chartRadar;
+			case "friends":
+				return icons.friends;
 			default:
 				return null;
 		}

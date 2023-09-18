@@ -14,10 +14,10 @@
 			justify-content: center;
 			height: 100%;
 			width: 100%;
-			font-weight: bold;
+
 			padding: 0 1.5em;
-			transition: color 0.3s;
-			transition: opacity 0.3s;
+			transition: opacity 0.3s, color 0.3s;
+			text-shadow: 0 0 2px #c7c7c7;
 
 			&:hover {
 				color: $secondary-color;

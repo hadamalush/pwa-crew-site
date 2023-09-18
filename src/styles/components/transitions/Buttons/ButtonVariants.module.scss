@@ -36,3 +36,50 @@
 		transform: scale(5.5);
 	}
 }
+
+.borderIn {
+	position: relative;
+	background-color: rgba(14, 14, 14, 0.9);
+	transform-origin: top;
+	font-size: 1.4rem;
+
+	&:hover {
+		transform: scale(1.02);
+		color: $secondary-color;
+	}
+
+	&:before {
+		content: "";
+		position: absolute;
+		display: flex;
+		top: 4px;
+		right: 4px;
+		bottom: 4px;
+		left: 4px;
+		border: solid 1px $secondary-color;
+		border-radius: 2px;
+	}
+}
+
+.btnSkewRight {
+	position: relative;
+	background-color: rgba(14, 14, 14, 0.9);
+	transform: skew(-10deg);
+	font-size: 1.4rem;
+
+	&:hover {
+		color: $secondary-color;
+	}
+
+	&:before {
+		content: "";
+		position: absolute;
+		display: flex;
+		top: 4px;
+		right: 4px;
+		bottom: 4px;
+		left: 4px;
+		border: solid 1px $secondary-color;
+		border-radius: 2px;
+	}
+}

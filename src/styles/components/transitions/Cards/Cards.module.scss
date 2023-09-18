@@ -1,0 +1,19 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.cards {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	width: 100%;
+	min-height: 30rem;
+	padding: 10em 4em;
+
+	@include media-query(largeScreen) {
+		flex-direction: row;
+	}
+
+	@include media-query(hugeScreen) {
+		padding: 15em 10em;
+	}
+}

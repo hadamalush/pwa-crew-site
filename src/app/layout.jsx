@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
 						fill
 						sizes='100vw'
 					/>
+					<div className='hero__bg'></div>
 				</div>
 				{children}
 			</body>

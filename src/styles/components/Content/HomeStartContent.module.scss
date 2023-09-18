@@ -6,11 +6,10 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
-	min-height: 20rem;
-
+	height: 60vh;
+	min-height: 55rem;
 	width: 100vw;
-	position: relative;
+	padding: 10rem 0;
 
 	&__h1 {
 		width: 100%;
@@ -19,36 +18,33 @@
 		font-size: 2.5rem;
 		margin-top: 1em;
 		color: $secondary-color;
+		text-shadow: 2px 2px 2px black;
 		// @media ((max-width: 900px) and (max-height: 420px) and (orientation: portrait)) {
 		// 	margin-top: 2em;
 		// }
 	}
 
 	&__text {
-		padding: 1em 0;
+		padding: 1em 0 3em;
+		text-shadow: 2px 2px 5px black;
+		text-align: center;
+		letter-spacing: 1px;
+		font-style: italic;
 	}
 
-	&__btn {
-		width: 50%;
-		max-width: 20rem;
+	&__btn,
+	&__btn--right {
+		max-width: max-content;
 		// margin-bottom: auto;
 	}
 
-	// @include media-query(smallScreen) {
-	// 	height: 75vh;
-	// }
+	&__btn + &__btn--right {
+		margin-left: 1em;
+	}
 
-	// @include media-query(x-largeScreen) {
-	// 	height: 70vh;
-	// }
-
-	// @include media-query(largeScreen) {
-	// 	&__btn {
-	// 		margin: 0;
-	// 	}
-
-	// 	&__h1 {
-	// 		margin: 0;
-	// 	}
-	// }
+	@include media-query(largeScreen) {
+		&__h1 {
+			font-size: 4rem;
+		}
+	}
 }
