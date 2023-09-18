@@ -21,4 +21,29 @@
 
 .normal {
 	text-align: center;
+	
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background-color: $card-bg-primary;
+		z-index: 2;
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+
+		left: 0;
+		bottom: 0;
+		height: 12rem;
+		width: 100%;
+		background-color: $background-primary;
+		z-index: 2;
+		box-shadow: 0 0 
+	}
 }

@@ -2,11 +2,12 @@
 @import "../styles/transitions/variables";
 @import "../styles/base/topography";
 @import "../styles/mixins/mixins";
+
 .hero {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 100vw;
 	height: 60vh;
 	min-height: 55rem;
 	z-index: -20;
@@ -21,11 +22,4 @@
 		position: absolute;
 		background-color: rgb(192, 185, 185, 0.2);
 	}
-}
-
-.card__text {
-	
-		font-size: 1.4rem;
-		line-height: 2rem;
-
 }

@@ -7,14 +7,6 @@
 	min-height: 25rem;
 	text-align: center;
 
-	&__title {
-		position: relative;
-		color: $secondary-color;
-		padding: 0.2em 0 2em;
-		letter-spacing: 0.2rem;
-	}
-	
-
 	@include media-query(hugeScreen) {
 		padding: 5em 10em;
 	}

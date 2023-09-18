@@ -4,7 +4,7 @@ import { ImageBase } from "./ImageBase";
 import Image from "next/image";
 
 export default function ImageLoader(props) {
-	const classes = `${styles.img} ${styles.className}`;
+	const classes = `${styles.img} ${props.className}`;
 
 	const images = ImageBase();
 	const variant = props.variant;

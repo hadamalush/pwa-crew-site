@@ -5,10 +5,14 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	position: relative;
 	width: 100%;
 	min-height: 30rem;
-	padding: 10em 4em;
+	padding: 15em 2em 10em;
 
+	@include media-query(mediumScreen) {
+		padding: 15em 5em 10em;
+	}
 	@include media-query(largeScreen) {
 		flex-direction: row;
 	}

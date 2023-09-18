@@ -5,8 +5,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
-	padding: 6rem;
+
 	min-height: 100vh;
 }
 
@@ -18,37 +17,128 @@
 	}
 }
 
+.history__text {
+	font-size: 1.4rem;
+	line-height: 2rem;
+}
+
 .card-icon {
 	width: 4rem;
 	color: $secondary-color;
 }
 
+.history {
+	padding: 15em 3em 10em;
+
+	> h3 {
+		color: $primary-color;
+		position: absolute;
+		z-index: 10;
+		top: 5rem;
+		left: 50%;
+		transform: translateX(-50%);
+		text-align: center;
+	}
+
+	> div > div {
+		width: 4rem;
+		color: $secondary-color;
+	}
+
+	> div > h4 {
+		padding: 0.2em 0 2em;
+		letter-spacing: 0.2rem;
+	}
+
+	> div:nth-child(3) {
+		margin: 4em 0;
+	}
+	@include media-query(mediumScreen) {
+		padding: 15em 5em 10em;
+	}
+
+	@include media-query(largeScreen) {
+		> div:nth-child(3) {
+			margin: 0 2em;
+		}
+	}
+}
+
 .aboutus {
 	position: relative;
 	flex-wrap: wrap;
-	background-color: $section-bg-primary;
 	justify-content: center;
-	padding: 10rem 2em;
 	gap: 5rem;
 
-	&__card {
+	background-color: $section-bg-primary;
+
+	> img {
+		position: absolute;
+	}
+
+	& > div {
+		display: grid;
+		grid-template-rows: 1fr 3rem 9rem;
 		min-height: 40rem;
 		min-width: 25rem;
 		margin-bottom: 5rem;
 		padding: 0;
 		margin: 0;
+		overflow: hidden;
+		border-bottom-left-radius: 10px;
+		border-top-right-radius: 10px;
 	}
 
-	&__image {
+	> h3 {
+		color: $primary-color;
 		position: absolute;
+		z-index: 10;
+		top: 5rem;
+		left: 50%;
+		transform: translateX(-50%);
+		text-align: center;
+	}
+
+	> div > h4 {
+		position: relative;
+		z-index: 10;
+		margin-top: 20px;
+		font-size: 2rem;
+		font-style: italic;
+		text-shadow: 1px 1px 1px black;
+		color: $secondary-color;
+	}
+
+	> div > h5 {
+		position: relative;
+		height: max-content;
+		margin-top: auto;
+		z-index: 6;
+		font-size: 1.4rem;
+		color: #ebdbbe;
+	}
+
+	> div > p {
+		position: relative;
+
+		font-size: 1.3rem;
 		z-index: 5;
+		height: max-content;
+		padding: 1em 2em;
+		align-self: flex-end;
 	}
 
 	@include media-query(mediumScreen) {
 		flex-direction: row;
 
-		&__card {
+		> div {
 			flex-basis: 40%;
+		}
+	}
+
+	@include media-query(hugeScreen) {
+		> div {
+			min-height: 50rem;
 		}
 	}
 }

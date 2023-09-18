@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
 				<MainHeader newsletter={true} />
 				<div className='hero'>
 					<Image
-						alt='dasd'
+						alt='Crowd on the concert'
 						src='/images/header/concert.jpg'
 						width={0}
 						height={0}
