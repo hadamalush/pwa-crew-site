@@ -110,6 +110,8 @@ const Footer = props => {
 					</li>
 				</ul>
 			</span>
+
+			<p>&copy; 2023 PwaCrew - Wszystkie prawa zastrzeżone</p>
 		</footer>
 	);
 };

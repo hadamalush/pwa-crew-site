@@ -9,7 +9,7 @@
 	position: relative;
 	width: 100%;
 	min-height: 30rem;
-	padding: 15em 2em 10em;
+	padding: 15em 2em 13em;
 
 	h3 {
 		color: $primary-color;
@@ -162,8 +162,19 @@
 		}
 	}
 
+	p:last-of-type {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 7rem;
+		text-align: center;
+	}
+
 	@include media-query(mediumScreen) {
 		padding: 15em 5em 10em;
+		p:last-of-type {
+			bottom: 2rem;
+		}
 	}
 	@include media-query(largeScreen) {
 		flex-direction: row;
@@ -186,5 +197,26 @@
 
 	@include media-query(hugeScreen) {
 		padding: 15em 10em 10em;
+
+		h3 {
+			font-size: 3.2rem;
+		}
+
+		h5 {
+			font-size: 2.4rem;
+		}
+		a {
+			font-size: 2rem;
+		}
+
+		h3 {
+			font-size: 3.2rem;
+		}
+
+		span:last-of-type {
+			div:all {
+				width: 4rem;
+			}
+		}
 	}
 }
