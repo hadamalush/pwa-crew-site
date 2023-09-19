@@ -1,3 +1,8 @@
+:root,
+body {
+	position: relative;
+	overflow-x: hidden;
+}
 @import "../styles/base/reset";
 @import "../styles/transitions/variables";
 @import "../styles/base/topography";

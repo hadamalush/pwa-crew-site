@@ -1,0 +1,23 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	position: relative;
+	width: 100%;
+	min-height: 30rem;
+	padding: 15em 2em 10em;
+
+	@include media-query(mediumScreen) {
+		padding: 15em 5em 10em;
+	}
+	@include media-query(largeScreen) {
+		flex-direction: row;
+	}
+
+	@include media-query(hugeScreen) {
+		padding: 15em 10em;
+	}
+}

@@ -6,24 +6,6 @@
 	width: 100vw;
 }
 
-.second-card {
-	margin: 5em 0;
-
-	@include media-query(largeScreen) {
-		margin: 0 5em;
-	}
-}
-
-.history__text {
-	font-size: 1.4rem;
-	line-height: 2rem;
-}
-
-.card-icon {
-	width: 4rem;
-	color: $secondary-color;
-}
-
 .history {
 	padding: 15em 3em 10em;
 
@@ -165,6 +147,7 @@
 	}
 
 	@include media-query(hugeScreen) {
+		padding: 15em 10em 10em;
 		> h3 {
 			font-size: 3.2rem;
 		}

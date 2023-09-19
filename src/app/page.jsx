@@ -1,21 +1,21 @@
 import HomeStartContent from "@/components/Content/HomeStartContent";
 import IconRender from "@/components/Icons/IconRender";
-import Cards from "@/components/transitions/Cards/Cards";
 import Card from "@/components/transitions/Cards/Card";
-import styles from "./page.module.scss";
 import ImageLoader from "@/components/transitions/Image/ImageRender";
+import styles from "./page.module.scss";
+import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
+// import BackgroundAnimation from "@/components/transitions/Background/BackgroundAnimation";
 
 export default function Home() {
 	return (
 		<main>
 			<HomeStartContent />
-			<Cards id='history' className={styles.history}>
+			<WrapperSection id='history' className={styles.history}>
 				<h3>Trochę o Hip-hopie</h3>
 				<Card variant={"skew"}>
 					<IconRender variant='history' />
 					<h4>Historia Hip-Hopu</h4>
-
-					<p className={styles["history__text"]}>
+					<p>
 						Hip-hop narodził się w Bronksie w latach 70. jako subkultura młodych
 						ludzi, łącząca muzykę, taniec, graffiti i rap. Dziś jest globalnym
 						fenomenem kształtującym kulturę i społeczeństwo.
@@ -24,7 +24,7 @@ export default function Home() {
 				<Card variant={"skew"}>
 					<IconRender variant='chartRadar' />
 					<h4>Wartości Hip-Hopu</h4>
-					<p className={styles["history__text"]}>
+					<p>
 						Hip-hop to nie tylko muzyka, to także filozofia życia. Obejmuje
 						wartości takie jak samowiedza, wyrażanie siebie i walka z
 						niesprawiedliwością społeczną.
@@ -33,14 +33,14 @@ export default function Home() {
 				<Card variant={"skew"}>
 					<IconRender variant='chartRadar' />
 					<h4>Wielcy Hip-Hopowi Artyści</h4>
-					<p className={styles["history__text"]}>
+					<p>
 						Hip-hop to gatunek, który wydał na świat wielu niezapomnianych
 						artystów, od Tupaca Shakura i Notorious B.I.G. po Kendricka Lamara i
 						Cardi B. Ich muzyka inspiruje i podnosi świadomość społeczną.
 					</p>
 				</Card>
-			</Cards>
-			<Cards id='aboutus' className={styles["aboutus"]}>
+			</WrapperSection>
+			<WrapperSection id='aboutus' className={styles["aboutus"]}>
 				<h3>Nasz team</h3>
 				<Card variant={"normal"}>
 					<h4>Baker</h4>
@@ -94,7 +94,8 @@ export default function Home() {
 						ulic.
 					</p>
 				</Card>
-			</Cards>
+			</WrapperSection>
+
 			<br></br>
 			<br />
 			<br />

@@ -1,21 +1,21 @@
 @import "../../../transitions/variables";
 
 .skew {
-	&:hover {
-		transform: scale(1.05);
-	}
-
 	&::before {
 		content: "";
 		position: absolute;
-		background-color: $card-color-primary;
 		transform: skew(-7deg);
 		z-index: -10;
-
 		top: 0;
 		left: 0;
 		bottom: 0;
 		right: 0;
+		background-color: $card-color-primary;
+		transition: transform 0.3s;
+	}
+
+	&:hover:before {
+		transform: skew(-7deg) scale(1.05);
 	}
 }
 

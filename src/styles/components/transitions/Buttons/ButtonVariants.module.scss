@@ -42,6 +42,7 @@
 	background-color: rgba(14, 14, 14, 0.9);
 	transform-origin: top;
 	font-size: 1.4rem;
+	transition: transform 0.3s, color 0.3s;
 
 	&:hover {
 		transform: scale(1.02);
@@ -66,8 +67,10 @@
 	background-color: rgba(14, 14, 14, 0.9);
 	transform: skew(-10deg);
 	font-size: 1.4rem;
+	transition: transform 0.3s, color 0.3s;
 
 	&:hover {
+		transform: scale(1.04) skew(-10deg);
 		color: $secondary-color;
 	}
 
