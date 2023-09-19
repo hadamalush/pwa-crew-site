@@ -4,18 +4,14 @@
 .footer {
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
+	// justify-content: center;
 	position: relative;
 	width: 100%;
 	min-height: 30rem;
 	padding: 15em 2em 10em;
 
-	> .newsletter {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-
-	> h3 {
+	h3 {
 		color: $primary-color;
 		position: absolute;
 		z-index: 10;
@@ -25,35 +21,145 @@
 		text-align: center;
 	}
 
-	> .newsletter > label {
+	.newsletter {
+		display: flex;
+		flex-direction: column;
 		width: 100%;
-		font-size: 1.4rem;
-		text-align: center;
+
+		label {
+			width: 100%;
+			font-size: 1.4rem;
+			text-align: center;
+		}
+
+		button {
+			max-width: 20rem;
+			margin: 1em auto;
+		}
 	}
 
-	.newsletter__input-box {
-		display: flex;
-		position: relative;
-		width: 100%;
-		max-width: 30rem;
+	.newsletter div {
 		margin: 0 auto;
 		padding: 2em 0 1em;
 
-		> input {
+		input {
 			width: 100%;
 		}
 
-		> div {
+		div {
+			// icon
 			position: absolute;
 			right: 0;
 			top: 50%;
-			transform: translateY(-20%);
+			transform: translateY(-50%);
 		}
 	}
 
-	> .newsletter > button {
-		max-width: 20rem;
-		margin: 1em auto;
+	&__box {
+		// flex: 1;
+		margin: 0 auto;
+		height: 100%;
+		text-align: center;
+
+		h5 {
+			margin-top: 2em;
+			font-size: 1.8rem;
+			color: $tertiary-color;
+		}
+
+		ul {
+			li:first-child {
+				margin-top: 1em;
+			}
+
+			li {
+				font-size: 1.4rem;
+				max-width: max-content;
+				margin: 0 auto;
+
+				a {
+					display: block;
+					position: relative;
+					height: 100%;
+
+					padding: 0.5em 3em;
+
+					&:hover {
+						color: $secondary-color;
+					}
+
+					&:before {
+						content: "";
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						transform: translateX(-50%) rotate(0deg);
+						width: 50%;
+						height: 1px;
+						background-color: $secondary-color;
+						opacity: 0;
+						transition: opacity 0.3s, transform 0.3s;
+					}
+
+					&:hover:before {
+						opacity: 1;
+						transform: translateX(-50%) rotate(10deg);
+					}
+				}
+			}
+		}
+
+		.address a {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	.logo {
+		display: flex;
+		width: max-content;
+		margin: 2em auto 0;
+		max-height: max-content;
+
+		a {
+			max-height: max-content;
+		}
+
+		&__box {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			div:first-child {
+				display: flex;
+
+				width: 3rem;
+			}
+
+			h2 {
+				margin-left: 0.2em;
+			}
+		}
+
+		span {
+			color: $secondary-color;
+		}
+	}
+
+	span:last-of-type {
+		li {
+			display: inline-block;
+		}
+		li:first-child {
+			color: tomato;
+		}
+
+		li:nth-child(2) {
+			color: royalblue;
+		}
+		li:nth-child(4) {
+			color: burlywood;
+		}
 	}
 
 	@include media-query(mediumScreen) {
@@ -61,6 +167,21 @@
 	}
 	@include media-query(largeScreen) {
 		flex-direction: row;
+
+		&__box {
+			display: block;
+			width: 33%;
+		}
+
+		.logo {
+			align-items: center;
+			width: 100%;
+
+			:first-child {
+				// flex-direction: row;
+				margin: 0 auto;
+			}
+		}
 	}
 
 	@include media-query(hugeScreen) {

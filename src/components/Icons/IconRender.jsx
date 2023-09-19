@@ -47,6 +47,16 @@ const IconRender = props => {
 				return icons.friends;
 			case "email":
 				return icons.email;
+			case "location":
+				return icons.location;
+			case "phone":
+				return icons.phone;
+			case "x":
+				return icons.x;
+			case "facebook":
+				return icons.facebook;
+			case "instagram":
+				return icons.instagram;
 			default:
 				return null;
 		}

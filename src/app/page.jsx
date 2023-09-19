@@ -40,7 +40,7 @@ export default function Home() {
 					</p>
 				</Card>
 			</WrapperSection>
-			<WrapperSection id='aboutus' className={styles["aboutus"]}>
+			<WrapperSection id='team' className={styles["aboutus"]}>
 				<h3>Nasz team</h3>
 				<Card variant={"normal"}>
 					<h4>Baker</h4>
