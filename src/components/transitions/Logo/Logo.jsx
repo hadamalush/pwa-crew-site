@@ -1,11 +1,13 @@
-"use client";
-import Link from "next/link";
 import styles from "../../../styles/components/transitions/Logo/Logo.module.scss";
+import Link from "next/link";
 import IconRender from "@/components/Icons/IconRender";
-
-const Logo = props => {
-	const classes = `${styles["logo"]} ${props.className}`;
-
+/**
+ * 
+ * @param {className} props Set className and change fontSize there for increase logo ,icon will be increase adequately to font-size.
+ * @returns Link with address '/' (HomePage)
+ */
+const Logo2 = props => {
+	const classes = `${styles.logo} ${props.className}`;
 	return (
 		<Link href='/' className={classes}>
 			<IconRender variant='logo' className={styles["logo__icon"]} />
@@ -17,4 +19,4 @@ const Logo = props => {
 	);
 };
 
-export default Logo;
+export default Logo2;

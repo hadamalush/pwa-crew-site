@@ -2,7 +2,7 @@ import styles from "../../styles/components/Footer/Footer.module.scss";
 import IconRender from "../Icons/IconRender";
 import ButtonMain from "../transitions/Button/ButtonMain";
 import Input from "../transitions/Input/Input";
-import Logo2 from "../transitions/Logo/Logo2";
+import Logo from "../transitions/Logo/Logo";
 import WrapperInput from "../transitions/Wrappers/WrapperInput";
 import Link from "next/link";
 
@@ -85,7 +85,7 @@ const Footer = props => {
 				</address>
 			</span>
 
-			<Logo2 className={styles["footer__logo"]} />
+			<Logo className={styles["footer__logo"]} />
 
 			<span className={styles["footer__box"]}>
 				<h5>Social media</h5>

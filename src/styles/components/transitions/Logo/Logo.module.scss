@@ -1,44 +1,25 @@
-@import "../../../../styles/transitions/variables";
-@import "../../../mixins/mixins";
+@import "../../../transitions/variables";
 
 .logo {
 	display: flex;
-	margin: 0;
-	justify-self: flex-end;
+	justify-content: center;
 
 	&__icon {
 		display: flex;
 		align-items: center;
-		width: 4rem;
+		max-width: 13%;
 	}
-
 	&__text {
-		display: flex;
+		display: inline;
 		margin-left: 0.2em;
-		align-items: center;
-		font-size: 4rem;
+		font-size: inherit;
 
 		&--awarded {
 			color: $secondary-color;
 		}
 	}
+}
 
-	@include media-query(smallScreen) {
-		&__icon {
-			width: 4rem;
-		}
-
-		&__text {
-			font-size: 4rem;
-		}
-	}
-	@include media-query(largeScreen) {
-		&__icon {
-			width: 4rem;
-		}
-
-		&__text {
-			font-size: 4rem;
-		}
-	}
+.logo > div {
+	margin: 0;
 }
