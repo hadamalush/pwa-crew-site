@@ -9,7 +9,7 @@
 .history {
 	padding: 15em 3em 10em;
 
-	> h3 {
+	h3 {
 		color: $primary-color;
 		position: absolute;
 		z-index: 10;
@@ -156,7 +156,6 @@
 		}
 
 		> div > p {
-			font-size: 1.6rem;
 			padding: 0 5em 2em;
 		}
 		> div {

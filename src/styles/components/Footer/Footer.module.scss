@@ -115,38 +115,13 @@
 		}
 	}
 
-	.logo {
-		display: flex;
-		width: max-content;
-		margin: 2em auto 0;
-		max-height: max-content;
-
-		a {
-			max-height: max-content;
-		}
-
-		&__box {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-
-			div:first-child {
-				display: flex;
-
-				width: 3rem;
-			}
-
-			h2 {
-				margin-left: 0.2em;
-			}
-		}
-
-		span {
-			color: $secondary-color;
-		}
+	&__logo {
+		margin: 1em auto 0;
+		font-size: 3.4rem;
 	}
 
 	span:last-of-type {
+		width: 100%;
 		li {
 			display: inline-block;
 		}
@@ -166,7 +141,7 @@
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
-		bottom: 7rem;
+		bottom: 4rem;
 		text-align: center;
 	}
 
@@ -195,19 +170,20 @@
 		}
 	}
 
-	@include media-query(hugeScreen) {
-		padding: 15em 10em 10em;
-
-		h3 {
-			font-size: 3.2rem;
-		}
-
+	@include media-query(x-largeScreen) {
 		h5 {
-			font-size: 2.4rem;
-		}
-		a {
 			font-size: 2rem;
 		}
+
+		&__box {
+			a {
+				font-size: 1.7rem;
+			}
+		}
+	}
+
+	@include media-query(hugeScreen) {
+		padding: 15em 10em 10em;
 
 		h3 {
 			font-size: 3.2rem;
