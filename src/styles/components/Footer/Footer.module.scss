@@ -81,29 +81,15 @@
 					display: block;
 					position: relative;
 					height: 100%;
-
 					padding: 0.5em 3em;
+
+					//icon
+					div {
+						margin-right: 0.3em;
+					}
 
 					&:hover {
 						color: $secondary-color;
-					}
-
-					&:before {
-						content: "";
-						position: absolute;
-						left: 50%;
-						top: 50%;
-						transform: translateX(-50%) rotate(0deg);
-						width: 50%;
-						height: 1px;
-						background-color: $secondary-color;
-						opacity: 0;
-						transition: opacity 0.3s, transform 0.3s;
-					}
-
-					&:hover:before {
-						opacity: 1;
-						transform: translateX(-50%) rotate(10deg);
 					}
 				}
 			}
