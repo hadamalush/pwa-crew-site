@@ -1,0 +1,21 @@
+@import "../../../transitions/variables";
+
+.input {
+	position: relative;
+	background-color: inherit;
+	border: 0;
+	border-bottom: 2px solid $secondary-color;
+	padding: 1em 0;
+	width: 100%;
+	max-width: 30rem;
+	outline: none;
+	color: $primary-color;
+
+	&__icon {
+		display: inline-block;
+	}
+
+	&::placeholder {
+		color: $link-color-primary;
+	}
+}

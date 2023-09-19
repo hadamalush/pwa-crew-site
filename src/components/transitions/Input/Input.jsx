@@ -1,6 +1,7 @@
-import styles from "../../../styles/components/transitions/Inputs/InputTextMain.module.scss";
+import IconRender from "@/components/Icons/IconRender";
+import styles from "../../../styles/components/transitions/Inputs/Input.module.scss";
 
-const InputTextMain = props => {
+const Input = props => {
 	const classes = `${styles.input} ${props.className}`;
 	return (
 		<input
@@ -14,4 +15,4 @@ const InputTextMain = props => {
 	);
 };
 
-export default InputTextMain;
+export default Input;

@@ -1,5 +1,10 @@
 import styles from "../../../styles/components/transitions/Buttons/ButtonMain.module.scss";
 import btnVariant from "../../../styles/components/transitions/Buttons/ButtonVariants.module.scss";
+/** 
+@param variant - default, borderIn, btnSkewRight
+
+
+**/
 
 const ButtonMain = props => {
 	//variants: default,

@@ -1,6 +1,6 @@
 import styles from "../../../../styles/components/transitions/Forms/Newsletter/NewsletterForm.module.scss";
 import ButtonMain from "../../Button/ButtonMain";
-import InputTextMain from "../../Input/InputTextMain";
+import InputTextMain from "../../Input/Input";
 
 const NewsletterForm = props => {
 	const classes = `${styles.newsletter} ${props.className}`;

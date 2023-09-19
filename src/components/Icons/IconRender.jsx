@@ -1,7 +1,11 @@
 "use client";
 import { IconsBase } from "./IconsBase";
 import styles from "../../styles/components/transitions/Icons/IconRender.module.scss";
-
+/**
+ *
+ * @param {string} variant - Variants of icons (Available: youtube, film, powerOff, settings, user, event, calendar, info, contact, shop, home, user, users, history, chartRadar, email)
+ * @returns icon svg wrapped div
+ */
 const IconRender = props => {
 	const icons = IconsBase();
 	const variant = props.variant;
@@ -41,6 +45,8 @@ const IconRender = props => {
 				return icons.chartRadar;
 			case "friends":
 				return icons.friends;
+			case "email":
+				return icons.email;
 			default:
 				return null;
 		}
