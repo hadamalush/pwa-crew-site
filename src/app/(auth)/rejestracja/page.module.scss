@@ -3,7 +3,7 @@
 
 .login {
 	width: 100vw;
-	height: 70rem;
+	// height: 70rem;
 
 	&__container {
 		position: relative;
@@ -45,13 +45,13 @@
 	}
 
 	&__form {
-		width: 100%;
+		width: 50%;
 		// transform: translateX(100%);
 		backdrop-filter: blur(20px);
 		// animation: move 3s forwards;
 
 		form {
-			width: 28rem;
+			width: 30rem;
 		}
 	}
 
@@ -92,12 +92,3 @@
 		}
 	}
 }
-
-// @keyframes move {
-// 	from {
-// 		transform: translateX(100%);
-// 	}
-// 	to {
-// 		transform: translateX(0);
-// 	}
-// }

@@ -1,11 +1,11 @@
 "use client";
 
-import styles from "../../../../styles/components/transitions/Forms/Registration/RegistrationForm.module.scss";
 import Input from "../../Input/Input";
 import WrapperInput from "../../Wrappers/WrapperInput";
 import IconRender from "@/components/Icons/IconRender";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
+import styles from "../../../../styles/components/transitions/Forms/Login/LoginForm.module.scss";
 import { useRouter } from "next/navigation";
 
 const RegistrationForm = ({ className, ...props }) => {
@@ -61,8 +61,7 @@ const RegistrationForm = ({ className, ...props }) => {
 				</WrapperInput>
 				<WrapperInput className={styles["logreg-box__remember-forgot"]}>
 					<input type='checkbox' />
-					<label>Pamiętaj</label>
-					<Link href='/'> Zapomniałeś hasła?</Link>
+					<label>Akceptuje warunki umowy</label>
 				</WrapperInput>
 				<ButtonMain variant={"btnSkewRight"}> Zaloguj </ButtonMain>
 

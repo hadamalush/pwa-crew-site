@@ -1,4 +1,5 @@
 @import "../../../../transitions/variables";
+// Registration and Login forms
 
 .logreg-box {
 	display: flex;
@@ -6,6 +7,8 @@
 	transition: transform 0.6s;
 	transform-origin: right;
 	animation: show 0.6s;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 
 	form {
 		width: 30rem;

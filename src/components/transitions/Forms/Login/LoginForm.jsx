@@ -1,10 +1,10 @@
 "use client";
-import styles from "../../../../styles/components/transitions/Forms/Login/LoginForm.module.scss";
 import Input from "../../Input/Input";
 import WrapperInput from "../../Wrappers/WrapperInput";
 import IconRender from "@/components/Icons/IconRender";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
+import styles from "../../../../styles/components/transitions/Forms/Login/LoginForm.module.scss";
 import { useRouter } from "next/navigation";
 
 const LoginForm = ({ className, ...props }) => {
