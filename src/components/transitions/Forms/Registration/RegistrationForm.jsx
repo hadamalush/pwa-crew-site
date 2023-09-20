@@ -21,7 +21,7 @@ const RegistrationForm = ({ className, ...props }) => {
 
 		setTimeout(() => {
 			console.log("object");
-			router.replace("/logowanie");
+			router.push("/logowanie");
 		}, 500);
 	};
 
