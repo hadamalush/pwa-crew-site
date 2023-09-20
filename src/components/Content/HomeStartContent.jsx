@@ -1,9 +1,10 @@
 import styles from "../../styles/components/Content/HomeStartContent.module.scss";
+import WrapperStart from "../transitions/Wrappers/WrapperStart";
 import ButtonMain from "../transitions/Button/ButtonMain";
 
 const HomeStartContent = () => {
 	return (
-		<section className={styles.introduction}>
+		<WrapperStart className={styles.introduction}>
 			<div className={styles["introduction__text"]}>
 				<h1 className={styles["introduction__h1"]}>Tylko dobry rap</h1>
 				<p className={styles["introduction__text"]}>
@@ -21,7 +22,7 @@ const HomeStartContent = () => {
 					Współpraca
 				</ButtonMain>
 			</div>
-		</section>
+		</WrapperStart>
 	);
 };
 
