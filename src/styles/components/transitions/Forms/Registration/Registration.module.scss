@@ -16,6 +16,7 @@
 }
 
 .container .content {
+	// display: none; mobile
 	display: flex;
 	flex-wrap: wrap;
 	width: 58%;
@@ -50,6 +51,7 @@
 
 .container .logreg-box {
 	width: 42%;
+	// width: 100%; mobile
 	backdrop-filter: blur(20px);
 	display: flex;
 	justify-content: center;

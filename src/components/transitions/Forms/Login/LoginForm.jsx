@@ -1,32 +1,15 @@
-import styles from "../../../../styles/components/transitions/Forms/Registration/Registration.module.scss";
-import Logo2 from "../../Logo/Logo";
-import SocialMedia from "../../SocialMedia/SocialMedia";
+import styles from "../../../../styles/components/transitions/Forms/Login/LoginForm.module.scss";
 import Input from "../../Input/Input";
 import WrapperInput from "../../Wrappers/WrapperInput";
 import IconRender from "@/components/Icons/IconRender";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 
-const RegistrationForm = () => {
+const LoginForm = ({ className, ...props }) => {
+	const classes = `${styles["logreg-box"]} ${className}`;
 	return (
-		<div className={styles.container}>
-			<div className={styles.content}>
-				<Logo2 />
-				<div className={styles["content__text"]}>
-					<h3>
-						Welcome!
-						<br />
-						<span> To Our New Website.</span>
-					</h3>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore,
-						molestiae.
-					</p>
-					<SocialMedia />
-				</div>
-			</div>
-
-			<div className={styles["logreg-box"]}>
+		<>
+			<div className={classes}>
 				<form>
 					<h1>Logowanie</h1>
 					<WrapperInput className={styles["logreg-box__input-box"]}>
@@ -61,8 +44,8 @@ const RegistrationForm = () => {
 					</p>
 				</form>
 			</div>
-		</div>
+		</>
 	);
 };
 
-export default RegistrationForm;
+export default LoginForm;
