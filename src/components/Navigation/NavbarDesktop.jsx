@@ -15,7 +15,7 @@ const NavbarDesktop = props => {
 					</Link>
 				</li>
 				<li>
-					<Link href='/' className={styles["nav__list-link"]}>
+					<Link href='/registration' className={styles["nav__list-link"]}>
 						<IconRender variant='users' className={styles["nav__icon"]} />O nas
 					</Link>
 				</li>

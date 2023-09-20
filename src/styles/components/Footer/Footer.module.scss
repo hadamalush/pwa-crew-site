@@ -105,20 +105,11 @@
 		font-size: 3.4rem;
 	}
 
-	span:last-of-type {
+	.footer__box:last-of-type {
 		width: 100%;
-		li {
-			display: inline-block;
-		}
-		li:first-child {
-			color: tomato;
-		}
 
-		li:nth-child(2) {
-			color: royalblue;
-		}
-		li:nth-child(4) {
-			color: burlywood;
+		h5 {
+			margin-bottom: 1em;
 		}
 	}
 

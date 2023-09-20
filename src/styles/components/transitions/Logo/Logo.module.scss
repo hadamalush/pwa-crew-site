@@ -11,8 +11,9 @@
 	}
 	&__text {
 		display: inline;
-		margin-left: 0.2em;
+		margin-left: 0.05em;
 		font-size: inherit;
+		text-shadow: $heading-primary-shadow;
 
 		&--awarded {
 			color: $secondary-color;

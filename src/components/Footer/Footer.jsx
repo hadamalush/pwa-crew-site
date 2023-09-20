@@ -5,6 +5,7 @@ import Input from "../transitions/Input/Input";
 import Logo from "../transitions/Logo/Logo";
 import WrapperInput from "../transitions/Wrappers/WrapperInput";
 import Link from "next/link";
+import SocialMedia from "../transitions/SocialMedia/SocialMedia";
 
 const Footer = props => {
 	return (
@@ -27,7 +28,7 @@ const Footer = props => {
 				<ButtonMain variant='btnSkewRight'>Subskrybuj</ButtonMain>
 			</form>
 
-			<span className={styles["footer__box"]}>
+			<div className={styles["footer__box"]}>
 				<h5>Navigation</h5>
 				<ul>
 					<li>
@@ -45,9 +46,9 @@ const Footer = props => {
 						<Link href='/kontakt'>Kontakt</Link>
 					</li>
 				</ul>
-			</span>
+			</div>
 
-			<span className={styles["footer__box"]}>
+			<div className={styles["footer__box"]}>
 				<h5>Wydarzenia</h5>
 				<ul>
 					<li>
@@ -57,9 +58,9 @@ const Footer = props => {
 						<Link href='/wyderzenia/nadchodzace'>Nadchodzące wydarzenia</Link>
 					</li>
 				</ul>
-			</span>
+			</div>
 
-			<span className={styles["footer__box"]}>
+			<div className={styles["footer__box"]}>
 				<h5>Address</h5>
 				<address className={styles.address}>
 					<ul>
@@ -83,26 +84,13 @@ const Footer = props => {
 						</li>
 					</ul>
 				</address>
-			</span>
+			</div>
 
 			<Logo className={styles["footer__logo"]} />
 
 			<span className={styles["footer__box"]}>
 				<h5>Social media</h5>
-				<ul>
-					<li>
-						<IconRender variant='youtube' />
-					</li>
-					<li>
-						<IconRender variant='facebook' />
-					</li>
-					<li>
-						<IconRender variant='x' />
-					</li>
-					<li>
-						<IconRender variant='instagram' />
-					</li>
-				</ul>
+				<SocialMedia />
 			</span>
 
 			<p>&copy; 2023 PwaCrew - Wszystkie prawa zastrzeżone</p>
