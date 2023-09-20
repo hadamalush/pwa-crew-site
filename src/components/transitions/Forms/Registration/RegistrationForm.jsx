@@ -1,66 +1,58 @@
-import styles from "../../../../styles/components/transitions/Forms/Registration/Registration.module.scss";
-import Logo2 from "../../Logo/Logo";
-import SocialMedia from "../../SocialMedia/SocialMedia";
+import styles from "../../../../styles/components/transitions/Forms/Login/LoginForm.module.scss";
 import Input from "../../Input/Input";
 import WrapperInput from "../../Wrappers/WrapperInput";
 import IconRender from "@/components/Icons/IconRender";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ className, ...props }) => {
+	const classes = `${styles["logreg-box"]} ${className}`;
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.content}>
-				<Logo2 />
-				<div className={styles["content__text"]}>
-					<h3>
-						Welcome!
-						<br />
-						<span> To Our New Website.</span>
-					</h3>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore,
-						molestiae.
-					</p>
-					<SocialMedia />
-				</div>
-			</div>
+		<div className={classes}>
+			<form>
+				<h1>Rejestracja</h1>
+				<WrapperInput className={styles["logreg-box__input-box"]}>
+					<Input
+						type='text'
+						name='email'
+						id='email'
+						placeholder='Email'
+						arialabel={"Email"}
+					/>
+					<IconRender variant='email' />
+				</WrapperInput>
+				<WrapperInput className={styles["logreg-box__input-box"]}>
+					<Input
+						type='password'
+						name='password'
+						id='password'
+						placeholder='Hasło'
+						arialabel={"Hasło"}
+					/>
+					<IconRender variant='lock' />
+				</WrapperInput>
+				<WrapperInput className={styles["logreg-box__input-box"]}>
+					<Input
+						type='password'
+						name='password'
+						id='password'
+						placeholder='Powtórz hasło'
+						arialabel={"Powtórz hasło"}
+					/>
+					<IconRender variant='lock' />
+				</WrapperInput>
+				<WrapperInput className={styles["logreg-box__remember-forgot"]}>
+					<input type='checkbox' />
+					<label>Pamiętaj</label>
+					<Link href='/'> Zapomniałeś hasła?</Link>
+				</WrapperInput>
+				<ButtonMain variant={"btnSkewRight"}> Zaloguj </ButtonMain>
 
-			<div className={styles["logreg-box"]}>
-				<form>
-					<h1>Logowanie</h1>
-					<WrapperInput className={styles["logreg-box__input-box"]}>
-						<Input
-							type='text'
-							name='email'
-							id='email'
-							placeholder='Email'
-							arialabel={"Email"}
-						/>
-						<IconRender variant='email' />
-					</WrapperInput>
-					<WrapperInput className={styles["logreg-box__input-box"]}>
-						<Input
-							type='password'
-							name='password'
-							id='password'
-							placeholder='Password'
-							arialabel={"Password"}
-						/>
-						<IconRender variant='lock' />
-					</WrapperInput>
-					<WrapperInput className={styles["logreg-box__remember-forgot"]}>
-						<input type='checkbox' />
-						<label>Remember me</label>
-						<Link href='/'> Forgot password?</Link>
-					</WrapperInput>
-					<ButtonMain variant={"btnSkewRight"}> Zaloguj </ButtonMain>
-
-					<p>
-						Don't have an account? <Link href='registration'>Register</Link>
-					</p>
-				</form>
-			</div>
+				<p>
+					Masz konto? <Link href='/logowanie'>Zaloguj</Link>
+				</p>
+			</form>
 		</div>
 	);
 };

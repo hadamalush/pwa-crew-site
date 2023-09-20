@@ -1,17 +1,15 @@
 @import "../../../../transitions/variables";
 
 .logreg-box {
-	// width: 42%; from medium
-
-	width: 100%;
-	backdrop-filter: blur(20px);
 	display: flex;
 	justify-content: center;
+	width: 100%;
+	backdrop-filter: blur(20px);
 
 	form {
+		width: 30rem;
 		margin: 0 auto;
 		padding: 5em 0;
-		width: 30rem;
 	}
 
 	h1 {

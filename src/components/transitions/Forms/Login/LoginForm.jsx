@@ -8,43 +8,41 @@ import ButtonMain from "../../Button/ButtonMain";
 const LoginForm = ({ className, ...props }) => {
 	const classes = `${styles["logreg-box"]} ${className}`;
 	return (
-		<>
-			<div className={classes}>
-				<form>
-					<h1>Logowanie</h1>
-					<WrapperInput className={styles["logreg-box__input-box"]}>
-						<Input
-							type='text'
-							name='email'
-							id='email'
-							placeholder='Email'
-							arialabel={"Email"}
-						/>
-						<IconRender variant='email' />
-					</WrapperInput>
-					<WrapperInput className={styles["logreg-box__input-box"]}>
-						<Input
-							type='password'
-							name='password'
-							id='password'
-							placeholder='Password'
-							arialabel={"Password"}
-						/>
-						<IconRender variant='lock' />
-					</WrapperInput>
-					<WrapperInput className={styles["logreg-box__remember-forgot"]}>
-						<input type='checkbox' />
-						<label>Remember me</label>
-						<Link href='/'> Forgot password?</Link>
-					</WrapperInput>
-					<ButtonMain variant={"btnSkewRight"}> Zaloguj </ButtonMain>
+		<div className={classes}>
+			<form>
+				<h1>Logowanie</h1>
+				<WrapperInput className={styles["logreg-box__input-box"]}>
+					<Input
+						type='text'
+						name='email'
+						id='email'
+						placeholder='Email'
+						arialabel={"Email"}
+					/>
+					<IconRender variant='email' />
+				</WrapperInput>
+				<WrapperInput className={styles["logreg-box__input-box"]}>
+					<Input
+						type='password'
+						name='password'
+						id='password'
+						placeholder='Password'
+						arialabel={"Password"}
+					/>
+					<IconRender variant='lock' />
+				</WrapperInput>
+				<WrapperInput className={styles["logreg-box__remember-forgot"]}>
+					<input type='checkbox' />
+					<label>Pamiętaj</label>
+					<Link href='/'> Zapomniałeś hasła?</Link>
+				</WrapperInput>
+				<ButtonMain variant={"btnSkewRight"}> Zaloguj </ButtonMain>
 
-					<p>
-						Don't have an account? <Link href='registration'>Register</Link>
-					</p>
-				</form>
-			</div>
-		</>
+				<p>
+					Nie masz konta? <Link href='/rejestracja'>Zarejestruj</Link>
+				</p>
+			</form>
+		</div>
 	);
 };
 
