@@ -22,7 +22,9 @@ export default function RegistrationPage() {
 							<SocialMedia />
 						</div>
 					</div>
-					<LoginForm className={styles["login__form"]} />
+			
+						<LoginForm className={styles["login__form"]} />
+				
 				</WrapperForm>
 			</WrapperStart>
 		</main>

@@ -45,9 +45,8 @@
 	}
 
 	&__form {
-		transform: translateX(100%);
-		animation: move 3s forwards;
-
+		width: 100%;
+		backdrop-filter: blur(20px);
 		form {
 			width: 28rem;
 		}
@@ -88,14 +87,5 @@
 			padding: 10em;
 			width: 60%;
 		}
-	}
-}
-
-@keyframes move {
-	from {
-		transform: translateX(100%);
-	}
-	to {
-		transform: translateX(0);
 	}
 }

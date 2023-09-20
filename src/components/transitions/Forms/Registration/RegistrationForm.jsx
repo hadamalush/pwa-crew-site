@@ -1,18 +1,35 @@
-import styles from "../../../../styles/components/transitions/Forms/Login/LoginForm.module.scss";
+"use client";
+
+import styles from "../../../../styles/components/transitions/Forms/Registration/RegistrationForm.module.scss";
 import Input from "../../Input/Input";
 import WrapperInput from "../../Wrappers/WrapperInput";
 import IconRender from "@/components/Icons/IconRender";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
+import { useRouter } from "next/navigation";
 
 const RegistrationForm = ({ className, ...props }) => {
+	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
 
+	const changeWebstiteHandler = async event => {
+		event.preventDefault();
+
+		const form = document
+			.getElementById("form")
+			.classList.toggle(styles.active);
+
+		setTimeout(() => {
+			console.log("object");
+			router.replace("/logowanie");
+		}, 500);
+	};
+
 	return (
-		<div className={classes}>
+		<div className={classes} id='form'>
 			<form>
 				<h1>Rejestracja</h1>
-				<WrapperInput className={styles["logreg-box__input-box"]}>
+				<WrapperInput className={`${styles["logreg-box__input-box"]}`}>
 					<Input
 						type='text'
 						name='email'
@@ -50,7 +67,10 @@ const RegistrationForm = ({ className, ...props }) => {
 				<ButtonMain variant={"btnSkewRight"}> Zaloguj </ButtonMain>
 
 				<p>
-					Masz konto? <Link href='/logowanie'>Zaloguj</Link>
+					Masz konto?{" "}
+					<Link href='/logowanie' onClick={changeWebstiteHandler}>
+						Zaloguj
+					</Link>
 				</p>
 			</form>
 		</div>
