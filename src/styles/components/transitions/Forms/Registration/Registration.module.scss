@@ -2,9 +2,10 @@
 
 .container {
 	position: absolute;
+	display: flex;
 	left: 50%;
 	width: 80%;
-	height: 550px;
+	max-width: 120rem;
 	transform: translateX(-50%);
 	height: 60rem;
 	overflow: hidden;
@@ -44,5 +45,60 @@
 
 	&__text {
 		width: 100%;
+	}
+}
+
+.container .logreg-box {
+	width: 42%;
+	backdrop-filter: blur(20px);
+	display: flex;
+	justify-content: center;
+
+	form {
+		margin: 0 auto;
+		padding: 5em 0;
+		width: 30rem;
+	}
+
+	h1 {
+		font-size: 3rem;
+		text-align: center;
+	}
+
+	&__input-box {
+		margin: 4em auto;
+		div {
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+	&__input-box input {
+		width: 100%;
+		max-width: 35rem;
+		border-color: $primary-color;
+		&::placeholder {
+			color: $primary-color;
+		}
+	}
+
+	&__remember-forgot {
+		display: flex;
+
+		label {
+			margin-left: 0.5em;
+		}
+
+		a {
+			margin-left: auto;
+		}
+
+		font-size: 1.6rem;
+	}
+
+	button {
+		margin: 2em 0;
 	}
 }

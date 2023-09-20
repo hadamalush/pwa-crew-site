@@ -12,15 +12,15 @@ const Footer = props => {
 		<footer className={styles.footer}>
 			<h3>Dołącz do nas!</h3>
 			<form className={styles.newsletter}>
-				<label htmlFor='email'>
+				<label htmlFor='email-newsletter'>
 					Dołącz do naszego newslettera, aby być na bieżąco z naszymi koncertami
 					i wydarzeniami hip-hopowymi!
 				</label>
 				<WrapperInput>
 					<Input
 						type='text'
-						name='email'
-						id='email'
+						name='email-newsletter'
+						id='email-newsletter'
 						placeholder='Podaj adres email'
 					/>
 					<IconRender variant='email' />

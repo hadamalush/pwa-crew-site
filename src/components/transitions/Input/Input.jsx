@@ -1,4 +1,3 @@
-import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../styles/components/transitions/Inputs/Input.module.scss";
 
 const Input = props => {
@@ -11,6 +10,7 @@ const Input = props => {
 			type={props.type}
 			name={props.name}
 			placeholder={props.placeholder}
+			aria-label={props.arialabel}
 		/>
 	);
 };

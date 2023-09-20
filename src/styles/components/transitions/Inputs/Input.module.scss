@@ -5,10 +5,11 @@
 	background-color: inherit;
 	border: 0;
 	border-bottom: 2px solid $secondary-color;
-	padding: 1em 0;
+	padding: 1em 0 0.5em;
 	max-width: 30rem;
 	outline: none;
 	color: $primary-color;
+	font-size: 1.6rem;
 
 	&__icon {
 		display: inline-block;
