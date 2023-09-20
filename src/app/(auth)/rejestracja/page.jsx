@@ -3,7 +3,7 @@ import RegistrationForm from "@/components/transitions/Forms/Registration/Regist
 import WrapperForm from "@/components/transitions/Wrappers/WrapperForm";
 import Logo2 from "@/components/transitions/Logo/Logo";
 import SocialMedia from "@/components/transitions/SocialMedia/SocialMedia";
-import styles from "../logowanie/page.module.scss";
+import styles from "../Common.module.scss";
 
 export default function RegistrationPage() {
 	return (

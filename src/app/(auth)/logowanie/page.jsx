@@ -3,7 +3,7 @@ import LoginForm from "@/components/transitions/Forms/Login/LoginForm";
 import WrapperForm from "@/components/transitions/Wrappers/WrapperForm";
 import Logo2 from "@/components/transitions/Logo/Logo";
 import SocialMedia from "@/components/transitions/SocialMedia/SocialMedia";
-import styles from "./page.module.scss";
+import styles from "../Common.module.scss";
 
 export default function RegistrationPage() {
 	return (
@@ -22,9 +22,7 @@ export default function RegistrationPage() {
 							<SocialMedia />
 						</div>
 					</div>
-			
-						<LoginForm className={styles["login__form"]} />
-				
+					<LoginForm className={styles["login__form"]} />
 				</WrapperForm>
 			</WrapperStart>
 		</main>
