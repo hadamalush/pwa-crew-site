@@ -7,17 +7,6 @@
 	min-height: 55rem;
 	z-index: -20;
 
-	&::before {
-		content: "";
-		position: absolute;
-		z-index: 10;
-		width: 100vw;
-		height: 100vh;
-		top: 0;
-		left: 0;
-		// backdrop-filter: blur(20px);
-	}
-
 	img {
 		object-fit: cover;
 	}

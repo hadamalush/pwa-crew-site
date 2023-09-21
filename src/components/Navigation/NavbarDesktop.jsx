@@ -32,7 +32,7 @@ const NavbarDesktop = props => {
 					</Link>
 				</li>
 				<li>
-					<Link href='/' className={styles["nav__list-link"]}>
+					<Link href='/logowanie' className={styles["nav__list-link"]}>
 						<IconRender variant='user' className={styles["nav__icon"]} />
 						Zaloguj
 					</Link>

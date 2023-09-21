@@ -1,6 +1,5 @@
 import "./globals.scss";
 import MainHeader from "@/components/Header/MainHeader";
-import Image from "next/image";
 import Footer from "@/components/Footer/Footer";
 import BackgroundImageGeneral from "@/components/transitions/Background/BackgroundImageGeneral";
 

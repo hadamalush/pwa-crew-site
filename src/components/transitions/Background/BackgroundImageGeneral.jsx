@@ -19,7 +19,7 @@ const BackgroundImageGeneral = () => {
 		pathname = pathname.replace(/^\/+/, "");
 	}
 
-	const isShow = pathname === "logowanie" || pathname === "rejestracja";
+	const isPath = pathname === "logowanie" || pathname === "rejestracja";
 
 	const style = {
 		logowanie: {
@@ -34,15 +34,17 @@ const BackgroundImageGeneral = () => {
 
 	useEffect(() => {
 		const checkPoints = async () => {
-			if (isShow && isMediumScreen) {
-				style[pathname].display = "none";
+			const hero = document.getElementById("hero");
 
-				// setStyle1(stylling);
+			if (isPath && isMediumScreen) {
+				style[pathname].display = "none";
 				setStyle1(style[pathname]);
-			} else if (isShow) {
+			} else if (isPath) {
 				setStyle1(style[pathname]);
-			} else if (!isShow) {
+				hero.classList.add(styles.filter);
+			} else if (!isPath) {
 				setStyle1(null);
+				hero.classList.remove(styles.filter);
 			}
 
 			return;
@@ -51,10 +53,8 @@ const BackgroundImageGeneral = () => {
 		checkPoints();
 	}, [isMediumScreen, pathname]);
 
-	console.log(isShow);
-
 	return (
-		<div className={styles.hero} style={style1}>
+		<div className={styles.hero} style={style1} id='hero'>
 			{/* {isShow && ( */}
 			<Image
 				alt='Crowd on the concert'
@@ -66,7 +66,7 @@ const BackgroundImageGeneral = () => {
 				sizes='100vw'
 			/>
 			{/* )} */}
-			<div className={styles["hero__bg"]}></div>
+			{!isPath && <div className={styles["hero__bg"]}></div>}
 		</div>
 	);
 };

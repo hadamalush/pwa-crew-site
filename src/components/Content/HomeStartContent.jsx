@@ -1,6 +1,7 @@
-import styles from "../../styles/components/Content/HomeStartContent.module.scss";
 import WrapperStart from "../transitions/Wrappers/WrapperStart";
 import ButtonMain from "../transitions/Button/ButtonMain";
+import Link from "next/link";
+import styles from "../../styles/components/Content/HomeStartContent.module.scss";
 
 const HomeStartContent = () => {
 	return (
@@ -11,11 +12,16 @@ const HomeStartContent = () => {
 					O każdej porze dnia, <br />
 					rapuje ile tylko sie da!
 				</p>
-				<ButtonMain
+				{/* <ButtonMain
 					variant='btnSkewRight'
 					className={styles["introduction__btn"]}>
 					Rejestracja
-				</ButtonMain>
+				</ButtonMain> */}
+				<Link
+					href='/rejestracja'
+					className={`${styles["introduction__btn"]} ${styles["introduction__btn--right"]} ${styles["btnSkewRight"]}`}>
+					Rejestracja{" "}
+				</Link>
 				<ButtonMain
 					variant='btnSkewRight'
 					className={`${styles["introduction__btn"]} ${styles["introduction__btn--right"]}`}>
