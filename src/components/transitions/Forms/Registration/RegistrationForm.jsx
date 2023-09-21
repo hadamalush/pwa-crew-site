@@ -20,7 +20,6 @@ const RegistrationForm = ({ className, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			console.log("object");
 			router.push("/logowanie");
 		}, 500);
 	};

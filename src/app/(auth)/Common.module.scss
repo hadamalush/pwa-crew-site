@@ -48,14 +48,6 @@ main .login {
 		}
 	}
 
-	&__form {
-		width: 100%;
-		backdrop-filter: blur(20px);
-		form {
-			width: 28rem;
-		}
-	}
-
 	@include media-query(mediumScreen) {
 		// margin-top: 15em;
 		height: 100rem;
@@ -67,13 +59,6 @@ main .login {
 			border-radius: 5px;
 		}
 
-		&__form {
-			width: 50%;
-			form {
-				width: 30rem;
-			}
-		}
-
 		&__content {
 			display: flex;
 		}
@@ -82,10 +67,6 @@ main .login {
 	@include media-query(xx-largeScreen) {
 		&__container {
 			width: 100%;
-		}
-
-		&__form {
-			width: 40%;
 		}
 
 		&__content {

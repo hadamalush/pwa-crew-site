@@ -19,7 +19,6 @@ const LoginForm = ({ className, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			console.log("object");
 			router.replace("/rejestracja");
 		}, 500);
 	};
