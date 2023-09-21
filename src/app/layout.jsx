@@ -2,6 +2,7 @@ import "./globals.scss";
 import MainHeader from "@/components/Header/MainHeader";
 import Image from "next/image";
 import Footer from "@/components/Footer/Footer";
+import BackgroundImageGeneral from "@/components/transitions/Background/BackgroundImageGeneral";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
@@ -13,18 +14,7 @@ export default function RootLayout({ children }) {
 		<html lang='pl'>
 			<body>
 				<MainHeader newsletter={true} />
-				<div className='hero'>
-					<Image
-						alt='Crowd on the concert'
-						src='/images/header/concert.jpg'
-						priority={true}
-						width={0}
-						height={0}
-						fill
-						sizes='100vw'
-					/>
-					<div className='hero__bg'></div>
-				</div>
+				<BackgroundImageGeneral />
 				{children}
 				<Footer />
 			</body>
