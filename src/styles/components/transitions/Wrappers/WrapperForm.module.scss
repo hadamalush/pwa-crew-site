@@ -4,8 +4,9 @@
 	max-width: 120rem;
 	height: 60rem;
 	min-height: 60rem;
-	background-image: url("/images/header/concert.jpg");
-	background-size: cover;
-	background-position: center;
-	// overflow-x: hidden;
+
+	img {
+		position: absolute;
+		z-index: -1;
+	}
 }

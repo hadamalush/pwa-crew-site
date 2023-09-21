@@ -21,6 +21,8 @@ export default function ImageLoader(props) {
 				return images.marian;
 			case "neo":
 				return images.neo;
+			case "concert":
+				return images.concert;
 			default:
 				return null;
 		}
@@ -30,12 +32,12 @@ export default function ImageLoader(props) {
 
 	return (
 		<Image
-			priority
+			priority={props.priority}
 			src={selectedImage}
 			alt={props.alt}
 			fill
 			className={classes}
-			sizes='(max-width: 768px) 90vw, (min-width: 1200px) 40vw'
+			sizes={props.sizes}
 		/>
 	);
 }

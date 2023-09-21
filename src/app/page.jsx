@@ -47,6 +47,7 @@ export default function Home() {
 					<ImageLoader
 						alt='Mężczyzna grający na gitarze, na koncercie'
 						variant='baker'
+						sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
 					/>
 
 					<h5> Weteran sceny, bitowy magik. </h5>
@@ -60,6 +61,7 @@ export default function Home() {
 					<ImageLoader
 						alt='Mężczyzna grający na gitarze, na koncercie'
 						variant='marian'
+						sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
 					/>
 					<h5> Szybki flow, uliczna poezja. </h5>
 					<p>
@@ -73,6 +75,7 @@ export default function Home() {
 					<ImageLoader
 						alt='Mężczyzna grający na gitarze, na koncercie'
 						variant='neo'
+						sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
 					/>
 					<h5> Technologiczny vibe.</h5>
 					<p>
@@ -86,6 +89,7 @@ export default function Home() {
 					<ImageLoader
 						alt='Mężczyzna grający na gitarze, na koncercie'
 						variant='david'
+						sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
 					/>
 					<h5> Historie życiowe, głębokie teksty. </h5>
 					<p>

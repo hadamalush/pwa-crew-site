@@ -7,6 +7,7 @@ export function ImageBase() {
 		david: "/images/mainContent/card/david.jpg",
 		marian: "/images/mainContent/card/marian.jpg",
 		neo: "/images/mainContent/card/neo.jpg",
+		concert: "/images/header/concert.jpg",
 	};
 
 	return ALL_Images;

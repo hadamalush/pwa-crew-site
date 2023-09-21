@@ -35,6 +35,7 @@ const RegistrationForm = ({ className, ...props }) => {
 						name='email'
 						id='email'
 						placeholder='Email'
+						autoComplete={"email"}
 						arialabel={"Email"}
 					/>
 					<IconRender variant='email' />
@@ -45,6 +46,7 @@ const RegistrationForm = ({ className, ...props }) => {
 						name='password'
 						id='password'
 						placeholder='Hasło'
+						autoComplete={"false"}
 						arialabel={"Hasło"}
 					/>
 					<IconRender variant='lock' />
@@ -52,9 +54,10 @@ const RegistrationForm = ({ className, ...props }) => {
 				<WrapperInput className={styles["logreg-box__input-box"]}>
 					<Input
 						type='password'
-						name='password'
-						id='password'
+						name='repeatpassword'
+						id='repeatpassword'
 						placeholder='Powtórz hasło'
+						autoComplete='false'
 						arialabel={"Powtórz hasło"}
 					/>
 					<IconRender variant='lock' />

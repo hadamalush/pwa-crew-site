@@ -10,6 +10,7 @@ const Input = props => {
 			type={props.type}
 			name={props.name}
 			placeholder={props.placeholder}
+			autoComplete={props.autoComplete}
 			aria-label={props.arialabel}
 		/>
 	);
