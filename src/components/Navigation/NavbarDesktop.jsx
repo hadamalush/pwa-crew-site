@@ -1,9 +1,19 @@
 import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
 import IconRender from "../Icons/IconRender";
 import Link from "next/link";
+import { useSession, signOut, SessionProvider } from "next-auth/react";
 
 const NavbarDesktop = props => {
+	const { data: session, status } = useSession();
 	const classes = `${styles.nav} ${props.className}`;
+
+	console.log(status);
+
+	const logoutHandler = e => {
+		e.preventDefault();
+
+		signOut();
+	};
 
 	return (
 		<nav className={classes}>
@@ -32,10 +42,22 @@ const NavbarDesktop = props => {
 					</Link>
 				</li>
 				<li>
-					<Link href='/logowanie' className={styles["nav__list-link"]}>
-						<IconRender variant='user' className={styles["nav__icon"]} />
-						Zaloguj
-					</Link>
+					{!session && status === "unauthenticated" && (
+						<Link href='/logowanie' className={styles["nav__list-link"]}>
+							<IconRender variant='user' className={styles["nav__icon"]} />
+							Zaloguj
+						</Link>
+					)}
+
+					{session && status === "authenticated" && (
+						<Link
+							href='/'
+							onClick={logoutHandler}
+							className={styles["nav__list-link"]}>
+							<IconRender variant='powerOff' className={styles["nav__icon"]} />
+							Wyloguj
+						</Link>
+					)}
 				</li>
 			</ul>
 		</nav>

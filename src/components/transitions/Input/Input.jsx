@@ -7,6 +7,7 @@ const Input = props => {
 			id={props.id}
 			className={classes}
 			onChange={props.onChange}
+			ref={props.reference}
 			type={props.type}
 			name={props.name}
 			placeholder={props.placeholder}

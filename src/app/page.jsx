@@ -7,6 +7,8 @@ import styles from "./page.module.scss";
 // import BackgroundAnimation from "@/components/transitions/Background/BackgroundAnimation";
 
 export default function Home() {
+	const sprawdz = getKey();
+	// console.log(sprawdz);
 	return (
 		<main>
 			<HomeStartContent />
@@ -102,3 +104,11 @@ export default function Home() {
 		</main>
 	);
 }
+
+const getKey = async () => {
+	const key = process.env.NEXT_PUBLIC_FIREBASE_API;
+
+	console.log(key);
+
+	return key;
+};
