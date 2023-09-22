@@ -8,6 +8,10 @@ export const authOptions = {
 	session: {
 		strategy: "jwt",
 	},
+	pages: {
+		signIn: "/logowanie",
+		// signOut: "/rejestracja",
+	},
 	providers: [
 		CredentialsProvider({
 			async authorize(credentials) {

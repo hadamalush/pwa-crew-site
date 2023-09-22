@@ -7,7 +7,7 @@ const NavbarDesktop = props => {
 	const { data: session, status } = useSession();
 	const classes = `${styles.nav} ${props.className}`;
 
-	console.log(status);
+	console.log(session);
 
 	const logoutHandler = e => {
 		e.preventDefault();
@@ -42,7 +42,7 @@ const NavbarDesktop = props => {
 					</Link>
 				</li>
 				<li>
-					{!session && status === "unauthenticated" && (
+					{!session && (
 						<Link href='/logowanie' className={styles["nav__list-link"]}>
 							<IconRender variant='user' className={styles["nav__icon"]} />
 							Zaloguj
