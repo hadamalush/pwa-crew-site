@@ -3,6 +3,7 @@ import MainHeader from "@/components/Header/MainHeader";
 import Footer from "@/components/Footer/Footer";
 import BackgroundImageGeneral from "@/components/transitions/Background/BackgroundImageGeneral";
 import { AuthProvider } from "./Providers";
+import { ReduxProvider } from "@/global/provider";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
@@ -14,10 +15,12 @@ export default function RootLayout({ children }) {
 		<html lang='pl'>
 			<body>
 				<AuthProvider>
-					<MainHeader newsletter={true} />
-					<BackgroundImageGeneral />
-					{children}
-					<Footer />
+					<ReduxProvider>
+						<MainHeader newsletter={true} />
+						<BackgroundImageGeneral />
+						{children}
+						<Footer />
+					</ReduxProvider>
 				</AuthProvider>
 			</body>
 		</html>

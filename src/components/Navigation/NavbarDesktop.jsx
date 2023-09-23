@@ -2,12 +2,17 @@ import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss
 import IconRender from "../Icons/IconRender";
 import Link from "next/link";
 import { useSession, signOut, SessionProvider } from "next-auth/react";
+import { useSelector } from "react-redux";
 
 const NavbarDesktop = props => {
 	const { data: session, status } = useSession();
 	const classes = `${styles.nav} ${props.className}`;
 
-	console.log(session);
+	const username = useSelector(state => state.session.email);
+	const auth = useSelector(state => state.session.isAuth);
+
+	console.log("redux: ", username, auth);
+	console.log("dasdasdsadfe9rf98ref98er8uf98ur");
 
 	const logoutHandler = e => {
 		e.preventDefault();
@@ -49,7 +54,7 @@ const NavbarDesktop = props => {
 						</Link>
 					)}
 
-					{session && status === "authenticated" && (
+					{session && (
 						<Link
 							href='/'
 							onClick={logoutHandler}

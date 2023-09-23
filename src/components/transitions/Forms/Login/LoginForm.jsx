@@ -5,14 +5,28 @@ import IconRender from "@/components/Icons/IconRender";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
-import { useRouter } from "next/navigation";
-import { useRef } from "react";
 import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { logIn, logOut } from "../../../../global/session-slice";
 
 const LoginForm = ({ className, ...props }) => {
 	const router = useRouter();
 	const enteredEmail = useRef();
 	const enteredPassword = useRef();
+
+	const dispatch = useDispatch(logIn);
+	const { data: session, status } = useSession();
+
+	useEffect(() => {
+		if (status === "authenticated" && session) {
+			dispatch(logIn(session.user));
+
+			router.push("/");
+			console.log(session.user);
+		}
+	}, [session, status]);
 
 	const classes = `${styles["logreg-box"]} ${className}`;
 
@@ -33,16 +47,19 @@ const LoginForm = ({ className, ...props }) => {
 
 		const email = enteredEmail.current.value;
 		const password = enteredPassword.current.value;
-
+		let response;
 		try {
-			const result = await signIn("credentials", {
+			response = await signIn("credentials", {
 				redirect: false,
 				email: email,
 				password: password,
 			});
-			console.log(result);
 		} catch (error) {
 			console.log(error);
+		}
+
+		if (response.error) {
+			console.log("error occured");
 		}
 	};
 

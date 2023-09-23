@@ -7,8 +7,7 @@ import styles from "./page.module.scss";
 // import BackgroundAnimation from "@/components/transitions/Background/BackgroundAnimation";
 
 export default function Home() {
-	const sprawdz = getKey();
-	// console.log(sprawdz);
+
 	return (
 		<main>
 			<HomeStartContent />

@@ -4,6 +4,7 @@ import { connectDatabase } from "@/lib/mongodb";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+
 export const authOptions = {
 	session: {
 		strategy: "jwt",
@@ -15,7 +16,7 @@ export const authOptions = {
 	providers: [
 		CredentialsProvider({
 			async authorize(credentials) {
-				console.log("object");
+				console.log("logowanie");
 				const client = await connectDatabase();
 
 				const user = await findDocument(client, "Users", {
@@ -28,15 +29,22 @@ export const authOptions = {
 					console.log("Nie znaleziono usera.");
 
 					const error = new Error("No user Found");
+
 					throw error;
 				}
 
-				const isValid = verifyPassword(credentials.password, user.password);
+				const isValid = await verifyPassword(
+					credentials.password,
+					user.password
+				);
 
 				if (!isValid) {
 					client.close();
 
-					const error = new Error("Invalid Password");
+					const error = new Error("Invalid Password", { status: 422 });
+
+					console.log(error);
+
 					throw error;
 				}
 

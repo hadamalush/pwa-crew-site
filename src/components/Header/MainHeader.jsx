@@ -5,7 +5,6 @@ import NavbarDesktop from "../Navigation/NavbarDesktop";
 import NavbarMobile from "../Navigation/NavbarMobile";
 
 const MainHeader = props => {
-	console.log("ladowanie");
 	return (
 		<header className={styles.header}>
 			<Logo className={styles["header__logo"]} />

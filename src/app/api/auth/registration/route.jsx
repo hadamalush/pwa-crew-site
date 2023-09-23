@@ -7,7 +7,7 @@ export async function POST(request) {
 
 	const { email, password, repeatedPass } = data;
 
-	console.log(data);
+	
 	// poprawic walidacje
 	if (
 		!email ||

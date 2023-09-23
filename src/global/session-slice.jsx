@@ -1,0 +1,25 @@
+"use client";
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+	isAuth: false,
+	email: "dsadsadsadasd",
+	uid: null,
+};
+
+const session = createSlice({
+	name: "session",
+	initialState: initialState,
+	reducers: {
+		logOut: () => {
+			return initialState;
+		},
+		logIn: (state, action) => {
+			state.isAuth = true;
+			state.email = action.payload.email;
+		},
+	},
+});
+
+export const { logIn, logOut } = session.actions; //sessionActions dispatch
+export default session.reducer; // sessionReducer useSelector
