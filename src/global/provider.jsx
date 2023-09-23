@@ -10,7 +10,9 @@ let persistor = persistStore(store);
 export function ReduxProvider({ children }) {
 	return (
 		<Provider store={store}>
-			<PersistGate persistor={persistor}>{children}</PersistGate>
+			<PersistGate persistor={persistor} loading={null}>
+				{children}
+			</PersistGate>
 		</Provider>
 	);
 }

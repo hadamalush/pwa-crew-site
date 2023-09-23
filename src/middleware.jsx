@@ -13,5 +13,4 @@ export async function middleware(request) {
 	return;
 }
 
-
-export const config = { matcher: ["/rejestracja", "/logowanie"] };
+export const config = { matcher: ["/rejestracja/:path*", "/logowanie/:path*"] };

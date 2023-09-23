@@ -4,7 +4,6 @@ import { connectDatabase } from "@/lib/mongodb";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-
 export const authOptions = {
 	session: {
 		strategy: "jwt",
@@ -37,6 +36,8 @@ export const authOptions = {
 					credentials.password,
 					user.password
 				);
+				
+				
 
 				if (!isValid) {
 					client.close();

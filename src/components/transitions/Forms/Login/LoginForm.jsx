@@ -9,7 +9,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logIn, logOut } from "../../../../global/session-slice";
+import { logIn } from "../../../../global/session-slice";
 
 const LoginForm = ({ className, ...props }) => {
 	const router = useRouter();

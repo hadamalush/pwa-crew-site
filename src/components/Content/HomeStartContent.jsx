@@ -1,9 +1,13 @@
+"use client";
 import WrapperStart from "../transitions/Wrappers/WrapperStart";
 import ButtonMain from "../transitions/Button/ButtonMain";
 import Link from "next/link";
 import styles from "../../styles/components/Content/HomeStartContent.module.scss";
+import { useSelector } from "react-redux";
 
 const HomeStartContent = () => {
+	const isLoggedIn = useSelector(state => state.session.isAuth);
+
 	return (
 		<WrapperStart className={styles.introduction}>
 			<div className={styles["introduction__text"]}>
@@ -17,11 +21,13 @@ const HomeStartContent = () => {
 					className={styles["introduction__btn"]}>
 					Rejestracja
 				</ButtonMain> */}
-				<Link
-					href='/rejestracja'
-					className={`${styles["introduction__btn"]} ${styles["introduction__btn--right"]} ${styles["btnSkewRight"]}`}>
-					Rejestracja{" "}
-				</Link>
+				{!isLoggedIn && (
+					<Link
+						href='/rejestracja'
+						className={`${styles["introduction__btn"]} ${styles["introduction__btn--right"]} ${styles["btnSkewRight"]}`}>
+						Rejestracja{" "}
+					</Link>
+				)}
 				<ButtonMain
 					variant='btnSkewRight'
 					className={`${styles["introduction__btn"]} ${styles["introduction__btn--right"]}`}>

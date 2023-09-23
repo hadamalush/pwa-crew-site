@@ -21,16 +21,18 @@ if (isClient) {
 
 const persistConfig = {
 	key: "session",
+	version: 1,
 	storage: storage,
 };
 const rootReducer = combineReducers({
 	session: persistReducer(persistConfig, sessionReducer),
 });
 
-export const store = configureStore({
+const store = configureStore({
 	reducer: rootReducer,
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({ serializableCheck: false }),
+	devTools: true,
 });
 
 export default store;
