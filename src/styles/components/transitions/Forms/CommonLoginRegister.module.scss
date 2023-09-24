@@ -28,15 +28,20 @@
 		margin: 4em auto;
 		div {
 			position: absolute;
-			right: 0;
-			top: 50%;
+			left: 0;
+			top: 55%;
 			transform: translateY(-50%);
 		}
+	}
+	input[type="checkbox"] {
+		color: black;
+		accent-color: green;
 	}
 
 	&__input-box input {
 		width: 100%;
 		max-width: 35rem;
+		padding-left: 30px;
 		border-color: $primary-color;
 		&::placeholder {
 			color: $primary-color;
