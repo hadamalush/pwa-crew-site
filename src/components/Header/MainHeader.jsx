@@ -1,8 +1,8 @@
 "use client";
-import styles from "../../styles/components/Header/MainHeader.module.scss";
-import Logo from "../transitions/Logo/Logo";
 import NavbarDesktop from "../Navigation/NavbarDesktop";
+import Logo from "../transitions/Logo/Logo";
 import Image from "next/image";
+import styles from "../../styles/components/Header/MainHeader.module.scss";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
@@ -15,7 +15,7 @@ const MainHeader = props => {
 	return (
 		<>
 			{isMediumScreen && (
-				<header className={styles.header}>
+				<header className={`${styles.header} ${styles.loading}`}>
 					<Logo className={styles["header__logo"]} />
 					<NavbarDesktop className={styles["header__nav"]} />
 					{isLoggedIn && (

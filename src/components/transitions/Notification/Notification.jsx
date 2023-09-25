@@ -11,9 +11,11 @@ const Notification = () => {
 	const message = useSelector(state => state.notification.message);
 	const result = useSelector(state => state.notification.result);
 	const variant = useSelector(state => state.notification.variant);
+	let isAlready = false;
 	const dispatch = useDispatch(reset);
 
-	if (result && variant === "success") {
+	if (result && !isAlready && variant === "success") {
+		isAlready = true;
 		toast.success(message, {
 			position: "top-center",
 			autoClose: 5000,
@@ -25,10 +27,14 @@ const Notification = () => {
 			theme: "dark",
 		});
 
-		setTimeout(() => dispatch(reset()), 5000);
+		setTimeout(() => {
+			dispatch(reset());
+			isAlready = false;
+		}, 5000);
 	}
 
 	if (result && variant === "warning") {
+		isAlready = true;
 		toast.error(message, {
 			position: "top-center",
 			autoClose: 5000,
@@ -40,7 +46,10 @@ const Notification = () => {
 			theme: "dark",
 		});
 
-		setTimeout(() => dispatch(reset()), 5000);
+		setTimeout(() => {
+			dispatch(reset());
+			isAlready = false;
+		}, 5000);
 	}
 
 	return (
