@@ -6,8 +6,6 @@ export async function middleware(request) {
 		request.cookies.has("next-auth.session-token") ||
 		request.cookies.has("__Secure-next-auth.session-token");
 
-	console.log("middleware src: ", session);
-
 	if (session) {
 		return NextResponse.redirect(new URL("/", request.url));
 	}

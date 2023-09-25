@@ -2,15 +2,14 @@
 @import "../../../styles/mixins/mixins";
 
 .header {
-	position: absolute;
+	position: fixed;
 	display: grid;
 	z-index: 1000;
-	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-columns: 20px 1fr 3fr 10px;
 	grid-template-rows: 1fr 1fr;
 	width: 100%;
 	height: 10rem;
 	background-color: $background-nav;
-	// background-color: rgba(14, 14, 14, 0.9);
 	box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.8);
 
 	&__logo {
@@ -22,7 +21,7 @@
 	}
 
 	&__nav {
-		display: none;
+		display: flex;
 		justify-content: center;
 		grid-column: 3/4;
 		grid-row: 1/3;
@@ -41,19 +40,6 @@
 		transform: translateY(-50%);
 	}
 
-	@include media-query(mediumScreen) {
-		position: fixed;
-		grid-template-columns: 20px 1fr 3fr 10px;
-		grid-template-rows: 1fr 1fr;
-
-		&__logo {
-			grid-row: 1/3;
-		}
-
-		&__nav {
-			display: flex;
-		}
-	}
 	@include media-query(x-largeScreen) {
 		grid-template-columns: 1fr 1fr 3fr 1fr;
 	}

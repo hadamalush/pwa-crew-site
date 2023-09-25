@@ -5,6 +5,7 @@ import BackgroundImageGeneral from "@/components/transitions/Background/Backgrou
 import { AuthProvider } from "./Providers";
 import { ReduxProvider } from "@/global/provider";
 import Notification from "@/components/transitions/Notification/Notification";
+import MobileHeader from "@/components/Header/MobileHeader";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
 				<AuthProvider>
 					<ReduxProvider>
 						<MainHeader newsletter={true} />
+						<MobileHeader />
 						<BackgroundImageGeneral />
 						<Notification />
 						{children}
