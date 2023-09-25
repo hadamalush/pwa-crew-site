@@ -1,22 +1,23 @@
 "use client";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
+import InputFormik from "../../Input/InputFormik";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
+import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { Formik, Form } from "formik";
+import { loginSchema } from "@/components/Schemas/FormSchem";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../../global/session-slice";
-import { useRouter } from "next/navigation";
-import { Formik, Form } from "formik";
-import InputFormik from "../../Input/InputFormik";
-import { loginSchema } from "@/components/Schemas/FormSchem";
+import { showResult } from "@/global/notification-slice";
 
 const FormikLogin = ({ className, ...props }) => {
 	const router = useRouter();
-	const dispatch = useDispatch(logIn);
-	const { data: session, status } = useSession();
-
 	const classes = `${styles["logreg-box"]} ${className}`;
+	const { data: session, status } = useSession();
+	const dispatch = useDispatch(logIn);
+	const dispatchNotification = useDispatch(showResult);
 
 	useEffect(() => {
 		if (status === "authenticated" && session) {
@@ -44,14 +45,30 @@ const FormikLogin = ({ className, ...props }) => {
 		const password = values.password;
 
 		try {
-			response = await signIn("credentials", {
+			const response = await signIn("credentials", {
 				redirect: false,
 				email: email,
 				password: password,
 			});
+
+			if (response.error) {
+				dispatchNotification(
+					showResult({ message: response.error, variant: "warning" })
+				);
+				return;
+			}
 		} catch (error) {
-			console.log(error);
+			dispatchNotification(
+				showResult({
+					message: "Coś poszło nie tak. Skontaktuj się z administratorem.",
+					variant: "warning",
+				})
+			);
 		}
+
+		dispatchNotification(
+			showResult({ message: "Witamy ponownie!", variant: "success" })
+		);
 	};
 
 	return (
@@ -86,9 +103,9 @@ const FormikLogin = ({ className, ...props }) => {
 						</ButtonMain>
 
 						<p>
-							Masz konto?{" "}
+							Nie masz konta?{" "}
 							<Link href='/rejestracja' onClick={changeWebstiteHandler}>
-								Zaloguj
+								Zarejestruj
 							</Link>
 						</p>
 					</Form>

@@ -1,17 +1,19 @@
 "use client";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
+import CheckboxFormik from "../../Input/CheckboxFormik";
+import InputFormik from "../../Input/InputFormik";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import { useRouter } from "next/navigation";
 import { Formik, Form } from "formik";
-import InputFormik from "../../Input/InputFormik";
 import { registerSchema } from "@/components/Schemas/FormSchem";
-import CheckboxFormik from "../../Input/CheckboxFormik";
+import { useDispatch } from "react-redux";
+import { showResult } from "@/global/notification-slice";
 
 const FormikRegister = ({ className, ...props }) => {
 	const router = useRouter();
-
 	const classes = `${styles["logreg-box"]} ${className}`;
+	const dispatch = useDispatch(showResult);
 
 	const changeWebstiteHandler = async event => {
 		event.preventDefault();
@@ -38,10 +40,29 @@ const FormikRegister = ({ className, ...props }) => {
 				body: JSON.stringify({ email, password, confirmPassword, terms }),
 			});
 
-			console.log(response);
+			const data = await response.json();
+
+			if (!response.ok) {
+				dispatch(
+					showResult({
+						message: data.message,
+						variant: "warning",
+					})
+				);
+				return;
+			}
 		} catch (error) {
 			console.log(error);
+			return;
 		}
+
+		dispatch(
+			showResult({
+				message: "Udało się zarejestrować",
+				variant: "success",
+			})
+		);
+		router.push("/");
 	};
 
 	return (

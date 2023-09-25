@@ -2,9 +2,10 @@ export { default } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export async function middleware(request) {
-	const session = request.cookies.has(
-		"next-auth.session-token" || "__Secure-next-auth.session-token"
-	);
+	const session =
+		request.cookies.has("next-auth.session-token") ||
+		request.cookies.has("__Secure-next-auth.session-token");
+
 	console.log("middleware src: ", session);
 
 	if (session) {

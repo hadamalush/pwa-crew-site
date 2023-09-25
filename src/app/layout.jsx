@@ -4,6 +4,7 @@ import Footer from "@/components/Footer/Footer";
 import BackgroundImageGeneral from "@/components/transitions/Background/BackgroundImageGeneral";
 import { AuthProvider } from "./Providers";
 import { ReduxProvider } from "@/global/provider";
+import Notification from "@/components/transitions/Notification/Notification";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
 					<ReduxProvider>
 						<MainHeader newsletter={true} />
 						<BackgroundImageGeneral />
+						<Notification />
 						{children}
 						<Footer />
 					</ReduxProvider>

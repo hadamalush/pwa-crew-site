@@ -1,8 +1,8 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import sessionReducer from "./session-slice";
-import { persistReducer } from "redux-persist";
-import logger from "redux-logger";
+import notificationReducer from "./notification-slice";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
 
 const isClient = typeof window !== "undefined";
 
@@ -26,6 +26,7 @@ const persistConfig = {
 };
 const rootReducer = combineReducers({
 	session: persistReducer(persistConfig, sessionReducer),
+	notification: persistReducer(persistConfig, notificationReducer),
 });
 
 const store = configureStore({

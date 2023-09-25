@@ -16,7 +16,7 @@ export async function POST(request) {
 		password !== confirmPassword ||
 		!terms
 	) {
-		return NextResponse.json({ message: "Niepowodzenie!" }, { status: 422 });
+		return NextResponse.json({ message: "Spróbuj ponownie!" }, { status: 422 });
 	}
 
 	let client;
@@ -46,8 +46,7 @@ export async function POST(request) {
 		client.close();
 		return NextResponse.json(
 			{
-				message:
-					"Użytkownik z takim adresem email już istnieje!",
+				message: "Użytkownik z takim adresem email już istnieje!",
 			},
 			{ status: 410 }
 		);

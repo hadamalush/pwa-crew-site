@@ -1,0 +1,11 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.notification {
+	font-size: 1.6rem;
+	top: 0;
+
+	@include media-query(mediumScreen) {
+		top: 10rem;
+	}
+}

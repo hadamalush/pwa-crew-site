@@ -25,9 +25,7 @@ export const authOptions = {
 				if (!user) {
 					client.close();
 
-					console.log("Nie znaleziono usera.");
-
-					const error = new Error("No user Found");
+					const error = new Error("Nie znaleziono takiego użytkownika.");
 
 					throw error;
 				}
@@ -36,15 +34,11 @@ export const authOptions = {
 					credentials.password,
 					user.password
 				);
-				
-				
 
 				if (!isValid) {
 					client.close();
 
-					const error = new Error("Invalid Password", { status: 422 });
-
-					console.log(error);
+					const error = new Error("Hasło jest niepoprawne", { status: 422 });
 
 					throw error;
 				}
