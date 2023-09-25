@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	isLoading: false,
-	result: true,
+	result: false,
 	message: "",
 	variant: "",
 };
@@ -20,11 +20,11 @@ const notification = createSlice({
 			state.variant = action.payload.variant;
 			state.result = true;
 		},
-		showPending: () => {
-			state.isLoading = true;
+		toggleLoading: state => {
+			state.isLoading = !state.isLoading;
 		},
 	},
 });
 
-export const { reset, showResult, showPending } = notification.actions;
+export const { reset, showResult, toggleLoading } = notification.actions;
 export default notification.reducer;

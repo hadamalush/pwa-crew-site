@@ -12,8 +12,6 @@ const NavbarDesktop = props => {
 	const username = useSelector(state => state.session.email);
 	const auth = useSelector(state => state.session.isAuth);
 
-	console.log(username, auth);
-
 	const logoutHandler = e => {
 		e.preventDefault();
 

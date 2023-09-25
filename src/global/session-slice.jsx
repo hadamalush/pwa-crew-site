@@ -15,7 +15,7 @@ const session = createSlice({
 			return initialState;
 		},
 		logIn: (state, action) => {
-			state.isAuth = true;
+			state.isAuth = action.payload.auth;
 			state.email = action.payload.email;
 		},
 	},

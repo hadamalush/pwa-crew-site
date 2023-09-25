@@ -60,8 +60,9 @@
 		left: -5%;
 		width: 15%;
 		border-bottom: 5px solid;
-		border-image: linear-gradient(to right, rgb(194, 110, 14), rgb(63, 39, 3)) 1;
-		animation: loading 3s infinite;
+		border-radius: 50%;
+		border-image: linear-gradient(to right, rgb(145, 86, 14), rgb(63, 39, 3)) 1;
+		animation: loading 1.5s infinite;
 	}
 }
 
@@ -70,6 +71,6 @@
 		transform: translateX(0);
 	}
 	to {
-		transform: translateX(700%);
+		transform: translateX(750%);
 	}
 }

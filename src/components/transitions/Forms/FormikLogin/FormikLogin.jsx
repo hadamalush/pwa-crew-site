@@ -10,18 +10,20 @@ import { Formik, Form } from "formik";
 import { loginSchema } from "@/components/Schemas/FormSchem";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../../global/session-slice";
-import { showResult } from "@/global/notification-slice";
+import { showResult, toggleLoading } from "@/global/notification-slice";
 
 const FormikLogin = ({ className, ...props }) => {
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const { data: session, status } = useSession();
 	const dispatch = useDispatch(logIn);
+	const dispatchLoading = useDispatch(toggleLoading);
 	const dispatchNotification = useDispatch(showResult);
 
 	useEffect(() => {
 		if (status === "authenticated" && session) {
-			dispatch(logIn(session.user));
+			console.log("loginsave");
+			dispatch(logIn({ email: session.user, auth: true }));
 
 			router.push("/");
 			console.log(session.user);
@@ -40,9 +42,10 @@ const FormikLogin = ({ className, ...props }) => {
 		}, 500);
 	};
 
-	const onSubmit = async (values, actions) => {
+	const onSubmit = async values => {
 		const email = values.email;
 		const password = values.password;
+		dispatchLoading(toggleLoading());
 
 		try {
 			const response = await signIn("credentials", {
@@ -55,6 +58,7 @@ const FormikLogin = ({ className, ...props }) => {
 				dispatchNotification(
 					showResult({ message: response.error, variant: "warning" })
 				);
+				dispatchLoading(toggleLoading());
 				return;
 			}
 		} catch (error) {
@@ -64,11 +68,13 @@ const FormikLogin = ({ className, ...props }) => {
 					variant: "warning",
 				})
 			);
+			dispatchLoading(toggleLoading());
 		}
 
 		dispatchNotification(
 			showResult({ message: "Witamy ponownie!", variant: "success" })
 		);
+		dispatchLoading(toggleLoading());
 	};
 
 	return (
