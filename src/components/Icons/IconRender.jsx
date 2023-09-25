@@ -57,8 +57,14 @@ const IconRender = props => {
 				return icons.facebook;
 			case "instagram":
 				return icons.instagram;
-			case "lock":
-				return icons.lock;
+			case "password":
+				return icons.password;
+			case "confirmPassword":
+				return icons.confirmPassword;
+			case "warning":
+				return icons.warning;
+			case "good":
+				return icons.good;
 			default:
 				return null;
 		}

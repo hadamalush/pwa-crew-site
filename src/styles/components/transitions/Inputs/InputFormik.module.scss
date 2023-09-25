@@ -1,0 +1,51 @@
+@import "../../../transitions/variables";
+
+.input {
+	position: relative;
+	background-color: inherit;
+	border: 0;
+	border-bottom: 2px solid $primary-color;
+	padding: 1em 2em 0.5em;
+	width: 100%;
+	max-width: 30rem;
+	outline: none;
+	color: $primary-color;
+	font-size: 1.6rem;
+
+	&__icon {
+		display: inline-block;
+	}
+
+	&::placeholder {
+		color: $primary-color;
+	}
+}
+
+.input-box {
+	margin: 4em auto;
+
+	div:first-child {
+		position: absolute;
+		left: 0;
+		top: 55%;
+		transform: translateY(-50%);
+	}
+
+	input ~ div {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		font-weight: bold;
+		color: red;
+		width: 2.5em;
+		transform: translateY(-50%);
+	}
+
+	&__error {
+		position: absolute;
+		font-size: 1.4rem;
+		color: red;
+		bottom: -1.5em;
+		text-shadow: 1px 1px 1px rgb(61, 43, 43);
+	}
+}

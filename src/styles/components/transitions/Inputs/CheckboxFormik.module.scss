@@ -1,0 +1,20 @@
+@import "../../../transitions/variables";
+
+.input-box {
+	input[type="checkbox"] {
+		accent-color: green;
+	}
+
+	label {
+		margin-left: 0.5em;
+		font-size: 1.6rem;
+	}
+
+	&__error {
+		position: absolute;
+		font-size: 1.4rem;
+		color: red;
+		bottom: -1.5em;
+		text-shadow: 1px 1px 1px rgb(61, 43, 43);
+	}
+}

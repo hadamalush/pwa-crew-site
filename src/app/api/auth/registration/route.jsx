@@ -5,16 +5,15 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
 	const data = await request.json();
 
-	const { email, password, repeatedPass } = data;
+	const { email, password, confirmPassword } = data;
 
-	
 	// poprawic walidacje
 	if (
 		!email ||
 		!email.includes("@") ||
 		!password ||
-		password.trim().length < 6 ||
-		password !== repeatedPass
+		password.trim().length < 7 ||
+		password !== confirmPassword
 	) {
 		return NextResponse.json({ message: "Niepowodzenie!" }, { status: 422 });
 	}
