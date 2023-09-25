@@ -1,5 +1,4 @@
 import WrapperStart from "@/components/transitions/Wrappers/WrapperStart";
-import LoginForm from "@/components/transitions/Forms/Login/LoginForm";
 import WrapperForm from "@/components/transitions/Wrappers/WrapperForm";
 import Logo2 from "@/components/transitions/Logo/Logo";
 import SocialMedia from "@/components/transitions/SocialMedia/SocialMedia";

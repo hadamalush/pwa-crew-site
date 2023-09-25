@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
 	const data = await request.json();
 
-	const { email, password, confirmPassword } = data;
+	const { email, password, confirmPassword, terms } = data;
 
 	// poprawic walidacje
 	if (
@@ -13,7 +13,8 @@ export async function POST(request) {
 		!email.includes("@") ||
 		!password ||
 		password.trim().length < 7 ||
-		password !== confirmPassword
+		password !== confirmPassword ||
+		!terms
 	) {
 		return NextResponse.json({ message: "Niepowodzenie!" }, { status: 422 });
 	}
@@ -46,7 +47,7 @@ export async function POST(request) {
 		return NextResponse.json(
 			{
 				message:
-					"Użytkownik z takim adresem email już istnieje ,skontakuj się z administratorem!",
+					"Użytkownik z takim adresem email już istnieje!",
 			},
 			{ status: 410 }
 		);
@@ -71,6 +72,6 @@ export async function POST(request) {
 
 	client.close();
 	return NextResponse.json({
-		message: "Udało się utworzyć użytkownika, cieszymy się ,że z nami jesteś!",
+		message: "Zarejestrowano pomyślnie ,witamy na pokładzie!",
 	});
 }

@@ -29,11 +29,13 @@ const FormikRegister = ({ className, ...props }) => {
 		const email = values.email;
 		const password = values.password;
 		const confirmPassword = values.confirmPassword;
+		const terms = values.terms;
+
 		try {
 			const response = await fetch("/api/auth/registration", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password, confirmPassword }),
+				body: JSON.stringify({ email, password, confirmPassword, terms }),
 			});
 
 			console.log(response);
