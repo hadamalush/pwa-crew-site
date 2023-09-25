@@ -18,6 +18,7 @@ const MainHeader = props => {
 					src='/images/header/alpaca.png'
 					height={75}
 					width={75}
+					alt='Lama'
 					className={styles["header__avatar"]}
 				/>
 			)}

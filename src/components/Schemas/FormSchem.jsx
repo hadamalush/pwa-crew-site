@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
-export const formSchem = yup.object().shape({
+export const registerSchema = yup.object().shape({
 	email: yup
 		.string()
 		.email("Proszę podać poprawny adres email!")
@@ -17,4 +17,12 @@ export const formSchem = yup.object().shape({
 		.oneOf([yup.ref("password")], "Hasła muszą być udentyczne.")
 		.required("Wymagane"),
 	terms: yup.boolean().oneOf([true], "Musisz zaakceptować warunki umowy"),
+});
+
+export const loginSchema = yup.object().shape({
+	email: yup
+		.string()
+		.email("Proszę podać poprawny adres email!")
+		.required("Wymagane"),
+	password: yup.string().required("Wymagane"),
 });

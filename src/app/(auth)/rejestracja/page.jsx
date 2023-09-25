@@ -1,5 +1,5 @@
-import RegistrationForm from "@/components/transitions/Forms/Registration/RegistrationForm";
+import FormikRegister from "@/components/transitions/Forms/FormikRegister/FormikRegister";
 
 export default function RegistrationPage() {
-	return <RegistrationForm />;
+	return <FormikRegister />;
 }

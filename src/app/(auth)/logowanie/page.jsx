@@ -1,5 +1,6 @@
-import LoginForm from "@/components/transitions/Forms/Login/LoginForm";
+import FormikLogin from "@/components/transitions/Forms/FormikLogin/FormikLogin";
+
 
 export default function RegistrationPage() {
-	return <LoginForm />;
+	return <FormikLogin />;
 }

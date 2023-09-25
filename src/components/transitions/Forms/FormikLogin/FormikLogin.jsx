@@ -2,16 +2,30 @@
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../../../global/session-slice";
 import { useRouter } from "next/navigation";
 import { Formik, Form } from "formik";
 import InputFormik from "../../Input/InputFormik";
-import { registerSchema } from "@/components/Schemas/FormSchem";
-import CheckboxFormik from "../../Input/CheckboxFormik";
+import { loginSchema } from "@/components/Schemas/FormSchem";
 
-const FormikRegister = ({ className, ...props }) => {
+const FormikLogin = ({ className, ...props }) => {
 	const router = useRouter();
+	const dispatch = useDispatch(logIn);
+	const { data: session, status } = useSession();
 
 	const classes = `${styles["logreg-box"]} ${className}`;
+
+	useEffect(() => {
+		if (status === "authenticated" && session) {
+			dispatch(logIn(session.user));
+
+			router.push("/");
+			console.log(session.user);
+		}
+	}, [session, status]);
 
 	const changeWebstiteHandler = async event => {
 		event.preventDefault();
@@ -21,22 +35,20 @@ const FormikRegister = ({ className, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push("/logowanie");
+			router.push("/rejestracja");
 		}, 500);
 	};
 
 	const onSubmit = async (values, actions) => {
 		const email = values.email;
 		const password = values.password;
-		const confirmPassword = values.confirmPassword;
-		try {
-			const response = await fetch("/api/auth/registration", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password, confirmPassword }),
-			});
 
-			console.log(response);
+		try {
+			response = await signIn("credentials", {
+				redirect: false,
+				email: email,
+				password: password,
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -48,14 +60,12 @@ const FormikRegister = ({ className, ...props }) => {
 				initialValues={{
 					email: "",
 					password: "",
-					confirmPassword: "",
-					terms: false,
 				}}
 				onSubmit={onSubmit}
-				validationSchema={registerSchema}>
+				validationSchema={loginSchema}>
 				{props => (
 					<Form>
-						<h1>Rejestracja</h1>
+						<h1>Logowanie</h1>
 
 						<InputFormik
 							name='email'
@@ -69,27 +79,15 @@ const FormikRegister = ({ className, ...props }) => {
 							aria-label='Hasło'
 							type='password'
 						/>
-						<InputFormik
-							name='confirmPassword'
-							placeholder='Powtórz hasło'
-							aria-label='Powtórz hasło'
-							type='password'
-						/>
-
-						<CheckboxFormik
-							name='terms'
-							label='Akceptuje warunki umowy'
-							type='checkbox'
-						/>
 
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
 							{" "}
-							Zarejestruj{" "}
+							Zaloguj{" "}
 						</ButtonMain>
 
 						<p>
 							Masz konto?{" "}
-							<Link href='/logowanie' onClick={changeWebstiteHandler}>
+							<Link href='/rejestracja' onClick={changeWebstiteHandler}>
 								Zaloguj
 							</Link>
 						</p>
@@ -100,4 +98,4 @@ const FormikRegister = ({ className, ...props }) => {
 	);
 };
 
-export default FormikRegister;
+export default FormikLogin;
