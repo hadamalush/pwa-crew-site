@@ -17,12 +17,8 @@ const MainHeader = props => {
 	const { data: session, status } = useSession();
 
 	useEffect(() => {
-		if (status === "authenticated" && session) {
-			console.log("raz;raz");
-			console.log("loginsave");
+		if (status === "authenticated" && session && !isLoggedIn) {
 			dispatch(logIn({ email: session.user, auth: true }));
-
-			console.log(session.user);
 		}
 	}, [session]);
 

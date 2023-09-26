@@ -6,16 +6,12 @@ import { reset } from "@/global/notification-slice";
 import "react-toastify/dist/ReactToastify.css";
 
 const Notification = () => {
-	// const message = useSelector(state => state.notification.message);
-
 	const message = useSelector(state => state.notification.message);
 	const result = useSelector(state => state.notification.result);
 	const variant = useSelector(state => state.notification.variant);
-	let isAlready = false;
 	const dispatch = useDispatch(reset);
 
-	if (result && !isAlready && variant === "success") {
-		isAlready = true;
+	if (result && variant === "success") {
 		toast.success(message, {
 			position: "top-center",
 			autoClose: 5000,
@@ -29,12 +25,10 @@ const Notification = () => {
 
 		setTimeout(() => {
 			dispatch(reset());
-			isAlready = false;
 		}, 5000);
 	}
 
 	if (result && variant === "warning") {
-		isAlready = true;
 		toast.error(message, {
 			position: "top-center",
 			autoClose: 5000,

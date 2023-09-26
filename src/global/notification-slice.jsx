@@ -16,9 +16,9 @@ const notification = createSlice({
 			return initialState;
 		},
 		showResult: (state, action) => {
+			state.result = true;
 			state.message = action.payload.message;
 			state.variant = action.payload.variant;
-			state.result = true;
 		},
 		toggleLoading: state => {
 			state.isLoading = !state.isLoading;
@@ -26,5 +26,6 @@ const notification = createSlice({
 	},
 });
 
-export const { reset, showResult, toggleLoading } = notification.actions;
+export const { reset, showResult, toggleLoading, toggleResult } =
+	notification.actions;
 export default notification.reducer;

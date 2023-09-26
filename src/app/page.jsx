@@ -4,10 +4,8 @@ import Card from "@/components/transitions/Cards/Card";
 import ImageLoader from "@/components/transitions/Image/ImageRender";
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import styles from "./page.module.scss";
-// import BackgroundAnimation from "@/components/transitions/Background/BackgroundAnimation";
 
 export default function Home() {
-
 	return (
 		<main>
 			<HomeStartContent />
@@ -103,11 +101,3 @@ export default function Home() {
 		</main>
 	);
 }
-
-const getKey = async () => {
-	const key = process.env.NEXT_PUBLIC_FIREBASE_API;
-
-	console.log(key);
-
-	return key;
-};
