@@ -2,8 +2,10 @@
 @import "../../styles/mixins/mixins";
 
 main .login {
+	position: relative;
 	width: 100vw;
 	height: 70rem;
+	top: 10rem;
 
 	&__container {
 		position: relative;
@@ -49,6 +51,7 @@ main .login {
 	}
 
 	@include media-query(mediumScreen) {
+		top: 0;
 		// margin-top: 15em;
 		height: 100rem;
 

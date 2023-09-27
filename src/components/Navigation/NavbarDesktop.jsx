@@ -1,21 +1,15 @@
 import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
 import IconRender from "../Icons/IconRender";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
-import { useSelector, useDispatch } from "react-redux";
-import { logOut } from "@/global/session-slice";
+import { signOut, useSession } from "next-auth/react";
 
 const NavbarDesktop = props => {
 	const classes = `${styles.nav} ${props.className}`;
-
-	const dispatch = useDispatch(logOut);
-	const username = useSelector(state => state.session.email);
-	const auth = useSelector(state => state.session.isAuth);
+	const { data: session, status } = useSession();
 
 	const logoutHandler = e => {
 		e.preventDefault();
 
-		dispatch(logOut());
 		signOut();
 	};
 
@@ -46,14 +40,14 @@ const NavbarDesktop = props => {
 					</Link>
 				</li>
 				<li>
-					{!auth && (
+					{!session && (
 						<Link href='/logowanie' className={styles["nav__list-link"]}>
 							<IconRender variant='user' className={styles["nav__icon"]} />
 							Zaloguj
 						</Link>
 					)}
 
-					{auth && (
+					{session && (
 						<Link
 							href='/'
 							onClick={logoutHandler}

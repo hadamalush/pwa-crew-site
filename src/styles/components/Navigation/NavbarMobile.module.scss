@@ -9,7 +9,7 @@
 	z-index: 1000;
 	background-color: $background-nav;
 	opacity: 1;
-	animation: show 1s;
+	animation: show 1s forwards;
 
 	&__list {
 		display: flex;
@@ -48,7 +48,7 @@
 //Handling opacity navbar during scrolling
 .isShow {
 	opacity: 0;
-	animation: hide 1s;
+	animation: hide 1s forwards;
 }
 
 @keyframes hide {

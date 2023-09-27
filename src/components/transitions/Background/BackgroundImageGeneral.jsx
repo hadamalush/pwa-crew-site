@@ -2,7 +2,6 @@
 import Image from "next/image";
 import styles from "./BackgroundImage.module.scss";
 import { usePathname } from "next/navigation";
-
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
 import { useEffect } from "react";

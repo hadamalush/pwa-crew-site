@@ -3,10 +3,10 @@ import WrapperStart from "../transitions/Wrappers/WrapperStart";
 import ButtonMain from "../transitions/Button/ButtonMain";
 import Link from "next/link";
 import styles from "../../styles/components/Content/HomeStartContent.module.scss";
-import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
 
 const HomeStartContent = () => {
-	const isLoggedIn = useSelector(state => state.session.isAuth);
+	const { data: session, status } = useSession();
 
 	return (
 		<WrapperStart className={styles.introduction}>
@@ -16,12 +16,7 @@ const HomeStartContent = () => {
 					O każdej porze dnia, <br />
 					rapuje ile tylko sie da!
 				</p>
-				{/* <ButtonMain
-					variant='btnSkewRight'
-					className={styles["introduction__btn"]}>
-					Rejestracja
-				</ButtonMain> */}
-				{!isLoggedIn && (
+				{!session && (
 					<Link
 						href='/rejestracja'
 						className={`${styles["introduction__btn"]} ${styles["introduction__btn--right"]} ${styles["btnSkewRight"]}`}>

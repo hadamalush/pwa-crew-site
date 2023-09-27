@@ -42,7 +42,6 @@ const Notification = () => {
 
 		setTimeout(() => {
 			dispatch(reset());
-			isAlready = false;
 		}, 5000);
 	}
 

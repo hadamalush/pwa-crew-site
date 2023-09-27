@@ -7,12 +7,23 @@ import styles from "../../../../styles/components/transitions/Forms/CommonLoginR
 import { useRouter } from "next/navigation";
 import { Formik, Form } from "formik";
 import { registerSchema } from "@/components/Schemas/FormSchem";
+import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
 const FormikRegister = ({ className, ...props }) => {
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
+	const isMediumScreen = useMediaQuery({
+		query: "(min-width: 768px)",
+	});
+
+	const isClient = typeof window !== "undefined";
+
+	if (!isMediumScreen && isClient) {
+		window.scrollTo(0, 100);
+	}
+
 	const dispatch = useDispatch(showResult);
 
 	const changeWebstiteHandler = async event => {

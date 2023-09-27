@@ -8,22 +8,30 @@ import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { Formik, Form } from "formik";
 import { loginSchema } from "@/components/Schemas/FormSchem";
-import { useDispatch } from "react-redux";
-import { logIn } from "../../../../global/session-slice";
+import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
+import { useDispatch } from "react-redux";
 
 const FormikLogin = ({ className, ...props }) => {
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const { data: session, status } = useSession();
-	const dispatch = useDispatch(logIn);
+	const isMediumScreen = useMediaQuery({
+		query: "(min-width: 768px)",
+	});
+
+	const isClient = typeof window !== "undefined";
+
+	if (!isMediumScreen && isClient) {
+		window.scrollTo(0, 100);
+	}
+
 	const dispatchLoading = useDispatch(toggleLoading);
 	const dispatchNotification = useDispatch(showResult);
 
 	useEffect(() => {
 		if (status === "authenticated" && session) {
 			console.log("loginsave");
-			dispatch(logIn({ email: session.user, auth: true }));
 
 			router.push("/");
 			console.log(session.user);

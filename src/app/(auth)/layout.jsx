@@ -8,7 +8,7 @@ import styles from "./Common.module.scss";
 export default function Layout({ children }) {
 	return (
 		<main>
-			<WrapperStart className={styles["login"]}>
+			<WrapperStart className={styles["login"]} id='#login'>
 				<WrapperForm className={styles["login__container"]}>
 					<ImageLoader
 						alt='Crowd of people playing on the concert'
