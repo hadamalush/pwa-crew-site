@@ -3,7 +3,7 @@
 
 .carousel {
 	position: relative;
-	display: flex;
+	display: none;
 	justify-content: center;
 	width: 95%;
 	height: 40rem;
@@ -16,24 +16,24 @@
 			align-items: center;
 			justify-content: center;
 			z-index: 2;
-			text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.842);
+			text-shadow: $heading-primary-shadow;
 			height: 40%;
 		}
 		time {
 			display: block;
 			padding: 3rem;
 			min-width: 14rem;
-			background-color: #000000d3;
+			background-color: $hero-secondary-bgc;
 			transform: skew(-10deg);
 
-			@include borderIn(5px, 2px);
+			@include borderIn(5px, 2px, 0);
 		}
 		span {
+			display: block;
 			font-weight: bold;
 			font-size: 2.4rem;
-			display: block;
-			transform: skew(10deg);
 			text-align: center;
+			transform: skew(10deg);
 
 			&:nth-child(1),
 			&:nth-child(3) {
@@ -47,22 +47,22 @@
 
 		h3 {
 			position: relative;
-			z-index: 1;
-			margin-top: 1em;
-			text-align: center;
-			text-shadow: 2px 2px 2px black;
 			padding: 1em;
+			margin-top: 1em;
+			z-index: 1;
+			text-align: center;
+			text-shadow: $heading-primary-shadow;
 		}
 
 		a {
 			position: absolute;
 			margin-top: auto;
 			bottom: 0;
+			width: 100%;
+			padding: 1em 0;
+			font-size: 1.8rem;
 			text-align: center;
 			letter-spacing: 2px;
-			font-size: 1.8rem;
-			padding: 1em 0;
-			width: 100%;
 			color: $tertiary-color;
 			background-color: $background-tertiary;
 
@@ -95,6 +95,10 @@
 	&__item--right {
 		transform: translateX(-80%) scale(0.8);
 		z-index: 2;
+	}
+
+	@include media-query(mediumScreen) {
+		display: flex;
 	}
 }
 

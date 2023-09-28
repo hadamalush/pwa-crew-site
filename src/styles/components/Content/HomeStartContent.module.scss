@@ -55,13 +55,11 @@
 		font-style: italic;
 	}
 
-	&__btn,
-	&__btn--right {
-		max-width: max-content;
-	}
-
-	&__btn + &__btn--right {
-		margin-left: 1em;
+	a {
+		&::first-letter {
+			text-transform: uppercase;
+		}
+		margin: 0 0.2em;
 	}
 
 	@include media-query(largeScreen) {

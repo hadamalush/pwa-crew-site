@@ -43,7 +43,7 @@
 	}
 }
 
-@mixin borderIn($distance, $size) {
+@mixin borderIn($distance, $size, $skew) {
 	&:before {
 		content: "";
 		position: absolute;
@@ -52,6 +52,7 @@
 		right: $distance;
 		bottom: $distance;
 		left: $distance;
+		transform: skew($skew);
 		border: solid $size $secondary-color;
 		border-radius: 2px;
 	}

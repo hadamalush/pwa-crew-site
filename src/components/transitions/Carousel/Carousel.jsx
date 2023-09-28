@@ -26,7 +26,7 @@ const Carousel = () => {
 		}
 	};
 
-	setInterval(changeMiddleHandler, 10000);
+	// const spin = setInterval(changeMiddleHandler, 10000);
 
 	return (
 		<div className={styles.carousel}>
@@ -37,7 +37,7 @@ const Carousel = () => {
 				className={`${styles["carousel__item"]} ${styles["carousel__item--left"]}`}
 				onClick={changeMiddleHandler}>
 				<div className={styles["carousel__item-time"]}>
-					<time datetime='2018-07-07'>
+					<time dateTime='2018-07-07'>
 						<span>1</span>
 						<span>Maj</span>
 						<span>2024</span>
@@ -53,7 +53,7 @@ const Carousel = () => {
 				className={`${styles["carousel__item"]} ${styles["carousel__item--middle"]}`}
 				onClick={changeMiddleHandler}>
 				<div className={styles["carousel__item-time"]}>
-					<time datetime='2018-07-07'>
+					<time>
 						<span>18</span>
 						<span>Marzec</span>
 						<span>2018</span>
@@ -69,7 +69,7 @@ const Carousel = () => {
 				className={`${styles["carousel__item"]} ${styles["carousel__item--right"]}`}
 				onClick={changeMiddleHandler}>
 				<div className={styles["carousel__item-time"]}>
-					<time datetime='2018-07-07'>
+					<time>
 						<span>27</span>
 						<span>Kwiecień</span>
 						<span>2024</span>

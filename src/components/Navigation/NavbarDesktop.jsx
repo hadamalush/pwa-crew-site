@@ -41,10 +41,11 @@ const NavbarDesktop = props => {
 							Zaloguj
 						</Link>
 					)}
-
-					<Link href='/' className={styles["nav__list-link"]}>
-						Chat
-					</Link>
+					{session && (
+						<Link href='/' className={styles["nav__list-link"]}>
+							Chat
+						</Link>
+					)}
 				</li>
 			</ul>
 
