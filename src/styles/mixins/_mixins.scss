@@ -36,13 +36,25 @@
 		@media (min-height: #{$mediumScreen}) {
 			@content;
 		}
-	}
-	 @else if $breakpoint == smallScreenMax {
+	} @else if $breakpoint == smallScreenMax {
 		@media (max-height: #{$mediumScreen}) {
 			@content;
 		}
 	}
-	
+}
+
+@mixin borderIn($distance, $size) {
+	&:before {
+		content: "";
+		position: absolute;
+		display: flex;
+		top: $distance;
+		right: $distance;
+		bottom: $distance;
+		left: $distance;
+		border: solid $size $secondary-color;
+		border-radius: 2px;
+	}
 }
 
 @mixin pointer($icon) {

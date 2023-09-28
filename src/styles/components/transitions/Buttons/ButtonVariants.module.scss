@@ -1,4 +1,5 @@
 @import "../../../transitions/variables";
+@import "../../../mixins/mixins";
 
 .default {
 	position: relative;
@@ -74,15 +75,5 @@
 		color: $secondary-color;
 	}
 
-	&:before {
-		content: "";
-		position: absolute;
-		display: flex;
-		top: 4px;
-		right: 4px;
-		bottom: 4px;
-		left: 4px;
-		border: solid 1px $secondary-color;
-		border-radius: 2px;
-	}
+	@include borderIn(4px, 1px);
 }

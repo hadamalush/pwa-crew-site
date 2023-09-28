@@ -17,6 +17,7 @@
 	}
 
 	&__item {
+		height: 100%;
 		flex: 1;
 	}
 
@@ -27,17 +28,19 @@
 		fill: $secondary-color;
 	}
 
-	&__item {
-		height: 100%;
-	}
-
 	&__link {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		height: 100%;
 		color: $link-color-primary;
 		fill: $link-color-primary;
 		transition: color 0.3s, fill 0.3s;
+
+		p {
+			font-size: 1.2rem;
+		}
 	}
 
 	@include media-query(mediumScreen) {

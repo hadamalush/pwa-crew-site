@@ -1,0 +1,28 @@
+.carousel-item {
+	position: absolute;
+
+	height: 100%;
+	width: 30%;
+	max-width: 40rem;
+	box-shadow: 2px 2px 2px black;
+	transform: scale(0.8);
+	transition: transform 1s;
+
+	&__img {
+		position: absolute;
+		object-fit: cover;
+		object-position: top;
+		z-index: -1;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		z-index: 3;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: #00000098;
+	}
+}

@@ -1,0 +1,19 @@
+@import "../../../transitions/variables";
+
+.link {
+    display: block;
+	min-width: 20rem;
+	max-width: max-content;
+	font-size: 1.6rem;
+	font-weight: bold;
+	padding: 14px 26px;
+	text-align: center;
+	background-color: rgba(14, 14, 14, 0.9);
+	transform: skew(-10deg);
+	transition: transform 0.3s, color 0.3s;
+    
+	&:hover {
+		transform: scale(1.04) skew(-10deg);
+		color: $secondary-color;
+	}
+}

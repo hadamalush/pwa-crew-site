@@ -35,7 +35,8 @@ const NavbarMobile = () => {
 					<Link
 						href='/'
 						className={pathname === "/" ? isActive : styles["nav__link"]}>
-						<IconRender variant='user' />
+						<IconRender variant='home' />
+						<p>Start</p>
 					</Link>
 				</li>
 
@@ -46,16 +47,7 @@ const NavbarMobile = () => {
 							pathname === "/kolekcja" ? isActive : styles["nav__link"]
 						}>
 						<IconRender variant='film' />
-					</Link>
-				</li>
-
-				<li className={styles["nav__item"]}>
-					<Link
-						href='/wydarzenia'
-						className={
-							pathname === "/wydarzenia" ? isActive : styles["nav__link"]
-						}>
-						<IconRender variant='event' />
+						<p>Kolekcja</p>
 					</Link>
 				</li>
 
@@ -65,7 +57,29 @@ const NavbarMobile = () => {
 						className={
 							pathname === "/ustawienia" ? isActive : styles["nav__link"]
 						}>
-						<IconRender variant='settings' />
+						<IconRender variant='chat' />
+						<p>Chat</p>
+					</Link>
+				</li>
+				<li className={styles["nav__item"]}>
+					<Link
+						href='/wydarzenia'
+						className={
+							pathname === "/wydarzenia" ? isActive : styles["nav__link"]
+						}>
+						<IconRender variant='event' />
+						<p>Wydarzenia</p>
+					</Link>
+				</li>
+
+				<li className={styles["nav__item"]}>
+					<Link
+						href='/ustawienia'
+						className={
+							pathname === "/ustawienia" ? isActive : styles["nav__link"]
+						}>
+						<IconRender variant='user' />
+						<p>Konto</p>
 					</Link>
 				</li>
 			</ul>

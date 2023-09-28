@@ -65,6 +65,10 @@ const IconRender = props => {
 				return icons.warning;
 			case "good":
 				return icons.good;
+			case "home":
+				return icons.home;
+			case "chat":
+				return icons.chat;
 			default:
 				return null;
 		}
