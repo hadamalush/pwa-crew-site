@@ -71,6 +71,8 @@ const IconRender = props => {
 				return icons.chat;
 			case "clock":
 				return icons.clock;
+			case "description":
+				return icons.description;
 			default:
 				return null;
 		}
