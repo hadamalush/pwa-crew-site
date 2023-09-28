@@ -15,6 +15,7 @@ $danger-color: rgb(5, 30, 255);
 $background-primary: #161b22;
 $background-secondary: #121a23;
 $background-tertiary: #0d141b;
+$background-quaternary: #192737;
 
 //background - section
 $section-bg-primary: #212529;
@@ -57,7 +58,10 @@ $btn-hover-primary-c: #ccb35f;
 //heading-shadow
 $heading-primary-shadow: 2px 2px 2px black;
 
-//heroshadow
+//box-shadow
+$boxshadow-primary: 0 5px 15px 0 rgba(0, 0, 0, 0.8);
+
+//heroshadow-bgc
 
 $hero-primay-bgc: #00000098;
 $hero-secondary-bgc: #000000d3;

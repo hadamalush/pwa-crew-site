@@ -69,6 +69,8 @@ const IconRender = props => {
 				return icons.home;
 			case "chat":
 				return icons.chat;
+			case "clock":
+				return icons.clock;
 			default:
 				return null;
 		}

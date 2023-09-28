@@ -103,17 +103,19 @@
 	@include media-query(mediumScreen) {
 		display: flex;
 
+		&__item {
+			width: 30%;
+			opacity: 1;
+		}
+
 		&__item--middle {
 			width: 40%;
 		}
-
 		&__item--left {
-			opacity: 1;
 			transform: translateX(80%) scale(0.8);
 			animation: move-left 2s;
 		}
 		&__item--right {
-			opacity: 1;
 			transform: translateX(-80%) scale(0.8);
 		}
 	}
