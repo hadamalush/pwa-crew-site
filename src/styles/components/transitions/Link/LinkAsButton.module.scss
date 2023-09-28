@@ -33,3 +33,11 @@
 		color: $secondary-color;
 	}
 }
+
+.green {
+	@include borderIn(4px, 1px, -10deg, $septenary-color);
+
+	&:hover {
+		color: $septenary-color;
+	}
+}
