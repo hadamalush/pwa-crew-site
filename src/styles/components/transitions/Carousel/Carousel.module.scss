@@ -3,13 +3,14 @@
 
 .carousel {
 	position: relative;
-	display: none;
+	display: flex;
 	justify-content: center;
 	width: 95%;
 	height: 40rem;
 	z-index: 1;
 
 	&__item {
+		transition: transform 2s, opacity 2s;
 		div {
 			display: flex;
 			position: relative;
@@ -21,7 +22,7 @@
 		}
 		time {
 			display: block;
-			padding: 3rem;
+			padding: 2rem 4rem;
 			min-width: 14rem;
 			background-color: $hero-secondary-bgc;
 			transform: skew(-10deg);
@@ -34,14 +35,11 @@
 			font-size: 2.4rem;
 			text-align: center;
 			transform: skew(10deg);
+			font-size: 1.3rem;
 
-			&:nth-child(1),
-			&:nth-child(3) {
-				font-size: 1.6rem;
-			}
 			&:nth-child(2) {
 				margin: 0.2em 0 0.5em;
-				transform: scale(1.2);
+				transform: scale(1.4);
 			}
 		}
 
@@ -49,6 +47,7 @@
 			position: relative;
 			padding: 1em;
 			margin-top: 1em;
+			font-size: 1.8rem;
 			z-index: 1;
 			text-align: center;
 			text-shadow: $heading-primary-shadow;
@@ -76,7 +75,7 @@
 		position: relative;
 		max-width: 50rem;
 		height: 100%;
-		width: 40%;
+		width: 100%;
 		box-shadow: 0 0 15px black;
 		transform: scale(1);
 		z-index: 3;
@@ -88,17 +87,35 @@
 	}
 
 	&__item--left {
-		transform: translateX(80%) scale(0.8);
-		animation: move-left 2s;
+		opacity: 0;
+		transform: translateX(100%);
+		width: 100%;
 		z-index: 2;
 	}
+
 	&__item--right {
-		transform: translateX(-80%) scale(0.8);
+		opacity: 0;
+		width: 100%;
+		transform: translateX(-300%);
 		z-index: 2;
 	}
 
 	@include media-query(mediumScreen) {
 		display: flex;
+
+		&__item--middle {
+			width: 40%;
+		}
+
+		&__item--left {
+			opacity: 1;
+			transform: translateX(80%) scale(0.8);
+			animation: move-left 2s;
+		}
+		&__item--right {
+			opacity: 1;
+			transform: translateX(-80%) scale(0.8);
+		}
 	}
 }
 

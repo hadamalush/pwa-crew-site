@@ -1,12 +1,14 @@
 "use client";
+import { useState, useEffect } from "react";
 import CarouselItem from "./CarouselItem";
 import Link from "next/link";
 import styles from "../../../styles/components/transitions/Carousel/Carousel.module.scss";
 
 const Carousel = () => {
 	const isClient = typeof window !== "undefined";
+	const [timer1, setTimer1] = useState(10000);
 
-	const changeMiddleHandler = () => {
+	const changeMiddleHandler = async () => {
 		if (isClient) {
 			const itemOne = document.querySelector(
 				`.${styles["carousel__item--left"]}`
@@ -24,9 +26,13 @@ const Carousel = () => {
 			itemTwo.classList.add(styles["carousel__item--right"]);
 			itemThree.classList.add(styles["carousel__item--left"]);
 		}
+		setTimer1(10000);
 	};
 
-	// const spin = setInterval(changeMiddleHandler, 10000);
+	// useEffect(() => {
+	// 	const spin = setInterval(changeMiddleHandler, timer1);
+	// 	return () => clearInterval(spin);
+	// }, [timer1]);
 
 	return (
 		<div className={styles.carousel}>
