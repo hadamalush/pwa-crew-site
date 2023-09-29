@@ -1,4 +1,5 @@
 "use client";
+import FormContainerBlur from "@/components/Containers/FormContainerBlur";
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 import CheckboxFormik from "../../Input/CheckboxFormik";
@@ -77,7 +78,7 @@ const FormikRegister = ({ className, ...props }) => {
 	};
 
 	return (
-		<div className={classes} id='form'>
+		<FormContainerBlur className={classes} id='form'>
 			<Formik
 				initialValues={{
 					email: "",
@@ -130,7 +131,7 @@ const FormikRegister = ({ className, ...props }) => {
 					</Form>
 				)}
 			</Formik>
-		</div>
+		</FormContainerBlur>
 	);
 };
 

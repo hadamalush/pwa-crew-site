@@ -1,12 +1,13 @@
 @import "../../styles/transitions/variables";
 @import "../../styles/mixins/mixins";
 
-.start {
+main .start {
 	position: relative;
 	width: 100vw;
 	height: 70rem;
-	top: 7rem;
+	top: 3rem;
 	margin-bottom: 5rem;
+	padding: 0;
 
 	@include media-query(mediumScreen) {
 		margin-bottom: 0;

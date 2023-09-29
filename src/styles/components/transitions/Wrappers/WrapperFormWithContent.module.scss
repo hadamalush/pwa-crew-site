@@ -2,9 +2,19 @@
 @import "../../../mixins/mixins";
 
 .container {
+	display: flex;
 	position: relative;
 	z-index: 500;
-	min-height: 70rem;
+	width: 100%;
+	max-width: 120rem;
+	min-height: 60rem;
+
+	height: 65rem;
+
+	img {
+		position: absolute;
+		z-index: -1;
+	}
 
 	&__content {
 		display: none;

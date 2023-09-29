@@ -3,6 +3,7 @@ import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 import InputFormik from "../../Input/InputFormik";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
+import FormContainerBlur from "@/components/Containers/FormContainerBlur";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -86,7 +87,7 @@ const FormikLogin = ({ className, ...props }) => {
 	};
 
 	return (
-		<div className={classes} id='form'>
+		<FormContainerBlur className={classes} id='form'>
 			<Formik
 				initialValues={{
 					email: "",
@@ -125,7 +126,7 @@ const FormikLogin = ({ className, ...props }) => {
 					</Form>
 				)}
 			</Formik>
-		</div>
+		</FormContainerBlur>
 	);
 };
 

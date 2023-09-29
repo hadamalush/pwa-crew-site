@@ -1,0 +1,19 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+
+.container {
+	display: flex;
+	justify-content: center;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	backdrop-filter: blur(20px);
+	width: 100%;
+
+	@include media-query(mediumScreen) {
+		width: 50%;
+	}
+
+	@include media-query(xx-largeScreen) {
+		width: 40%;
+	}
+}
