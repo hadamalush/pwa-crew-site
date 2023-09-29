@@ -1,86 +1,10 @@
 @import "../../transitions/variables";
 @import "../../mixins/mixins";
 
-.login {
-	position: relative;
-	width: 100vw;
-	height: 70rem;
-
-	top: 7rem;
-
-	&__container {
-		position: relative;
-		z-index: 500;
-		min-height: 70rem;
-	}
-
-	&__content {
-		display: none;
-		flex-wrap: wrap;
-		width: 50%;
-		height: 100%;
-		padding: 5em;
-
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			font-size: 4rem;
-			line-height: 1em;
-			text-shadow: $heading-primary-shadow;
-		}
-		h3 > span {
-			font-size: 2.5rem;
-			font-weight: bold;
-		}
-
-		p {
-			margin: 2em 0;
-			text-shadow: $heading-primary-shadow;
-		}
-
-		a {
-			align-self: start;
-			justify-content: start;
-			font-size: 3rem;
-		}
-
-		&-text {
-			width: 100%;
-
-			ul {
-				margin-top: 5em;
-			}
-		}
-	}
-
-	@include media-query(mediumScreen) {
-		top: 0;
-		// margin-top: 15em;
-		height: 100rem;
-
-		&__container {
-			z-index: 100;
-			min-height: 60rem;
-			width: 90%;
-			border-radius: 5px;
-		}
-
-		&__content {
-			display: flex;
-		}
-	}
-
-	@include media-query(xx-largeScreen) {
-		&__container {
-			width: 100%;
-		}
-
-		&__content {
-			padding: 10em;
-			width: 60%;
-		}
-	}
+.section__new-event {
+	display: flex;
+	justify-content: center;
+}
+.container {
+	height: 90rem;
 }
