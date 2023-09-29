@@ -1,5 +1,3 @@
-
-
 const NewEventPage = () => {
 	return <p>dasdasd</p>;
 };

@@ -7,6 +7,8 @@
 }
 
 .history {
+	display: flex;
+	flex-direction: column;
 	padding: 15em 3em 10em;
 
 	h3 {
@@ -66,6 +68,8 @@
 }
 
 .aboutus {
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	flex-wrap: wrap;
 	justify-content: center;

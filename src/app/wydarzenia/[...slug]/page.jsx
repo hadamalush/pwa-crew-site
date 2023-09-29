@@ -1,5 +1,4 @@
 import EventItem from "@/components/transitions/Events/EventItem";
-import { config } from "@/middleware";
 
 const DUMMY_DATA = {
 	e1: {
