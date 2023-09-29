@@ -1,10 +1,6 @@
 import WrapperStart from "@/components/transitions/Wrappers/WrapperStart";
-import WrapperForm from "@/components/transitions/Wrappers/WrapperForm";
-import Logo2 from "@/components/transitions/Logo/Logo";
-import SocialMedia from "@/components/transitions/SocialMedia/SocialMedia";
-import ImageLoader from "@/components/transitions/Image/ImageRender";
-import styles from "./Common.module.scss";
 import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFormWithContent";
+import styles from "./Common.module.scss";
 
 export default function Layout({ children }) {
 	const dataContent = {
@@ -17,14 +13,15 @@ export default function Layout({ children }) {
 
 	return (
 		<main>
-			<WrapperStart className={styles["login"]} id='#login'>
+			<WrapperStart className={styles["start"]}>
 				<WrapperFormWithContent
 					headingType='h3'
 					title={dataContent.title}
 					textFirst={dataContent.textFirst}
 					textSecond={dataContent.textFirst}
 					imageSrc={dataContent.imageSrc}
-					alt={dataContent.alt}>
+					alt={dataContent.alt}
+					className={styles.box}>
 					{children}
 				</WrapperFormWithContent>
 			</WrapperStart>

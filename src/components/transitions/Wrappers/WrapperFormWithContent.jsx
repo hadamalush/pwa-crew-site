@@ -11,10 +11,10 @@ import styles from "../../../styles/components/transitions/Wrappers/WrapperFormW
  * @param {String} title It should be text of type string
  * @param {String} textFirst It should be string and should have maximum 20characters
  * @param {String} textSecond It should be string and should have maximum 30characters
- * @param {*} className You can add additional classes and and overwrite styles this wrapper.
- * @param {Class} Beetween It is no parametr ,beetween tags you should pass form.
+ * @param {String} className You can add additional classes and and overwrite styles this wrapper.
+ * @param {*} children Beetween tags you should pass form.
  *
- * @returns {String} This component will return div
+ * @returns {JSX.Element} This component will return div
  */
 
 const WrapperFormWithContent = ({
@@ -33,11 +33,15 @@ const WrapperFormWithContent = ({
 
 	return (
 		<WrapperForm className={classes}>
-			<ImageFill src={imageSrc} alt={alt} />
+			<ImageFill
+				src={imageSrc}
+				alt={alt}
+				sizes={"(max-width: 768px) 10vw, (min-width: 1200px) 70vw"}
+			/>
 			<div className={styles["container__content"]}>
 				<Logo2 />
 				<div className={styles["container__content-text"]}>
-					<HeadingCustom>
+					<HeadingCustom className={styles["container__content-heading"]}>
 						{title}
 						<br />
 						<span> {textFirst} </span>

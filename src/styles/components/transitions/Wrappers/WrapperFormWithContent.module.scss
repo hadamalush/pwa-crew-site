@@ -13,23 +13,13 @@
 		height: 100%;
 		padding: 5em;
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
+		&-heading {
 			font-size: 4rem;
 			line-height: 1em;
 			text-shadow: $heading-primary-shadow;
 		}
-		
-		h1 > span,
-		h2 > span,
-		h3 > span,
-		h4 > span,
-		h5 > span,
-		h6 > span {
+
+		&-heading > span {
 			font-size: 2.5rem;
 			font-weight: bold;
 		}

@@ -1,13 +1,12 @@
 @import "../../styles/transitions/variables";
 @import "../../styles/mixins/mixins";
 
-.container {
+main .container {
 	position: relative;
 	min-height: unset;
 	height: unset;
 	z-index: -1000;
-	// background-color: $section-bg-primary;
-
+	padding: 10em 0 5em;
 	z-index: 0;
 
 	&__link {
@@ -17,7 +16,6 @@
 
 .section-events {
 	flex-direction: column;
-	// background-color: $section-bg-primary;
 
 	h1 {
 		color: $primary-color;
