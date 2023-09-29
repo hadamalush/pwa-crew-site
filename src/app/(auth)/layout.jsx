@@ -4,31 +4,29 @@ import Logo2 from "@/components/transitions/Logo/Logo";
 import SocialMedia from "@/components/transitions/SocialMedia/SocialMedia";
 import ImageLoader from "@/components/transitions/Image/ImageRender";
 import styles from "./Common.module.scss";
+import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFormWithContent";
 
 export default function Layout({ children }) {
+	const dataContent = {
+		title: "Witamy!",
+		textFirst: "Bądź na bieżąco!",
+		textSecond: "Już teraz osiągnij sukces!",
+		imageSrc: "/images/header/concert.jpg",
+		alt: "Concert",
+	};
+
 	return (
 		<main>
 			<WrapperStart className={styles["login"]} id='#login'>
-				<WrapperForm className={styles["login__container"]}>
-					<ImageLoader
-						alt='Crowd of people playing on the concert'
-						variant='concert'
-						sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 70vw"}
-					/>
-					<div className={styles["login__content"]}>
-						<Logo2 />
-						<div className={styles["login__content-text"]}>
-							<h3>
-								Witamy!
-								<br />
-								<span> Na Naszej Stronie Internetowej.</span>
-							</h3>
-							<p>Dołącz do nas i ciesz się razem z nami!</p>
-							<SocialMedia />
-						</div>
-					</div>
+				<WrapperFormWithContent
+					headingType='h3'
+					title={dataContent.title}
+					textFirst={dataContent.textFirst}
+					textSecond={dataContent.textFirst}
+					imageSrc={dataContent.imageSrc}
+					alt={dataContent.alt}>
 					{children}
-				</WrapperForm>
+				</WrapperFormWithContent>
 			</WrapperStart>
 		</main>
 	);

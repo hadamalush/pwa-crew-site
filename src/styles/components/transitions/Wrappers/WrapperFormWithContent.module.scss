@@ -1,18 +1,10 @@
-@import "../../transitions/variables";
-@import "../../mixins/mixins";
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
 
-.login {
+.container {
 	position: relative;
-	width: 100vw;
-	height: 70rem;
-
-	top: 7rem;
-
-	&__container {
-		position: relative;
-		z-index: 500;
-		min-height: 70rem;
-	}
+	z-index: 500;
+	min-height: 70rem;
 
 	&__content {
 		display: none;
@@ -31,7 +23,13 @@
 			line-height: 1em;
 			text-shadow: $heading-primary-shadow;
 		}
-		h3 > span {
+		
+		h1 > span,
+		h2 > span,
+		h3 > span,
+		h4 > span,
+		h5 > span,
+		h6 > span {
 			font-size: 2.5rem;
 			font-weight: bold;
 		}
@@ -57,16 +55,10 @@
 	}
 
 	@include media-query(mediumScreen) {
-		top: 0;
-		// margin-top: 15em;
-		height: 100rem;
-
-		&__container {
-			z-index: 100;
-			min-height: 60rem;
-			width: 90%;
-			border-radius: 5px;
-		}
+		z-index: 100;
+		min-height: 60rem;
+		width: 90%;
+		border-radius: 5px;
 
 		&__content {
 			display: flex;
@@ -74,9 +66,7 @@
 	}
 
 	@include media-query(xx-largeScreen) {
-		&__container {
-			width: 100%;
-		}
+		width: 100%;
 
 		&__content {
 			padding: 10em;
