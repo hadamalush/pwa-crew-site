@@ -43,6 +43,7 @@ const EventsList = ({ className, children, ...props }) => {
 	return (
 		<ul className={classes}>
 			<EventItem
+				id='e1'
 				title={DUMMY_DATA.e1.title}
 				date={DUMMY_DATA.e1.date}
 				town={DUMMY_DATA.e1.town}
@@ -50,6 +51,26 @@ const EventsList = ({ className, children, ...props }) => {
 				codePost={DUMMY_DATA.e1.codePost}
 				time={DUMMY_DATA.e1.time}
 				image={DUMMY_DATA.e1.image}
+			/>
+			<EventItem
+				id='e2'
+				title={DUMMY_DATA.e2.title}
+				date={DUMMY_DATA.e2.date}
+				town={DUMMY_DATA.e2.town}
+				street={DUMMY_DATA.e2.street}
+				codePost={DUMMY_DATA.e2.codePost}
+				time={DUMMY_DATA.e2.time}
+				image={DUMMY_DATA.e2.image}
+			/>
+			<EventItem
+				id='e3'
+				title={DUMMY_DATA.e3.title}
+				date={DUMMY_DATA.e3.date}
+				town={DUMMY_DATA.e3.town}
+				street={DUMMY_DATA.e3.street}
+				codePost={DUMMY_DATA.e3.codePost}
+				time={DUMMY_DATA.e3.time}
+				image={DUMMY_DATA.e3.image}
 			/>
 		</ul>
 	);

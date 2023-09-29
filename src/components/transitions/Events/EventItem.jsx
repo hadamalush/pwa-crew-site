@@ -1,5 +1,4 @@
 "use client";
-
 import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import ImageFill from "../Image/ImageFill";
@@ -14,45 +13,35 @@ const EventItem = ({
 	codePost,
 	time,
 	image,
+	id,
 	...props
 }) => {
 	const classes = `${styles["event-item"]} '${className}`;
 
 	const showDetailHandler = () => {
-		const detailsList = document.querySelector(`.${styles.details}`);
+		const detailsList = document.getElementById(id);
 
-		detailsList.classList.toggle(styles["details-show"]);
+		detailsList.classList.toggle(styles["accordion__control"]);
 	};
 
 	return (
-		<>
-			<li className={classes} onClick={showDetailHandler}>
-				<div className={styles["event-item__box"]}>
-					<ImageFill
-						src={image}
-						alt='test'
-						className={styles["event-item__img"]}
-					/>
-					<div className={styles["event-item__content"]}>
-						<p className={styles["event-item__town"]}>{town}</p>
-						<address className={styles["event-item__date"]}>
-							{/* <IconRender
-							variant='location'
-							className={styles["event-item__town--icon"]}
-						/>
-						{date} */}
-						</address>
-						<p>Start wydarzenia:</p>
-						<time className={styles["event-item__time"]}>
-							<IconRender
-								variant='clock'
-								className={styles["event-item__town--icon"]}
-							/>
-							{time}
-						</time>
-					</div>
-				</div>
+		<li className={classes} onClick={showDetailHandler}>
+			<div className={styles["event-item__box"]}>
+				<ImageFill
+					src={image}
+					alt='test'
+					className={styles["event-item__img"]}
+				/>
 
+				<div className={styles["event-item__content"]}>
+					<p className={styles["event-item__town"]}>{town}</p>
+					<address className={styles["event-item__date"]}>{date}</address>
+					<p>Start wydarzenia:</p>
+
+					<time className={styles["event-item__time"]}>{time}</time>
+				</div>
+			</div>
+			<div className={styles.accordion} id={id}>
 				<ul className={styles["details"]}>
 					<li className={styles["details__item"]}>
 						<IconRender
@@ -83,10 +72,9 @@ const EventItem = ({
 						<LinkAsBtn href=''>Zobacz szczegóły</LinkAsBtn>
 					</li>
 				</ul>
-
-				<h4 className={styles["event-item__title"]}>{title}</h4>
-			</li>
-		</>
+			</div>
+			<h4 className={styles["event-item__title"]}>{title}</h4>
+		</li>
 	);
 };
 
