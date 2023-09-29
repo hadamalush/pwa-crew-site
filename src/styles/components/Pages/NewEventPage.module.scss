@@ -1,7 +1,7 @@
-@import "../../styles/transitions/variables";
-@import "../../styles/mixins/mixins";
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
 
-main .login {
+.login {
 	position: relative;
 	width: 100vw;
 	height: 70rem;

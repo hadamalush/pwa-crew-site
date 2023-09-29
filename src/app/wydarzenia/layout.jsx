@@ -15,6 +15,7 @@ export default function Layout({ children }) {
 					Utwórz wydarzenie
 				</LinkAsBtn>
 			</WrapperStart>
+
 			{children}
 		</main>
 	);
