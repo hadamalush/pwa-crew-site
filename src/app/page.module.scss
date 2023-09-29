@@ -38,6 +38,8 @@
 	}
 
 	@include media-query(largeScreen) {
+		flex-direction: row;
+
 		> div:nth-child(3) {
 			margin: 0 2em;
 		}

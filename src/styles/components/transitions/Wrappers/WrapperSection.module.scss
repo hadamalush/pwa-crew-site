@@ -12,9 +12,6 @@
 	@include media-query(mediumScreen) {
 		padding: 15em 5em 10em;
 	}
-	@include media-query(largeScreen) {
-		flex-direction: row;
-	}
 
 	@include media-query(hugeScreen) {
 		padding: 15em 10em 10em;

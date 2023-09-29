@@ -13,14 +13,22 @@
 	&__link {
 		margin-top: 2em;
 	}
-
-	h1 {
-		margin-bottom: auto;
-	}
 }
 
 .section-events {
+	flex-direction: column;
 	// background-color: $section-bg-primary;
+
+	h1 {
+		color: $primary-color;
+		position: absolute;
+		z-index: 10;
+		top: 2rem;
+		left: 50%;
+		transform: translateX(-50%);
+		text-align: center;
+		font-size: 3.6rem;
+	}
 	@include media-query(largeScreen) {
 		flex-direction: column;
 	}
