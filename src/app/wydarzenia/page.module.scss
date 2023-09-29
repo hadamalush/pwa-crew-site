@@ -1,7 +1,12 @@
+@import "../../styles/transitions/variables";
+@import "../../styles/mixins/mixins";
+
 .container {
 	position: relative;
 	min-height: unset;
 	height: unset;
+	z-index: -1000;
+	// background-color: $section-bg-primary;
 
 	z-index: 0;
 
@@ -14,6 +19,9 @@
 	}
 }
 
-// .section-events {
-// 	flex-direction: row;
-// }
+.section-events {
+	// background-color: $section-bg-primary;
+	@include media-query(largeScreen) {
+		flex-direction: column;
+	}
+}
