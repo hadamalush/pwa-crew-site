@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "../../../styles/components/transitions/Events/EventsList.module.scss";
 import EventItem from "./EventItem";
 
@@ -37,12 +39,26 @@ const DUMMY_DATA = {
 	},
 };
 
-const EventsList = ({ className, children, ...props }) => {
+const EventsList = ({ events, className, children, ...props }) => {
 	const classes = `${styles.events} '${className}`;
+	const { id, title, town, code_post, street, date, time, image_src } = events;
 
 	return (
 		<ul className={classes}>
-			<EventItem
+			{events.map(event => (
+				<EventItem
+					key={event.id}
+					id={event.id}
+					title={event.title}
+					date={event.date}
+					town={event.town}
+					street={event.street}
+					codePost={event.code_post}
+					time={event.time}
+					image={event.image_src}
+				/>
+			))}
+			{/* <EventItem
 				id='e1'
 				title={DUMMY_DATA.e1.title}
 				date={DUMMY_DATA.e1.date}
@@ -71,7 +87,7 @@ const EventsList = ({ className, children, ...props }) => {
 				codePost={DUMMY_DATA.e3.codePost}
 				time={DUMMY_DATA.e3.time}
 				image={DUMMY_DATA.e3.image}
-			/>
+			/> */}
 		</ul>
 	);
 };
