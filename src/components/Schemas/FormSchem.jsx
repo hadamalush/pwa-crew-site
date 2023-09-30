@@ -35,31 +35,31 @@ const SUPPORTED_FORMATS = [
 ];
 
 export const eventSchema = yup.object().shape({
-	// title: yup
-	// 	.string()
-	// 	.min(5, "Minimum 5 znaków")
-	// 	.max(30, "Tytuł nie może przekraczać 30 znaków")
-	// 	.required("Wymagane"),
-	// town: yup
-	// 	.string()
-	// 	.min(2, "Minimum 2 znaki")
-	// 	.max(30, "Maksiumum 30 znaków")
-	// 	.required("Wymagane"),
-	// codePost: yup
-	// 	.string()
-	// 	.min(5, "Minimum 5 znaków")
-	// 	.max(6, "Maksimum 6 znaków")
-	// 	.required("Wymagane"),
-	// street: yup
-	// 	.string()
-	// 	.min(2, "Minimum 2 znaki")
-	// 	.max(57, "Maksimum 57 znaków")
-	// 	.required("Wymagane"),
-	// date: yup
-	// 	.date()
-	// 	.required("Wymagane")
-	// 	.min(new Date(Date.now()), "Nie można ustawić daty wstecz"),
-	// time: yup.string().required("Wymagane"),
+	title: yup
+		.string()
+		.min(5, "Minimum 5 znaków")
+		.max(30, "Tytuł nie może przekraczać 30 znaków")
+		.required("Wymagane"),
+	town: yup
+		.string()
+		.min(2, "Minimum 2 znaki")
+		.max(30, "Maksiumum 30 znaków")
+		.required("Wymagane"),
+	codePost: yup
+		.string()
+		.min(5, "Minimum 5 znaków")
+		.max(6, "Maksimum 6 znaków")
+		.required("Wymagane"),
+	street: yup
+		.string()
+		.min(2, "Minimum 2 znaki")
+		.max(57, "Maksimum 57 znaków")
+		.required("Wymagane"),
+	date: yup
+		.date()
+		.required("Wymagane")
+		.min(new Date(Date.now()), "Nie można ustawić daty wstecz"),
+	time: yup.string().required("Wymagane"),
 	fileImg: yup
 		.mixed()
 		.required("Wymagane")

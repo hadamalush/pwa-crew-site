@@ -8,6 +8,14 @@ export async function connectDatabase() {
 	return client;
 }
 
+export async function connectDatabaseEvents() {
+	const client = await MongoClient.connect(
+		`mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/Events?retryWrites=true&w=majority`
+	);
+
+	return client;
+}
+
 export async function insertDocument(client, collection, document) {
 	const db = client.db();
 

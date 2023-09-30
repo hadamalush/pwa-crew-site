@@ -14,40 +14,54 @@ import { eventSchema } from "@/components/Schemas/FormSchem";
 
 const FormikEvent = () => {
 	const addEventhandler = async values => {
-		console.log(values.fileImg);
-
 		const file = values.fileImg;
+		let imgSrc;
 
-		console.log(file.name);
+		//UPLOAD FILE TO VERCEL BLOB
+		try {
+			const response = await fetch(
+				`/api/upload/vercelBlob?filename=${file.name}`,
+				{
+					method: "POST",
+					body: file,
+				}
+			);
 
-		const response = await fetch(`/api/addEvent?filename=${file.name}`, {
-			method: "POST",
-			// headers: { "Content-type": "application/json" },
-			body: file,
-		});
+			if (response.ok) {
+				const data = await response.json();
+				imgSrc = data.url;
+			}else{
+				//powiadomienie o bledzie
+				return;
+			}
+		} catch (error) {
+			//wstawic powiadomienie o bledzie
+			console.log(error);
+		}
 
-		const data = await response.json();
+		console.log("Zwrot: ", imgSrc);
 
-		console.log("Zwrot: ", data);
+		try {
+			const response = await fetch("/api/addEvent", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					title: values.title,
+					town: values.town,
+					codePost: values.codePost,
+					street: values.street,
+					date: values.date,
+					time: values.time,
+					imageSrc: imgSrc,
+				}),
+			});
 
-		// try {
-		// 	const response = await fetch("/api/addEvent", {
-		// 		method: "POST",
-		// 		headers: { "Content-Type": "application/json" },
-		// 		body: JSON.stringify({
-		// 			title: values.title,
-		// 			town: values.town,
-		// 			codePost: values.codePost,
-		// 			street: values.street,
-		// 			date: values.date,
-		// 			time: values.time,
-		// 			fileImg: values.fileImg,
-		// 		}),
-		// 	});
-		// 	console.log(response);
-		// } catch (error) {
-		// 	console.log(error);
-		// }
+			const data = await response.json();
+			console.log(data);
+		} catch (error) {
+			//wstawic powiadomienie o bledzie
+			console.log(error);
+		}
 	};
 
 	return (
