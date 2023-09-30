@@ -27,7 +27,12 @@ export const loginSchema = yup.object().shape({
 	password: yup.string().required("Wymagane"),
 });
 
-const SUPPORTED_FORMATS = ["jpg", "image/jpeg", "png"];
+const SUPPORTED_FORMATS = [
+	"image/jpeg",
+	"image/png",
+	"image/webp",
+	"image/jpg",
+];
 
 export const eventSchema = yup.object().shape({
 	title: yup
@@ -59,21 +64,13 @@ export const eventSchema = yup.object().shape({
 		.mixed()
 		.required("Wymagane")
 		.test("fileSize", "Maksymalny rozmiar pliku to 4 MB", function (value) {
-			// Sprawdza, czy rozmiar pliku nie przekracza 4 MB (4 * 1024 * 1024)
 			return value && value.size <= 4 * 1024 * 1024;
 		})
 		.test(
 			"fileType",
 			"Dozwolone formaty to: jpg, jpeg, png, webp",
 			function (value) {
-				// Sprawdza, czy format pliku jest jpg, jpeg, png, webp
-				return (
-					value &&
-					["image/jpeg", "image/png", "image/webp"].includes(value.type)
-				);
+				return value && SUPPORTED_FORMATS.includes(value.type);
 			}
 		),
 });
-
-// console.log(eventSchema.fields["fileImg"]);
-console.log(eventSchema);

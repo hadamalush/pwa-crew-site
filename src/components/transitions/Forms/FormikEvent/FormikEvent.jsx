@@ -1,12 +1,16 @@
 "use client";
-import InputFormik from "../../Input/InputFormik";
 import FormContainerBlur from "@/components/Containers/FormContainerBlur";
-import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
+import InputFormik from "../../Input/InputFormik";
+import InputFormikFile from "../../Input/InputFormikFile";
 import ButtonMain from "../../Button/ButtonMain";
+import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
-import { useState } from "react";
-import InputFormikFile from "../../Input/InputFormikFile";
+
+/**
+ * @description This component returns form for create new event.
+ * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component withoud that wrapper.
+ */
 
 const FormikEvent = () => {
 	return (
@@ -66,9 +70,7 @@ const FormikEvent = () => {
 						/>
 						<InputFormikFile
 							name='fileImg'
-							placeholder='Zdjęcie'
 							aria-label='Zdjęcie'
-							type='file'
 							setFieldValue={setFieldValue}
 							setFieldTouched={setFieldTouched}
 						/>

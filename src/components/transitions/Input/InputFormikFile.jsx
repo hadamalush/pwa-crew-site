@@ -5,18 +5,24 @@ import styles from "../../../styles/components/transitions/Inputs/InputFormik.mo
 import { useField } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 
+/**
+ * @description This component is input type file ,exactly for image type PNG,JPEG,WEBP,JPG and allow size maximum 4MB . There is connected with eventSchema(fileImg).
+ * @param {String} name Pass name of type string.
+ * @param {Function} setFieldValue Pass function from formik props.
+ * @param {Function} setFieldTouched Pass function from formik props.
+ * @returns Return input.
+ */
+
 const InputFormikFile = ({
 	name,
-	onChange,
 	setFieldValue,
 	setFieldTouched,
 	...props
 }) => {
 	const [field, meta] = useField(name);
-
 	const iconStyle = { color: "green" };
 
-	const validate = async event => {
+	const validationFileHandler = async event => {
 		setFieldValue("fileImg", event.target.files[0]);
 
 		try {
@@ -29,17 +35,17 @@ const InputFormikFile = ({
 		setFieldTouched("fileImg", true);
 	};
 
-
 	return (
 		<>
 			<WrapperInput className={styles["input-box"]}>
 				<IconRender variant={name} />
 				<input
 					name={name}
-					{...props}
+					type='file'
 					className={styles.input}
 					autoComplete='off'
-					onChange={validate}
+					onChange={validationFileHandler}
+					{...props}
 				/>
 				{meta.error && meta.touched && (
 					<>
