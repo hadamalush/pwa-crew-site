@@ -9,7 +9,7 @@ export default function Layout({ children }) {
 			<WrapperStart className={styles.container}>
 				<Carousel />
 				<LinkAsBtn
-					href='/'
+					href='/wydarzenia/nowe-wydarzenie#formularz'
 					variant='green'
 					className={styles["container__link"]}>
 					Utwórz wydarzenie

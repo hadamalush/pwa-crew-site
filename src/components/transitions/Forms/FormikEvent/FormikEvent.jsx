@@ -6,6 +6,8 @@ import ButtonMain from "../../Button/ButtonMain";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
+import { useDispatch, useSelector } from "react-redux";
+import { showResult } from "@/global/notification-slice";
 
 /**
  * @description This component returns form for create new event.
@@ -13,6 +15,8 @@ import { eventSchema } from "@/components/Schemas/FormSchem";
  */
 
 const FormikEvent = () => {
+	const dispatch = useDispatch(showResult);
+
 	const addEventhandler = async values => {
 		const file = values.fileImg;
 		let imgSrc;
@@ -30,7 +34,7 @@ const FormikEvent = () => {
 			if (response.ok) {
 				const data = await response.json();
 				imgSrc = data.url;
-			}else{
+			} else {
 				//powiadomienie o bledzie
 				return;
 			}
@@ -38,8 +42,6 @@ const FormikEvent = () => {
 			//wstawic powiadomienie o bledzie
 			console.log(error);
 		}
-
-		console.log("Zwrot: ", imgSrc);
 
 		try {
 			const response = await fetch("/api/addEvent", {
@@ -57,7 +59,7 @@ const FormikEvent = () => {
 			});
 
 			const data = await response.json();
-			console.log(data);
+			dispatch(showResult({ message: data.message, variant: "success" }));
 		} catch (error) {
 			//wstawic powiadomienie o bledzie
 			console.log(error);

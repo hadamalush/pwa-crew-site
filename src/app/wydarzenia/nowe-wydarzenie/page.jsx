@@ -13,7 +13,7 @@ const NewEventPage = () => {
 	};
 
 	return (
-		<WrapperSection className={styles["section__new-event"]}>
+		<WrapperSection className={styles["section__new-event"]} id='formularz'>
 			<WrapperFormWithContent
 				headingType='h3'
 				title={dataWrapper.title}
