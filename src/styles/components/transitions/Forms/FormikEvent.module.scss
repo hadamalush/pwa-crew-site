@@ -1,4 +1,12 @@
 @import "../../../transitions/variables";
 @import "../../../mixins/mixins";
 
+.form {
+	width: 28rem;
 
+	h1 {
+		margin-top: 2em;
+		font-size: 3rem;
+		text-align: center;
+	}
+}

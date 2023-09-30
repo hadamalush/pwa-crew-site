@@ -14,10 +14,10 @@ const FormikEvent = () => {
 				}}
 				// onSubmit={onSubmit}
 				// validationSchema={loginSchema}
-			>
+				className={styles.form}>
 				{props => (
-					<Form>
-						<h1>Logowanie</h1>
+					<Form className={styles.form}>
+						<h1>Dodawanie wydarzenia</h1>
 						<InputFormik
 							name='title'
 							placeholder='Tytuł wydarzenia'
@@ -55,9 +55,9 @@ const FormikEvent = () => {
 							type='time'
 						/>
 						<InputFormik
-							name='date'
-							placeholder='Data'
-							aria-label='Data'
+							name='fileImg'
+							placeholder='Zdjęcie'
+							aria-label='Zdjęcie'
 							type='file'
 						/>
 					</Form>

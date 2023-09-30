@@ -73,6 +73,20 @@ const IconRender = props => {
 				return icons.clock;
 			case "description":
 				return icons.description;
+			case "title":
+				return icons.title;
+			case "town":
+				return icons.town;
+			case "street":
+				return icons.street;
+			case "time":
+				return icons.time;
+			case "date":
+				return icons.date;
+			case "codePost":
+				return icons.codePost;
+			case "fileImg":
+				return icons.fileImg;
 			default:
 				return null;
 		}

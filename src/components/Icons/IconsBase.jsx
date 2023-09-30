@@ -484,6 +484,126 @@ export function IconsBase() {
 				<path d='M9 13h6'></path>
 			</svg>
 		),
+		title: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-signature'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2'></path>
+			</svg>
+		),
+		town: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-building-fortress'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M7 21h1a1 1 0 0 0 1 -1v-1h0a3 3 0 0 1 6 0m3 2h1a1 1 0 0 0 1 -1v-15l-3 -2l-3 2v6h-4v-6l-3 -2l-3 2v15a1 1 0 0 0 1 1h2m8 -2v1a1 1 0 0 0 1 1h2'></path>
+				<path d='M7 7h0v.01'></path>
+				<path d='M7 10h0v.01'></path>
+				<path d='M7 13h0v.01'></path>
+				<path d='M17 7h0v.01'></path>
+				<path d='M17 10h0v.01'></path>
+				<path d='M17 13h0v.01'></path>
+			</svg>
+		),
+		street: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-traffic-cone'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M4 20l16 0'></path>
+				<path d='M9.4 10l5.2 0'></path>
+				<path d='M7.8 15l8.4 0'></path>
+				<path d='M6 20l5 -15h2l5 15'></path>
+			</svg>
+		),
+		time: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-clock-hour-9'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0'></path>
+				<path d='M12 12h-3.5'></path>
+				<path d='M12 7v5'></path>
+			</svg>
+		),
+		date: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-calendar-event'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z'></path>
+				<path d='M16 3l0 4'></path>
+				<path d='M8 3l0 4'></path>
+				<path d='M4 11l16 0'></path>
+				<path d='M8 15h2v2h-2z'></path>
+			</svg>
+		),
+		codePost: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-zoom-code'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0'></path>
+				<path d='M21 21l-6 -6'></path>
+				<path d='M8 8l-2 2l2 2'></path>
+				<path d='M12 8l2 2l-2 2'></path>
+			</svg>
+		),
+		fileImg: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				class='icon icon-tabler icon-tabler-file-type-jpg'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M14 3v4a1 1 0 0 0 1 1h4'></path>
+				<path d='M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4'></path>
+				<path d='M11 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6'></path>
+				<path d='M20 15h-1a2 2 0 0 0 -2 2v2a2 2 0 0 0 2 2h1v-3'></path>
+				<path d='M5 15h3v4.5a1.5 1.5 0 0 1 -3 0'></path>
+			</svg>
+		),
 	};
 
 	return ALL_ICONS;
