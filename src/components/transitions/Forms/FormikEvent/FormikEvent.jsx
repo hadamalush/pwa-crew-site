@@ -16,24 +16,38 @@ const FormikEvent = () => {
 	const addEventhandler = async values => {
 		console.log(values.fileImg);
 
-		try {
-			const response = await fetch("/api/addEvent", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					title: values.title,
-					town: values.town,
-					codePost: values.codePost,
-					street: values.street,
-					date: values.date,
-					time: values.time,
-					fileImg: values.fileImg,
-				}),
-			});
-			console.log(response);
-		} catch (error) {
-			console.log(error);
-		}
+		const file = values.fileImg;
+
+		console.log(file.name);
+
+		const response = await fetch(`/api/addEvent?filename=${file.name}`, {
+			method: "POST",
+			// headers: { "Content-type": "application/json" },
+			body: file,
+		});
+
+		const data = await response.json();
+
+		console.log("Zwrot: ", data);
+
+		// try {
+		// 	const response = await fetch("/api/addEvent", {
+		// 		method: "POST",
+		// 		headers: { "Content-Type": "application/json" },
+		// 		body: JSON.stringify({
+		// 			title: values.title,
+		// 			town: values.town,
+		// 			codePost: values.codePost,
+		// 			street: values.street,
+		// 			date: values.date,
+		// 			time: values.time,
+		// 			fileImg: values.fileImg,
+		// 		}),
+		// 	});
+		// 	console.log(response);
+		// } catch (error) {
+		// 	console.log(error);
+		// }
 	};
 
 	return (
