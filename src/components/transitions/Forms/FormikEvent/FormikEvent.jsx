@@ -13,6 +13,29 @@ import { eventSchema } from "@/components/Schemas/FormSchem";
  */
 
 const FormikEvent = () => {
+	const addEventhandler = async values => {
+		console.log(values.fileImg);
+
+		try {
+			const response = await fetch("/api/addEvent", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					title: values.title,
+					town: values.town,
+					codePost: values.codePost,
+					street: values.street,
+					date: values.date,
+					time: values.time,
+					fileImg: values.fileImg,
+				}),
+			});
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<FormContainerBlur>
 			<Formik
@@ -25,7 +48,7 @@ const FormikEvent = () => {
 					time: "",
 					fileImg: "",
 				}}
-				// onSubmit={onSubmit}
+				onSubmit={addEventhandler}
 				validationSchema={eventSchema}
 				className={styles.form}>
 				{({ setFieldValue, setFieldTouched, ...props }) => (
