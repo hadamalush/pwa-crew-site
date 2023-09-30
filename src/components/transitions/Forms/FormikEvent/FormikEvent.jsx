@@ -2,22 +2,32 @@
 import InputFormik from "../../Input/InputFormik";
 import FormContainerBlur from "@/components/Containers/FormContainerBlur";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
+import ButtonMain from "../../Button/ButtonMain";
 import { Formik, Form } from "formik";
+import { eventSchema } from "@/components/Schemas/FormSchem";
+import { useState } from "react";
+import InputFormikFile from "../../Input/InputFormikFile";
 
 const FormikEvent = () => {
 	return (
 		<FormContainerBlur>
 			<Formik
 				initialValues={{
-					email: "",
-					password: "",
+					title: "",
+					town: "",
+					codePost: "",
+					street: "",
+					date: "",
+					time: "",
+					fileImg: "",
 				}}
 				// onSubmit={onSubmit}
-				// validationSchema={loginSchema}
+				validationSchema={eventSchema}
 				className={styles.form}>
-				{props => (
+				{({ setFieldValue, setFieldTouched, ...props }) => (
 					<Form className={styles.form}>
 						<h1>Dodawanie wydarzenia</h1>
+
 						<InputFormik
 							name='title'
 							placeholder='Tytuł wydarzenia'
@@ -26,8 +36,8 @@ const FormikEvent = () => {
 						/>
 						<InputFormik
 							name='town'
-							placeholder='Miasto'
-							aria-label='Miasto'
+							placeholder='Miejscowość'
+							aria-label='Miejscowość'
 							type='text'
 						/>
 						<InputFormik
@@ -54,12 +64,17 @@ const FormikEvent = () => {
 							aria-label='Godzina'
 							type='time'
 						/>
-						<InputFormik
+						<InputFormikFile
 							name='fileImg'
 							placeholder='Zdjęcie'
 							aria-label='Zdjęcie'
 							type='file'
+							setFieldValue={setFieldValue}
+							setFieldTouched={setFieldTouched}
 						/>
+						<ButtonMain type='submit' variant={"btnSkewRight"}>
+							Utwórz wydarzenie
+						</ButtonMain>
 					</Form>
 				)}
 			</Formik>

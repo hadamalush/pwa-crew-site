@@ -1,24 +1,45 @@
 "use client";
 import IconRender from "@/components/Icons/IconRender";
-import styles from "../../../styles/components/transitions/Inputs/InputFormik.module.scss";
-
-import { Field, useField } from "formik";
-
 import WrapperInput from "../Wrappers/WrapperInput";
+import styles from "../../../styles/components/transitions/Inputs/InputFormik.module.scss";
+import { useField } from "formik";
+import { eventSchema } from "@/components/Schemas/FormSchem";
 
-const InputFormik = ({ name, onChange, setFieldValue, ...props }) => {
+const InputFormikFile = ({
+	name,
+	onChange,
+	setFieldValue,
+	setFieldTouched,
+	...props
+}) => {
 	const [field, meta] = useField(name);
+
 	const iconStyle = { color: "green" };
+
+	const validate = async event => {
+		setFieldValue("fileImg", event.target.files[0]);
+
+		try {
+			await eventSchema.validateAt(name, {
+				fileImg: event.target.files[0],
+			});
+		} catch (error) {
+			console.log(error);
+		}
+		setFieldTouched("fileImg", true);
+	};
+
 
 	return (
 		<>
 			<WrapperInput className={styles["input-box"]}>
 				<IconRender variant={name} />
-				<Field
+				<input
 					name={name}
 					{...props}
 					className={styles.input}
 					autoComplete='off'
+					onChange={validate}
 				/>
 				{meta.error && meta.touched && (
 					<>
@@ -37,4 +58,4 @@ const InputFormik = ({ name, onChange, setFieldValue, ...props }) => {
 	);
 };
 
-export default InputFormik;
+export default InputFormikFile;

@@ -26,3 +26,54 @@ export const loginSchema = yup.object().shape({
 		.required("Wymagane"),
 	password: yup.string().required("Wymagane"),
 });
+
+const SUPPORTED_FORMATS = ["jpg", "image/jpeg", "png"];
+
+export const eventSchema = yup.object().shape({
+	title: yup
+		.string()
+		.min(5, "Minimum 5 znaków")
+		.max(30, "Tytuł nie może przekraczać 30 znaków")
+		.required("Wymagane"),
+	town: yup
+		.string()
+		.min(2, "Minimum 2 znaki")
+		.max(30, "Maksiumum 30 znaków")
+		.required("Wymagane"),
+	codePost: yup
+		.string()
+		.min(5, "Minimum 5 znaków")
+		.max(6, "Maksimum 6 znaków")
+		.required("Wymagane"),
+	street: yup
+		.string()
+		.min(2, "Minimum 2 znaki")
+		.max(57, "Maksimum 57 znaków")
+		.required("Wymagane"),
+	date: yup
+		.date()
+		.required("Wymagane")
+		.min(new Date(Date.now()), "Nie można ustawić daty wstecz"),
+	time: yup.string().required("Wymagane"),
+	fileImg: yup
+		.mixed()
+		.required("Wymagane")
+		.test("fileSize", "Maksymalny rozmiar pliku to 4 MB", function (value) {
+			// Sprawdza, czy rozmiar pliku nie przekracza 4 MB (4 * 1024 * 1024)
+			return value && value.size <= 4 * 1024 * 1024;
+		})
+		.test(
+			"fileType",
+			"Dozwolone formaty to: jpg, jpeg, png, webp",
+			function (value) {
+				// Sprawdza, czy format pliku jest jpg, jpeg, png, webp
+				return (
+					value &&
+					["image/jpeg", "image/png", "image/webp"].includes(value.type)
+				);
+			}
+		),
+});
+
+// console.log(eventSchema.fields["fileImg"]);
+console.log(eventSchema);
