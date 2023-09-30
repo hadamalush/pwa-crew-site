@@ -11,7 +11,6 @@
 	outline: none;
 	color: $primary-color;
 	font-size: 1.6rem;
-
 	&__icon {
 		display: inline-block;
 	}
@@ -24,21 +23,45 @@
 .input-box {
 	margin: 4em auto;
 
+	input[type="date"] {
+		&::-webkit-datetime-edit-text {
+			padding: 0 2rem;
+		}
+		&::-webkit-datetime-edit-month-field {
+			text-transform: uppercase;
+		}
+		&::-webkit-datetime-edit-day-field {
+			text-transform: uppercase;
+		}
+		&::-webkit-datetime-edit-year-field {
+			text-transform: uppercase;
+		}
+		&::-webkit-calendar-picker-indicator {
+			opacity: 0;
+		}
 
+		&::before {
+			content: "🔺";
+			position: absolute;
+			font-size: 2rem;
+			right: 3rem;
+			z-index: -1;
+		}
+	}
 
+	input[type="time"] {
+		&::-webkit-calendar-picker-indicator {
+			opacity: 0;
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-	
+		&::before {
+			content: "🔺";
+			position: absolute;
+			font-size: 2rem;
+			right: 3rem;
+			z-index: -1;
+		}
+	}
 
 	div:first-child {
 		position: absolute;
