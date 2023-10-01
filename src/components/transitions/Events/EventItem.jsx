@@ -47,7 +47,6 @@ const EventItem = ({
 							variant='location'
 							className={styles["details__item-icon"]}
 						/>
-
 						<address>
 							<p>{town}</p>
 							<p>{codePost}</p>

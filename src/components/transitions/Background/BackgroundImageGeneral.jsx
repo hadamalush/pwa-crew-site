@@ -23,11 +23,13 @@ const BackgroundImageGeneral = () => {
 	const style = {
 		logowanie: {
 			height: "100vh",
-			minHeight: "100rem",
+			maxHeight: "100rem",
+			minHeight: "90rem",
 		},
 		rejestracja: {
 			height: "100vh",
-			minHeight: "100rem",
+			maxHeight: "100rem",
+			minHeight: "90rem",
 		},
 	};
 
