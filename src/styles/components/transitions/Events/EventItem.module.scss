@@ -49,6 +49,7 @@
 	&__content {
 		display: flex;
 		flex-direction: column;
+		padding: 0 1em;
 		width: 70%;
 	}
 
@@ -56,8 +57,6 @@
 		position: relative;
 		margin: auto 0;
 		width: 30%;
-		// min-width: 10rem;
-		// max-width: 15rem;
 		height: 10.5rem;
 		overflow: hidden;
 		border: 5px solid $background-quaternary;
@@ -93,8 +92,7 @@
 	&__town {
 		position: relative;
 		margin: 1em auto 0;
-		width: 80%;
-		padding-right: 3rem;
+		width: 100%;
 		text-align: center;
 		word-wrap: break-word;
 	}
@@ -102,9 +100,8 @@
 	&__date {
 		display: block;
 		margin: 0 auto;
-		padding-right: 3rem;
 		+ p {
-			padding-right: 3rem;
+			text-align: center;
 			margin: 1em auto 0;
 			font-size: 1rem;
 			color: $secondary-color;
@@ -116,7 +113,6 @@
 		position: relative;
 		margin: 0 auto;
 		font-size: 1.2rem;
-		padding-right: 3rem;
 		z-index: 1;
 	}
 
@@ -125,7 +121,7 @@
 		justify-content: center;
 		width: 100%;
 		word-wrap: break-word;
-		padding: 1em 0.5em;
+		padding: 1em 1rem;
 		color: $tertiary-color;
 		background-color: $background-secondary;
 		box-shadow: 0 5px 10px black;
@@ -133,7 +129,7 @@
 
 		h4 {
 			width: 70%;
-			max-width: 80%;
+			margin-left: auto;
 			text-align: center;
 			margin: auto 0 auto auto;
 		}
@@ -166,18 +162,12 @@
 		display: flex;
 		align-items: center;
 		box-shadow: 0 5px 10px black;
-
 		padding: 1em;
-
-		&-icon {
-			margin: 0 2em 0 2em;
-			width: 3rem;
-		}
 
 		address {
 			width: 70%;
 			text-align: center;
-			margin: 0 auto;
+			margin-left: auto;
 			font-size: 1.2rem;
 			word-wrap: break-word;
 
@@ -188,9 +178,9 @@
 		}
 
 		time {
-			margin: 0 auto;
+			width: 70%;
+			margin-left: auto;
 			text-align: center;
-
 			p {
 				padding: 0.3em 0;
 				font-size: 1.2rem;
@@ -198,7 +188,8 @@
 		}
 
 		&-link {
-			width: 80%;
+			width: 70%;
+			margin-left: auto;
 			a {
 				display: block;
 				margin: 0 auto;

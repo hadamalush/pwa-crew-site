@@ -1,7 +1,7 @@
-import styles from "./page.module.scss";
 import WrapperStart from "@/components/transitions/Wrappers/WrapperStart";
 import Carousel from "@/components/transitions/Carousel/Carousel";
 import LinkAsBtn from "@/components/transitions/Link/LinkAsBtn";
+import styles from "./page.module.scss";
 
 export default function Layout({ children }) {
 	return (

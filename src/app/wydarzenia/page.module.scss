@@ -3,14 +3,15 @@
 
 main .container {
 	position: relative;
-	min-height: unset;
+	min-height: 55rem;
 	height: unset;
+	max-height: 55rem;
 	z-index: -1000;
 	padding: 10em 0 5em;
 	z-index: 0;
 
 	&__link {
-		margin-top: 2em;
+		margin-top: 5em;
 	}
 }
 
