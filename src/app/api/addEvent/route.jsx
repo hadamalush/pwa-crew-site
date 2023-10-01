@@ -67,7 +67,7 @@ export const POST = async request => {
 			image_src: imageSrc,
 		});
 	} catch (error) {
-		client.close();
+		// client.close();
 		return NextResponse.json(
 			{
 				message: "Nie udało się utworzyć wydarzenia.",
@@ -76,6 +76,6 @@ export const POST = async request => {
 		);
 	}
 
-	client.close();
+	// client.close();
 	return NextResponse.json({ message: "Dodano wydarzenie!" }, { status: 200 });
 };

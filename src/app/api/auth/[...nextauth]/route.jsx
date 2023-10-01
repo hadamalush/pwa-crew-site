@@ -36,14 +36,14 @@ export const authOptions = {
 				);
 
 				if (!isValid) {
-					client.close();
+					// client.close();
 
 					const error = new Error("Hasło jest niepoprawne", { status: 422 });
 
 					throw error;
 				}
 
-				client.close();
+				// client.close();
 				return { email: user.email };
 			},
 		}),

@@ -35,7 +35,7 @@ export async function POST(request) {
 	try {
 		existingUser = await findDocument(client, "Users", { email: email });
 	} catch (error) {
-		client.close();
+		// client.close();
 		return NextResponse.json(
 			{ message: "Skontakuj sie z administratorem, cos poszlo nie tak!" },
 			{ status: 422 }
@@ -43,7 +43,7 @@ export async function POST(request) {
 	}
 
 	if (existingUser) {
-		client.close();
+		// client.close();
 		return NextResponse.json(
 			{
 				message: "Użytkownik z takim adresem email już istnieje!",
@@ -60,7 +60,7 @@ export async function POST(request) {
 			password: hashedPassword,
 		});
 	} catch (error) {
-		client.close();
+		// client.close();
 		return NextResponse.json(
 			{
 				message: "Nie udało się dodać użytkownika",
@@ -69,7 +69,7 @@ export async function POST(request) {
 		);
 	}
 
-	client.close();
+	// client.close();
 	return NextResponse.json({
 		message: "Zarejestrowano pomyślnie ,witamy na pokładzie!",
 	});
