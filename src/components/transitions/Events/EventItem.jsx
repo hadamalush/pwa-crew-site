@@ -68,11 +68,17 @@ const EventItem = ({
 							variant='description'
 							className={styles["details__item-icon"]}
 						/>
-						<LinkAsBtn href=''>Zobacz szczegóły</LinkAsBtn>
+						<div className={styles["details__item-link"]}>
+							<LinkAsBtn href=''>Zobacz szczegóły</LinkAsBtn>
+						</div>
 					</li>
 				</ul>
 			</div>
-			<h4 className={styles["event-item__title"]}>{title}</h4>
+			<div className={styles["event-item__title"]}>
+				<IconRender variant='title' className={styles["details__item-icon"]} />
+				<h4>{title}</h4>
+			</div>
+			{/* <h4 className={styles["event-item__title"]}>{title}</h4> */}
 		</li>
 	);
 };

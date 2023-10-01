@@ -87,6 +87,8 @@ const IconRender = props => {
 				return icons.codePost;
 			case "fileImg":
 				return icons.fileImg;
+			case "quotes":
+				return icons.quotes;
 			default:
 				return null;
 		}
