@@ -20,9 +20,29 @@ const FormikEvent = () => {
 	const addEventhandler = async values => {
 		const file = values.fileImg;
 		let imgSrc;
+		let imgSrcLocal;
 
-		//UPLOAD FILE TO VERCEL BLOB
+		// UPLOAD FILE LOCAL DIRECTORY
+
 		try {
+			const response = await fetch(`/api/upload/local?filename=${file.name}`, {
+				method: "POST",
+				body: file,
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				imgSrcLocal = data.message;
+			}
+		} catch (error) {
+			//wstawic powiadomienie o bledzie
+			console.log(error);
+		}
+
+		// UPLOAD FILE TO VERCEL BLOB
+		try {
+			console.log("start");
 			const response = await fetch(
 				`/api/upload/vercelBlob?filename=${file.name}`,
 				{
@@ -55,6 +75,7 @@ const FormikEvent = () => {
 					date: values.date,
 					time: values.time,
 					imageSrc: imgSrc,
+					imageSrcLocal: imgSrcLocal,
 				}),
 			});
 

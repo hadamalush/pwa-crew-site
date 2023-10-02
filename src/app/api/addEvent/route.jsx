@@ -15,11 +15,21 @@ export const POST = async request => {
 
 	const email = session.user.email;
 	const data = await request.json();
-	const { title, town, codePost, street, date, time, imageSrc } = data;
+	const { title, town, codePost, street, date, time, imageSrc, imageSrcLocal } =
+		data;
 	const currentDate = new Date();
 	const inputDate = new Date(date);
 
-	console.log("session: ", session);
+	console.log(
+		title,
+		town,
+		codePost,
+		street,
+		date,
+		time,
+		imageSrc,
+		imageSrcLocal
+	);
 
 	if (
 		!title ||
@@ -65,6 +75,7 @@ export const POST = async request => {
 			date,
 			time,
 			image_src: imageSrc,
+			image_src_local: imageSrcLocal,
 		});
 	} catch (error) {
 		// client.close();
