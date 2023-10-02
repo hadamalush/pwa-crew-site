@@ -1,5 +1,6 @@
 import fs from "fs";
 import { NextResponse } from "next/server";
+import path from "path";
 import { nanoid } from "nanoid";
 
 export const POST = async request => {
@@ -19,6 +20,14 @@ export const POST = async request => {
 	// 		{ status: 422 }
 	// 	);
 	// }
+	const folderPath = path.join(process.cwd(), "public", "upload", "events");
+
+	if (!fs.existsSync(folderPath)) {
+		fs.mkdirSync(folderPath, { recursive: true });
+		console.log("Folder created successfully.");
+	} else {
+		console.log("Folder already exists.");
+	}
 
 	const lastDotIndex = filename.lastIndexOf(".");
 	const format = filename.substring(lastDotIndex + 1);
@@ -32,11 +41,11 @@ export const POST = async request => {
 
 	console.log(request.body);
 
-	const filePath = `public/uploads/events/${fileNameWithId}`;
+	const filePath = `${folderPath}/${fileNameWithId}`;
 	await fs.promises.writeFile(filePath, request.body);
 
 	return NextResponse.json(
-		{ message: `/uploads/events/${fileNameWithId}` },
+		{ message: `${folderPath}/${fileNameWithId}` },
 		{ status: 200 }
 	);
 };
