@@ -18,7 +18,7 @@ const EventsList = ({ events, className, children, ...props }) => {
 					street={event.street}
 					codePost={event.code_post}
 					time={event.time}
-					image={event.image_src_local}
+					image={event.image_src}
 				/>
 			))}
 		</ul>

@@ -8,6 +8,7 @@ import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { useDispatch, useSelector } from "react-redux";
 import { showResult } from "@/global/notification-slice";
+import { Readable } from "stream";
 
 /**
  * @description This component returns form for create new event.
@@ -19,6 +20,7 @@ const FormikEvent = () => {
 
 	const addEventhandler = async values => {
 		const file = values.fileImg;
+
 		let imgSrc;
 		let imgSrcLocal;
 
@@ -40,51 +42,51 @@ const FormikEvent = () => {
 			console.log(error);
 		}
 
-		// UPLOAD FILE TO VERCEL BLOB
-		try {
-			console.log("start");
-			const response = await fetch(
-				`/api/upload/vercelBlob?filename=${file.name}`,
-				{
-					method: "POST",
-					body: file,
-				}
-			);
+		// // UPLOAD FILE TO VERCEL BLOB
+		// try {
+		// 	console.log("start");
+		// 	const response = await fetch(
+		// 		`/api/upload/vercelBlob?filename=${file.name}`,
+		// 		{
+		// 			method: "POST",
+		// 			body: file,
+		// 		}
+		// 	);
 
-			if (response.ok) {
-				const data = await response.json();
-				imgSrc = data.url;
-			} else {
-				//powiadomienie o bledzie
-				return;
-			}
-		} catch (error) {
-			//wstawic powiadomienie o bledzie
-			console.log(error);
-		}
+		// 	if (response.ok) {
+		// 		const data = await response.json();
+		// 		imgSrc = data.url;
+		// 	} else {
+		// 		//powiadomienie o bledzie
+		// 		return;
+		// 	}
+		// } catch (error) {
+		// 	//wstawic powiadomienie o bledzie
+		// 	console.log(error);
+		// }
 
-		try {
-			const response = await fetch("/api/addEvent", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					title: values.title,
-					town: values.town,
-					codePost: values.codePost,
-					street: values.street,
-					date: values.date,
-					time: values.time,
-					imageSrc: imgSrc,
-					imageSrcLocal: imgSrcLocal,
-				}),
-			});
+		// try {
+		// 	const response = await fetch("/api/addEvent", {
+		// 		method: "POST",
+		// 		headers: { "Content-Type": "application/json" },
+		// 		body: JSON.stringify({
+		// 			title: values.title,
+		// 			town: values.town,
+		// 			codePost: values.codePost,
+		// 			street: values.street,
+		// 			date: values.date,
+		// 			time: values.time,
+		// 			imageSrc: imgSrc,
+		// 			imageSrcLocal: imgSrcLocal,
+		// 		}),
+		// 	});
 
-			const data = await response.json();
-			dispatch(showResult({ message: data.message, variant: "success" }));
-		} catch (error) {
-			//wstawic powiadomienie o bledzie
-			console.log(error);
-		}
+		// 	const data = await response.json();
+		// 	dispatch(showResult({ message: data.message, variant: "success" }));
+		// } catch (error) {
+		// 	//wstawic powiadomienie o bledzie
+		// 	console.log(error);
+		// }
 	};
 
 	return (
