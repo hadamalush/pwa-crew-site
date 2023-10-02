@@ -24,6 +24,22 @@ export async function insertDocument(client, collection, document) {
 	return result;
 }
 
+let dbCached = null;
+
+export async function connectDb() {
+	// console.log(dbCached);
+	if (dbCached) {
+		dbCached = dbCached;
+		return dbCached;
+	}
+	console.log("Nie udalo sie zachowac");
+	const client = await connectDatabaseEvents();
+	const db = client.db();
+	dbCached = db;
+
+	return db;
+}
+
 export async function findDocument(client, collection, document) {
 	const db = client.db();
 	const existingDocument = await db.collection(collection).findOne(document);

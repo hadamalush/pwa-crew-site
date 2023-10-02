@@ -621,6 +621,18 @@ export function IconsBase() {
 				<path d='M20 18c1.333 -1.854 1.333 -4.146 0 -6'></path>
 			</svg>
 		),
+		pentagon: (
+			<svg
+				viewBox='0 0 500 500'
+				xmlns='http://www.w3.org/2000/svg'
+				xmlnsBx='https://boxy-svg.com'>
+				<path
+					d='M 250 66.963 L 313.889 158.481 L 313.889 341.518 L 250 433.037 L 186.111 341.519 L 186.111 158.481 Z'
+					transform='matrix(0, 1, -1, 0, 3.948921083643, -10.979860469399)'
+					bxShape='n-gon 250 250 73.773 183.037 6 0 1@37cde6ab'
+				/>
+			</svg>
+		),
 	};
 
 	return ALL_ICONS;

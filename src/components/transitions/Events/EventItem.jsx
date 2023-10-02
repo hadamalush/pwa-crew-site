@@ -29,9 +29,11 @@ const EventItem = ({
 			<div className={styles["event-item__box"]}>
 				<ImageFill
 					src={image}
-					alt='test'
+					alt={title}
+					sizes='(max-width: 991px) 10vw, (min-width: 992px) 30vw'
 					className={styles["event-item__img"]}
 				/>
+
 				<div className={styles["event-item__content"]}>
 					<p className={styles["event-item__town"]}>{town}</p>
 					<address className={styles["event-item__date"]}>{date}</address>
@@ -41,6 +43,12 @@ const EventItem = ({
 			</div>
 
 			<div className={styles["event-item__accordion"]} id={id}>
+				<ImageFill
+					src='/images/events/social.png'
+					alt=''
+					sizes='(max-width: 991px) 0vw, (min-width: 992px) 20vw'
+					className={styles["event-item__accordion-bgc"]}
+				/>
 				<ul className={styles["details"]}>
 					<li className={styles["details__item"]}>
 						<IconRender
@@ -74,6 +82,7 @@ const EventItem = ({
 					</li>
 				</ul>
 			</div>
+
 			<div className={styles["event-item__title"]}>
 				<IconRender variant='title' className={styles["details__item-icon"]} />
 				<h4>{title}</h4>

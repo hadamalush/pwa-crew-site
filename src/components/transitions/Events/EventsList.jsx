@@ -4,7 +4,7 @@ import styles from "../../../styles/components/transitions/Events/EventsList.mod
 import EventItem from "./EventItem";
 
 const EventsList = ({ events, className, children, ...props }) => {
-	const classes = `${styles.events} '${className}`;
+	const classes = `${styles.events} ${className}`;
 
 	return (
 		<ul className={classes}>

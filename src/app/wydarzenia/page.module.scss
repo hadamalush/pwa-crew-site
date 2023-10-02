@@ -3,13 +3,9 @@
 
 main .container {
 	position: relative;
-	min-height: 55rem;
-	height: unset;
-	max-height: 55rem;
 	z-index: -1000;
 	padding: 10em 0 5em;
 	z-index: 0;
-
 	&__link {
 		margin-top: 5em;
 	}
@@ -17,6 +13,16 @@ main .container {
 
 .section-events {
 	flex-direction: column;
+	align-items: center;
+
+	.section-events__list {
+		margin: 0 auto;
+		flex-direction: row;
+		flex-wrap: wrap;
+		max-width: 200rem;
+		justify-content: center;
+		gap: 10em;
+	}
 
 	h1 {
 		color: $primary-color;
