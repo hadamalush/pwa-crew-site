@@ -26,8 +26,7 @@ export const convertFromBuffersToBase64 = buffers => {
 	}
 
 	const convertedBuffers = buffers.map(buffer => {
-		const newBuffer = Buffer.from(buffer);
-		const base64 = newBuffer.toString("base64");
+		const base64 = buffer.toString("base64");
 
 		return base64;
 	});
