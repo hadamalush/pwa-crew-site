@@ -19,12 +19,8 @@ const EventItem = ({
 }) => {
 	const classes = `${styles["event-item"]} '${className}`;
 
-	console.log(upload);
-
 	const imageSrc =
-		upload === "mega" ? `data:image/jpeg;base64,${image}` : image;
-
-	console.log(imageSrc);
+		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
 	const showDetailHandler = () => {
 		const detailsList = document.getElementById(id);
@@ -41,12 +37,6 @@ const EventItem = ({
 					sizes='(max-width: 991px) 10vw, (min-width: 992px) 30vw'
 					className={styles["event-item__img"]}
 				/>
-				{/* <ImageFill
-					src={image}
-					alt={title}
-					sizes='(max-width: 991px) 10vw, (min-width: 992px) 30vw'
-					className={styles["event-item__img"]}
-				/> */}
 
 				<div className={styles["event-item__content"]}>
 					<p className={styles["event-item__town"]}>{town}</p>

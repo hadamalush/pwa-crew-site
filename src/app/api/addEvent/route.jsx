@@ -22,24 +22,12 @@ export const POST = async request => {
 		street,
 		date,
 		time,
-		imageSrc,
+		imageSrcVercelBlob,
 		imageSrcMega,
 		// imageSrcLocal,
 	} = data;
 	const currentDate = new Date();
 	const inputDate = new Date(date);
-
-	console.log(
-		title,
-		town,
-		codePost,
-		street,
-		date,
-		time,
-		imageSrc,
-		imageSrcMega
-		// imageSrcLocal
-	);
 
 	if (
 		!title ||
@@ -55,7 +43,7 @@ export const POST = async request => {
 		street.length > 57 ||
 		!date ||
 		!time ||
-		!imageSrc ||
+		(!imageSrcVercelBlob && !imageSrcMega) ||
 		inputDate < currentDate
 	) {
 		return NextResponse.json(
@@ -84,7 +72,7 @@ export const POST = async request => {
 			street,
 			date,
 			time,
-			image_src: imageSrc,
+			image_src_vercelBlob: imageSrcVercelBlob,
 			image_src_mega: imageSrcMega,
 			// image_src_local: imageSrcLocal,
 		});

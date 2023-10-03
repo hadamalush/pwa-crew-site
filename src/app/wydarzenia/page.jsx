@@ -4,8 +4,6 @@ import styles from "./page.module.scss";
 
 import { connectDatabaseEvents, connectDb } from "@/lib/mongodb";
 import {
-	allConvertFromBuffersToBase64,
-	allDownloadBuffersMegaNz,
 	oneConvertFromBuffersToBase64,
 	oneDownloadBuffersMegaNz,
 } from "@/lib/storage/storage";
@@ -41,39 +39,32 @@ const getData = async () => {
 
 	// const db = client.db();
 
-	console.log(generalConfig);
-
 	const db = await connectDb();
 	const result = await db.collection("AllEvents").find().toArray();
 
-	// const mapMegaLinks = result.map(event => event.image_src_mega);
-
-	// const buffers = await allDownloadBuffersMegaNz(mapMegaLinks);
-	// const convertedBuffers = allConvertFromBuffersToBase64(buffers);
-
-	let i = 0;
 	const convertedEvenets = Promise.all(
 		result.map(async event => {
-			let upload = storage[0];
+			let uploadStorage = storage[0];
 
+			//If is empty using second storage
 			if (!event[`image_src_${storage[0]}`]) {
-				upload = storage[1];
+				uploadStorage = storage[1];
 			}
 
-			if (upload === "mega") {
+			//Mega links need to download buffer and then convert to base64
+			if (uploadStorage === "mega") {
 				const buffer = await oneDownloadBuffersMegaNz(event.image_src_mega);
 				event.image_src_mega = oneConvertFromBuffersToBase64(buffer);
 			}
 
-			const targetSrc = event[`image_src_${upload}`];
+			const targetSrc = event[`image_src_${uploadStorage}`];
 
-			const { _id, image_src_mega, image_src, ...rest } = event;
-			i++;
+			const { _id, image_src_mega, image_src_vercelBlob, ...rest } = event;
 
 			return {
 				id: new Object(_id).toString(),
 				targetSrc: targetSrc,
-				upload: upload,
+				upload: uploadStorage,
 				...rest,
 			};
 		})

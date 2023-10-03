@@ -32,10 +32,7 @@ const FormikLogin = ({ className, ...props }) => {
 
 	useEffect(() => {
 		if (status === "authenticated" && session) {
-			console.log("loginsave");
-
 			router.push("/");
-			console.log(session.user);
 		}
 	}, [session, status]);
 
