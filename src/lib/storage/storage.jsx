@@ -1,7 +1,7 @@
 import { File } from "megajs";
 
 //pass table of links as argument, returns promise
-export const downloadBuffersMegaNz = async megaLinks => {
+export const allDownloadBuffersMegaNz = async megaLinks => {
 	if (!megaLinks) {
 		return;
 	}
@@ -20,7 +20,7 @@ export const downloadBuffersMegaNz = async megaLinks => {
 };
 
 // pass array of buffers
-export const convertFromBuffersToBase64 = buffers => {
+export const allConvertFromBuffersToBase64 = buffers => {
 	if (!buffers) {
 		return;
 	}
@@ -32,4 +32,25 @@ export const convertFromBuffersToBase64 = buffers => {
 	});
 
 	return convertedBuffers;
+};
+
+export const oneDownloadBuffersMegaNz = async megaLink => {
+	if (!megaLink) {
+		return;
+	}
+	const file = File.fromURL(megaLink);
+	await file.loadAttributes();
+	const buffer = await file.downloadBuffer();
+
+	return buffer;
+};
+
+export const oneConvertFromBuffersToBase64 = buffer => {
+	if (!buffer) {
+		return;
+	}
+
+	const convertedBuffer = buffer.toString("base64");
+
+	return convertedBuffer;
 };

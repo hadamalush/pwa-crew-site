@@ -4,6 +4,7 @@ import styles from "../../../styles/components/transitions/Events/EventsList.mod
 import EventItem from "./EventItem";
 
 const EventsList = ({ events, className, children, ...props }) => {
+	// console.log(events);
 	const classes = `${styles.events} ${className}`;
 
 	return (
@@ -18,8 +19,8 @@ const EventsList = ({ events, className, children, ...props }) => {
 					street={event.street}
 					codePost={event.code_post}
 					time={event.time}
-					image={event.image_src_mega}
-					// image={image}
+					image={event.targetSrc}
+					upload={event.upload}
 				/>
 			))}
 		</ul>

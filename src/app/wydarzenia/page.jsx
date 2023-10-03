@@ -3,8 +3,13 @@ import EventsList from "@/components/transitions/Events/EventsList";
 import styles from "./page.module.scss";
 
 import { connectDatabaseEvents, connectDb } from "@/lib/mongodb";
-import { File } from "megajs";
-import { convertFromBuffersToBase64, downloadBuffersMegaNz } from "@/lib/store";
+import {
+	allConvertFromBuffersToBase64,
+	allDownloadBuffersMegaNz,
+	oneConvertFromBuffersToBase64,
+	oneDownloadBuffersMegaNz,
+} from "@/lib/storage/storage";
+import { generalConfig } from "../../config/gerenalConfig";
 
 export default async function Events() {
 	const [events] = await Promise.all([getData()]);
@@ -23,6 +28,9 @@ export default async function Events() {
 }
 
 const getData = async () => {
+	// setting which storage should be using
+	const storage = generalConfig.downloadImageStorageEvent;
+
 	// let client;
 
 	// try {
@@ -33,25 +41,43 @@ const getData = async () => {
 
 	// const db = client.db();
 
+	console.log(generalConfig);
+
 	const db = await connectDb();
 	const result = await db.collection("AllEvents").find().toArray();
 
-	const mapMegaLinks = result.map(event => event.image_src_mega);
+	// const mapMegaLinks = result.map(event => event.image_src_mega);
 
-	const buffers = await downloadBuffersMegaNz(mapMegaLinks);
-
-	const convertedBuffers = convertFromBuffersToBase64(buffers);
+	// const buffers = await allDownloadBuffersMegaNz(mapMegaLinks);
+	// const convertedBuffers = allConvertFromBuffersToBase64(buffers);
 
 	let i = 0;
-	const convertedEvenets = result.map(event => {
-		i++;
-		const { _id, image_src_mega, ...rest } = event;
-		return {
-			id: new Object(_id).toString(),
-			image_src_mega: convertedBuffers[i - 1],
-			...rest,
-		};
-	});
+	const convertedEvenets = Promise.all(
+		result.map(async event => {
+			let upload = storage[0];
+
+			if (!event[`image_src_${storage[0]}`]) {
+				upload = storage[1];
+			}
+
+			if (upload === "mega") {
+				const buffer = await oneDownloadBuffersMegaNz(event.image_src_mega);
+				event.image_src_mega = oneConvertFromBuffersToBase64(buffer);
+			}
+
+			const targetSrc = event[`image_src_${upload}`];
+
+			const { _id, image_src_mega, image_src, ...rest } = event;
+			i++;
+
+			return {
+				id: new Object(_id).toString(),
+				targetSrc: targetSrc,
+				upload: upload,
+				...rest,
+			};
+		})
+	);
 
 	return convertedEvenets;
 };

@@ -13,12 +13,18 @@ const EventItem = ({
 	codePost,
 	time,
 	image,
+	upload,
 	id,
 	...props
 }) => {
 	const classes = `${styles["event-item"]} '${className}`;
 
-	// console.log("image: ", image);
+	console.log(upload);
+
+	const imageSrc =
+		upload === "mega" ? `data:image/jpeg;base64,${image}` : image;
+
+	console.log(imageSrc);
 
 	const showDetailHandler = () => {
 		const detailsList = document.getElementById(id);
@@ -30,7 +36,7 @@ const EventItem = ({
 		<li className={classes} onClick={showDetailHandler}>
 			<div className={styles["event-item__box"]}>
 				<ImageFill
-					src={`data:image/jpeg;base64,${image}`}
+					src={imageSrc}
 					alt={title}
 					sizes='(max-width: 991px) 10vw, (min-width: 992px) 30vw'
 					className={styles["event-item__img"]}
