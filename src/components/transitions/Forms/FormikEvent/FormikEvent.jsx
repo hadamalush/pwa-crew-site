@@ -25,23 +25,23 @@ const FormikEvent = () => {
 
 		// UPLOAD FILE LOCAL DIRECTORY
 
-		try {
-			const response = await fetch(`/api/upload/local?filename=${file.name}`, {
-				method: "POST",
-				body: file,
-			});
+		// try {
+		// 	const response = await fetch(`/api/upload/local?filename=${file.name}`, {
+		// 		method: "POST",
+		// 		body: file,
+		// 	});
 
-			const data = await response.json();
+		// 	const data = await response.json();
 
-			console.log(data);
+		// 	console.log(data);
 
-			if (response.ok) {
-				imgSrcLocal = data.message;
-			}
-		} catch (error) {
-			//wstawic powiadomienie o bledzie
-			console.log(error);
-		}
+		// 	if (response.ok) {
+		// 		imgSrcLocal = data.message;
+		// 	}
+		// } catch (error) {
+		// 	//wstawic powiadomienie o bledzie
+		// 	console.log(error);
+		// }
 
 		// UPLOAD FILE MEGA DIRECTORY
 
@@ -99,7 +99,7 @@ const FormikEvent = () => {
 					time: values.time,
 					imageSrc: imgSrc,
 					imageSrcMega: imgSrcMega,
-					imageSrcLocal: imgSrcLocal,
+					// imageSrcLocal: imgSrcLocal,
 				}),
 			});
 

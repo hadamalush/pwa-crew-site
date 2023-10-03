@@ -24,7 +24,7 @@ export const POST = async request => {
 		time,
 		imageSrc,
 		imageSrcMega,
-		imageSrcLocal,
+		// imageSrcLocal,
 	} = data;
 	const currentDate = new Date();
 	const inputDate = new Date(date);
@@ -37,8 +37,8 @@ export const POST = async request => {
 		date,
 		time,
 		imageSrc,
-		imageSrcMega,
-		imageSrcLocal
+		imageSrcMega
+		// imageSrcLocal
 	);
 
 	if (
@@ -86,7 +86,7 @@ export const POST = async request => {
 			time,
 			image_src: imageSrc,
 			image_src_mega: imageSrcMega,
-			image_src_local: imageSrcLocal,
+			// image_src_local: imageSrcLocal,
 		});
 	} catch (error) {
 		// client.close();
