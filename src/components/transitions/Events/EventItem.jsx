@@ -18,6 +18,8 @@ const EventItem = ({
 }) => {
 	const classes = `${styles["event-item"]} '${className}`;
 
+	// console.log("image: ", image);
+
 	const showDetailHandler = () => {
 		const detailsList = document.getElementById(id);
 
@@ -28,11 +30,17 @@ const EventItem = ({
 		<li className={classes} onClick={showDetailHandler}>
 			<div className={styles["event-item__box"]}>
 				<ImageFill
-					src={image}
+					src={`data:image/jpeg;base64,${image}`}
 					alt={title}
 					sizes='(max-width: 991px) 10vw, (min-width: 992px) 30vw'
 					className={styles["event-item__img"]}
 				/>
+				{/* <ImageFill
+					src={image}
+					alt={title}
+					sizes='(max-width: 991px) 10vw, (min-width: 992px) 30vw'
+					className={styles["event-item__img"]}
+				/> */}
 
 				<div className={styles["event-item__content"]}>
 					<p className={styles["event-item__town"]}>{town}</p>

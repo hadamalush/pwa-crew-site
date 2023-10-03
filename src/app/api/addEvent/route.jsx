@@ -15,8 +15,17 @@ export const POST = async request => {
 
 	const email = session.user.email;
 	const data = await request.json();
-	const { title, town, codePost, street, date, time, imageSrc, imageSrcLocal } =
-		data;
+	const {
+		title,
+		town,
+		codePost,
+		street,
+		date,
+		time,
+		imageSrc,
+		imageSrcMega,
+		imageSrcLocal,
+	} = data;
 	const currentDate = new Date();
 	const inputDate = new Date(date);
 
@@ -28,6 +37,7 @@ export const POST = async request => {
 		date,
 		time,
 		imageSrc,
+		imageSrcMega,
 		imageSrcLocal
 	);
 
@@ -75,6 +85,7 @@ export const POST = async request => {
 			date,
 			time,
 			image_src: imageSrc,
+			image_src_mega: imageSrcMega,
 			image_src_local: imageSrcLocal,
 		});
 	} catch (error) {
