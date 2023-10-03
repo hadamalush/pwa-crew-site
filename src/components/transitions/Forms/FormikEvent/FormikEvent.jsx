@@ -8,8 +8,6 @@ import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { useDispatch, useSelector } from "react-redux";
 import { showResult } from "@/global/notification-slice";
-import { Readable } from "stream";
-
 /**
  * @description This component returns form for create new event.
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component withoud that wrapper.
@@ -27,14 +25,16 @@ const FormikEvent = () => {
 		// UPLOAD FILE LOCAL DIRECTORY
 
 		try {
-			const response = await fetch(`/api/upload/local?filename=${file.name}`, {
+			const response = await fetch(`/api/upload/mega?filename=${file.name}`, {
 				method: "POST",
 				body: file,
 			});
 
 			const data = await response.json();
 
-			if (response.ok) {
+			console.log(data);
+
+			if (data.message) {
 				imgSrcLocal = data.message;
 			}
 		} catch (error) {
@@ -42,51 +42,51 @@ const FormikEvent = () => {
 			console.log(error);
 		}
 
-		// // UPLOAD FILE TO VERCEL BLOB
-		// try {
-		// 	console.log("start");
-		// 	const response = await fetch(
-		// 		`/api/upload/vercelBlob?filename=${file.name}`,
-		// 		{
-		// 			method: "POST",
-		// 			body: file,
-		// 		}
-		// 	);
+		// UPLOAD FILE TO VERCEL BLOB
+		try {
+			console.log("start");
+			const response = await fetch(
+				`/api/upload/vercelBlob?filename=${file.name}`,
+				{
+					method: "POST",
+					body: file,
+				}
+			);
 
-		// 	if (response.ok) {
-		// 		const data = await response.json();
-		// 		imgSrc = data.url;
-		// 	} else {
-		// 		//powiadomienie o bledzie
-		// 		return;
-		// 	}
-		// } catch (error) {
-		// 	//wstawic powiadomienie o bledzie
-		// 	console.log(error);
-		// }
+			if (response.ok) {
+				const data = await response.json();
+				imgSrc = data.url;
+			} else {
+				//powiadomienie o bledzie
+				return;
+			}
+		} catch (error) {
+			//wstawic powiadomienie o bledzie
+			console.log(error);
+		}
 
-		// try {
-		// 	const response = await fetch("/api/addEvent", {
-		// 		method: "POST",
-		// 		headers: { "Content-Type": "application/json" },
-		// 		body: JSON.stringify({
-		// 			title: values.title,
-		// 			town: values.town,
-		// 			codePost: values.codePost,
-		// 			street: values.street,
-		// 			date: values.date,
-		// 			time: values.time,
-		// 			imageSrc: imgSrc,
-		// 			imageSrcLocal: imgSrcLocal,
-		// 		}),
-		// 	});
+		try {
+			const response = await fetch("/api/addEvent", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					title: values.title,
+					town: values.town,
+					codePost: values.codePost,
+					street: values.street,
+					date: values.date,
+					time: values.time,
+					imageSrc: imgSrc,
+					imageSrcLocal: imgSrcLocal,
+				}),
+			});
 
-		// 	const data = await response.json();
-		// 	dispatch(showResult({ message: data.message, variant: "success" }));
-		// } catch (error) {
-		// 	//wstawic powiadomienie o bledzie
-		// 	console.log(error);
-		// }
+			const data = await response.json();
+			dispatch(showResult({ message: data.message, variant: "success" }));
+		} catch (error) {
+			//wstawic powiadomienie o bledzie
+			console.log(error);
+		}
 	};
 
 	return (
