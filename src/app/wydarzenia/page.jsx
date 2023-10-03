@@ -4,7 +4,7 @@ import styles from "./page.module.scss";
 
 import { connectDatabaseEvents, connectDb } from "@/lib/mongodb";
 import { File } from "megajs";
-import { Storage } from "megajs";
+import { convertFromBuffersToBase64, downloadBuffersMegaNz } from "@/lib/store";
 
 export default async function Events() {
 	const [events] = await Promise.all([getData()]);
@@ -36,21 +36,21 @@ const getData = async () => {
 	const db = await connectDb();
 	const result = await db.collection("AllEvents").find().toArray();
 
-	const mega_src = result[0].image_src_mega;
+	const mapMegaLinks = result.map(event => event.image_src_mega);
 
-	const file = File.fromURL(mega_src);
+	const buffers = await downloadBuffersMegaNz(mapMegaLinks);
 
-	await file.loadAttributes();
+	const convertedBuffers = convertFromBuffersToBase64(buffers);
 
-	const data = await file.downloadBuffer();
-
-	const buffer = Buffer.from(data);
-
-	const base64 = buffer.toString("base64");
-
+	let i = 0;
 	const convertedEvenets = result.map(event => {
+		i++;
 		const { _id, image_src_mega, ...rest } = event;
-		return { id: new Object(_id).toString(), image_src_mega: base64, ...rest };
+		return {
+			id: new Object(_id).toString(),
+			image_src_mega: convertedBuffers[i - 1],
+			...rest,
+		};
 	});
 
 	return convertedEvenets;
