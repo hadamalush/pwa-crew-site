@@ -10,7 +10,8 @@ export const POST = async request => {
 			access: "public",
 		});
 	} catch (error) {
-		return NextResponse.json({ message: error });
+		console.log("Error vercel blob: ", error);
+		return NextResponse.json({ error: error });
 	}
 
 	return NextResponse.json(blob);

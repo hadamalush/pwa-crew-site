@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
-import megajs from "megajs";
 import { Storage } from "megajs";
-import { File } from "megajs";
-import { verify } from "megajs";
 
 export const POST = async request => {
 	const { searchParams } = new URL(request.url);
@@ -12,8 +9,15 @@ export const POST = async request => {
 	const buffers = [];
 
 	//covert to buffer
-	for await (const chunk of readAbleStream) {
-		buffers.push(chunk);
+	try {
+		for await (const chunk of readAbleStream) {
+			buffers.push(chunk);
+		}
+	} catch (error) {
+		return NextResponse.json(
+			{ error: "Failure convert buffer." },
+			{ status: 304 }
+		);
 	}
 
 	const finalBuffer = Buffer.concat(buffers);
@@ -30,17 +34,29 @@ export const POST = async request => {
 		`.${format}`;
 
 	//connect
-	const megaStorage = await new Storage({
-		email: process.env.MEGA_EMAIL,
-		password: process.env.MEGA_PASSWORD,
-		allowUploadBuffering: true,
-	}).ready;
+	let megaStorage;
+
+	try {
+		megaStorage = await new Storage({
+			email: process.env.MEGA_EMAIL,
+			password: process.env.MEGA_PASSWORD,
+			allowUploadBuffering: true,
+		}).ready;
+	} catch (error) {
+		return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+	}
 
 	//upload
-	const file = await megaStorage.upload(
-		fileNameWithId,
-		Buffer.from(finalBuffer, "hex")
-	).complete;
+	let file;
+
+	try {
+		file = await megaStorage.upload(
+			fileNameWithId,
+			Buffer.from(finalBuffer, "hex")
+		).complete;
+	} catch (error) {
+		return NextResponse.json({ error: "Failure upload." }, { status: 422 });
+	}
 
 	const link = await file.link();
 

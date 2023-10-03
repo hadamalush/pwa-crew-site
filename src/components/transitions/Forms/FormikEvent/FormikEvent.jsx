@@ -53,16 +53,12 @@ const FormikEvent = () => {
 					method: "POST",
 					body: file,
 				});
-
 				const data = await response.json();
-
-				console.log(data);
 
 				if (data.message) {
 					imgSrcMega = data.message;
 				}
 			} catch (error) {
-				//wstawic powiadomienie o bledzie
 				console.log(error);
 			}
 		}
@@ -84,13 +80,27 @@ const FormikEvent = () => {
 					imgSrcVercelBlob = data.url;
 				}
 
-				console.log(response);
+				if (!response.ok && !imgSrcMega) {
+					dispatch(
+						showResult({
+							message: "Nie udało się utworzyć wydarzenia ,spróbuj ponownie.",
+							variant: "warning",
+						})
+					);
+					return;
+				}
 			} catch (error) {
-				console.log("Something went wrong");
+				if (!imgSrcMega) {
+					dispatch(
+						showResult({
+							message: "Nie udało się utworzyć wydarzenia ,spróbuj ponownie.",
+							variant: "warning",
+						})
+					);
+					return;
+				}
 			}
 		}
-
-		console.log("idzie dalej");
 
 		try {
 			const response = await fetch("/api/addEvent", {
@@ -110,11 +120,20 @@ const FormikEvent = () => {
 			});
 
 			const data = await response.json();
-			console.log(data);
+
+			if (!response.ok) {
+				dispatch(showResult({ message: data.error, variant: "warning" }));
+				return;
+			}
 			dispatch(showResult({ message: data.message, variant: "success" }));
+			return;
 		} catch (error) {
-			//wstawic powiadomienie o bledzie
-			console.log(error);
+			dispatch(
+				showResult({
+					message: "Nie udało się utworzyć wydarzenia",
+					variant: "warning",
+				})
+			);
 		}
 	};
 

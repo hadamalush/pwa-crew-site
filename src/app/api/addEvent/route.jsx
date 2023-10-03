@@ -8,7 +8,7 @@ export const POST = async request => {
 
 	if (!session) {
 		return NextResponse.json(
-			{ message: "Tylko zalogowani mogą dodawać wydarzenia!" },
+			{ error: "Tylko zalogowani mogą dodawać wydarzenia!" },
 			{ status: 401 }
 		);
 	}
@@ -47,7 +47,7 @@ export const POST = async request => {
 		inputDate < currentDate
 	) {
 		return NextResponse.json(
-			{ message: "Wprowadzone dane są nie poprawne." },
+			{ error: "Wprowadzone dane są nie poprawne." },
 			{ status: 422 }
 		);
 	}
@@ -58,7 +58,7 @@ export const POST = async request => {
 		client = await connectDatabaseEvents();
 	} catch (error) {
 		return NextResponse.json(
-			{ message: "Nie udalo sie polaczyc z baza danych!" },
+			{ error: "Nie udalo sie polaczyc z baza danych!" },
 			{ status: 500 }
 		);
 	}
@@ -77,15 +77,15 @@ export const POST = async request => {
 			// image_src_local: imageSrcLocal,
 		});
 	} catch (error) {
-		// client.close();
+		client.close();
 		return NextResponse.json(
 			{
-				message: "Nie udało się utworzyć wydarzenia.",
+				error: "Nie udało się utworzyć wydarzenia.",
 			},
 			{ status: 305 }
 		);
 	}
 
-	// client.close();
+	client.close();
 	return NextResponse.json({ message: "Dodano wydarzenie!" }, { status: 200 });
 };
