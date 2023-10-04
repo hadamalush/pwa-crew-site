@@ -18,6 +18,7 @@ const EventItem = ({
 	...props
 }) => {
 	const classes = `${styles["event-item"]} '${className}`;
+	const replacedTitle = title.replaceAll(" ", "-");
 
 	const imageSrc =
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
@@ -81,7 +82,9 @@ const EventItem = ({
 							className={styles["details__item-icon"]}
 						/>
 						<div className={styles["details__item-link"]}>
-							<LinkAsBtn href=''>Zobacz szczegóły</LinkAsBtn>
+							<LinkAsBtn href={`/wydarzenia/${replacedTitle}/${id}`}>
+								Zobacz szczegóły
+							</LinkAsBtn>
 						</div>
 					</li>
 				</ul>
@@ -91,7 +94,6 @@ const EventItem = ({
 				<IconRender variant='title' className={styles["details__item-icon"]} />
 				<h4>{title}</h4>
 			</div>
-			{/* <h4 className={styles["event-item__title"]}>{title}</h4> */}
 		</li>
 	);
 };

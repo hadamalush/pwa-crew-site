@@ -1,4 +1,11 @@
 import EventItem from "@/components/transitions/Events/EventItem";
+import { generalConfig } from "@/config/gerenalConfig";
+import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
+import {
+	oneConvertFromBuffersToBase64,
+	oneDownloadBuffersMegaNz,
+} from "@/lib/storage/storage";
+import { ObjectId } from "mongodb";
 
 const DUMMY_DATA = {
 	e1: {
@@ -36,31 +43,71 @@ const DUMMY_DATA = {
 	},
 };
 
-const EventPage = ({ params }) => {
+const EventPage = async ({ params }) => {
 	const slug = params.slug;
 	const eventId = slug[slug.length - 1];
-	console.log(slug);
-	// const replaced = slug.replaceAll(" ", "-") + "/e2";
 
-	// const lastSlashIndex = replaced.lastIndexOf("/");
+	if (eventId.length !== 24) {
+		return <p>Nie znaleziono takiego wydarzenia.</p>;
+	}
 
-	// let fragmentAfterLastSlash = "e1";
-	// if (lastSlashIndex !== -1) {
-	// 	fragmentAfterLastSlash = replaced.substring(lastSlashIndex + 1);
-	// }
+	let modifiedEventId;
+	try {
+		modifiedEventId = new ObjectId(eventId);
+	} catch (error) {
+		return <p>Nie poprawny adres.</p>;
+	}
 
-	const id1 = DUMMY_DATA[eventId];
+	let client, result;
+	try {
+		client = await connectDatabaseEvents();
+	} catch (error) {
+		console.log(error);
+	}
+
+	try {
+		result = await findDocument(client, "AllEvents", { _id: modifiedEventId });
+
+		if (!result) {
+			return <p>Nie ma takiego wydarzenia.</p>;
+		}
+	} catch (error) {
+		console.log("ERROR: ", error);
+	}
+
+	const { title, town, code_post, street, date, time, description } = result;
+
+	const storage = generalConfig.downloadImageStorageEvent;
+	let uploadStorage = storage[0];
+
+	if (!result[`image_src_${storage[0]}`]) {
+		uploadStorage = storage[1];
+	}
+
+	try {
+		if (uploadStorage === "mega") {
+			const buffer = await oneDownloadBuffersMegaNz(result.image_src_mega);
+			result.image_src_mega = oneConvertFromBuffersToBase64(buffer);
+		}
+	} catch (err) {
+		//set default picture - info
+		console.log(err);
+	}
+
+	const targetSrc = result[`image_src_${uploadStorage}`];
 
 	return (
 		<EventItem
 			id={eventId}
-			title={id1.title}
-			date={id1.date}
-			town={id1.town}
-			street={id1.street}
-			codePost={id1.codePost}
-			time={id1.time}
-			image={id1.image}
+			title={title}
+			date={date}
+			town={town}
+			street={street}
+			codePost={code_post}
+			time={time}
+			description={description}
+			image={targetSrc}
+			upload={uploadStorage}
 		/>
 	);
 };
