@@ -29,7 +29,7 @@ const EventItem = ({
 	};
 
 	return (
-		<li className={classes} onClick={showDetailHandler}>
+		<li className={classes} onClick={showDetailHandler} id={id + 7}>
 			<div className={styles["event-item__box"]}>
 				<ImageFill
 					src={imageSrc}

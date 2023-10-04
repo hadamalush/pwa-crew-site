@@ -52,9 +52,15 @@ const getData = async () => {
 			}
 
 			//Mega links need to download buffer and then convert to base64
-			if (uploadStorage === "mega") {
-				const buffer = await oneDownloadBuffersMegaNz(event.image_src_mega);
-				event.image_src_mega = oneConvertFromBuffersToBase64(buffer);
+
+			try {
+				if (uploadStorage === "mega") {
+					const buffer = await oneDownloadBuffersMegaNz(event.image_src_mega);
+					event.image_src_mega = oneConvertFromBuffersToBase64(buffer);
+				}
+			} catch (err) {
+				//set default picture - info
+				console.log(err);
 			}
 
 			const targetSrc = event[`image_src_${uploadStorage}`];

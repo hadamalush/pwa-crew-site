@@ -1,5 +1,4 @@
 import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
-import IconRender from "../Icons/IconRender";
 import Link from "next/link";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";

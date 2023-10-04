@@ -1,11 +1,28 @@
 import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 import { Storage } from "megajs";
+import sharp from "sharp";
+
+const convertImage = buffer => {
+	return new Promise((resolve, reject) => {
+		sharp(buffer)
+			.resize(450, 300)
+			.toFormat("webp")
+			.toBuffer((error, convertedBuffer) => {
+				if (error) {
+					return reject(error);
+				}
+
+				resolve(convertedBuffer);
+			});
+	});
+};
 
 export const POST = async request => {
 	const { searchParams } = new URL(request.url);
 	const filename = searchParams.get("filename");
 	const readAbleStream = await request.body;
+
 	const buffers = [];
 
 	//covert to buffer
@@ -22,9 +39,12 @@ export const POST = async request => {
 
 	const finalBuffer = Buffer.concat(buffers);
 
+	const convertedBuffer = await convertImage(finalBuffer);
+
 	//createId
 	const lastDotIndex = filename.lastIndexOf(".");
-	const format = filename.substring(lastDotIndex + 1);
+	// const format = filename.substring(lastDotIndex + 1);
+	const format = "webp";
 
 	let fileNameWithId =
 		filename.substring(lastDotIndex, -1) +
@@ -52,7 +72,7 @@ export const POST = async request => {
 	try {
 		file = await megaStorage.upload(
 			fileNameWithId,
-			Buffer.from(finalBuffer, "hex")
+			Buffer.from(convertedBuffer, "hex")
 		).complete;
 	} catch (error) {
 		return NextResponse.json({ error: "Failure upload." }, { status: 422 });
