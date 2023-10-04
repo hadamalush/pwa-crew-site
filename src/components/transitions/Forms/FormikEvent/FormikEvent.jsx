@@ -3,6 +3,7 @@ import FormContainerBlur from "@/components/Containers/FormContainerBlur";
 import InputFormik from "../../Input/InputFormik";
 import InputFormikFile from "../../Input/InputFormikFile";
 import ButtonMain from "../../Button/ButtonMain";
+import TextareaFormik from "../../Input/TextareaFormik";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
@@ -113,6 +114,7 @@ const FormikEvent = () => {
 					street: values.street,
 					date: values.date,
 					time: values.time,
+					description: values.description,
 					imageSrcVercelBlob: imgSrcVercelBlob,
 					imageSrcMega: imgSrcMega,
 					// imageSrcLocal: imgSrcLocal,
@@ -147,6 +149,7 @@ const FormikEvent = () => {
 					street: "",
 					date: "",
 					time: "",
+					description: "",
 					fileImg: "",
 				}}
 				onSubmit={addEventhandler}
@@ -192,6 +195,14 @@ const FormikEvent = () => {
 							aria-label='Godzina'
 							type='time'
 						/>
+
+						<TextareaFormik
+							name='description'
+							aria-label='Opis wydarzenia'
+							placeholder='Opis wydarzenia'
+							type='textarea'
+						/>
+
 						<InputFormikFile
 							name='fileImg'
 							aria-label='Zdjęcie'

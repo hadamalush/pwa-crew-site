@@ -22,6 +22,7 @@ export const POST = async request => {
 		street,
 		date,
 		time,
+		description,
 		imageSrcVercelBlob,
 		imageSrcMega,
 		// imageSrcLocal,
@@ -43,6 +44,9 @@ export const POST = async request => {
 		street.length > 57 ||
 		!date ||
 		!time ||
+		!description ||
+		description.length < 50 ||
+		description.length > 300 ||
 		(!imageSrcVercelBlob && !imageSrcMega) ||
 		inputDate < currentDate
 	) {
@@ -72,6 +76,7 @@ export const POST = async request => {
 			street,
 			date,
 			time,
+			description: description,
 			image_src_vercelBlob: imageSrcVercelBlob,
 			image_src_mega: imageSrcMega,
 			// image_src_local: imageSrcLocal,

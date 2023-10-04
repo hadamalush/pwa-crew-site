@@ -1,14 +1,11 @@
 "use client";
 import IconRender from "@/components/Icons/IconRender";
-import styles from "../../../styles/components/transitions/Inputs/InputFormik.module.scss";
-
+import WrapperInput from "../Wrappers/WrapperInput";
+import styles from "../../../styles/components/transitions/Inputs/TextareaFormik.module.scss";
 import { Field, useField } from "formik";
 
-import WrapperInput from "../Wrappers/WrapperInput";
-
-const InputFormik = ({ name, ...props }) => {
+const TextareaFormik = ({ name, onChange, setFieldValue, ...props }) => {
 	const [field, meta] = useField(name);
-	const iconStyle = { color: "green" };
 
 	return (
 		<>
@@ -18,6 +15,7 @@ const InputFormik = ({ name, ...props }) => {
 					name={name}
 					{...props}
 					className={styles.input}
+					component='textarea'
 					autoComplete='off'
 				/>
 				{meta.error && meta.touched && (
@@ -25,16 +23,14 @@ const InputFormik = ({ name, ...props }) => {
 						<p className={styles["input-box__error"]}>{meta?.error}</p>
 					</>
 				)}
-				<IconRender
-					style={!meta.error && iconStyle}
-					variant={
-						(meta.error && meta.touched && "warning") ||
-						(!meta.error && meta.touched && "good")
-					}
-				/>
+				{!meta.error && meta.touched && (
+					<>
+						<p className={styles["input-box__correct"]}>Poprawnie.</p>
+					</>
+				)}
 			</WrapperInput>
 		</>
 	);
 };
 
-export default InputFormik;
+export default TextareaFormik;

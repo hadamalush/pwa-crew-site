@@ -60,6 +60,11 @@ export const eventSchema = yup.object().shape({
 		.required("Wymagane")
 		.min(new Date(Date.now()), "Nie można ustawić daty wstecz"),
 	time: yup.string().required("Wymagane"),
+	description: yup
+		.string()
+		.min(50, "Minimum 50 znaków.")
+		.max(300, "Maksimum 300 znaków.")
+		.required("Wymagane"),
 	fileImg: yup
 		.mixed()
 		.required("Wymagane")
