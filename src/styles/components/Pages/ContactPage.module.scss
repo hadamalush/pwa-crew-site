@@ -21,8 +21,9 @@ main .start {
 	}
 }
 
-.box {
+.start .box {
 	height: 70rem;
 	box-shadow: $boxshadow-secondary;
 	border-radius: 15px;
+	margin-bottom: 2em;
 }

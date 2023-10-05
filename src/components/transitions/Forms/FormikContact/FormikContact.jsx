@@ -29,15 +29,14 @@ const FormikContact = ({ className, ...props }) => {
 
 	const onSubmit = async (values, actions) => {
 		const email = values.email;
-		const password = values.password;
-		const confirmPassword = values.confirmPassword;
-		const terms = values.terms;
+		const subject = values.title;
+		const message = values.message;
 
 		try {
-			const response = await fetch("/api/auth/registration", {
+			const response = await fetch("/api/sendMessage", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password, confirmPassword, terms }),
+				body: JSON.stringify({ email, subject, message }),
 			});
 
 			const data = await response.json();
@@ -58,11 +57,11 @@ const FormikContact = ({ className, ...props }) => {
 
 		dispatch(
 			showResult({
-				message: "Udało się zarejestrować",
+				message: "Udało się zarejestrowaćddddddddddddddddd",
 				variant: "success",
 			})
 		);
-		router.push("/");
+		// router.push("/");
 	};
 
 	return (
@@ -70,9 +69,8 @@ const FormikContact = ({ className, ...props }) => {
 			<Formik
 				initialValues={{
 					email: "",
-					password: "",
-					confirmPassword: "",
-					terms: false,
+					title: "",
+					message: "",
 				}}
 				onSubmit={onSubmit}
 				validationSchema={contactSchema}>
@@ -87,8 +85,8 @@ const FormikContact = ({ className, ...props }) => {
 						/>
 						<InputFormik
 							name='title'
-							placeholder='Tytuł'
-							aria-label='Tytuł'
+							placeholder='Temat'
+							aria-label='Temat'
 							type='text'
 						/>
 						<label htmlFor='message' className={styles["logreg-box__message"]}>

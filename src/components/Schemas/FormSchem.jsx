@@ -38,6 +38,11 @@ export const contactSchema = yup.object().shape({
 		.string()
 		.email("Proszę podać poprawny adres email!")
 		.required("Wymagane"),
+	title: yup
+		.string()
+		.min(10, "Minimum 10 znaków.")
+		.max(60, "Maksimum 60 znaków.")
+		.required("Wymagane"),
 	message: yup
 		.string()
 		.min(50, "Minimum 50 znaków.")
