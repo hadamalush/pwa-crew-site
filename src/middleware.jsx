@@ -1,6 +1,5 @@
 export { default } from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import { getSession } from "next-auth/react";
 
 export async function middleware(request) {
 	const registerUrl = request.nextUrl.pathname.startsWith("/rejestracja");
