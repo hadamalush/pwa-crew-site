@@ -17,7 +17,9 @@ main .start {
 }
 
 .box {
+	box-shadow: $boxshadow-secondary;
 	font-size: 12px;
+	border-radius: 15px;
 	@include media-query(mediumScreen) {
 		margin-bottom: 10rem;
 	}

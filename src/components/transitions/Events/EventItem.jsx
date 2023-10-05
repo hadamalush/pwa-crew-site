@@ -39,7 +39,6 @@ const EventItem = ({
 		? styles["event-item__accordion"]
 		: `${styles["event-item__accordion"]} ${styles["event-item__accordion--control"]}`;
 	const isMaxMedium = useMediaQuery({ maxWidth: 768 });
-	console.log(isMaxMedium);
 
 	const showDetailHandler = () => {
 		const detailsList = document.getElementById(id);

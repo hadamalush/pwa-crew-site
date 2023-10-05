@@ -1,11 +1,12 @@
 @import "../../transitions/variables";
 @import "../../mixins/mixins";
 
-.section__new-event {
+main .section__new-event {
 	display: flex;
 	justify-content: center;
 	padding: 15em 0 10em;
 }
 .section__new-event .container {
 	height: 115rem;
+	box-shadow: $boxshadow-secondary;
 }
