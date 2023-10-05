@@ -13,6 +13,27 @@
 	cursor: pointer;
 	box-shadow: 0 0 10px black;
 
+	&__alone {
+		cursor: unset;
+	}
+
+	&__arrow-back {
+		top: 3.5em;
+		left: 1em;
+		z-index: 500;
+		position: absolute;
+		transition: color 0.3s;
+		cursor: pointer;
+
+		div {
+			width: 3em;
+		}
+
+		&:hover {
+			color: $secondary-color;
+		}
+	}
+
 	&__box {
 		position: relative;
 		display: flex;
@@ -200,6 +221,16 @@
 				font-size: 1.2rem;
 			}
 		}
+
+		//class description is only for eventPage
+		&-description {
+			width: 70%;
+			margin-left: auto;
+			line-height: 1.5em;
+			padding: 0 1em;
+			text-align: center;
+			word-wrap: break-word;
+		}
 	}
 }
 
@@ -271,6 +302,11 @@
 				width: 80%;
 				margin-left: auto;
 			}
+
+			&-description {
+				width: 80%;
+				margin-left: auto;
+			}
 		}
 	}
 }
@@ -291,6 +327,11 @@
 		border-radius: 3px;
 		background-color: $background-tertiary;
 		cursor: default;
+
+		//class alone is only for eventPage
+		&__alone {
+			height: 95rem;
+		}
 
 		&__box {
 			display: grid;
@@ -377,7 +418,7 @@
 
 			h4 {
 				width: 100%;
-				font-size: 3rem;
+				font-size: 2.4rem;
 				letter-spacing: 1px;
 			}
 		}
@@ -463,6 +504,12 @@
 					border-color: $septenary-color;
 				}
 			}
+		}
+
+		//class description is only for eventPage
+		&__item-description {
+			width: 100%;
+			margin-bottom: 2em;
 		}
 	}
 }

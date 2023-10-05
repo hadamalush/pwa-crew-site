@@ -621,16 +621,19 @@ export function IconsBase() {
 				<path d='M20 18c1.333 -1.854 1.333 -4.146 0 -6'></path>
 			</svg>
 		),
-		pentagon: (
+		arrow_back: (
 			<svg
-				viewBox='0 0 500 500'
 				xmlns='http://www.w3.org/2000/svg'
-				xmlnsBx='https://boxy-svg.com'>
-				<path
-					d='M 250 66.963 L 313.889 158.481 L 313.889 341.518 L 250 433.037 L 186.111 341.519 L 186.111 158.481 Z'
-					transform='matrix(0, 1, -1, 0, 3.948921083643, -10.979860469399)'
-					bxShape='n-gon 250 250 73.773 183.037 6 0 1@37cde6ab'
-				/>
+				className='icon icon-tabler icon-tabler-arrow-big-left-line'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M12 15v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h6v6h-6z'></path>
+				<path d='M21 15v-6'></path>
 			</svg>
 		),
 	};

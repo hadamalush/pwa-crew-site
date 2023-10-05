@@ -1,4 +1,6 @@
 import EventItem from "@/components/transitions/Events/EventItem";
+import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
+import styles from "../../../styles/components/Pages/EventPage.module.scss";
 import { generalConfig } from "@/config/gerenalConfig";
 import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
 import {
@@ -97,18 +99,24 @@ const EventPage = async ({ params }) => {
 	const targetSrc = result[`image_src_${uploadStorage}`];
 
 	return (
-		<EventItem
-			id={eventId}
-			title={title}
-			date={date}
-			town={town}
-			street={street}
-			codePost={code_post}
-			time={time}
-			description={description}
-			image={targetSrc}
-			upload={uploadStorage}
-		/>
+		<WrapperSection
+			className={styles["section-detail"]}
+			id='section_detail-item'>
+			<h1>{title}</h1>
+			<EventItem
+				id={eventId}
+				title={title}
+				date={date}
+				town={town}
+				street={street}
+				codePost={code_post}
+				time={time}
+				description={description}
+				image={targetSrc}
+				upload={uploadStorage}
+				className={styles["section-detail__item"]}
+			/>
+		</WrapperSection>
 	);
 };
 

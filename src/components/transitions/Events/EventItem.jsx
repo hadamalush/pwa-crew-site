@@ -3,6 +3,10 @@ import IconRender from "@/components/Icons/IconRender";
 import ImageFill from "../Image/ImageFill";
 import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 
 const EventItem = ({
 	className,
@@ -14,23 +18,59 @@ const EventItem = ({
 	time,
 	image,
 	upload,
+	description,
 	id,
 	...props
 }) => {
-	const classes = `${styles["event-item"]} '${className}`;
 	const replacedTitle = title.replaceAll(" ", "-");
+	const pathname = usePathname();
+
+	const lastPartOfLink = pathname.substring(pathname.lastIndexOf("/") + 1);
+	const isDescription = id === lastPartOfLink;
 
 	const imageSrc =
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
+	const classes = `${styles["event-item"]} ${className}`;
+	const classesEventItem = !isDescription
+		? classes
+		: `${classes} ${styles["event-item__alone"]}`;
+	const classesAccordion = !isDescription
+		? styles["event-item__accordion"]
+		: `${styles["event-item__accordion"]} ${styles["event-item__accordion--control"]}`;
+	const isMaxMedium = useMediaQuery({ maxWidth: 768 });
+	console.log(isMaxMedium);
+
 	const showDetailHandler = () => {
 		const detailsList = document.getElementById(id);
-
 		detailsList.classList.toggle(styles["event-item__accordion--control"]);
 	};
 
+	const handlingScroll = () => {
+		if (!isDescription) {
+			return window.scrollBy(0, -100);
+		} else if (isDescription && !isMaxMedium) {
+			return window.scrollBy(0, -70);
+		}
+	};
+
+	useEffect(() => {
+		handlingScroll();
+	}, []);
+
 	return (
-		<li className={classes} onClick={showDetailHandler} id={id + 7}>
+		<li
+			className={classesEventItem}
+			onClick={!isDescription ? showDetailHandler : null}
+			id={id + 7}>
+			{isDescription && (
+				<Link
+					href={`/wydarzenia#${id + 7}`}
+					className={styles["event-item__arrow-back"]}>
+					<IconRender variant='arrow_back' />
+				</Link>
+			)}
+
 			<div className={styles["event-item__box"]}>
 				<ImageFill
 					src={imageSrc}
@@ -47,7 +87,7 @@ const EventItem = ({
 				</div>
 			</div>
 
-			<div className={styles["event-item__accordion"]} id={id}>
+			<div className={classesAccordion} id={id}>
 				<ImageFill
 					src='/images/events/social.png'
 					alt=''
@@ -76,17 +116,31 @@ const EventItem = ({
 							<p>{time}</p>
 						</time>
 					</li>
-					<li className={styles["details__item"]}>
-						<IconRender
-							variant='description'
-							className={styles["details__item-icon"]}
-						/>
-						<div className={styles["details__item-link"]}>
-							<LinkAsBtn href={`/wydarzenia/${replacedTitle}/${id}`}>
-								Zobacz szczegóły
-							</LinkAsBtn>
-						</div>
-					</li>
+					{!isDescription && (
+						<li className={styles["details__item"]}>
+							<IconRender
+								variant='description'
+								className={styles["details__item-icon"]}
+							/>
+							<div className={styles["details__item-link"]}>
+								<LinkAsBtn
+									href={`/wydarzenia/${replacedTitle}/${id}#section_detail-item`}>
+									Zobacz szczegóły
+								</LinkAsBtn>
+							</div>
+						</li>
+					)}
+					{isDescription && (
+						<li className={styles["details__item"]}>
+							<IconRender
+								variant='description'
+								className={styles["details__item-icon"]}
+							/>
+							<p className={styles["details__item-description"]}>
+								{description}
+							</p>
+						</li>
+					)}
 				</ul>
 			</div>
 

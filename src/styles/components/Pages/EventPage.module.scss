@@ -1,0 +1,22 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+
+main .section-detail {
+	padding-top: 5em;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+
+	&__item {
+		margin-top: 5em;
+	}
+
+	h1 {
+		text-align: center;
+		font-size: 3rem;
+	}
+
+	@include media-query(mediumScreen) {
+		padding-top: 5em;
+	}
+}

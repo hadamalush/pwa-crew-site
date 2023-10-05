@@ -89,8 +89,8 @@ const IconRender = props => {
 				return icons.fileImg;
 			case "quotes":
 				return icons.quotes;
-			case "pentagon":
-				return icons.pentagon;
+			case "arrow_back":
+				return icons.arrow_back;
 			default:
 				return null;
 		}
