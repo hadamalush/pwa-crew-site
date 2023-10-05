@@ -1,0 +1,28 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+
+main .start {
+	position: relative;
+	width: 100vw;
+	height: 80rem;
+	top: 3rem;
+	margin-bottom: 5rem;
+	padding: 0;
+
+	//backgroundimage of box
+	img {
+		object-position: center;
+	}
+
+	@include media-query(mediumScreen) {
+		margin-bottom: 0;
+		top: 0;
+		height: 100rem;
+	}
+}
+
+.box {
+	height: 70rem;
+	box-shadow: $boxshadow-secondary;
+	border-radius: 15px;
+}

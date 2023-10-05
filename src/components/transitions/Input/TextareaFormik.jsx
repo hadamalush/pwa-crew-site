@@ -10,7 +10,6 @@ const TextareaFormik = ({ name, onChange, setFieldValue, ...props }) => {
 	return (
 		<>
 			<WrapperInput className={styles["input-box"]}>
-				<IconRender variant={name} />
 				<Field
 					name={name}
 					{...props}

@@ -1,0 +1,49 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+// Registration and Login forms
+
+.logreg-box {
+	transition: transform 0.6s;
+	transform-origin: right;
+	animation: show 0.6s;
+
+	form {
+		width: 28rem;
+		margin: 0 auto;
+		padding: 5em 0;
+	}
+
+	h1 {
+		font-size: 3rem;
+		text-align: center;
+	}
+
+	&__message {
+		display: flex;
+		align-items: center;
+		position: relative;
+
+		p {
+			padding-left: 2em;
+		}
+
+		> div {
+			position: absolute;
+		}
+	}
+
+	//textarea
+	&__message + div {
+		margin: 1.5em 0;
+	}
+
+	button {
+		margin: 2em 0 1em;
+	}
+
+	@include media-query(mediumScreen) {
+		form {
+			width: 30rem;
+		}
+	}
+}

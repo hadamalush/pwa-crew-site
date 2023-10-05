@@ -1,13 +1,14 @@
 import WrapperStart from "@/components/transitions/Wrappers/WrapperStart";
 import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFormWithContent";
-import styles from "./Common.module.scss";
+import FormikContact from "@/components/transitions/Forms/FormikContact/FormikContact";
+import styles from "../../styles/components/Pages/ContactPage.module.scss";
 
-export default function Layout({ children }) {
+export default function ContactPage() {
 	const dataContent = {
-		title: "Witamy!",
-		textFirst: "Bądź na bieżąco!",
+		title: "Skontaktuj się z nami!",
+		textFirst: "Już teraz!",
 		textSecond: "Już teraz osiągnij sukces!",
-		imageSrc: "/images/header/concert.jpg",
+		imageSrc: "/images/background/background-contact.jpg",
 		alt: "Concert",
 	};
 
@@ -18,11 +19,11 @@ export default function Layout({ children }) {
 					headingType='h3'
 					title={dataContent.title}
 					textFirst={dataContent.textFirst}
-					textSecond={dataContent.textSecond}
+					textSecond={dataContent.textFirst}
 					imageSrc={dataContent.imageSrc}
 					alt={dataContent.alt}
 					className={styles.box}>
-					{children}
+					<FormikContact />
 				</WrapperFormWithContent>
 			</WrapperStart>
 		</main>

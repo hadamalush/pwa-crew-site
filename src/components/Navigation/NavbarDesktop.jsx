@@ -30,7 +30,7 @@ const NavbarDesktop = props => {
 				</li>
 
 				<li>
-					<Link href='/' className={styles["nav__list-link"]}>
+					<Link href='/kontakt' className={styles["nav__list-link"]}>
 						Kontakt
 					</Link>
 				</li>

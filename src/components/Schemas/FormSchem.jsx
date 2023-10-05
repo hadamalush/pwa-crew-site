@@ -1,6 +1,12 @@
 import * as yup from "yup";
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+const SUPPORTED_FORMATS = [
+	"image/jpeg",
+	"image/png",
+	"image/webp",
+	"image/jpg",
+];
 
 export const registerSchema = yup.object().shape({
 	email: yup
@@ -27,12 +33,17 @@ export const loginSchema = yup.object().shape({
 	password: yup.string().required("Wymagane"),
 });
 
-const SUPPORTED_FORMATS = [
-	"image/jpeg",
-	"image/png",
-	"image/webp",
-	"image/jpg",
-];
+export const contactSchema = yup.object().shape({
+	email: yup
+		.string()
+		.email("Proszę podać poprawny adres email!")
+		.required("Wymagane"),
+	message: yup
+		.string()
+		.min(50, "Minimum 50 znaków.")
+		.max(800, "Maksimum 800 znaków.")
+		.required("Wymagane"),
+});
 
 export const eventSchema = yup.object().shape({
 	title: yup
