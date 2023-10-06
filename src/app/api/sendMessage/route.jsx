@@ -6,16 +6,11 @@ import BrevoTransport from "nodemailer-brevo-transport";
 
 export const POST = async request => {
 	const { email, subject, message } = await request.json();
-	// const ip =
-	// 	NextRequest.headers["x-forwarded-for"] ||
-	// 	NextRequest.connection.remoteAddress;
-
-	// console.log(ip);
 
 	const ourEmail = generalConfig.receiveEmailAddresContact;
 	const defaultFeedback = generalConfig.defaultReplyMessage;
 
-	// walidacja
+	// walidacja;
 
 	console.log(email, subject, message, ourEmail, defaultFeedback);
 
