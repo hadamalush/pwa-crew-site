@@ -2,6 +2,11 @@ export { default } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export async function middleware(request) {
+	const headers = new Headers(request.headers);
+	const ip = request.ip || "";
+
+	headers.set("x-forwarded-for", ip);
+
 	const registerUrl = request.nextUrl.pathname.startsWith("/rejestracja");
 	const loginUrl = request.nextUrl.pathname.startsWith("/logowanie");
 	const newEventUrl = request.nextUrl.pathname.startsWith(
@@ -20,7 +25,11 @@ export async function middleware(request) {
 		return NextResponse.redirect(new URL("/logowanie", request.url));
 	}
 
-	return;
+	return NextResponse.next({
+		request: {
+			headers: headers,
+		},
+	});
 }
 
 // export const config = {
