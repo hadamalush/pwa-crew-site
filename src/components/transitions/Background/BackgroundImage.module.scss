@@ -20,12 +20,18 @@
 }
 
 .filter {
+	height: 100vh;
+	max-height: 80rem;
+	min-height: 70rem;
+
 	&::before {
 		content: "";
 		position: absolute;
 		z-index: 10;
 		width: 100vw;
 		height: 100vh;
+		max-height: 100rem;
+		min-height: 90rem;
 		top: 0;
 		left: 0;
 		backdrop-filter: blur(20px);

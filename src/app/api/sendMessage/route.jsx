@@ -6,18 +6,26 @@ import BrevoTransport from "nodemailer-brevo-transport";
 
 export const POST = async request => {
 	const { email, subject, message } = await request.json();
-	// const ip =
-	// 	NextRequest.headers["x-forwarded-for"] ||
-	// 	NextRequest.connection.remoteAddress;
-
-	// console.log(ip);
 
 	const ourEmail = generalConfig.receiveEmailAddresContact;
 	const defaultFeedback = generalConfig.defaultReplyMessage;
 
-	// walidacja
-
-	console.log(email, subject, message, ourEmail, defaultFeedback);
+	if (
+		!email ||
+		!subject ||
+		subject.length < 10 ||
+		subject > 30 ||
+		!message ||
+		message.length < 50 ||
+		message > 800 ||
+		!ourEmail ||
+		!defaultFeedback
+	) {
+		return NextResponse.json(
+			{ error: "Nie udało się wysłać wiadomości, spróbuj ponownie." },
+			{ status: 500 }
+		);
+	}
 
 	const transporter = nodemailer.createTransport(
 		new BrevoTransport({
@@ -46,10 +54,11 @@ export const POST = async request => {
 
 	try {
 		const result = await Promise.all(sendMailPromises);
-
-		console.log(result);
 	} catch (error) {
-		console.log(error);
+		return NextResponse.json(
+			{ error: "Nie udało się wysłać wiadomości, spróbuj ponownie." },
+			{ status: 500 }
+		);
 	}
 
 	return NextResponse.json(
