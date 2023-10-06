@@ -8,6 +8,14 @@ export async function connectDatabase() {
 	return client;
 }
 
+export const connectDbMongo = async database => {
+	const client = await MongoClient.connect(
+		`mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/${database}?retryWrites=true&w=majority`
+	);
+
+	return client;
+};
+
 export async function connectDatabaseEvents() {
 	const client = await MongoClient.connect(
 		`mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/Events?retryWrites=true&w=majority`
@@ -45,3 +53,28 @@ export async function findDocument(client, collection, document) {
 
 	return existingDocument;
 }
+
+export const createCollectionWithTTL = async (client, nameCollection) => {
+	const collection = client.db().collection(nameCollection);
+
+	const result = await collection.createIndex(
+		{ createdAt: 1 },
+		{ expireAfterSeconds: 1800 }
+	);
+
+	return result;
+};
+
+export const updateDocument = async (
+	client,
+	collection,
+	filter,
+	documentUpdate
+) => {
+	const db = client.db();
+	const updatedDocument = await db
+		.collection(collection)
+		.updateOne(filter, documentUpdate);
+
+	return updatedDocument;
+};
