@@ -39,6 +39,8 @@ const FormikContact = ({ className, ...props }) => {
 
 			const data = await response.json();
 
+			console.log(data);
+
 			dispatch(
 				showResult({
 					message: data.error,

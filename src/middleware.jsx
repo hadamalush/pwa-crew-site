@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request) {
 	const headers = new Headers(request.headers);
-	const ip = request.ip || "";
+	const ip = request.ip;
 
 	headers.set("x-forwarded-for", ip);
 
