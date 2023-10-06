@@ -5,7 +5,6 @@ import InputFormik from "../../Input/InputFormik";
 import TextareaFormik from "../../Input/TextareaFormik";
 import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../../styles/components/transitions/Forms/FormikContact.module.scss";
-import { useRouter } from "next/navigation";
 import { Formik, Form } from "formik";
 import { contactSchema } from "@/components/Schemas/FormSchem";
 import { useMediaQuery } from "react-responsive";
@@ -13,7 +12,6 @@ import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
 const FormikContact = ({ className, ...props }) => {
-	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",
@@ -44,20 +42,25 @@ const FormikContact = ({ className, ...props }) => {
 			if (!response.ok) {
 				dispatch(
 					showResult({
-						message: data.message,
+						message: data.error,
 						variant: "warning",
 					})
 				);
 				return;
 			}
 		} catch (error) {
-			console.log(error);
+			dispatch(
+				showResult({
+					message: "Wysyłanie wiadomości nie powiodło się,\n spróbuj ponownie.",
+					variant: "warning",
+				})
+			);
 			return;
 		}
 
 		dispatch(
 			showResult({
-				message: "Udało się zarejestrowaćddddddddddddddddd",
+				message: "Wysłano wiadomość.",
 				variant: "success",
 			})
 		);
