@@ -29,11 +29,13 @@ export const POST = async request => {
 	}
 
 	console.log("request ip: ", request.headers);
+	const headers = request.headers;
+	const functionip = requestIp.getClientIp(request);
 
 	console.log("function ip: ", requestIp.getClientIp(request));
 
 	return NextResponse.json(
-		{ error: requestIp.getClientIp(request) },
+		{ error: { headers: headers, functionip: functionip } },
 		{ status: 500 }
 	);
 

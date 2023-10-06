@@ -37,15 +37,18 @@ const FormikContact = ({ className, ...props }) => {
 				body: JSON.stringify({ email, subject, message }),
 			});
 
-			const data = await response.json();
+			let data = await response.json();
+
+			console.log("data: ", data);
 
 			if (!response.ok) {
-				dispatch(
-					showResult({
-						message: data.error,
-						variant: "warning",
-					})
-				);
+				console.log(data);
+				// dispatch(
+				// 	showResult({
+				// 		message: data.error,
+				// 		variant: "warning",
+				// 	})
+				// );
 				return;
 			}
 		} catch (error) {
