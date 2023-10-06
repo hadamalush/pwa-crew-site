@@ -37,12 +37,12 @@ const FormikContact = ({ className, ...props }) => {
 				body: JSON.stringify({ email, subject, message }),
 			});
 
-			let data = await response.json();
+			const data = await response.json();
 
-			console.log("data: ", data);
+			console.log(data);
 
 			if (!response.ok) {
-				console.log(data);
+				// console.log(object);
 				// dispatch(
 				// 	showResult({
 				// 		message: data.error,

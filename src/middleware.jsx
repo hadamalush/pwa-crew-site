@@ -1,5 +1,5 @@
 export { default } from "next-auth/middleware";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function middleware(request) {
 	const registerUrl = request.nextUrl.pathname.startsWith("/rejestracja");
@@ -7,6 +7,12 @@ export async function middleware(request) {
 	const newEventUrl = request.nextUrl.pathname.startsWith(
 		"/wydarzenia/nowe-wydarzenie"
 	);
+
+	const requestHeaders = new Headers(request.headers);
+
+	const ip = request.ip;
+
+	requestHeaders.set("x-forwarded-for", ip);
 
 	const session =
 		request.cookies.has("next-auth.session-token") ||
@@ -20,7 +26,11 @@ export async function middleware(request) {
 		return NextResponse.redirect(new URL("/logowanie", request.url));
 	}
 
-	return;
+	return NextResponse.next({
+		request: {
+			headers: requestHeaders,
+		},
+	});
 }
 
 // export const config = {
