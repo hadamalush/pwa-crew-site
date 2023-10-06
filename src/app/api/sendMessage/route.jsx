@@ -1,14 +1,19 @@
 import { NextResponse, NextRequest } from "next/server";
 import { generalConfig } from "@/config/gerenalConfig";
+import { headers } from "next/headers";
 
 import nodemailer from "nodemailer";
 import BrevoTransport from "nodemailer-brevo-transport";
+import { insertLimitByIp } from "@/lib/protection/protection";
 
 export const POST = async request => {
+	const ip = headers().get("x-forwarded-for");
 	const { email, subject, message } = await request.json();
 
 	const ourEmail = generalConfig.receiveEmailAddresContact;
 	const defaultFeedback = generalConfig.defaultReplyMessage;
+
+	const testIP = "777.777.777";
 
 	if (
 		!email ||
@@ -24,6 +29,17 @@ export const POST = async request => {
 		return NextResponse.json(
 			{ error: "Nie udało się wysłać wiadomości, spróbuj ponownie." },
 			{ status: 500 }
+		);
+	}
+
+	const result = await insertLimitByIp("ContactPage", ip, 5);
+
+	if (result.limit) {
+		return NextResponse.json(
+			{
+				error: "Przekroczono limit, spróbuj ponownie za 30 minut.",
+			},
+			{ status: 429 }
 		);
 	}
 
