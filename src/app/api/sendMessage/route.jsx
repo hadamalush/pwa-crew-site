@@ -32,7 +32,7 @@ export const POST = async request => {
 	const ip = headers().get("x-forwarded-for");
 	console.log(headers());
 
-	console.log("ip: ", ip);
+	console.log("ipnew: ", ip);
 
 	return NextResponse.json({ error: `IPadres: ${ip}` }, { status: 500 });
 
