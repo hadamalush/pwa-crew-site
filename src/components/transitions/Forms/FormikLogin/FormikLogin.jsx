@@ -36,7 +36,7 @@ const FormikLogin = ({ className, ...props }) => {
 		}
 	}, [session, status]);
 
-	const changeWebstiteHandler = async event => {
+	const changeWebstiteHandler = async (website, event) => {
 		event.preventDefault();
 
 		const form = document
@@ -44,7 +44,7 @@ const FormikLogin = ({ className, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push("/rejestracja");
+			router.push(`/${website}`);
 		}, 500);
 	};
 
@@ -109,14 +109,21 @@ const FormikLogin = ({ className, ...props }) => {
 							type='password'
 						/>
 
+						<Link
+							href='/forgot-password'
+							onClick={changeWebstiteHandler.bind(null, "forgot-password")}>
+							Zapomniałeś hasła?
+						</Link>
+
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{" "}
-							Zaloguj{" "}
+							Zaloguj
 						</ButtonMain>
 
 						<p>
-							Nie masz konta?{" "}
-							<Link href='/rejestracja' onClick={changeWebstiteHandler}>
+							Nie masz konta?
+							<Link
+								href='/rejestracja'
+								onClick={changeWebstiteHandler.bind(null, "rejestracja")}>
 								Zarejestruj
 							</Link>
 						</p>

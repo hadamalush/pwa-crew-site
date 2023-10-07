@@ -1,8 +1,6 @@
 import {
 	connectDbMongo,
-	createCollectionWithTTL,
 	findDocument,
-	insertDocument,
 	insertDocumentWithTTL,
 	updateDocument,
 } from "../mongodb";

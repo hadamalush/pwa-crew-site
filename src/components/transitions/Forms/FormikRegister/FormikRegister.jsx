@@ -66,8 +66,6 @@ const FormikRegister = ({ className, ...props }) => {
 				return;
 			}
 		} catch (error) {
-			console.log("error w responsie: ", error);
-			console.log(error);
 			return;
 		}
 

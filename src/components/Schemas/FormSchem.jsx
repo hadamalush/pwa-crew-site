@@ -33,6 +33,25 @@ export const loginSchema = yup.object().shape({
 	password: yup.string().required("Wymagane"),
 });
 
+export const forgotLinkSchema = yup.object().shape({
+	email: yup
+		.string()
+		.email("Proszę podać poprawny adres email!")
+		.required("Wymagane"),
+});
+
+export const forgotNewPasswordSchema = yup.object().shape({
+	password: yup
+		.string()
+		.min(7, "Hasło musi posiadać przynajmniej 7 znaków")
+		.matches(passwordRules, "Min. 1 znak,1 cyfra ,1 duża i mała litera")
+		.required("Wymagane"),
+	confirmPassword: yup
+		.string()
+		.oneOf([yup.ref("password")], "Hasła muszą być udentyczne.")
+		.required("Wymagane"),
+});
+
 export const contactSchema = yup.object().shape({
 	email: yup
 		.string()

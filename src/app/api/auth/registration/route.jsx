@@ -1,5 +1,3 @@
-import BrevoTransport from "nodemailer-brevo-transport";
-import nodemailer from "nodemailer";
 import { cryptPassword } from "@/lib/crypt";
 import {
 	connectDatabase,
@@ -91,6 +89,7 @@ export async function POST(request) {
 	try {
 		clientActivationLinks = await connectDbMongo("ActivationLinks");
 		const generatedIdLink = await generationIdLink(ip, userAgent);
+		const linkPrefix = "activation";
 
 		const resultOfCreatedActivationLink = await insertDocumentWithTTL(
 			clientActivationLinks,
@@ -109,7 +108,8 @@ export async function POST(request) {
 				email,
 				generatedIdLink,
 				message.subject,
-				message.text
+				message.text,
+				linkPrefix
 			);
 		}
 	} catch (error) {
