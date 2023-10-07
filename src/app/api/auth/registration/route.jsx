@@ -1,5 +1,3 @@
-import BrevoTransport from "nodemailer-brevo-transport";
-import nodemailer from "nodemailer";
 import { cryptPassword } from "@/lib/crypt";
 import {
 	connectDatabase,

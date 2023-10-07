@@ -108,14 +108,16 @@ const FormikLogin = ({ className, ...props }) => {
 							aria-label='Hasło'
 							type='password'
 						/>
+						<Link href='/forgot-password' onClick={changeWebstiteHandler}>
+							Zapomniałeś hasła?
+						</Link>
 
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{" "}
-							Zaloguj{" "}
+							Zaloguj
 						</ButtonMain>
 
 						<p>
-							Nie masz konta?{" "}
+							Nie masz konta?
 							<Link href='/rejestracja' onClick={changeWebstiteHandler}>
 								Zarejestruj
 							</Link>

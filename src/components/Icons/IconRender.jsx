@@ -91,6 +91,8 @@ const IconRender = props => {
 				return icons.quotes;
 			case "arrow_back":
 				return icons.arrow_back;
+			case "code":
+				return icons.code;
 			default:
 				return null;
 		}
