@@ -11,13 +11,15 @@ import { headers } from "next/headers";
 
 const ActivationPage = async ({ params }) => {
 	const activationId = params.activation;
-	const ip = headers().get("x-fordwarded-for");
+	const ip = headers().get("x-forwarded-for");
+
 	let isValid = false,
 		status,
 		foundDocument,
 		clientActivationLinks;
 
-	const result = insertLimitByIp("ActivationPage", ip, 5, 86400);
+	const result = await insertLimitByIp("ActivationPage", ip, 5, 86400);
+
 	if (result?.limit) {
 		redirect("/");
 	}
@@ -36,9 +38,9 @@ const ActivationPage = async ({ params }) => {
 		return (status = 500);
 	}
 
-	if (!foundDocument) {
-		redirect("/");
-	}
+	// if (!foundDocument) {
+	// 	redirect("/");
+	// }
 
 	if (foundDocument && !status) {
 		const { email } = foundDocument;
