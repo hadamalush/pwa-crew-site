@@ -14,5 +14,5 @@ export const generalConfig = {
 	defaultReplyMessage:
 		"Dziekujemy za zgłoszenie,\n postaramy się jak najszybciej odpowiedzieć na ten email. \n Z poważaniem PwaCrew.",
 	emailSignature: "\nZ poważaniem PwaCrew.",
-	domain: "pwa-crew-site-demo.vercel.app",
+	domain: "pwa-crew-site-demo.vercel.app", // This domain will be used to activation accounts. (Creating links for users.)
 };

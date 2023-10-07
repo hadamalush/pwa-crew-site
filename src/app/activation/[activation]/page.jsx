@@ -18,6 +18,7 @@ const ActivationPage = async ({ params }) => {
 		foundDocument,
 		clientActivationLinks;
 
+	//limit request for ip ,because we didnt want
 	const result = await insertLimitByIp("ActivationPage", ip, 5, 86400);
 
 	if (result?.limit) {
