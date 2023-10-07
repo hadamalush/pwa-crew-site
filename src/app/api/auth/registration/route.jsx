@@ -1,9 +1,21 @@
+import BrevoTransport from "nodemailer-brevo-transport";
+import nodemailer from "nodemailer";
 import { cryptPassword } from "@/lib/crypt";
-import { connectDatabase, findDocument, insertDocument } from "@/lib/mongodb";
+import {
+	connectDatabase,
+	connectDbMongo,
+	findDocument,
+	insertDocument,
+	insertDocumentWithTTL,
+} from "@/lib/mongodb";
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { generationIdLink, sendActivationLink } from "@/lib/message/message";
 
 export async function POST(request) {
 	const data = await request.json();
+	const ip = headers().get("x-forwarded-for");
+	const userAgent = headers().get("user-agent");
 
 	const { email, password, confirmPassword, terms } = data;
 
@@ -35,7 +47,7 @@ export async function POST(request) {
 	try {
 		existingUser = await findDocument(client, "Users", { email: email });
 	} catch (error) {
-		// client.close();
+		client.close();
 		return NextResponse.json(
 			{ message: "Skontakuj sie z administratorem, cos poszlo nie tak!" },
 			{ status: 422 }
@@ -43,7 +55,7 @@ export async function POST(request) {
 	}
 
 	if (existingUser) {
-		// client.close();
+		client.close();
 		return NextResponse.json(
 			{
 				message: "Użytkownik z takim adresem email już istnieje!",
@@ -58,9 +70,10 @@ export async function POST(request) {
 		await insertDocument(client, "Users", {
 			email: email,
 			password: hashedPassword,
+			isActivated: false,
 		});
 	} catch (error) {
-		// client.close();
+		client.close();
 		return NextResponse.json(
 			{
 				message: "Nie udało się dodać użytkownika",
@@ -69,7 +82,49 @@ export async function POST(request) {
 		);
 	}
 
-	// client.close();
+	const message = {
+		subject: "Link aktywacyjny na stronie PwaCrew.",
+		text: "Dziękujemy za zarejestrowanie się, poniżej znajduję się link aktywacyjny.",
+	};
+	let clientActivationLinks;
+
+	try {
+		clientActivationLinks = await connectDbMongo("ActivationLinks");
+		const generatedIdLink = await generationIdLink(ip, userAgent);
+
+		const resultOfCreatedActivationLink = await insertDocumentWithTTL(
+			clientActivationLinks,
+			"Registration",
+			{
+				email: email,
+				generatedIdLink: generatedIdLink,
+				createdAt: new Date(),
+			},
+			86400
+		);
+
+		if (resultOfCreatedActivationLink.acknowledged);
+		{
+			await sendActivationLink(
+				email,
+				generatedIdLink,
+				message.subject,
+				message.text
+			);
+		}
+	} catch (error) {
+		console.log(error);
+		return NextResponse.json(
+			{
+				error:
+					"Zarejestrowany pomyślnie ,jednak nie udało się utworzyć linku aktywacyjnego. Wyślemy go do Ciebie ,jak najszybciej!",
+			},
+			{ status: 400 }
+		);
+	}
+
+	client.close();
+	clientActivationLinks.close();
 	return NextResponse.json({
 		message: "Zarejestrowano pomyślnie ,witamy na pokładzie!",
 	});

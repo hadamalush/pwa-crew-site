@@ -3,10 +3,16 @@ import {
 	createCollectionWithTTL,
 	findDocument,
 	insertDocument,
+	insertDocumentWithTTL,
 	updateDocument,
 } from "../mongodb";
 
-export const insertLimitByIp = async (collection, ip, requestLimit) => {
+export const insertLimitByIp = async (
+	collection,
+	ip,
+	requestLimit,
+	blockadTime
+) => {
 	let client, foundPosition;
 
 	try {
@@ -44,7 +50,13 @@ export const insertLimitByIp = async (collection, ip, requestLimit) => {
 				addres_ip: ip,
 				createdAt: new Date(),
 			};
-			const result = await insertDocument(client, collection, data);
+
+			const result = insertDocumentWithTTL(
+				client,
+				collection,
+				data,
+				blockadTime
+			);
 		} catch (error) {
 			return false;
 		}

@@ -54,6 +54,8 @@ const FormikRegister = ({ className, ...props }) => {
 
 			const data = await response.json();
 
+			console.log("response: ", response, data);
+
 			if (!response.ok) {
 				dispatch(
 					showResult({
@@ -64,13 +66,15 @@ const FormikRegister = ({ className, ...props }) => {
 				return;
 			}
 		} catch (error) {
+			console.log("error w responsie: ", error);
 			console.log(error);
 			return;
 		}
 
 		dispatch(
 			showResult({
-				message: "Udało się zarejestrować",
+				message:
+					"Udało się zarejestrować, wysłaliśmy link rejestracyjny na Twój adres email.",
 				variant: "success",
 			})
 		);

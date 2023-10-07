@@ -6,9 +6,13 @@ import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import styles from "./page.module.scss";
 
 export default function Home() {
+	const startContent = {
+		title: "Tylko dobry rap",
+		text: "O każdej porze dnia,\n rapuje ile tylko sie da!",
+	};
 	return (
 		<main>
-			<HomeStartContent />
+			<HomeStartContent title={startContent.title} text={startContent.text} />
 			<WrapperSection id='history' className={styles.history}>
 				<h3>Trochę o Hip-hopie</h3>
 				<Card variant={"skew"}>
