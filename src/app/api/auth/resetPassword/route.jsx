@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 import { generationIdLink, sendActivationLink } from "@/lib/message/message";
-import { connectDbMongo, insertDocumentWithTTL } from "@/lib/mongodb";
+import {
+	connectDbMongo,
+	deleteDocument,
+	findDocument,
+	insertDocumentWithTTL,
+	updateDocument,
+} from "@/lib/mongodb";
 import { headers } from "next/headers";
+import { cryptPassword } from "@/lib/crypt";
 
 export const POST = async request => {
 	const { email, status, confirmPassword, password, code } =
@@ -10,7 +17,18 @@ export const POST = async request => {
 	const userAgent = headers().get("user-agent");
 	let clientActivationLinks, generatedIdLink, resultOfCreatedActivationLink;
 
-	//sending activation link if false status
+	try {
+		clientActivationLinks = await connectDbMongo("ActivationLinks");
+	} catch (error) {
+		return NextResponse.json(
+			{
+				error: "Niestety nie udało się wysłać linku, spróbuj ponownie później.",
+			},
+			{ status: 503 }
+		);
+	}
+
+	//sending activation link
 	if (!status && email) {
 		const message = {
 			subject: "Link resetujący hasło na stronie PwaCrew.",
@@ -19,7 +37,6 @@ export const POST = async request => {
 		const linkPrefix = "forgot-password";
 
 		try {
-			clientActivationLinks = await connectDbMongo("ActivationLinks");
 			generatedIdLink = await generationIdLink(ip, userAgent);
 		} catch (error) {
 			return NextResponse.json(
@@ -27,7 +44,7 @@ export const POST = async request => {
 					error:
 						"Niestety nie udało się wysłać linku, spróbuj ponownie później.",
 				},
-				{ status: 503 }
+				{ status: 400 }
 			);
 		}
 
@@ -66,7 +83,7 @@ export const POST = async request => {
 				return NextResponse.json(
 					{
 						error:
-							"Niestety nie udało się wysłać linku, spróbuj ponownie później. Status: 503",
+							"Niestety nie udało się wysłać linku, spróbuj ponownie później.",
 					},
 					{ status: 503 }
 				);
@@ -74,6 +91,95 @@ export const POST = async request => {
 		}
 		return NextResponse.json(
 			{ message: "Wysłaliśmy do Ciebie link resetujący hasło." },
+			{ status: 200 }
+		);
+	} else {
+		//reset password with code
+		let foundDocument;
+
+		if (
+			!password ||
+			!confirmPassword ||
+			password !== confirmPassword ||
+			!code
+		) {
+			return NextResponse.json(
+				{
+					error: "Nieprawidłowe dane.",
+				},
+				{ status: 422 }
+			);
+		}
+
+		const hashedPassword = await cryptPassword(password);
+
+		try {
+			foundDocument = await findDocument(
+				clientActivationLinks,
+				"ForgotPassword",
+				{
+					generatedIdLink: code,
+				}
+			);
+
+			if (!foundDocument) {
+				return NextResponse.json(
+					{
+						error: "Nieprawidłowe dane.",
+					},
+					{ status: 422 }
+				);
+			}
+		} catch (error) {
+			return NextResponse.json(
+				{
+					error: "Niepowodzenie, spróbuj ponownie później.",
+				},
+				{ status: 503 }
+			);
+		}
+
+		if (foundDocument) {
+			const { email } = foundDocument;
+
+			let clientAuth;
+
+			try {
+				clientAuth = await connectDbMongo("Auth");
+			} catch (error) {
+				return NextResponse.json(
+					{
+						error: "Niepowodzenie, spróbuj ponownie później.",
+					},
+					{ status: 503 }
+				);
+			}
+			try {
+				const updatedDocument = await updateDocument(
+					clientAuth,
+					"Users",
+					{ email: email },
+					{ $set: { password: hashedPassword } }
+				);
+
+				if (updatedDocument.acknowledged) {
+					await deleteDocument(clientActivationLinks, "ForgotPassword", {
+						email: email,
+					});
+				}
+			} catch (error) {
+				return NextResponse.json(
+					{
+						error: "Niepowodzenie, spróbuj ponownie później.",
+					},
+					{ status: 503 }
+				);
+			}
+		}
+		return NextResponse.json(
+			{
+				message: "Hasło zostało zmienione.",
+			},
 			{ status: 200 }
 		);
 	}
