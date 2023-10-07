@@ -30,7 +30,7 @@ export const POST = async request => {
 		);
 	}
 
-	const result = await insertLimitByIp("ContactPage", ip, 5);
+	const result = await insertLimitByIp("ContactPage", ip, 5, 1800);
 
 	if (result.limit) {
 		return NextResponse.json(
