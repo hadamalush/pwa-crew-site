@@ -9,10 +9,12 @@ const BackgroundImageGeneral = () => {
 	if (pathname.startsWith("/")) {
 		pathname = pathname.replace(/^\/+/, "");
 	}
+	const forgotPasswordPages = pathname.startsWith("forgot-password");
 
 	const isPath =
 		pathname === "logowanie" ||
 		pathname === "rejestracja" ||
+		forgotPasswordPages ||
 		pathname === "kontakt";
 
 	const classes = !isPath ? styles.hero : `${styles.hero} ${styles.filter}`;
