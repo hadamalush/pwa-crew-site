@@ -16,9 +16,10 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
-const FormikForgotPassword = ({ className, ...props }) => {
-	const temporaryStatus = false;
-	const schema = temporaryStatus ? forgotNewPasswordSchema : forgotLinkSchema;
+const FormikForgotPassword = ({ resetId, className, ...props }) => {
+	const resetForm = resetId ? true : false;
+
+	const schema = resetForm ? forgotNewPasswordSchema : forgotLinkSchema;
 
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
@@ -55,15 +56,48 @@ const FormikForgotPassword = ({ className, ...props }) => {
 	};
 
 	const onSubmit = async values => {
-		const email = values.email;
-		const password = values.password;
 		dispatchLoading(toggleLoading());
 
-		const message = {
-			subject: "Link resetujący hasło.",
-			text: "Otrzymaliśmy zgłoszenie ,odnośnie utracenia hasła. Jeżeli to nie Ty wysłałeś tą wiadomość ,prosimy ją zignorować. \n Link jest ważny przez 24h. Poniżej znajduje się link.",
-		};
-		let clientActivationLinks;
+		const email = values?.email;
+		const password = values?.password;
+		const confirmPassword = values?.confirmPassword;
+		const code = values?.code;
+
+		const sendData = !resetForm
+			? { email: email, status: resetForm }
+			: {
+					password: password,
+					confirmPassword: confirmPassword,
+					code: code,
+					status: resetForm,
+			  };
+
+		console.log(sendData);
+
+		try {
+			const response = await fetch("/api/auth/resetPassword", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(sendData),
+			});
+
+			console.log("ssssssssssssssssss");
+
+			const data = await response.json();
+			console.log("response: ", response, data);
+
+			if (!response.ok) {
+				dispatch(
+					showResult({
+						message: data.message,
+						variant: "warning",
+					})
+				);
+				return;
+			}
+		} catch (error) {
+			return;
+		}
 
 		// try {
 		// 	clientActivationLinks = await connectDbMongo("ActivationLinks");
@@ -137,7 +171,7 @@ const FormikForgotPassword = ({ className, ...props }) => {
 					email: "",
 					password: "",
 					confirmPassword: "",
-					code: "",
+					code: resetId,
 				}}
 				onSubmit={onSubmit}
 				validationSchema={schema}>
@@ -145,7 +179,7 @@ const FormikForgotPassword = ({ className, ...props }) => {
 					<Form>
 						<h1>Zapomniałeś hasła?</h1>
 
-						{!temporaryStatus && (
+						{!resetForm && (
 							<InputFormik
 								name='email'
 								placeholder='Email'
@@ -153,7 +187,7 @@ const FormikForgotPassword = ({ className, ...props }) => {
 								type='text'
 							/>
 						)}
-						{temporaryStatus && (
+						{resetForm && (
 							<>
 								<InputFormik
 									name='password'
@@ -177,7 +211,7 @@ const FormikForgotPassword = ({ className, ...props }) => {
 						)}
 
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{temporaryStatus ? "Zmień hasło" : "Zresetuj hasło"}
+							{resetForm ? "Zmień hasło" : "Zresetuj hasło"}
 						</ButtonMain>
 
 						<p>

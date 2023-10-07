@@ -22,13 +22,15 @@ export const generationIdLink = async (ip, userAgent) => {
  * @param {String} generatedIdLink Pass id link. You can use generationLink function to generate id. (String)
  * @param {String} subject Pass subject of message. (String)
  * @param {String} message Pass message. (String)
+ * @param {String} linkPrefix Pass link prefix. Will be: linkPrefix/generationId.
  */
 
 export const sendActivationLink = async (
 	email,
 	generatedIdLink,
 	subject,
-	message
+	message,
+	linkPrefix
 ) => {
 	const domain = generalConfig.domain;
 	const ourEmail = generalConfig.receiveEmailAddresContact;
@@ -49,7 +51,8 @@ export const sendActivationLink = async (
 			message +
 			"  \n <a href='" +
 			domain +
-			"/activation" +
+			"/" +
+			linkPrefix +
 			"/" +
 			generatedIdLink +
 			"'> Kliknij w ten link.</a> " +

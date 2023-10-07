@@ -1,5 +1,5 @@
 import FormikForgotPassword from "@/components/transitions/Forms/FormikForgotPassword/FormikForgotPassword";
 
-export default function RegistrationPage() {
+export default async function RegistrationPage() {
 	return <FormikForgotPassword />;
 }
