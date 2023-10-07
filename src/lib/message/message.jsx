@@ -11,7 +11,9 @@ export const generationIdLink = async (ip, userAgent) => {
 		ip + userAgent + currentDate + nanoid()
 	);
 
-	return createdIdLink;
+	const replacedLink = createdIdLink.replaceAll("$", "0").replaceAll("/", "-");
+
+	return replacedLink;
 };
 
 /**

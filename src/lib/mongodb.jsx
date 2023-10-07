@@ -104,3 +104,10 @@ export const updateDocument = async (
 
 	return updatedDocument;
 };
+
+export const deleteDocument = async (client, collection, document) => {
+	const db = client.db();
+	const deletedDocument = db.collection(collection).deleteOne(document);
+
+	return deletedDocument;
+};
