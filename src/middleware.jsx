@@ -9,6 +9,9 @@ export async function middleware(request) {
 
 	const registerUrl = request.nextUrl.pathname.startsWith("/rejestracja");
 	const loginUrl = request.nextUrl.pathname.startsWith("/logowanie");
+	const forgotPasswordUrl =
+		request.nextUrl.pathname.startsWith("/forgot-password");
+
 	const newEventUrl = request.nextUrl.pathname.startsWith(
 		"/wydarzenia/nowe-wydarzenie"
 	);
@@ -17,7 +20,7 @@ export async function middleware(request) {
 		request.cookies.has("next-auth.session-token") ||
 		request.cookies.has("__Secure-next-auth.session-token");
 
-	if (session && (registerUrl || loginUrl)) {
+	if (session && (registerUrl || loginUrl || forgotPasswordUrl)) {
 		return NextResponse.redirect(new URL("/", request.url));
 	}
 

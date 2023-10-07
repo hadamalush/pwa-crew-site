@@ -9,6 +9,7 @@ import {
 } from "@/lib/mongodb";
 import { headers } from "next/headers";
 import { cryptPassword } from "@/lib/crypt";
+import { insertLimitByIp } from "@/lib/protection/protection";
 
 export const POST = async request => {
 	const { email, status, confirmPassword, password, code } =
@@ -16,6 +17,17 @@ export const POST = async request => {
 	const ip = headers().get("x-forwarded-for");
 	const userAgent = headers().get("user-agent");
 	let clientActivationLinks, generatedIdLink, resultOfCreatedActivationLink;
+
+	const result = await insertLimitByIp("ForgotPasswordPage", ip, 5, 86400);
+
+	if (result.limit) {
+		return NextResponse.json(
+			{
+				error: "Zbyt wiele prób. Spróbuj ponownie za 24h.",
+			},
+			{ status: 429 }
+		);
+	}
 
 	try {
 		clientActivationLinks = await connectDbMongo("ActivationLinks");

@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 
 const FormikForgotPassword = ({ resetId, className, ...props }) => {
 	const resetForm = resetId ? true : false;
-
 	const schema = resetForm ? forgotNewPasswordSchema : forgotLinkSchema;
 
 	const router = useRouter();
@@ -62,6 +61,7 @@ const FormikForgotPassword = ({ resetId, className, ...props }) => {
 		const password = values?.password;
 		const confirmPassword = values?.confirmPassword;
 		const code = values?.code;
+		let data;
 
 		const sendData = !resetForm
 			? { email: email, status: resetForm }
@@ -72,8 +72,6 @@ const FormikForgotPassword = ({ resetId, className, ...props }) => {
 					status: resetForm,
 			  };
 
-		console.log(sendData);
-
 		try {
 			const response = await fetch("/api/auth/resetPassword", {
 				method: "POST",
@@ -81,87 +79,35 @@ const FormikForgotPassword = ({ resetId, className, ...props }) => {
 				body: JSON.stringify(sendData),
 			});
 
-			console.log("ssssssssssssssssss");
-
-			const data = await response.json();
-			console.log("response: ", response, data);
+			data = await response.json();
 
 			if (!response.ok) {
-				dispatch(
+				dispatchNotification(
 					showResult({
-						message: data.message,
+						message: data.error + " Kod błędu: " + response.status,
 						variant: "warning",
 					})
 				);
 				return;
 			}
 		} catch (error) {
+			dispatchNotification(
+				showResult({
+					message: "Niepowodzenie, spróbuj ponownie później.",
+					variant: "warning",
+				})
+			);
 			return;
 		}
 
-		// try {
-		// 	clientActivationLinks = await connectDbMongo("ActivationLinks");
-		// 	const generatedIdLink = await generationIdLink(ip, userAgent);
+		dispatchNotification(
+			showResult({
+				message: data.message,
+				variant: "success",
+			})
+		);
 
-		// 	const resultOfCreatedActivationLink = await insertDocumentWithTTL(
-		// 		clientActivationLinks,
-		// 		"Registration",
-		// 		{
-		// 			email: email,
-		// 			generatedIdLink: generatedIdLink,
-		// 			createdAt: new Date(),
-		// 		},
-		// 		86400
-		// 	);
-
-		// 	if (resultOfCreatedActivationLink.acknowledged);
-		// 	{
-		// 		await sendActivationLink(
-		// 			email,
-		// 			generatedIdLink,
-		// 			message.subject,
-		// 			message.text
-		// 		);
-		// 	}
-		// } catch (error) {
-		// 	console.log(error);
-		// 	return NextResponse.json(
-		// 		{
-		// 			error:
-		// 				"Zarejestrowany pomyślnie ,jednak nie udało się utworzyć linku aktywacyjnego. Wyślemy go do Ciebie ,jak najszybciej!",
-		// 		},
-		// 		{ status: 400 }
-		// 	);
-		// }
-
-		// try {
-		// 	const response = await signIn("credentials", {
-		// 		redirect: false,
-		// 		email: email,
-		// 		password: password,
-		// 	});
-
-		// 	if (response.error) {
-		// 		dispatchNotification(
-		// 			showResult({ message: response.error, variant: "warning" })
-		// 		);
-		// 		dispatchLoading(toggleLoading());
-		// 		return;
-		// 	}
-		// } catch (error) {
-		// 	dispatchNotification(
-		// 		showResult({
-		// 			message: "Coś poszło nie tak. Skontaktuj się z administratorem.",
-		// 			variant: "warning",
-		// 		})
-		// 	);
-		// 	dispatchLoading(toggleLoading());
-		// }
-
-		// dispatchNotification(
-		// 	showResult({ message: "Witamy ponownie!", variant: "success" })
-		// );
-		// dispatchLoading(toggleLoading());
+		router.push("/");
 	};
 
 	return (

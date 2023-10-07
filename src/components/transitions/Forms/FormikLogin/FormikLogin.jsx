@@ -39,8 +39,6 @@ const FormikLogin = ({ className, ...props }) => {
 	const changeWebstiteHandler = async (website, event) => {
 		event.preventDefault();
 
-		console.log(website);
-
 		const form = document
 			.getElementById("form")
 			.classList.toggle(styles.active);
