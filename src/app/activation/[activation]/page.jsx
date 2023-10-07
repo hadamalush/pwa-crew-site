@@ -1,3 +1,4 @@
+import HomeStartContent from "@/components/Content/HomeStartContent";
 import {
 	connectDbMongo,
 	deleteDocument,
@@ -7,9 +8,9 @@ import {
 
 const ActivationPage = async ({ params }) => {
 	const activationId = params.activation;
+	let isValid = false;
 
 	const clientActivationLinks = await connectDbMongo("ActivationLinks");
-
 	const foundDocument = await findDocument(
 		clientActivationLinks,
 		"Registration",
@@ -29,17 +30,25 @@ const ActivationPage = async ({ params }) => {
 			{ email: email },
 			{ $set: { isActivated: true } }
 		);
-
 		if (updatedDocument.acknowledged) {
 			const deletedDocument = await deleteDocument(
 				clientActivationLinks,
 				"Registration",
 				{ email: email }
 			);
+
+			isValid = deletedDocument.acknowledged && true;
 		}
 	}
 
-	return <></>;
+	const title = isValid
+		? "Aktywacja konta się powiodła"
+		: "Aktywacja konta się nie powiodła.";
+	const text = isValid
+		? "Życzymy miłego dnia."
+		: "Prosimy o kontakt z administratorem.";
+
+	return <HomeStartContent title={title} text={text} />;
 };
 
 export default ActivationPage;
