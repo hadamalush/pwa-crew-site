@@ -38,9 +38,9 @@ const ActivationPage = async ({ params }) => {
 		return (status = 500);
 	}
 
-	// if (!foundDocument) {
-	// 	redirect("/");
-	// }
+	if (!foundDocument) {
+		redirect("/");
+	}
 
 	if (foundDocument && !status) {
 		const { email } = foundDocument;
