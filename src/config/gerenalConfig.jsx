@@ -13,4 +13,6 @@ export const generalConfig = {
 	receiveEmailAddresContact: "pwacrewcompany@gmail.com", // Enter your email address to which messages will be sent from contact page.
 	defaultReplyMessage:
 		"Dziekujemy za zgłoszenie,\n postaramy się jak najszybciej odpowiedzieć na ten email. \n Z poważaniem PwaCrew.",
+	emailSignature: "\nZ poważaniem PwaCrew.",
+	domain: "pwa-crew-site-demo.vercel.app",
 };

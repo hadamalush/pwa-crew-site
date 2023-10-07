@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { generalConfig } from "@/config/gerenalConfig";
 import { headers } from "next/headers";
 
@@ -12,8 +12,6 @@ export const POST = async request => {
 
 	const ourEmail = generalConfig.receiveEmailAddresContact;
 	const defaultFeedback = generalConfig.defaultReplyMessage;
-
-	const testIP = "777.777.777";
 
 	if (
 		!email ||

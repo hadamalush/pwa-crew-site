@@ -65,6 +65,32 @@ export const createCollectionWithTTL = async (client, nameCollection) => {
 	return result;
 };
 
+/**
+ *
+ * @param {Object} client Enter client. You can use function connectDbMongo().
+ * @param {String} nameCollection Enter name of collection. (String)
+ * @param {Object} document Enter object should have field - createdAt. Example: {email : 'example@test.com', createdAt: new Date() }
+ * @param {Number} expireTime Enter time after which document will delete.
+ * @returns Return result.
+ */
+
+export const insertDocumentWithTTL = async (
+	client,
+	nameCollection,
+	document,
+	expireTime
+) => {
+	const db = client.db();
+
+	await db
+		.collection(nameCollection)
+		.createIndex({ createdAt: 1 }, { expireAfterSeconds: expireTime });
+
+	const result = await db.collection(nameCollection).insertOne(document);
+
+	return result;
+};
+
 export const updateDocument = async (
 	client,
 	collection,
