@@ -7,7 +7,7 @@ import {
 	oneConvertFromBuffersToBase64,
 	oneDownloadBuffersMegaNz,
 } from "@/lib/storage/storage";
-import { generalConfig } from "../../config/gerenalConfig";
+import { generalConfig } from "../../../config/gerenalConfig";
 
 export default async function Events() {
 	const [events] = await Promise.all([getData()]);

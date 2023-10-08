@@ -1,7 +1,7 @@
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFormWithContent";
 import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
-import styles from "../../../styles/components/Pages/NewEventPage.module.scss";
+import styles from "../../../../styles/components/Pages/NewEventPage.module.scss";
 
 const NewEventPage = () => {
 	const dataWrapper = {

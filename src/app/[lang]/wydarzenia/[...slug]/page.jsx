@@ -1,6 +1,6 @@
 import EventItem from "@/components/transitions/Events/EventItem";
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
-import styles from "../../../styles/components/Pages/EventPage.module.scss";
+import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { generalConfig } from "@/config/gerenalConfig";
 import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
 import {

@@ -1,7 +1,7 @@
 import WrapperStart from "@/components/transitions/Wrappers/WrapperStart";
 import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFormWithContent";
 import FormikContact from "@/components/transitions/Forms/FormikContact/FormikContact";
-import styles from "../../styles/components/Pages/ContactPage.module.scss";
+import styles from "../../../styles/components/Pages/ContactPage.module.scss";
 
 export default function ContactPage() {
 	const dataContent = {

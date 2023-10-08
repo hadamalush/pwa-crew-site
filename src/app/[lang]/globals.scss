@@ -1,0 +1,11 @@
+:root,
+body {
+	position: relative;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+}
+
+@import "../../styles/base/reset";
+@import "../../styles/transitions/variables";
+@import "../../styles/base/topography";
+@import "../../styles/mixins/mixins";
