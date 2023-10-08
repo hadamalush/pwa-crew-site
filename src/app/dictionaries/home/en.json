@@ -1,0 +1,47 @@
+{
+	"start_content": {
+		"title": "Only good rap",
+		"text": "At any time of the day,\n I rap as much as I can!",
+		"btn_registration": "Registration",
+		"btn_events": "Events",
+		"btn_cooperation": "Collaboration"
+	},
+	"section_history": {
+		"section_title": "A little about Hip-Hop",
+		"card_1": {
+			"title": "History of Hip-Hop",
+			"text": "Hip-hop was born in the Bronx in the 1970s as a subculture of young people, combining music, dance, graffiti and rap. Today it is a global phenomenon shaping culture and society."
+		},
+		"card_2": {
+			"title": "Hip-Hop Values",
+			"text": "Hip-hop is not just music, it is also a philosophy of life. It encompasses values such as self-knowledge, self-expression and fighting against social injustice."
+		},
+		"card_3": {
+			"title": "Great Hip-Hop Artists",
+			"text": "Hip-hop is a genre that has given birth to many unforgettable artists, from Tupac Shakur and Notorious B.I.G. to Kendrick Lamar and Cardi B. Their music inspires and raises public awareness."
+		}
+	},
+	"section_aboutus": {
+		"section_title": "Our team",
+		"card_1": {
+			"title": "Marian",
+			"desc_title": "Legendary striker.",
+			"text": "A hip-hop legend, complex beats are his games. He has the magic to create, which makes him unmatched on the scene."
+		},
+		"card_2": {
+			"title": "Baker",
+			"desc_title": "Fast flow, street poetry.",
+			"text": "A prodigious talent, he raps with passion and speed, like a street poet. His lyrics are the essence of life on the streets of the city, without wrapping it in cotton."
+		},
+		"card_3": {
+			"title": "Neo",
+			"desc_title": "Technological vibe.",
+			"text": "Hiphop of the future, he rhymes about technology and social change. His flow is as futuristic as his lyrics, which flow like a stream of data."
+		},
+		"card_4": {
+			"title": "David",
+			"desc_title": "Life stories, deep lyrics.",
+			"text": "He tells life stories, and there is a depth of emotion in his raps. David's words penetrate the soul, conveying real experiences from the streets."
+		}
+	}
+}
