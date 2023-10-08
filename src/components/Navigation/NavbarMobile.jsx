@@ -46,8 +46,8 @@ const NavbarMobile = () => {
 						className={
 							pathname === "/kolekcja" ? isActive : styles["nav__link"]
 						}>
-						<IconRender variant='film' />
-						<p>Kolekcja</p>
+						<IconRender variant='contact' />
+						<p>Kontakt</p>
 					</Link>
 				</li>
 

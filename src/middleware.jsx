@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
-let defaultLocale = "en";
-let locales = ["en", "pl", "dk"];
+let defaultLocale = "pl";
+let locales = ["pl", "en", "dk"];
 
 function getLocale(request) {
 	const acceptedLanguage = request.headers.get("accept-language") ?? undefined;
@@ -24,6 +24,7 @@ export async function middleware(request) {
 	if (pathnameHasLocale) return;
 
 	const locale = getLocale(request);
+
 	request.nextUrl.pathname = `/${locale}${pathname}`;
 
 	const headers = new Headers(request.headers);

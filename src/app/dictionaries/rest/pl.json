@@ -1,0 +1,10 @@
+{
+	"navigation": {
+		"home": "Home",
+		"events": "Wydarzenia",
+		"contact": "Kontakt",
+		"login": "Zaloguj",
+		"logout": "Wyloguj",
+		"chat": "Chat"
+	}
+}

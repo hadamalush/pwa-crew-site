@@ -1,0 +1,10 @@
+{
+	"navigation": {
+		"home": "Home",
+		"events": "Events",
+		"contact": "Contact",
+		"login": "Login",
+		"logout": "Logout",
+		"chat": "Chat"
+	}
+}

@@ -3,7 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 
-const NavbarDesktop = props => {
+const NavbarDesktop = ({ disc, ...props }) => {
+	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
+
 	const classes = `${styles.nav} ${props.className}`;
 	const { data: session, status } = useSession();
 
@@ -20,29 +22,29 @@ const NavbarDesktop = props => {
 			<ul className={styles["nav__list"]}>
 				<li>
 					<Link href='/' className={styles["nav__list-link"]}>
-						Home
+						{trl_home}
 					</Link>
 				</li>
 				<li>
 					<Link href='/wydarzenia' className={styles["nav__list-link"]}>
-						Wydarzenia
+						{trl_events}
 					</Link>
 				</li>
 
 				<li>
 					<Link href='/kontakt' className={styles["nav__list-link"]}>
-						Kontakt
+						{trl_contact}
 					</Link>
 				</li>
 				<li>
 					{!session && (
 						<Link href='/logowanie' className={styles["nav__list-link"]}>
-							Zaloguj
+							{trl_login}
 						</Link>
 					)}
 					{session && (
 						<Link href='/' className={styles["nav__list-link"]}>
-							Chat
+							{trl_chat}
 						</Link>
 					)}
 				</li>

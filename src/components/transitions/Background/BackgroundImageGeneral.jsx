@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./BackgroundImage.module.scss";
 import { usePathname } from "next/navigation";
 
-const BackgroundImageGeneral = () => {
+const BackgroundImageGeneral = ({ lang }) => {
 	let pathname = usePathname();
 
 	if (pathname.startsWith("/")) {
@@ -12,10 +12,10 @@ const BackgroundImageGeneral = () => {
 	const forgotPasswordPages = pathname.startsWith("forgot-password");
 
 	const isPath =
-		pathname === "logowanie" ||
-		pathname === "rejestracja" ||
+		pathname === `${lang}/logowanie` ||
+		pathname === `${lang}/rejestracja` ||
 		forgotPasswordPages ||
-		pathname === "kontakt";
+		pathname === `${lang}/kontakt`;
 
 	const classes = !isPath ? styles.hero : `${styles.hero} ${styles.filter}`;
 

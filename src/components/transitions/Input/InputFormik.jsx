@@ -26,7 +26,12 @@ const InputFormik = ({ name, ...props }) => {
 					</>
 				)}
 				<IconRender
-					style={!meta.error && iconStyle}
+					// style={!meta.error && iconStyle}
+					className={
+						!meta.error
+							? styles["input-box__icon--valid"]
+							: styles["input-box__icon--invalid"]
+					}
 					variant={
 						(meta.error && meta.touched && "warning") ||
 						(!meta.error && meta.touched && "good")

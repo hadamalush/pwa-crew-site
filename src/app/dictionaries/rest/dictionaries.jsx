@@ -6,4 +6,4 @@ const dictionaries = {
 	pl: () => import("./pl.json").then(module => module.default),
 };
 
-export const getDictionaryHome = async locale => dictionaries[locale]();
+export const getDictionaryElements = async locale => dictionaries[locale]();
