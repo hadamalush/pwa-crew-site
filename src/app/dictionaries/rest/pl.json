@@ -6,5 +6,28 @@
 		"login": "Zaloguj",
 		"logout": "Wyloguj",
 		"chat": "Chat"
+	},
+	"contact": {
+		"wp_content": {
+			"title": "Masz jakieś pytania?",
+			"textFirst": "Chcesz zacząć współpracę?",
+			"textSecond": "Już teraz ,skontaktuj się z nami!",
+			"alt": "Osoba siedząca na krześle przy stole wypełnia formularz kontaktowy. A w tle koncert."
+		},
+		"form": {
+			"title": "Formularz kontaktowy",
+			"email": "Email",
+			"subject": "Temat",
+			"message": "Wiadomość",
+			"btn": "Wyślij wiadomość"
+		}
+	},
+	"auth": {
+		"wp_content": {
+			"title": "Witamy!",
+			"textFirst": "Bądź na bieżąco!",
+			"textSecond": "Już teraz osiągnij sukces!",
+			"alt": "Osoba siedząca na krześle przy stole wypełnia formularz kontaktowy. A w tle koncert."
+		}
 	}
 }

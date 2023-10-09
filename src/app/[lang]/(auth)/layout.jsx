@@ -8,7 +8,7 @@ export default function Layout({ children }) {
 		textFirst: "Bądź na bieżąco!",
 		textSecond: "Już teraz osiągnij sukces!",
 		imageSrc: "/images/header/concert.jpg",
-		alt: "Concert",
+		alt: "Ludzie bawiący się pod sceną na koncercie.",
 	};
 
 	return (

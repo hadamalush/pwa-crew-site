@@ -14,7 +14,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params: { lang } }) {
-	console.log(lang);
 	const disc = await getDictionaryElements(lang);
 
 	const navTranslation = {

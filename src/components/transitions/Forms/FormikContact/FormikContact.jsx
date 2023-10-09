@@ -11,7 +11,9 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
-const FormikContact = ({ className, ...props }) => {
+const FormikContact = ({ className, dict, ...props }) => {
+	const { trl_title, trl_email, trl_subject, trl_message, trl_btn } = dict;
+
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",
@@ -64,7 +66,7 @@ const FormikContact = ({ className, ...props }) => {
 				variant: "success",
 			})
 		);
-		// router.push("/");
+		router.push("/");
 	};
 
 	return (
@@ -79,26 +81,26 @@ const FormikContact = ({ className, ...props }) => {
 				validationSchema={contactSchema}>
 				{props => (
 					<Form>
-						<h1>Formularz kontaktowy</h1>
+						<h1>{trl_title}</h1>
 						<InputFormik
 							name='email'
-							placeholder='Email'
-							aria-label='Email'
+							placeholder={trl_email}
+							aria-label={trl_email}
 							type='text'
 						/>
 						<InputFormik
 							name='title'
-							placeholder='Temat'
-							aria-label='Temat'
+							placeholder={trl_subject}
+							aria-label={trl_subject}
 							type='text'
 						/>
 						<label htmlFor='message' className={styles["logreg-box__message"]}>
 							<IconRender variant='description' />
-							<p>Wiadomość: </p>
+							<p>{trl_message}:</p>
 						</label>
 						<TextareaFormik name='message' id='message' />
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							Wyślij wiadomość
+							{trl_btn}
 						</ButtonMain>
 					</Form>
 				)}

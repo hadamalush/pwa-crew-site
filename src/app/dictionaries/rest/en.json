@@ -6,5 +6,28 @@
 		"login": "Login",
 		"logout": "Logout",
 		"chat": "Chat"
+	},
+	"contact": {
+		"wp_content": {
+			"title": "Do you have any questions?",
+			"textFirst": "Do you want to start cooperation?",
+			"textSecond": "Contact us now!",
+			"alt": "The person sitting on the chair at the table fills out the contact form. And there's a concert in the background."
+		},
+		"form": {
+			"title": "Contact Form",
+			"email": "Email",
+			"subject": "Subject",
+			"message": "Message",
+			"btn": "Send message"
+		}
+	},
+	"auth": {
+		"wp_content": {
+			"title": "Welcome!",
+			"textFirst": "Stay up to date!",
+			"textSecond": "Achieve success now!",
+			"alt": "A person sitting on a chair at a table fills out a contact form. And in the background is a concert."
+		}
 	}
 }

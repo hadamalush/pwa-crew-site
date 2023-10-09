@@ -7,9 +7,11 @@ let defaultLocale = "pl";
 let locales = ["pl", "en", "dk"];
 
 function getLocale(request) {
-	const acceptedLanguage = request.headers.get("accept-language") ?? undefined;
+	// const acceptedLanguage = request.headers.get("accept-language") ?? undefined;
 
-	let headers = { "accept-language": acceptedLanguage };
+	// let headers = { "accept-language": acceptedLanguage };
+	let headers = { "accept-language": "en-US,en;q=0.5" };
+
 	let languages = new Negotiator({ headers }).languages();
 
 	return match(languages, locales, defaultLocale);
