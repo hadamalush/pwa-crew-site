@@ -7,18 +7,34 @@ import styles from "../../styles/components/Header/MainHeader.module.scss";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const MainHeader = ({ disc, lang, ...props }) => {
 	const { data: session, status } = useSession();
 	const isLoading = useSelector(state => state.notification.isLoading);
 	const router = useRouter();
+	let pathname = usePathname();
+
+	if (pathname.startsWith("/pl") || pathname.startsWith("/en")) {
+		pathname = pathname.replace(/^\/(pl|en)/, "");
+	}
 
 	const classesHeader = !isLoading
 		? `${styles.header}`
 		: `${styles.header} ${styles.loading}`;
 
-	const changeLanguageHandler = language => {
-		router.push(`/${language}`);
+	const changeLanguageHandler = async language => {
+		const response = await fetch("/api/cookies", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(language),
+		});
+
+		if (response.ok) {
+			router.refresh();
+
+			router.replace(`/${language}/${pathname}`);
+		}
 	};
 
 	return (

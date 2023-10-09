@@ -6,16 +6,30 @@ import Negotiator from "negotiator";
 let defaultLocale = "pl";
 let locales = ["pl", "en", "dk"];
 
-function getLocale(request) {
-	// const acceptedLanguage = request.headers.get("accept-language") ?? undefined;
+const getLangFromCookies = request => {
+	const lang = request.cookies.get("lang");
+	let acceptedLang = null;
 
-	// let headers = { "accept-language": acceptedLanguage };
-	let headers = { "accept-language": "en-US,en;q=0.5" };
+	if (lang) {
+		acceptedLang = lang.value === "pl" ? "pl-PL,pl;q=0.9" : "en-US,en;q=0.5";
+	}
+
+	return acceptedLang;
+};
+
+const getLocale = request => {
+	const lang = getLangFromCookies(request);
+
+	// const acceptedLanguage = lang
+	// 	? lang
+	// 	: request.headers.get("accept-language") ?? undefined;
+
+	let headers = { "accept-language": lang };
 
 	let languages = new Negotiator({ headers }).languages();
 
 	return match(languages, locales, defaultLocale);
-}
+};
 
 export async function middleware(request) {
 	const { pathname } = request.nextUrl;
@@ -26,6 +40,8 @@ export async function middleware(request) {
 	if (pathnameHasLocale) return;
 
 	const locale = getLocale(request);
+
+	console.log(locale);
 
 	request.nextUrl.pathname = `/${locale}${pathname}`;
 
@@ -53,11 +69,11 @@ export async function middleware(request) {
 
 	return Response.redirect(request.nextUrl);
 
-	return NextResponse.next({
-		request: {
-			headers: headers,
-		},
-	});
+	// return NextResponse.next({
+	// 	request: {
+	// 		headers: headers,
+	// 	},
+	// });
 }
 
 export const config = {
