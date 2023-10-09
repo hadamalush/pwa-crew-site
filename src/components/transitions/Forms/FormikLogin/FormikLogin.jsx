@@ -13,7 +13,17 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
-const FormikLogin = ({ className, ...props }) => {
+const FormikLogin = ({ className, dict, lang, ...props }) => {
+	const {
+		trl_title,
+		trl_email,
+		trl_password,
+		trl_forgotPass,
+		trl_btn,
+		trl_question,
+		trl_questionLink,
+	} = dict;
+
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const { data: session, status } = useSession();
@@ -94,37 +104,37 @@ const FormikLogin = ({ className, ...props }) => {
 				validationSchema={loginSchema}>
 				{props => (
 					<Form>
-						<h1>Logowanie</h1>
+						<h1>{trl_title}</h1>
 
 						<InputFormik
 							name='email'
-							placeholder='Email'
-							aria-label='Email'
+							placeholder={trl_email}
+							aria-label={trl_email}
 							type='text'
 						/>
 						<InputFormik
 							name='password'
-							placeholder='Hasło'
-							aria-label='Hasło'
+							placeholder={trl_password}
+							aria-label={trl_password}
 							type='password'
 						/>
 
 						<Link
 							href='/forgot-password'
 							onClick={changeWebstiteHandler.bind(null, "forgot-password")}>
-							Zapomniałeś hasła?
+							{trl_forgotPass}
 						</Link>
 
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							Zaloguj
+							{trl_btn}
 						</ButtonMain>
 
 						<p>
-							Nie masz konta?
+							{trl_question}
 							<Link
 								href='/rejestracja'
 								onClick={changeWebstiteHandler.bind(null, "rejestracja")}>
-								Zarejestruj
+								{trl_questionLink}
 							</Link>
 						</p>
 					</Form>

@@ -38,7 +38,17 @@
 			"terms": "Accepts the terms of the agreement",
 			"btn": "Register",
 			"question": "Do you have an account?",
-			"question_link": "Login"
+			"questionLink": "Login"
+		},
+
+		"logging": {
+			"title": "Logging",
+			"email": "Email",
+			"password": "Password",
+			"forgotPass": "Forgot password?",
+			"btn": "Login",
+			"question": "Don't have an account?",
+			"questionLink": "Sign up"
 		}
 	}
 }

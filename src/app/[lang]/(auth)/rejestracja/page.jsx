@@ -12,7 +12,7 @@ export default async function RegistrationPage({ params: { lang } }) {
 		trl_terms: dict.auth.registration.terms,
 		trl_btn: dict.auth.registration.btn,
 		trl_question: dict.auth.registration.question,
-		trl_questionLnk: dict.auth.registration.questionLink,
+		trl_questionLink: dict.auth.registration.questionLink,
 	};
 
 	return <FormikRegister dict={regTranslation} lang={lang} />;

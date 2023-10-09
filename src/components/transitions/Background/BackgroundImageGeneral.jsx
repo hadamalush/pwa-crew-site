@@ -9,7 +9,7 @@ const BackgroundImageGeneral = ({ lang }) => {
 	if (pathname.startsWith("/")) {
 		pathname = pathname.replace(/^\/+/, "");
 	}
-	const forgotPasswordPages = pathname.startsWith("forgot-password");
+	const forgotPasswordPages = pathname.startsWith(`${lang}/forgot-password`);
 
 	const isPath =
 		pathname === `${lang}/logowanie` ||

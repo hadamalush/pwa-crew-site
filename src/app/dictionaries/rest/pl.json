@@ -39,6 +39,16 @@
 			"btn": "Zarejestruj",
 			"question": "Masz konto?",
 			"questionLink": "Zaloguj"
+		},
+
+		"logging": {
+			"title": "Logowanie",
+			"email": "Email",
+			"password": "Hasło",
+			"forgotPass": "Zapomniałeś hasła?",
+			"btn": "Login",
+			"question": "Nie masz konta?",
+			"questionLink": "Dołącz do nas."
 		}
 	}
 }
