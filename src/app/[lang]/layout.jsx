@@ -31,7 +31,7 @@ export default async function RootLayout({ children, params: { lang } }) {
 			<body>
 				<SessionProvider session={session}>
 					<ReduxProvider>
-						<MainHeader disc={navTranslation} />
+						<MainHeader disc={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
 						{children}

@@ -93,6 +93,12 @@ const IconRender = props => {
 				return icons.arrow_back;
 			case "code":
 				return icons.code;
+			case "flagPL":
+				return icons.flagPL;
+			case "flagUS":
+				return icons.flagUS;
+			case "glob":
+				return icons.glob;
 			default:
 				return null;
 		}

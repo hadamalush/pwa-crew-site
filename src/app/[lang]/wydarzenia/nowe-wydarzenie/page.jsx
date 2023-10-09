@@ -3,7 +3,7 @@ import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFor
 import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
 import styles from "../../../../styles/components/Pages/NewEventPage.module.scss";
 
-const NewEventPage = () => {
+const NewEventPage = params => {
 	const dataWrapper = {
 		title: "Dodaj wydarzenie",
 		textFirst: "Bądź na bieżąco!",
@@ -11,6 +11,8 @@ const NewEventPage = () => {
 		imageSrc: "/images/header/concert2.jpg",
 		alt: "Concert",
 	};
+
+	console.log(params);
 
 	return (
 		<WrapperSection className={styles["section__new-event"]} id='formularz'>

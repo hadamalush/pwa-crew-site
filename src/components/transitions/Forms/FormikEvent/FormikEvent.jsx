@@ -10,6 +10,7 @@ import { eventSchema } from "@/components/Schemas/FormSchem";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 import { generalConfig } from "@/config/gerenalConfig";
+
 /**
  * @description This component returns form for create new event.
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component withoud that wrapper.

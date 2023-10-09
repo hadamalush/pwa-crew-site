@@ -2,24 +2,48 @@
 import NavbarDesktop from "../Navigation/NavbarDesktop";
 import Logo from "../transitions/Logo/Logo";
 import NavbarMobile from "../Navigation/NavbarMobile";
+import IconRender from "../Icons/IconRender";
 import styles from "../../styles/components/Header/MainHeader.module.scss";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-const MainHeader = ({ disc, ...props }) => {
+const MainHeader = ({ disc, lang, ...props }) => {
 	const { data: session, status } = useSession();
 	const isLoading = useSelector(state => state.notification.isLoading);
+	const router = useRouter();
 
 	const classesHeader = !isLoading
 		? `${styles.header}`
 		: `${styles.header} ${styles.loading}`;
 
+	const changeLanguageHandler = language => {
+		router.push(`/${language}`);
+	};
+
 	return (
 		<>
 			<header className={classesHeader}>
 				<Logo className={styles["header__logo"]} />
-				<NavbarDesktop className={styles["header__nav"]} disc={disc} />
+				<NavbarDesktop
+					className={styles["header__nav"]}
+					disc={disc}
+					lang={lang}
+				/>
 				<NavbarMobile />
+				<IconRender variant='glob' className={styles["header__glob"]} />
+				<ul className={styles["header__leanguages"]}>
+					<li
+						className={styles["header__leanguages-item"]}
+						onClick={() => changeLanguageHandler("en")}>
+						EN
+					</li>
+					<li
+						className={styles["header__leanguages-item"]}
+						onClick={() => changeLanguageHandler("pl")}>
+						PL
+					</li>
+				</ul>
 			</header>
 		</>
 	);

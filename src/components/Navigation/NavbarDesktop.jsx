@@ -3,13 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 
-const NavbarDesktop = ({ disc, ...props }) => {
+const NavbarDesktop = ({ disc, lang, ...props }) => {
 	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
 
 	const classes = `${styles.nav} ${props.className}`;
 	const { data: session, status } = useSession();
-
-	console.log(session);
+	const eventUrl = lang === "pl" ? "/wydarzenia" : "/events";
 
 	const logoutHandler = e => {
 		e.preventDefault();
@@ -26,7 +25,7 @@ const NavbarDesktop = ({ disc, ...props }) => {
 					</Link>
 				</li>
 				<li>
-					<Link href='/wydarzenia' className={styles["nav__list-link"]}>
+					<Link href={eventUrl} className={styles["nav__list-link"]}>
 						{trl_events}
 					</Link>
 				</li>

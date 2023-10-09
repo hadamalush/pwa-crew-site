@@ -40,10 +40,87 @@
 		transform: translateY(-50%);
 	}
 
+	.header &__glob {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 5rem;
+		right: 0;
+		top: 50%;
+		height: 100%;
+		transform: translateY(-50%);
+		transition: opacity 0.3s;
+		cursor: pointer;
+
+		svg {
+			width: 2rem;
+			height: 100%;
+		}
+
+		&:hover + ul {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	&__leanguages {
+		position: absolute;
+		bottom: -7rem;
+		width: 5rem;
+		height: 7rem;
+		right: 0;
+		background-color: $background-nav;
+		box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.8);
+		opacity: 0;
+		transform: scale(0, 1);
+		transition: opacity 0.3s, transform 0.3s;
+
+		:first-child::after {
+			content: "";
+			background-color: #fff;
+			position: absolute;
+			width: 50%;
+			height: 1px;
+			bottom: 0;
+		}
+		&-item {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 50%;
+			font-size: 1.6rem;
+			cursor: pointer;
+			transition: color 0.3s;
+
+			&:hover {
+				color: $secondary-color;
+			}
+		}
+
+		&:hover {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
 	@include media-query(mediumScreen) {
 		position: fixed;
 		grid-template-columns: 20px 1fr 3fr 10rem;
 		grid-template-rows: 1fr 1fr;
+
+		.header &__glob {
+			right: 10rem;
+
+			svg {
+				width: 3rem;
+			}
+		}
+
+		&__leanguages {
+			right: 10rem;
+		}
 
 		&__logo {
 			grid-row: 1/3;
