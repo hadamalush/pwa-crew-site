@@ -12,8 +12,19 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
-const FormikRegister = ({ className, ...props }) => {
+const FormikRegister = ({ className, dict, lang, ...props }) => {
 	const router = useRouter();
+	const {
+		trl_title,
+		trl_email,
+		trl_password,
+		trl_confirmPassword,
+		trl_terms,
+		trl_btn,
+		trl_question,
+		trl_questionLink,
+	} = dict;
+
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",
@@ -92,42 +103,37 @@ const FormikRegister = ({ className, ...props }) => {
 				validationSchema={registerSchema}>
 				{props => (
 					<Form>
-						<h1>Rejestracja</h1>
+						<h1>{trl_title}</h1>
 
 						<InputFormik
 							name='email'
-							placeholder='Email'
-							aria-label='Email'
+							placeholder={trl_email}
+							aria-label={trl_email}
 							type='text'
 						/>
 						<InputFormik
 							name='password'
-							placeholder='Hasło'
-							aria-label='Hasło'
+							placeholder={trl_password}
+							aria-label={trl_password}
 							type='password'
 						/>
 						<InputFormik
 							name='confirmPassword'
-							placeholder='Powtórz hasło'
-							aria-label='Powtórz hasło'
+							placeholder={trl_confirmPassword}
+							aria-label={trl_confirmPassword}
 							type='password'
 						/>
 
-						<CheckboxFormik
-							name='terms'
-							label='Akceptuje warunki umowy'
-							type='checkbox'
-						/>
+						<CheckboxFormik name='terms' label={trl_terms} type='checkbox' />
 
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{" "}
-							Zarejestruj{" "}
+							{trl_btn}
 						</ButtonMain>
 
 						<p>
-							Masz konto?{" "}
+							{trl_question}
 							<Link href='/logowanie' onClick={changeWebstiteHandler}>
-								Zaloguj
+								{trl_questionLink}
 							</Link>
 						</p>
 					</Form>

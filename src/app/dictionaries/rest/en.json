@@ -28,6 +28,17 @@
 			"textFirst": "Stay up to date!",
 			"textSecond": "Achieve success now!",
 			"alt": "A person sitting on a chair at a table fills out a contact form. And in the background is a concert."
+		},
+
+		"registration": {
+			"title": "Registration",
+			"email": "Email",
+			"password": "Password",
+			"confirmPassword": "Confrim password",
+			"terms": "Accepts the terms of the agreement",
+			"btn": "Register",
+			"question": "Do you have an account?",
+			"question_link": "Login"
 		}
 	}
 }

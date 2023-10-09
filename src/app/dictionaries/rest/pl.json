@@ -28,6 +28,17 @@
 			"textFirst": "Bądź na bieżąco!",
 			"textSecond": "Już teraz osiągnij sukces!",
 			"alt": "Osoba siedząca na krześle przy stole wypełnia formularz kontaktowy. A w tle koncert."
+		},
+
+		"registration": {
+			"title": "Rejestracja",
+			"email": "Email",
+			"password": "Hasło",
+			"confirmPassword": "Powtórz hasło",
+			"terms": "Akceptuje warunki umowy",
+			"btn": "Zarejestruj",
+			"question": "Masz konto?",
+			"questionLink": "Zaloguj"
 		}
 	}
 }
