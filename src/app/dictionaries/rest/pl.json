@@ -49,6 +49,21 @@
 			"btn": "Login",
 			"question": "Nie masz konta?",
 			"questionLink": "Dołącz do nas."
+		},
+
+		"forgotPass": {
+			"title": "Zapomniałeś hasła?",
+			"email": "Email",
+			"btn": "Zresetuj hasło",
+			"question": "Nie masz konta?",
+			"questionLink": "Dołącz do nas."
+		},
+
+		"forgotResetPass": {
+			"newPassword": "Nowe hasło",
+			"confirmPassword": "Powtórz hasło",
+			"code": "Kod resetujący hasło",
+			"btn": "Zmień hasło"
 		}
 	}
 }

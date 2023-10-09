@@ -49,6 +49,21 @@
 			"btn": "Login",
 			"question": "Don't have an account?",
 			"questionLink": "Sign up"
+		},
+
+		"forgotPass": {
+			"title": "Did you forget your password?",
+			"email": "Email",
+			"btnReset": "Reset password",
+			"question": "Don't have an account?",
+			"questionLink": "Sign up"
+		},
+
+		"forgotResetPass": {
+			"newPassword": "New password",
+			"confirmPassword": "Confirm password",
+			"code": "Password reset code",
+			"btn": "Change password"
 		}
 	}
 }

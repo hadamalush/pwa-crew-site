@@ -16,8 +16,22 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
-const FormikForgotPassword = ({ resetId, className, ...props }) => {
+const FormikForgotPassword = ({ resetId, dict, lang, className, ...props }) => {
+	const {
+		trl_title,
+		trl_email,
+		trl_btnReset,
+		trl_question,
+		trl_questionLink,
+		trl_newPassword,
+		trl_confirmPassword,
+		trl_code,
+		trl_btnChange,
+	} = dict;
+
+	//resetForm - it is for check which page is now, for choose right api/route and right form.
 	const resetForm = resetId ? true : false;
+
 	const schema = resetForm ? forgotNewPasswordSchema : forgotLinkSchema;
 
 	const router = useRouter();
@@ -123,13 +137,13 @@ const FormikForgotPassword = ({ resetId, className, ...props }) => {
 				validationSchema={schema}>
 				{props => (
 					<Form>
-						<h1>Zapomniałeś hasła?</h1>
+						<h1>{trl_title}</h1>
 
 						{!resetForm && (
 							<InputFormik
 								name='email'
-								placeholder='Email'
-								aria-label='Email'
+								placeholder={trl_email}
+								aria-label={trl_email}
 								type='text'
 							/>
 						)}
@@ -137,33 +151,33 @@ const FormikForgotPassword = ({ resetId, className, ...props }) => {
 							<>
 								<InputFormik
 									name='password'
-									placeholder='Nowe hasło'
-									aria-label='Nowe hasło'
+									placeholder={trl_newPassword}
+									aria-label={trl_newPassword}
 									type='password'
 								/>
 								<InputFormik
 									name='confirmPassword'
-									placeholder='Powtórz hasło'
-									aria-label='Powtórz hasło'
+									placeholder={trl_confirmPassword}
+									aria-label={trl_confirmPassword}
 									type='password'
 								/>
 								<InputFormik
 									name='code'
-									placeholder='Kod resetujący hasło'
-									aria-label='Kod resetujący hasło'
+									placeholder={trl_code}
+									aria-label={trl_code}
 									type='text'
 								/>
 							</>
 						)}
 
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{resetForm ? "Zmień hasło" : "Zresetuj hasło"}
+							{resetForm ? trl_btnChange : trl_btnReset}
 						</ButtonMain>
 
 						<p>
-							Nie masz konta?
+							{trl_question}
 							<Link href='/rejestracja' onClick={changeWebstiteHandler}>
-								Zarejestruj
+								{trl_questionLink}
 							</Link>
 						</p>
 					</Form>
