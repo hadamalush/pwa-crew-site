@@ -5,10 +5,19 @@ import { headers } from "next/headers";
 import nodemailer from "nodemailer";
 import BrevoTransport from "nodemailer-brevo-transport";
 import { insertLimitByIp } from "@/lib/protection/protection";
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
 export const POST = async request => {
 	const ip = headers().get("x-forwarded-for");
-	const { email, subject, message } = await request.json();
+	const { email, subject, message, lang } = await request.json();
+	const dict = await getDictionaryNotifi(lang);
+
+	const notification = {
+		trl_err_422: dict.notifications.err_422,
+		trl_err_429: dict.notifications.err_429,
+		trl_generalError: dict.notifications.generalError,
+		trl_success: dict.notifications.sendMessage.success,
+	};
 
 	const ourEmail = generalConfig.receiveEmailAddresContact;
 	const defaultFeedback = generalConfig.defaultReplyMessage;
@@ -25,8 +34,8 @@ export const POST = async request => {
 		!defaultFeedback
 	) {
 		return NextResponse.json(
-			{ error: "Nie udało się wysłać wiadomości, spróbuj ponownie." },
-			{ status: 500 }
+			{ error: notification.trl_err_422 },
+			{ status: 422 }
 		);
 	}
 
@@ -35,7 +44,7 @@ export const POST = async request => {
 	if (result.limit) {
 		return NextResponse.json(
 			{
-				error: "Przekroczono limit, spróbuj ponownie za 30 minut.",
+				error: notification.trl_err_429,
 			},
 			{ status: 429 }
 		);
@@ -70,13 +79,13 @@ export const POST = async request => {
 		const result = await Promise.all(sendMailPromises);
 	} catch (error) {
 		return NextResponse.json(
-			{ error: "Nie udało się wysłać wiadomości, spróbuj ponownie." },
+			{ error: notification.trl_generalError },
 			{ status: 500 }
 		);
 	}
 
 	return NextResponse.json(
-		{ message: "Super, wysłano wiadomość pomyślnie" },
+		{ message: notification.trl_success },
 		{ status: 200 }
 	);
 };

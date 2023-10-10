@@ -3,9 +3,11 @@ import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFor
 import FormikContact from "@/components/transitions/Forms/FormikContact/FormikContact";
 import styles from "../../../styles/components/Pages/ContactPage.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
 export default async function ContactPage({ params: { lang } }) {
 	const dict = await getDictionaryElements(lang);
+	const dictNotifi = await getDictionaryNotifi(lang);
 
 	const dataContentWrapper = {
 		trl_title: dict.contact.wp_content.title,
@@ -23,6 +25,8 @@ export default async function ContactPage({ params: { lang } }) {
 		trl_btn: dict.contact.form.btn,
 	};
 
+	const trl_error = dictNotifi.notifications.newEvent.generalError;
+
 	return (
 		<main>
 			<WrapperStart className={styles["start"]}>
@@ -34,7 +38,11 @@ export default async function ContactPage({ params: { lang } }) {
 					imageSrc={dataContentWrapper.imageSrc}
 					alt={dataContentWrapper.trl_alt}
 					className={styles.box}>
-					<FormikContact dict={dataContentForm} lang={lang} />
+					<FormikContact
+						dict={dataContentForm}
+						lang={lang}
+						trl_error={trl_error}
+					/>
 				</WrapperFormWithContent>
 			</WrapperStart>
 		</main>

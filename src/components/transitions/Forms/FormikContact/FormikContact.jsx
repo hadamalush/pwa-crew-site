@@ -11,8 +11,9 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
-const FormikContact = ({ className, dict, ...props }) => {
-	const { trl_title, trl_email, trl_subject, trl_message, trl_btn } = dict;
+const FormikContact = ({ className, dict, lang, ...props }) => {
+	const { trl_title, trl_email, trl_subject, trl_message, trl_btn, trl_error } =
+		dict;
 
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const isMediumScreen = useMediaQuery({
@@ -31,15 +32,16 @@ const FormikContact = ({ className, dict, ...props }) => {
 		const email = values.email;
 		const subject = values.title;
 		const message = values.message;
+		let data;
 
 		try {
 			const response = await fetch("/api/sendMessage", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, subject, message }),
+				body: JSON.stringify({ email, subject, message, lang }),
 			});
 
-			const data = await response.json();
+			data = await response.json();
 
 			if (!response.ok) {
 				dispatch(
@@ -53,7 +55,7 @@ const FormikContact = ({ className, dict, ...props }) => {
 		} catch (error) {
 			dispatch(
 				showResult({
-					message: "Wysyłanie wiadomości nie powiodło się,\n spróbuj ponownie.",
+					message: trl_error,
 					variant: "warning",
 				})
 			);
@@ -62,7 +64,7 @@ const FormikContact = ({ className, dict, ...props }) => {
 
 		dispatch(
 			showResult({
-				message: "Wysłano wiadomość.",
+				message: data.message,
 				variant: "success",
 			})
 		);
