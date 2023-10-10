@@ -10,6 +10,14 @@ const nextConfig = {
 				destination: "/:lang(en|pl)/events",
 			},
 			{
+				source: "/:lang(en|pl)/wydarzenia/nowe-wydarzenie",
+				destination: "/:lang(en|pl)/events/new-event",
+			},
+			{
+				source: "/:lang(en|pl)/wydarzenia/:path*",
+				destination: "/:lang(en|pl)/events/:path*",
+			},
+			{
 				source: "/:lang(en|pl)/kontakt",
 				destination: "/:lang(en|pl)/contact",
 			},
@@ -20,10 +28,6 @@ const nextConfig = {
 			{
 				source: "/:lang(en|pl)/rejestracja",
 				destination: "/:lang(en|pl)/registration",
-			},
-			{
-				source: "/:lang(en|pl)/wydarzenia/nowe-wydarzenia",
-				destination: "/:lang(en|pl)/events/new-events",
 			},
 			{
 				source: "/:lang(en|pl)/zapomniane-haslo",

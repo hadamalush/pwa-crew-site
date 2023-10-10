@@ -80,5 +80,15 @@
 			"textFirst": "Account activation failed. ",
 			"textSecond": "Please contact the administrator."
 		}
+	},
+	"events": {
+		"title": "Events",
+		"btn_createEvent": "Create event",
+		"btn_checkEvents": "Check events",
+		"event": {
+			"btn_seeDetails": "See details",
+			"startEvent": "Start of the event"
+		},
+		"newEvent": {}
 	}
 }

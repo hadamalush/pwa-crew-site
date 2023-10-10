@@ -80,5 +80,15 @@
 			"textFirst": "Aktywacja konta się nie powiodła. ",
 			"textSecond": "Prosimy o kontakt z administratorem."
 		}
+	},
+	"events": {
+		"title": "Wydarzenia",
+		"btn_createEvent": "Utwórz wydarzenie",
+		"btn_checkEvents": "Sprawdź wydarzenia",
+		"event": {
+			"btn_seeDetails": "Zobacz szczegóły",
+			"startEvent": "Start wydarzenia"
+		},
+		"newEvent": {}
 	}
 }
