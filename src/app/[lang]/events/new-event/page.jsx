@@ -3,9 +3,11 @@ import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFor
 import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
 import styles from "../../../../styles/components/Pages/NewEventPage.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
 const NewEventPage = async ({ params: { lang } }) => {
 	const dict = await getDictionaryElements(lang);
+	const dictNotifi = await getDictionaryNotifi(lang);
 
 	const dataWrapper = {
 		title: dict.events.newEvent.wp_content.title,
@@ -28,6 +30,8 @@ const NewEventPage = async ({ params: { lang } }) => {
 		trl_btn_createEvent: dict.events.newEvent.form.btn_createEvent,
 	};
 
+	const trl_error = dictNotifi.notifications.newEvent.generalError;
+
 	return (
 		<WrapperSection className={styles["section__new-event"]} id='form'>
 			<WrapperFormWithContent
@@ -38,7 +42,7 @@ const NewEventPage = async ({ params: { lang } }) => {
 				imageSrc={dataWrapper.imageSrc}
 				alt={dataWrapper.alt}
 				className={styles.container}>
-				<FormikEvent dict={formTranslation} />
+				<FormikEvent dict={formTranslation} trl_error={trl_error} lang={lang} />
 			</WrapperFormWithContent>
 		</WrapperSection>
 	);

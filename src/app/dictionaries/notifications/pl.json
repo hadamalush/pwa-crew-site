@@ -1,0 +1,14 @@
+{
+	"notifications": {
+		"generalError": "Niepowiodło się, spróbuj ponownie",
+		"err_400": "Nie znaleziono strony",
+		"err_401": "Musisz być zalogowany",
+		"err_422": "Wrowadzone dane są nie prawidłowe",
+		"err_500": "Nie udało się połączyć z bazą danych",
+
+		"newEvent": {
+			"generalError": "Nie udało się utworzyć wydarzenia",
+			"success": "Dodano wydarzenie"
+		}
+	}
+}

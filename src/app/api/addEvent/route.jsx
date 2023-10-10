@@ -2,19 +2,31 @@ import { NextResponse } from "next/server";
 import { connectDatabaseEvents } from "@/lib/mongodb";
 import { insertDocument } from "@/lib/mongodb";
 import { getServerSession } from "next-auth";
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
 export const POST = async request => {
 	const session = await getServerSession();
+	const data = await request.json();
+	const { lang } = data;
+	const disc = await getDictionaryNotifi(lang);
+
+	const notification = {
+		trl_err_401: disc.notifications.err_401,
+		trl_err_422: disc.notifications.err_422,
+		trl_err_500: disc.notifications.err_500,
+		trl_generalError: disc.notifications.newEvent.generalError,
+		trl_success: disc.notifications.newEvent.success,
+	};
 
 	if (!session) {
 		return NextResponse.json(
-			{ error: "Tylko zalogowani mogą dodawać wydarzenia!" },
+			{ error: notification.trl_err_401 },
 			{ status: 401 }
 		);
 	}
 
 	const email = session.user.email;
-	const data = await request.json();
+
 	const {
 		title,
 		town,
@@ -51,7 +63,7 @@ export const POST = async request => {
 		inputDate < currentDate
 	) {
 		return NextResponse.json(
-			{ error: "Wprowadzone dane są nie poprawne." },
+			{ error: notification.trl_err_422 },
 			{ status: 422 }
 		);
 	}
@@ -62,7 +74,7 @@ export const POST = async request => {
 		client = await connectDatabaseEvents();
 	} catch (error) {
 		return NextResponse.json(
-			{ error: "Nie udalo sie polaczyc z baza danych!" },
+			{ error: notification.trl_err_500 },
 			{ status: 500 }
 		);
 	}
@@ -85,12 +97,15 @@ export const POST = async request => {
 		client.close();
 		return NextResponse.json(
 			{
-				error: "Nie udało się utworzyć wydarzenia.",
+				error: notification.trl_generalError,
 			},
 			{ status: 305 }
 		);
 	}
 
 	client.close();
-	return NextResponse.json({ message: "Dodano wydarzenie!" }, { status: 200 });
+	return NextResponse.json(
+		{ message: notification.trl_success },
+		{ status: 200 }
+	);
 };

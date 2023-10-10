@@ -1,0 +1,14 @@
+{
+	"notifications": {
+		"generalError": "Failed, try again",
+		"err_400": "Page not found",
+		"err_401": "You must be logged in",
+		"err_422": "The data entered is not correct",
+		"err_500": "Failed to connect to the database",
+
+		"newEvent": {
+			"generalError": "Failed to create event",
+			"success": "Added event"
+		}
+	}
+}

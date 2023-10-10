@@ -16,7 +16,7 @@ import { generalConfig } from "@/config/gerenalConfig";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component withoud that wrapper.
  */
 
-const FormikEvent = ({ dict }) => {
+const FormikEvent = ({ dict, lang, trl_error }) => {
 	const {
 		trl_title,
 		trl_eventTitle,
@@ -130,11 +130,14 @@ const FormikEvent = ({ dict }) => {
 					description: values.description,
 					imageSrcVercelBlob: imgSrcVercelBlob,
 					imageSrcMega: imgSrcMega,
+					lang: lang,
 					// imageSrcLocal: imgSrcLocal,
 				}),
 			});
 
 			const data = await response.json();
+
+			console.log(data);
 
 			if (!response.ok) {
 				dispatch(showResult({ message: data.error, variant: "warning" }));
@@ -145,7 +148,7 @@ const FormikEvent = ({ dict }) => {
 		} catch (error) {
 			dispatch(
 				showResult({
-					message: "Nie udało się utworzyć wydarzenia",
+					message: trl_error,
 					variant: "warning",
 				})
 			);
