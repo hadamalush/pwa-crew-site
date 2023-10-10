@@ -40,12 +40,14 @@ const InputFormikFile = ({
 			<WrapperInput className={styles["input-box"]}>
 				<IconRender variant={name} />
 				<input
+					id={name}
 					name={name}
 					type='file'
 					className={styles.input}
 					autoComplete='off'
 					onChange={validationFileHandler}
 					{...props}
+					capture='camera'
 				/>
 				{meta.error && meta.touched && (
 					<>

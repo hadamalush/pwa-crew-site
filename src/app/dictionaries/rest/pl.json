@@ -89,6 +89,25 @@
 			"btn_seeDetails": "Zobacz szczegóły",
 			"startEvent": "Start wydarzenia"
 		},
-		"newEvent": {}
+		"newEvent": {
+			"wp_content": {
+				"title": "Dodawaj z łatwością.",
+				"testFirst": "Promuj z pasją.",
+				"textSecond": "Twoja zabawa, nasza satysfakcja!",
+				"alt": "Ludzie bawiący się na koncercie pod wielką sceną."
+			},
+			"form": {
+				"title": "Dodawanie wydarzenia",
+				"eventTitle": "Tytuł wydarzenia",
+				"town": "Miejscowość",
+				"codePost": "Kod pocztowy",
+				"street": "Ulica",
+				"date": "Data",
+				"startTime": "Czas rozpoczęcia",
+				"picture": "Zdjęcie",
+				"eventDesc": "Opis wydarzenia",
+				"btn_createEvent": "Utwórz wydarzenie"
+			}
+		}
 	}
 }

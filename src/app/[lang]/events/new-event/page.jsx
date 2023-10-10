@@ -2,14 +2,30 @@ import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFormWithContent";
 import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
 import styles from "../../../../styles/components/Pages/NewEventPage.module.scss";
+import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
-const NewEventPage = params => {
+const NewEventPage = async ({ params: { lang } }) => {
+	const dict = await getDictionaryElements(lang);
+
 	const dataWrapper = {
-		title: "Dodaj wydarzenie",
-		textFirst: "Bądź na bieżąco!",
-		textSecond: "Już teraz osiągnij sukces!",
+		title: dict.events.newEvent.wp_content.title,
+		textFirst: dict.events.newEvent.wp_content.textFirst,
+		textSecond: dict.events.newEvent.wp_content.textSecond,
 		imageSrc: "/images/header/concert2.jpg",
-		alt: "Concert",
+		alt: dict.events.newEvent.wp_content.alt,
+	};
+
+	const formTranslation = {
+		trl_title: dict.events.newEvent.form.title,
+		trl_eventTitle: dict.events.newEvent.form.eventTitle,
+		trl_town: dict.events.newEvent.form.town,
+		trl_codePost: dict.events.newEvent.form.codePost,
+		trl_street: dict.events.newEvent.form.street,
+		trl_date: dict.events.newEvent.form.date,
+		trl_startTime: dict.events.newEvent.form.startTime,
+		trl_picture: dict.events.newEvent.form.picture,
+		trl_eventDesc: dict.events.newEvent.form.eventDesc,
+		trl_btn_createEvent: dict.events.newEvent.form.btn_createEvent,
 	};
 
 	return (
@@ -22,7 +38,7 @@ const NewEventPage = params => {
 				imageSrc={dataWrapper.imageSrc}
 				alt={dataWrapper.alt}
 				className={styles.container}>
-				<FormikEvent />
+				<FormikEvent dict={formTranslation} />
 			</WrapperFormWithContent>
 		</WrapperSection>
 	);

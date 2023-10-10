@@ -89,6 +89,25 @@
 			"btn_seeDetails": "See details",
 			"startEvent": "Start of the event"
 		},
-		"newEvent": {}
+		"newEvent": {
+			"wp_content": {
+				"title": "Add with ease.",
+				"testFirst": "Promote with passion.",
+				"textSecond": "Your fun, our satisfaction!",
+				"alt": "People enjoying the concert in front of the big stage."
+			},
+			"form": {
+				"title": "Adding an event",
+				"eventTitle": "Event title",
+				"town": "Town",
+				"codePost": "Code post",
+				"street": "Street",
+				"date": "Date",
+				"startTime": "startTime",
+				"picture": "Picture",
+				"eventDesc": "Event description",
+				"btn_createEvent": "Create event"
+			}
+		}
 	}
 }
