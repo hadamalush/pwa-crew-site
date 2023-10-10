@@ -9,6 +9,8 @@ const NavbarDesktop = ({ disc, lang, ...props }) => {
 	const classes = `${styles.nav} ${props.className}`;
 	const { data: session, status } = useSession();
 	const eventUrl = lang === "pl" ? "/wydarzenia" : "/events";
+	const contactUrl = lang === "pl" ? "/kontakt" : "/contact";
+	const loginUrl = lang === "pl" ? "/logowanie" : "/login";
 
 	const logoutHandler = e => {
 		e.preventDefault();
@@ -31,13 +33,13 @@ const NavbarDesktop = ({ disc, lang, ...props }) => {
 				</li>
 
 				<li>
-					<Link href='/kontakt' className={styles["nav__list-link"]}>
+					<Link href={contactUrl} className={styles["nav__list-link"]}>
 						{trl_contact}
 					</Link>
 				</li>
 				<li>
 					{!session && (
-						<Link href='/logowanie' className={styles["nav__list-link"]}>
+						<Link href={loginUrl} className={styles["nav__list-link"]}>
 							{trl_login}
 						</Link>
 					)}

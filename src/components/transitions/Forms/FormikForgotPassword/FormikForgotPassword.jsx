@@ -17,6 +17,7 @@ import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
 const FormikForgotPassword = ({ resetId, dict, lang, className, ...props }) => {
+	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
 	const {
 		trl_title,
 		trl_email,
@@ -64,7 +65,7 @@ const FormikForgotPassword = ({ resetId, dict, lang, className, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push("/rejestracja");
+			router.push(registrationUrl);
 		}, 500);
 	};
 
@@ -176,7 +177,7 @@ const FormikForgotPassword = ({ resetId, dict, lang, className, ...props }) => {
 
 						<p>
 							{trl_question}
-							<Link href='/rejestracja' onClick={changeWebstiteHandler}>
+							<Link href={`${registrationUrl}`} onClick={changeWebstiteHandler}>
 								{trl_questionLink}
 							</Link>
 						</p>

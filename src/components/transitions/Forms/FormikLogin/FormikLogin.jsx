@@ -14,6 +14,12 @@ import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
 const FormikLogin = ({ className, dict, lang, ...props }) => {
+	console.log(lang);
+	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
+	const forgotPassUrl =
+		lang === "pl" ? "/zapomniane-haslo" : "/forgot-password";
+
+	console.log("check: ", forgotPassUrl);
 	const {
 		trl_title,
 		trl_email,
@@ -54,7 +60,7 @@ const FormikLogin = ({ className, dict, lang, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push(`/${website}`);
+			router.push(`${website}`);
 		}, 500);
 	};
 
@@ -120,8 +126,8 @@ const FormikLogin = ({ className, dict, lang, ...props }) => {
 						/>
 
 						<Link
-							href='/forgot-password'
-							onClick={changeWebstiteHandler.bind(null, "forgot-password")}>
+							href={`${forgotPassUrl}`}
+							onClick={changeWebstiteHandler.bind(null, forgotPassUrl)}>
 							{trl_forgotPass}
 						</Link>
 
@@ -132,8 +138,8 @@ const FormikLogin = ({ className, dict, lang, ...props }) => {
 						<p>
 							{trl_question}
 							<Link
-								href='/rejestracja'
-								onClick={changeWebstiteHandler.bind(null, "rejestracja")}>
+								href={`${registrationUrl}`}
+								onClick={changeWebstiteHandler.bind(null, registrationUrl)}>
 								{trl_questionLink}
 							</Link>
 						</p>

@@ -54,7 +54,7 @@
 		"forgotPass": {
 			"title": "Zapomniałeś hasła?",
 			"email": "Email",
-			"btn": "Zresetuj hasło",
+			"btnReset": "Zresetuj hasło",
 			"question": "Nie masz konta?",
 			"questionLink": "Dołącz do nas."
 		},
@@ -64,6 +64,21 @@
 			"confirmPassword": "Powtórz hasło",
 			"code": "Kod resetujący hasło",
 			"btn": "Zmień hasło"
+		}
+	},
+	"activation": {
+		"btns": {
+			"btn_registration": "Rejestracja",
+			"btn_events": "Wydarzenia",
+			"btn_cooperation": "Współpraca"
+		},
+		"valid": {
+			"textFirst": "Aktywacja konta się powiodła.",
+			"textSecond": "Życzymy miłego dnia."
+		},
+		"inValid": {
+			"textFirst": "Aktywacja konta się nie powiodła. ",
+			"textSecond": "Prosimy o kontakt z administratorem."
 		}
 	}
 }

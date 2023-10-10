@@ -18,5 +18,11 @@ export default async function ForgotPassResetPage({
 		trl_btnChange: dict.auth.forgotResetPass.btn,
 	};
 
-	return <FormikForgotPassword resetId={resetId} dict={forgotTranslation} />;
+	return (
+		<FormikForgotPassword
+			resetId={resetId}
+			dict={forgotTranslation}
+			lang={lang}
+		/>
+	);
 }

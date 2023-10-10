@@ -1,7 +1,7 @@
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import FormikLogin from "@/components/transitions/Forms/FormikLogin/FormikLogin";
 
-export default async function RegistrationPage({ params: { lang } }) {
+export default async function LoginPage({ params: { lang } }) {
 	const dict = await getDictionaryElements(lang);
 
 	const logTranslation = {

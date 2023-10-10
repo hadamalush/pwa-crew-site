@@ -25,6 +25,7 @@ export default async function Home({ params: { lang } }) {
 				btn_registration={startContent.btn_registration}
 				btn_cooperation={startContent.btn_cooperation}
 				btn_events={startContent.btn_events}
+				lang={lang}
 			/>
 			<WrapperSection id='history' className={styles.history}>
 				<h3>{dict.section_history.section_title}</h3>

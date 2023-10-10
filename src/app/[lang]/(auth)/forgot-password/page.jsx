@@ -3,7 +3,7 @@ import FormikForgotPassword from "@/components/transitions/Forms/FormikForgotPas
 
 export default async function ForgotPassPage({ params: { lang } }) {
 	const dict = await getDictionaryElements(lang);
-
+	console.log(dict.auth.forgotPass.btnReset);
 	const forgotTranslation = {
 		trl_title: dict.auth.forgotPass.title,
 		trl_email: dict.auth.forgotPass.email,

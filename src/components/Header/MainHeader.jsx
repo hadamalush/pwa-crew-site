@@ -32,7 +32,6 @@ const MainHeader = ({ disc, lang, ...props }) => {
 
 		if (response.ok) {
 			router.refresh();
-
 			router.replace(`/${language}/${pathname}`);
 		}
 	};

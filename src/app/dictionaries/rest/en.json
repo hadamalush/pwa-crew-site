@@ -65,5 +65,20 @@
 			"code": "Password reset code",
 			"btn": "Change password"
 		}
+	},
+	"activation": {
+		"btns": {
+			"btn_registration": "Registration",
+			"btn_events": "Events",
+			"btn_cooperation": "Collaboration"
+		},
+		"valid": {
+			"textFirst": "The account activation was successful.",
+			"textSecond": "Have a great day."
+		},
+		"inValid": {
+			"textFirst": "Account activation failed. ",
+			"textSecond": "Please contact the administrator."
+		}
 	}
 }

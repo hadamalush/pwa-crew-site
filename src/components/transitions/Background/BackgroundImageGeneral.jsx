@@ -9,13 +9,12 @@ const BackgroundImageGeneral = ({ lang }) => {
 	if (pathname.startsWith("/")) {
 		pathname = pathname.replace(/^\/+/, "");
 	}
-	const forgotPasswordPages = pathname.startsWith(`${lang}/forgot-password`);
 
 	const isPath =
-		pathname === `${lang}/logowanie` ||
-		pathname === `${lang}/rejestracja` ||
-		forgotPasswordPages ||
-		pathname === `${lang}/kontakt`;
+		new RegExp(`${lang}/(logowanie|login)`).test(pathname) ||
+		new RegExp(`${lang}/(rejestracja|registration)`).test(pathname) ||
+		new RegExp(`${lang}/(zapomniane-haslo|forgot-password)`).test(pathname) ||
+		new RegExp(`${lang}/(kontakt|contact)`).test(pathname);
 
 	const classes = !isPath ? styles.hero : `${styles.hero} ${styles.filter}`;
 
