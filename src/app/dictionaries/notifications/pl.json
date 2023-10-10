@@ -25,6 +25,11 @@
 			"err_404": "Nie znaleziono takiego użytkownika.",
 			"err_422": "Nie prawidłowe hasło.",
 			"welcome": "Witamy ponownie!"
+		},
+		"forgotPass": {
+			"err_429": "Zbyt wiele prób. Spróbuj ponownie za 24h.",
+			"successChanged": "Hasło zostało zmienione.",
+			"successSent": "Wysłaliśmy do Ciebie link resetujący hasło."
 		}
 	}
 }

@@ -1,8 +1,11 @@
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import FormikForgotPassword from "@/components/transitions/Forms/FormikForgotPassword/FormikForgotPassword";
 
 export default async function ForgotPassPage({ params: { lang } }) {
 	const dict = await getDictionaryElements(lang);
+	const dictNotifi = await getDictionaryNotifi(lang);
+
 	const forgotTranslation = {
 		trl_title: dict.auth.forgotPass.title,
 		trl_email: dict.auth.forgotPass.email,
@@ -11,5 +14,13 @@ export default async function ForgotPassPage({ params: { lang } }) {
 		trl_questionLink: dict.auth.forgotPass.questionLink,
 	};
 
-	return <FormikForgotPassword dict={forgotTranslation} lang={lang} />;
+	const trl_error = dictNotifi.notifications.generalError;
+
+	return (
+		<FormikForgotPassword
+			dict={forgotTranslation}
+			trl_error={trl_error}
+			lang={lang}
+		/>
+	);
 }

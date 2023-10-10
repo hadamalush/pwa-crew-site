@@ -1,3 +1,4 @@
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import FormikForgotPassword from "@/components/transitions/Forms/FormikForgotPassword/FormikForgotPassword";
 
@@ -5,6 +6,7 @@ export default async function ForgotPassResetPage({
 	params: { lang, resetId },
 }) {
 	const dict = await getDictionaryElements(lang);
+	const dictNotifi = await getDictionaryNotifi(lang);
 
 	const forgotTranslation = {
 		trl_title: dict.auth.forgotPass.title,
@@ -18,10 +20,13 @@ export default async function ForgotPassResetPage({
 		trl_btnChange: dict.auth.forgotResetPass.btn,
 	};
 
+	const trl_error = dictNotifi.notifications.generalError;
+
 	return (
 		<FormikForgotPassword
 			resetId={resetId}
 			dict={forgotTranslation}
+			trl_error={trl_error}
 			lang={lang}
 		/>
 	);

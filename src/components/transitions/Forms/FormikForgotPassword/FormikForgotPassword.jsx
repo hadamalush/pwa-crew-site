@@ -16,7 +16,14 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
-const FormikForgotPassword = ({ resetId, dict, lang, className, ...props }) => {
+const FormikForgotPassword = ({
+	resetId,
+	dict,
+	trl_error,
+	lang,
+	className,
+	...props
+}) => {
 	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
 	const {
 		trl_title,
@@ -79,12 +86,13 @@ const FormikForgotPassword = ({ resetId, dict, lang, className, ...props }) => {
 		let data;
 
 		const sendData = !resetForm
-			? { email: email, status: resetForm }
+			? { email: email, status: resetForm, lang }
 			: {
 					password: password,
 					confirmPassword: confirmPassword,
 					code: code,
 					status: resetForm,
+					lang,
 			  };
 
 		try {
@@ -108,7 +116,7 @@ const FormikForgotPassword = ({ resetId, dict, lang, className, ...props }) => {
 		} catch (error) {
 			dispatchNotification(
 				showResult({
-					message: "Niepowodzenie, spróbuj ponownie później.",
+					message: trl_error,
 					variant: "warning",
 				})
 			);
