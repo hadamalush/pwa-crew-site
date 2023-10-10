@@ -3,11 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 
-const NavbarDesktop = props => {
+const NavbarDesktop = ({ disc, lang, ...props }) => {
+	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
+
 	const classes = `${styles.nav} ${props.className}`;
 	const { data: session, status } = useSession();
-
-	console.log(session);
+	const eventUrl = lang === "pl" ? "/wydarzenia" : "/events";
+	const contactUrl = lang === "pl" ? "/kontakt" : "/contact";
+	const loginUrl = lang === "pl" ? "/logowanie" : "/login";
 
 	const logoutHandler = e => {
 		e.preventDefault();
@@ -20,29 +23,29 @@ const NavbarDesktop = props => {
 			<ul className={styles["nav__list"]}>
 				<li>
 					<Link href='/' className={styles["nav__list-link"]}>
-						Home
+						{trl_home}
 					</Link>
 				</li>
 				<li>
-					<Link href='/wydarzenia' className={styles["nav__list-link"]}>
-						Wydarzenia
+					<Link href={eventUrl} className={styles["nav__list-link"]}>
+						{trl_events}
 					</Link>
 				</li>
 
 				<li>
-					<Link href='/kontakt' className={styles["nav__list-link"]}>
-						Kontakt
+					<Link href={contactUrl} className={styles["nav__list-link"]}>
+						{trl_contact}
 					</Link>
 				</li>
 				<li>
 					{!session && (
-						<Link href='/logowanie' className={styles["nav__list-link"]}>
-							Zaloguj
+						<Link href={loginUrl} className={styles["nav__list-link"]}>
+							{trl_login}
 						</Link>
 					)}
 					{session && (
 						<Link href='/' className={styles["nav__list-link"]}>
-							Chat
+							{trl_chat}
 						</Link>
 					)}
 				</li>

@@ -75,7 +75,7 @@
 		right: 0;
 		top: 50%;
 		font-weight: bold;
-		color: red;
+
 		width: 2.5em;
 		transform: translateY(-50%);
 	}
@@ -86,5 +86,12 @@
 		color: red;
 		bottom: -1.5em;
 		text-shadow: 1px 1px 1px rgb(61, 43, 43);
+	}
+
+	&__icon--valid {
+		color: green;
+	}
+	&__icon--invalid {
+		color: red;
 	}
 }

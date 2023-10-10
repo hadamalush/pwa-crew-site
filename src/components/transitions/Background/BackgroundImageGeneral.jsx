@@ -3,19 +3,18 @@ import Image from "next/image";
 import styles from "./BackgroundImage.module.scss";
 import { usePathname } from "next/navigation";
 
-const BackgroundImageGeneral = () => {
+const BackgroundImageGeneral = ({ lang }) => {
 	let pathname = usePathname();
 
 	if (pathname.startsWith("/")) {
 		pathname = pathname.replace(/^\/+/, "");
 	}
-	const forgotPasswordPages = pathname.startsWith("forgot-password");
 
 	const isPath =
-		pathname === "logowanie" ||
-		pathname === "rejestracja" ||
-		forgotPasswordPages ||
-		pathname === "kontakt";
+		new RegExp(`${lang}/(logowanie|login)`).test(pathname) ||
+		new RegExp(`${lang}/(rejestracja|registration)`).test(pathname) ||
+		new RegExp(`${lang}/(zapomniane-haslo|forgot-password)`).test(pathname) ||
+		new RegExp(`${lang}/(kontakt|contact)`).test(pathname);
 
 	const classes = !isPath ? styles.hero : `${styles.hero} ${styles.filter}`;
 

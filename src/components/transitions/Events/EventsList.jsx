@@ -3,7 +3,15 @@
 import styles from "../../../styles/components/transitions/Events/EventsList.module.scss";
 import EventItem from "./EventItem";
 
-const EventsList = ({ events, className, children, ...props }) => {
+const EventsList = ({
+	events,
+	className,
+	children,
+	lang,
+	trl_btnEventDetails,
+	trl_startEvent,
+	...props
+}) => {
 	const classes = `${styles.events} ${className}`;
 
 	return (
@@ -20,6 +28,9 @@ const EventsList = ({ events, className, children, ...props }) => {
 					time={event.time}
 					image={event.targetSrc}
 					upload={event.upload}
+					lang={lang}
+					trl_btnEventDetails={trl_btnEventDetails}
+					trl_startEvent={trl_startEvent}
 				/>
 			))}
 		</ul>

@@ -5,7 +5,11 @@ import IconRender from "../Icons/IconRender";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const NavbarMobile = () => {
+const NavbarMobile = ({ disc, lang }) => {
+	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
+	const eventUrl = lang === "pl" ? "/wydarzenia" : "/events";
+	const contactUrl = lang === "pl" ? "/kontakt" : "/contact";
+	const loginUrl = lang === "pl" ? "/logowanie" : "/login";
 	const pathname = usePathname();
 	const [isScrollChange, setIsScrollChange] = useState(false);
 
@@ -36,50 +40,50 @@ const NavbarMobile = () => {
 						href='/'
 						className={pathname === "/" ? isActive : styles["nav__link"]}>
 						<IconRender variant='home' />
-						<p>Start</p>
-					</Link>
-				</li>
-
-				<li className={styles["nav__item"]}>
-					<Link
-						href='/kolekcja'
-						className={
-							pathname === "/kolekcja" ? isActive : styles["nav__link"]
-						}>
-						<IconRender variant='film' />
-						<p>Kolekcja</p>
-					</Link>
-				</li>
-
-				<li className={styles["nav__item"]}>
-					<Link
-						href='/ustawienia'
-						className={
-							pathname === "/ustawienia" ? isActive : styles["nav__link"]
-						}>
-						<IconRender variant='chat' />
-						<p>Chat</p>
+						<p>{trl_home}</p>
 					</Link>
 				</li>
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/wydarzenia'
+						href={`${eventUrl}`}
 						className={
 							pathname === "/wydarzenia" ? isActive : styles["nav__link"]
 						}>
 						<IconRender variant='event' />
-						<p>Wydarzenia</p>
+						<p>{trl_events}</p>
 					</Link>
 				</li>
 
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/ustawienia'
+						href='/'
+						className={
+							pathname === "/ustawienia" ? isActive : styles["nav__link"]
+						}>
+						<IconRender variant='chat' />
+						<p>{trl_chat}</p>
+					</Link>
+				</li>
+
+				<li className={styles["nav__item"]}>
+					<Link
+						href={`${contactUrl}`}
+						className={
+							pathname === "/kolekcja" ? isActive : styles["nav__link"]
+						}>
+						<IconRender variant='contact' />
+						<p>{trl_contact}</p>
+					</Link>
+				</li>
+
+				<li className={styles["nav__item"]}>
+					<Link
+						href={loginUrl}
 						className={
 							pathname === "/ustawienia" ? isActive : styles["nav__link"]
 						}>
 						<IconRender variant='user' />
-						<p>Konto</p>
+						<p>{trl_login}</p>
 					</Link>
 				</li>
 			</ul>

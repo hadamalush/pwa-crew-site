@@ -9,15 +9,25 @@ import {
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { generationIdLink, sendActivationLink } from "@/lib/message/message";
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
 export async function POST(request) {
 	const data = await request.json();
 	const ip = headers().get("x-forwarded-for");
 	const userAgent = headers().get("user-agent");
 
-	const { email, password, confirmPassword, terms } = data;
+	const { email, password, confirmPassword, terms, lang } = data;
+	const dict = await getDictionaryNotifi(lang);
 
-	// poprawic walidacje
+	const notification = {
+		trl_err_409: dict.notifications.registration.err_409,
+		trl_err_422: dict.notifications.err_422,
+		trl_err_500: dict.notifications.err_500,
+		trl_errSendLink: dict.notifications.registration.err_sendLink,
+		trl_generalError: dict.notifications.registration.generalError,
+		trl_success: dict.notifications.registration.success,
+	};
+
 	if (
 		!email ||
 		!email.includes("@") ||
@@ -26,7 +36,10 @@ export async function POST(request) {
 		password !== confirmPassword ||
 		!terms
 	) {
-		return NextResponse.json({ message: "Spróbuj ponownie!" }, { status: 422 });
+		return NextResponse.json(
+			{ message: notification.trl_err_409 },
+			{ status: 422 }
+		);
 	}
 
 	let client;
@@ -35,7 +48,7 @@ export async function POST(request) {
 		client = await connectDatabase();
 	} catch (error) {
 		return NextResponse.json(
-			{ message: "Nie udalo sie polaczyc z baza danych!" },
+			{ message: notification.trl_err_500 },
 			{ status: 500 }
 		);
 	}
@@ -47,7 +60,7 @@ export async function POST(request) {
 	} catch (error) {
 		client.close();
 		return NextResponse.json(
-			{ message: "Skontakuj sie z administratorem, cos poszlo nie tak!" },
+			{ message: notification.trl_generalError },
 			{ status: 422 }
 		);
 	}
@@ -56,9 +69,9 @@ export async function POST(request) {
 		client.close();
 		return NextResponse.json(
 			{
-				message: "Użytkownik z takim adresem email już istnieje!",
+				message: notification.trl_err_409,
 			},
-			{ status: 410 }
+			{ status: 409 }
 		);
 	}
 
@@ -74,7 +87,7 @@ export async function POST(request) {
 		client.close();
 		return NextResponse.json(
 			{
-				message: "Nie udało się dodać użytkownika",
+				message: notification.trl_generalError,
 			},
 			{ status: 305 }
 		);
@@ -113,11 +126,9 @@ export async function POST(request) {
 			);
 		}
 	} catch (error) {
-		console.log(error);
 		return NextResponse.json(
 			{
-				error:
-					"Zarejestrowany pomyślnie ,jednak nie udało się utworzyć linku aktywacyjnego. Wyślemy go do Ciebie ,jak najszybciej!",
+				error: notification.trl_errSendLink,
 			},
 			{ status: 400 }
 		);
@@ -126,6 +137,6 @@ export async function POST(request) {
 	client.close();
 	clientActivationLinks.close();
 	return NextResponse.json({
-		message: "Zarejestrowano pomyślnie ,witamy na pokładzie!",
+		message: notification.trl_success,
 	});
 }

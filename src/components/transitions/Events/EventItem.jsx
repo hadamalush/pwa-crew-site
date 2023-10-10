@@ -20,6 +20,9 @@ const EventItem = ({
 	upload,
 	description,
 	id,
+	lang,
+	trl_btnEventDetails,
+	trl_startEvent,
 	...props
 }) => {
 	const replacedTitle = title.replaceAll(" ", "-");
@@ -81,7 +84,7 @@ const EventItem = ({
 				<div className={styles["event-item__content"]}>
 					<p className={styles["event-item__town"]}>{town}</p>
 					<address className={styles["event-item__date"]}>{date}</address>
-					<p>Start wydarzenia:</p>
+					<p>{trl_startEvent}</p>
 					<time className={styles["event-item__time"]}>{time}</time>
 				</div>
 			</div>
@@ -124,7 +127,7 @@ const EventItem = ({
 							<div className={styles["details__item-link"]}>
 								<LinkAsBtn
 									href={`/wydarzenia/${replacedTitle}/${id}#section_detail-item`}>
-									Zobacz szczegóły
+									{trl_btnEventDetails}
 								</LinkAsBtn>
 							</div>
 						</li>

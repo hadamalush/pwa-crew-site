@@ -13,7 +13,24 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
-const FormikLogin = ({ className, ...props }) => {
+const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
+	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
+	const forgotPassUrl =
+		lang === "pl" ? "/zapomniane-haslo" : "/forgot-password";
+
+	const {
+		trl_title,
+		trl_email,
+		trl_password,
+		trl_forgotPass,
+		trl_btn,
+		trl_question,
+		trl_questionLink,
+	} = dict;
+
+	const { trl_err_404, trl_err_422, trl_generalError, trl_welcome } =
+		dictNotifi;
+
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const { data: session, status } = useSession();
@@ -44,7 +61,7 @@ const FormikLogin = ({ className, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push(`/${website}`);
+			router.push(`${website}`);
 		}, 500);
 	};
 
@@ -58,11 +75,14 @@ const FormikLogin = ({ className, ...props }) => {
 				redirect: false,
 				email: email,
 				password: password,
+				lang: lang,
 			});
+
+			const selectedErr = response.error === "404" ? trl_err_404 : trl_err_422;
 
 			if (response.error) {
 				dispatchNotification(
-					showResult({ message: response.error, variant: "warning" })
+					showResult({ message: selectedErr, variant: "warning" })
 				);
 				dispatchLoading(toggleLoading());
 				return;
@@ -70,7 +90,7 @@ const FormikLogin = ({ className, ...props }) => {
 		} catch (error) {
 			dispatchNotification(
 				showResult({
-					message: "Coś poszło nie tak. Skontaktuj się z administratorem.",
+					message: trl_generalError,
 					variant: "warning",
 				})
 			);
@@ -78,7 +98,7 @@ const FormikLogin = ({ className, ...props }) => {
 		}
 
 		dispatchNotification(
-			showResult({ message: "Witamy ponownie!", variant: "success" })
+			showResult({ message: trl_welcome, variant: "success" })
 		);
 		dispatchLoading(toggleLoading());
 	};
@@ -94,37 +114,37 @@ const FormikLogin = ({ className, ...props }) => {
 				validationSchema={loginSchema}>
 				{props => (
 					<Form>
-						<h1>Logowanie</h1>
+						<h1>{trl_title}</h1>
 
 						<InputFormik
 							name='email'
-							placeholder='Email'
-							aria-label='Email'
+							placeholder={trl_email}
+							aria-label={trl_email}
 							type='text'
 						/>
 						<InputFormik
 							name='password'
-							placeholder='Hasło'
-							aria-label='Hasło'
+							placeholder={trl_password}
+							aria-label={trl_password}
 							type='password'
 						/>
 
 						<Link
-							href='/forgot-password'
-							onClick={changeWebstiteHandler.bind(null, "forgot-password")}>
-							Zapomniałeś hasła?
+							href={`${forgotPassUrl}`}
+							onClick={changeWebstiteHandler.bind(null, forgotPassUrl)}>
+							{trl_forgotPass}
 						</Link>
 
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							Zaloguj
+							{trl_btn}
 						</ButtonMain>
 
 						<p>
-							Nie masz konta?
+							{trl_question}
 							<Link
-								href='/rejestracja'
-								onClick={changeWebstiteHandler.bind(null, "rejestracja")}>
-								Zarejestruj
+								href={`${registrationUrl}`}
+								onClick={changeWebstiteHandler.bind(null, registrationUrl)}>
+								{trl_questionLink}
 							</Link>
 						</p>
 					</Form>

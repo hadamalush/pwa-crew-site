@@ -1,0 +1,26 @@
+@import "../../../styles/transitions/variables";
+@import "../../../styles/mixins/mixins";
+
+main .start {
+	position: relative;
+	width: 100vw;
+	height: 70rem;
+	top: 3rem;
+	margin-bottom: 5rem;
+	padding: 0;
+
+	@include media-query(mediumScreen) {
+		margin-bottom: 0;
+		top: 0;
+		height: 100rem;
+	}
+}
+
+.box {
+	box-shadow: $boxshadow-secondary;
+	font-size: 12px;
+	border-radius: 15px;
+	@include media-query(mediumScreen) {
+		margin-bottom: 10rem;
+	}
+}

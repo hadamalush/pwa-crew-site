@@ -2,11 +2,29 @@
 import { useState, useEffect } from "react";
 import CarouselItem from "./CarouselItem";
 import Link from "next/link";
+import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Carousel/Carousel.module.scss";
+import { usePathname } from "next/navigation";
 
-const Carousel = () => {
+const Carousel = ({ btn_checkEvents, btn_createEvents, lang }) => {
 	const isClient = typeof window !== "undefined";
 	const [timer1, setTimer1] = useState(10000);
+	const path = usePathname();
+	const endOfPath = path.split("/").pop();
+
+	const newEventUrl =
+		lang === "pl"
+			? "/wydarzenia/nowe-wydarzenie#form"
+			: "/events/new-event#form";
+	const eventsUrl = lang === "pl" ? "/wydarzenia" : "/events";
+
+	const btn_pathDependent = new RegExp(`(events|wydarzenia)`).test(endOfPath)
+		? btn_createEvents
+		: btn_checkEvents;
+
+	const url_pathDependent = new RegExp(`(events|wydarzenia)`).test(endOfPath)
+		? newEventUrl
+		: eventsUrl;
 
 	const changeMiddleHandler = async () => {
 		if (isClient) {
@@ -84,6 +102,12 @@ const Carousel = () => {
 				<h3>Klasyka w Nowoczesnym Wydaniu</h3>
 				<Link href='/'>Dowiedz się więcej </Link>
 			</CarouselItem>
+			<LinkAsBtn
+				href={`${url_pathDependent}`}
+				variant='green'
+				className={styles["carousel__event-link"]}>
+				{btn_pathDependent}
+			</LinkAsBtn>
 		</div>
 	);
 };

@@ -10,12 +10,23 @@ import {
 import { headers } from "next/headers";
 import { cryptPassword } from "@/lib/crypt";
 import { insertLimitByIp } from "@/lib/protection/protection";
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
 export const POST = async request => {
-	const { email, status, confirmPassword, password, code } =
+	const { email, status, confirmPassword, password, code, lang } =
 		await request.json();
 	const ip = headers().get("x-forwarded-for");
 	const userAgent = headers().get("user-agent");
+	const dict = await getDictionaryNotifi(lang);
+
+	const notification = {
+		err_422: dict.notifications.err_422,
+		err_429: dict.notifications.forgotPass.err_429,
+		generalError: dict.notifications.generalError,
+		successChanged: dict.notifications.forgotPass.successChanged,
+		successSent: dict.notifications.forgotPass.successSent,
+	};
+
 	let clientActivationLinks, generatedIdLink, resultOfCreatedActivationLink;
 
 	const result = await insertLimitByIp("ForgotPasswordPage", ip, 5, 86400);
@@ -23,7 +34,7 @@ export const POST = async request => {
 	if (result.limit) {
 		return NextResponse.json(
 			{
-				error: "Zbyt wiele prób. Spróbuj ponownie za 24h.",
+				error: notification.err_429,
 			},
 			{ status: 429 }
 		);
@@ -34,7 +45,7 @@ export const POST = async request => {
 	} catch (error) {
 		return NextResponse.json(
 			{
-				error: "Niestety nie udało się wysłać linku, spróbuj ponownie później.",
+				error: notification.generalError,
 			},
 			{ status: 503 }
 		);
@@ -53,8 +64,7 @@ export const POST = async request => {
 		} catch (error) {
 			return NextResponse.json(
 				{
-					error:
-						"Niestety nie udało się wysłać linku, spróbuj ponownie później.",
+					error: notification.generalError,
 				},
 				{ status: 400 }
 			);
@@ -74,8 +84,7 @@ export const POST = async request => {
 		} catch (error) {
 			return NextResponse.json(
 				{
-					error:
-						"Niestety nie udało się wysłać linku, spróbuj ponownie później. Status: 400",
+					error: notification.generalError,
 				},
 				{ status: 400 }
 			);
@@ -94,15 +103,14 @@ export const POST = async request => {
 			} catch (error) {
 				return NextResponse.json(
 					{
-						error:
-							"Niestety nie udało się wysłać linku, spróbuj ponownie później.",
+						error: notification.generalError,
 					},
 					{ status: 503 }
 				);
 			}
 		}
 		return NextResponse.json(
-			{ message: "Wysłaliśmy do Ciebie link resetujący hasło." },
+			{ message: notification.successSent },
 			{ status: 200 }
 		);
 	} else {
@@ -117,7 +125,7 @@ export const POST = async request => {
 		) {
 			return NextResponse.json(
 				{
-					error: "Nieprawidłowe dane.",
+					error: notification.err_422,
 				},
 				{ status: 422 }
 			);
@@ -137,7 +145,7 @@ export const POST = async request => {
 			if (!foundDocument) {
 				return NextResponse.json(
 					{
-						error: "Nieprawidłowe dane.",
+						error: notification.err_422,
 					},
 					{ status: 422 }
 				);
@@ -145,7 +153,7 @@ export const POST = async request => {
 		} catch (error) {
 			return NextResponse.json(
 				{
-					error: "Niepowodzenie, spróbuj ponownie później.",
+					error: notification.generalError,
 				},
 				{ status: 503 }
 			);
@@ -161,7 +169,7 @@ export const POST = async request => {
 			} catch (error) {
 				return NextResponse.json(
 					{
-						error: "Niepowodzenie, spróbuj ponownie później.",
+						error: notification.generalError,
 					},
 					{ status: 503 }
 				);
@@ -182,7 +190,7 @@ export const POST = async request => {
 			} catch (error) {
 				return NextResponse.json(
 					{
-						error: "Niepowodzenie, spróbuj ponownie później.",
+						error: notification.generalError,
 					},
 					{ status: 503 }
 				);
@@ -190,7 +198,7 @@ export const POST = async request => {
 		}
 		return NextResponse.json(
 			{
-				message: "Hasło zostało zmienione.",
+				message: notification.successChanged,
 			},
 			{ status: 200 }
 		);

@@ -1,0 +1,113 @@
+{
+	"navigation": {
+		"home": "Home",
+		"events": "Wydarzenia",
+		"contact": "Kontakt",
+		"login": "Zaloguj",
+		"logout": "Wyloguj",
+		"chat": "Chat"
+	},
+	"contact": {
+		"wp_content": {
+			"title": "Masz jakieś pytania?",
+			"textFirst": "Chcesz zacząć współpracę?",
+			"textSecond": "Już teraz ,skontaktuj się z nami!",
+			"alt": "Osoba siedząca na krześle przy stole wypełnia formularz kontaktowy. A w tle koncert."
+		},
+		"form": {
+			"title": "Formularz kontaktowy",
+			"email": "Email",
+			"subject": "Temat",
+			"message": "Wiadomość",
+			"btn": "Wyślij wiadomość"
+		}
+	},
+	"auth": {
+		"wp_content": {
+			"title": "Witamy!",
+			"textFirst": "Bądź na bieżąco!",
+			"textSecond": "Już teraz osiągnij sukces!",
+			"alt": "Osoba siedząca na krześle przy stole wypełnia formularz kontaktowy. A w tle koncert."
+		},
+
+		"registration": {
+			"title": "Rejestracja",
+			"email": "Email",
+			"password": "Hasło",
+			"confirmPassword": "Powtórz hasło",
+			"terms": "Akceptuje warunki umowy",
+			"btn": "Zarejestruj",
+			"question": "Masz konto?",
+			"questionLink": "Zaloguj"
+		},
+
+		"logging": {
+			"title": "Logowanie",
+			"email": "Email",
+			"password": "Hasło",
+			"forgotPass": "Zapomniałeś hasła?",
+			"btn": "Login",
+			"question": "Nie masz konta?",
+			"questionLink": "Dołącz do nas."
+		},
+
+		"forgotPass": {
+			"title": "Zapomniałeś hasła?",
+			"email": "Email",
+			"btnReset": "Zresetuj hasło",
+			"question": "Nie masz konta?",
+			"questionLink": "Dołącz do nas."
+		},
+
+		"forgotResetPass": {
+			"newPassword": "Nowe hasło",
+			"confirmPassword": "Powtórz hasło",
+			"code": "Kod resetujący hasło",
+			"btn": "Zmień hasło"
+		}
+	},
+	"activation": {
+		"btns": {
+			"btn_registration": "Rejestracja",
+			"btn_events": "Wydarzenia",
+			"btn_cooperation": "Współpraca"
+		},
+		"valid": {
+			"textFirst": "Aktywacja konta się powiodła.",
+			"textSecond": "Życzymy miłego dnia."
+		},
+		"inValid": {
+			"textFirst": "Aktywacja konta się nie powiodła. ",
+			"textSecond": "Prosimy o kontakt z administratorem."
+		}
+	},
+	"events": {
+		"title": "Wydarzenia",
+		"btn_createEvent": "Utwórz wydarzenie",
+		"btn_checkEvents": "Sprawdź wydarzenia",
+		"event": {
+			"btn_seeDetails": "Zobacz szczegóły",
+			"startEvent": "Start wydarzenia"
+		},
+		"newEvent": {
+			"wp_content": {
+				"title": "Dodawaj z łatwością.",
+				"testFirst": "Promuj z pasją.",
+				"textSecond": "Twoja zabawa, nasza satysfakcja!",
+				"alt": "Ludzie bawiący się na koncercie pod wielką sceną."
+			},
+			"form": {
+				"title": "Dodawanie wydarzenia",
+				"eventTitle": "Tytuł wydarzenia",
+				"town": "Miejscowość",
+				"codePost": "Kod pocztowy",
+				"street": "Ulica",
+				"date": "Data",
+				"startTime": "Czas rozpoczęcia",
+				"picture": "Zdjęcie",
+				"eventDesc": "Opis wydarzenia",
+				"btn_createEvent": "Utwórz wydarzenie"
+			}
+		}
+	}
+}

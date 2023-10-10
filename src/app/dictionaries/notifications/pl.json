@@ -1,0 +1,35 @@
+{
+	"notifications": {
+		"generalError": "Niepowiodło się, spróbuj ponownie",
+		"err_400": "Nie znaleziono strony",
+		"err_401": "Musisz być zalogowany",
+		"err_409": "Konflikt. Takie dane już istnieją",
+		"err_422": "Wrowadzone dane są nie prawidłowe",
+		"err_429": "Przekroczono limit, spróbuj ponownie za 30 minut",
+		"err_500": "Nie udało się połączyć z bazą danych",
+
+		"newEvent": {
+			"generalError": "Nie udało się utworzyć wydarzenia",
+			"success": "Dodano wydarzenie"
+		},
+		"sendMessage": {
+			"success": "Wysłano wiadomość"
+		},
+		"registration": {
+			"err_409": "Użytkownik z takim adresem email juz istnieje.",
+			"err_sendLink": "Zarejestrowany pomyślnie ,jednak nie udało się utworzyć linku aktywacyjnego. Wyślemy go do Ciebie ,jak najszybciej.",
+			"generalError": "Nie udało się dodać użytkownika.",
+			"success": "Zarejestrowano pomyślnie ,wysłaliśmy link rejestracyjny na Twój adres email."
+		},
+		"login": {
+			"err_404": "Nie znaleziono takiego użytkownika.",
+			"err_422": "Nie prawidłowe hasło.",
+			"welcome": "Witamy ponownie!"
+		},
+		"forgotPass": {
+			"err_429": "Zbyt wiele prób. Spróbuj ponownie za 24h.",
+			"successChanged": "Hasło zostało zmienione.",
+			"successSent": "Wysłaliśmy do Ciebie link resetujący hasło."
+		}
+	}
+}

@@ -11,7 +11,10 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
-const FormikContact = ({ className, ...props }) => {
+const FormikContact = ({ className, dict, lang, ...props }) => {
+	const { trl_title, trl_email, trl_subject, trl_message, trl_btn, trl_error } =
+		dict;
+
 	const classes = `${styles["logreg-box"]} ${className}`;
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",
@@ -29,15 +32,16 @@ const FormikContact = ({ className, ...props }) => {
 		const email = values.email;
 		const subject = values.title;
 		const message = values.message;
+		let data;
 
 		try {
 			const response = await fetch("/api/sendMessage", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, subject, message }),
+				body: JSON.stringify({ email, subject, message, lang }),
 			});
 
-			const data = await response.json();
+			data = await response.json();
 
 			if (!response.ok) {
 				dispatch(
@@ -51,7 +55,7 @@ const FormikContact = ({ className, ...props }) => {
 		} catch (error) {
 			dispatch(
 				showResult({
-					message: "Wysyłanie wiadomości nie powiodło się,\n spróbuj ponownie.",
+					message: trl_error,
 					variant: "warning",
 				})
 			);
@@ -60,11 +64,11 @@ const FormikContact = ({ className, ...props }) => {
 
 		dispatch(
 			showResult({
-				message: "Wysłano wiadomość.",
+				message: data.message,
 				variant: "success",
 			})
 		);
-		// router.push("/");
+		router.push("/");
 	};
 
 	return (
@@ -79,26 +83,26 @@ const FormikContact = ({ className, ...props }) => {
 				validationSchema={contactSchema}>
 				{props => (
 					<Form>
-						<h1>Formularz kontaktowy</h1>
+						<h1>{trl_title}</h1>
 						<InputFormik
 							name='email'
-							placeholder='Email'
-							aria-label='Email'
+							placeholder={trl_email}
+							aria-label={trl_email}
 							type='text'
 						/>
 						<InputFormik
 							name='title'
-							placeholder='Temat'
-							aria-label='Temat'
+							placeholder={trl_subject}
+							aria-label={trl_subject}
 							type='text'
 						/>
 						<label htmlFor='message' className={styles["logreg-box__message"]}>
 							<IconRender variant='description' />
-							<p>Wiadomość: </p>
+							<p>{trl_message}:</p>
 						</label>
 						<TextareaFormik name='message' id='message' />
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							Wyślij wiadomość
+							{trl_btn}
 						</ButtonMain>
 					</Form>
 				)}

@@ -1,0 +1,47 @@
+{
+	"start_content": {
+		"title": "Tylko dobry rap",
+		"text": "O każdej porze dnia,\n rapuje ile tylko sie da!",
+		"btn_registration": "Rejestracja",
+		"btn_events": "Wydarzenia",
+		"btn_cooperation": "Współpraca"
+	},
+	"section_history": {
+		"section_title": "Trochę o Hip-hopie",
+		"card_1": {
+			"title": "Historia Hip-Hopu",
+			"text": "Hip-hop narodził się w Bronksie w latach 70. jako subkultur młodych ludzi, łącząca muzykę, taniec, graffiti i rap. Dziś jest globalnym fenomenem kształtującym kulturę i społeczeństwo."
+		},
+		"card_2": {
+			"title": "Wartości Hip-Hopu",
+			"text": "Hip-hop to nie tylko muzyka, to także filozofia życia. Obejmuje wartości takie jak samowiedza, wyrażanie siebie i walka z niesprawiedliwością społeczną."
+		},
+		"card_3": {
+			"title": "Wielcy Hip-Hopowi Artyści",
+			"text": "Hip-hop to gatunek, który wydał na świat wielu niezapomnianych artystów, od Tupaca Shakura i Notorious B.I.G. po Kendricka Lamara i Cardi B. Ich muzyka inspiruje i podnosi świadomość społeczną."
+		}
+	},
+	"section_aboutus": {
+		"section_title": "Nasz zespół",
+		"card_1": {
+			"title": "Marian",
+			"desc_title": "Legandarny napastnik.",
+			"text": "Legenda hiphopu, skomplikowane bity to jego igraszki. Ma w sobie magię tworzenia, co sprawia, że nie ma mu równych na scenie."
+		},
+		"card_2": {
+			"title": "Baker",
+			"desc_title": "Szybki flow, uliczna poezja.",
+			"text": "Wystrzałowy talent, rapuje z pasją i szybkością, jak uliczny poet. Jego teksty to esencja życia na ulicach miasta, bez owijania w bawełnę."
+		},
+		"card_3": {
+			"title": "Neo",
+			"desc_title": "Technologiczny vibe.",
+			"text": "Hiphop przyszłości, rymuje o technologii i przemianach społecznych. Jego flow jest równie futurystyczny jak teksty, które płyną jak strumień danych."
+		},
+		"card_4": {
+			"title": "David",
+			"desc_title": "Historie życiowe, głębokie teksty.",
+			"text": "Opowiada o życiowych historiach, w jego rapach tkwi głębia emocji. Słowa Davida wnikają w duszę, przekazując prawdziwe doświadczenia z ulic."
+		}
+	}
+}

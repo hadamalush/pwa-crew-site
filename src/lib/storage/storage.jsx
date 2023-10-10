@@ -38,7 +38,9 @@ export const oneDownloadBuffersMegaNz = async megaLink => {
 	if (!megaLink) {
 		return;
 	}
+
 	const file = File.fromURL(megaLink);
+
 	await file.loadAttributes();
 	const buffer = await file.downloadBuffer();
 

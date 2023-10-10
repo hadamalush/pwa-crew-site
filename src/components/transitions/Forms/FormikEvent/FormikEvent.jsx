@@ -10,12 +10,25 @@ import { eventSchema } from "@/components/Schemas/FormSchem";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 import { generalConfig } from "@/config/gerenalConfig";
+
 /**
  * @description This component returns form for create new event.
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component withoud that wrapper.
  */
 
-const FormikEvent = () => {
+const FormikEvent = ({ dict, lang, trl_error }) => {
+	const {
+		trl_title,
+		trl_eventTitle,
+		trl_town,
+		trl_codePost,
+		trl_street,
+		trl_eventDesc,
+		trl_date,
+		trl_startTime,
+		trl_picture,
+		trl_btn_createEvent,
+	} = dict;
 	const dispatch = useDispatch(showResult);
 
 	const addEventhandler = async values => {
@@ -117,11 +130,14 @@ const FormikEvent = () => {
 					description: values.description,
 					imageSrcVercelBlob: imgSrcVercelBlob,
 					imageSrcMega: imgSrcMega,
+					lang: lang,
 					// imageSrcLocal: imgSrcLocal,
 				}),
 			});
 
 			const data = await response.json();
+
+			console.log(data);
 
 			if (!response.ok) {
 				dispatch(showResult({ message: data.error, variant: "warning" }));
@@ -132,7 +148,7 @@ const FormikEvent = () => {
 		} catch (error) {
 			dispatch(
 				showResult({
-					message: "Nie udało się utworzyć wydarzenia",
+					message: trl_error,
 					variant: "warning",
 				})
 			);
@@ -157,60 +173,60 @@ const FormikEvent = () => {
 				className={styles.form}>
 				{({ setFieldValue, setFieldTouched, ...props }) => (
 					<Form className={styles.form}>
-						<h1>Dodawanie wydarzenia</h1>
+						<h1>{trl_title}</h1>
 
 						<InputFormik
 							name='title'
-							placeholder='Tytuł wydarzenia'
-							aria-label='Tytuł wydarzenia'
+							placeholder={trl_eventTitle}
+							aria-label={trl_eventTitle}
 							type='text'
 						/>
 						<InputFormik
 							name='town'
-							placeholder='Miejscowość'
-							aria-label='Miejscowość'
+							placeholder={trl_town}
+							aria-label={trl_town}
 							type='text'
 						/>
 						<InputFormik
 							name='codePost'
-							placeholder='Kod pocztowy'
-							aria-label='Kod pocztowy'
+							placeholder={trl_codePost}
+							aria-label={trl_codePost}
 							type='text'
 						/>
 						<InputFormik
 							name='street'
-							placeholder='Ulica'
-							aria-label='Ulica'
+							placeholder={trl_street}
+							aria-label={trl_street}
 							type='text'
 						/>
 						<InputFormik
 							name='date'
-							placeholder='Data'
-							aria-label='Data'
+							placeholder={trl_date}
+							aria-label={trl_date}
 							type='date'
 						/>
 						<InputFormik
 							name='time'
-							placeholder='Godzina'
-							aria-label='Godzina'
+							placeholder={trl_startTime}
+							aria-label={trl_startTime}
 							type='time'
 						/>
 
 						<TextareaFormik
 							name='description'
-							aria-label='Opis wydarzenia'
-							placeholder='Opis wydarzenia'
+							aria-label={trl_eventDesc}
+							placeholder={trl_eventDesc}
 							type='textarea'
 						/>
 
 						<InputFormikFile
 							name='fileImg'
-							aria-label='Zdjęcie'
+							aria-label={trl_picture}
 							setFieldValue={setFieldValue}
 							setFieldTouched={setFieldTouched}
 						/>
 						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							Utwórz wydarzenie
+							{trl_btn_createEvent}
 						</ButtonMain>
 					</Form>
 				)}

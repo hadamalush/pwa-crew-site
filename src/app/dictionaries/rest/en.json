@@ -1,0 +1,113 @@
+{
+	"navigation": {
+		"home": "Home",
+		"events": "Events",
+		"contact": "Contact",
+		"login": "Login",
+		"logout": "Logout",
+		"chat": "Chat"
+	},
+	"contact": {
+		"wp_content": {
+			"title": "Do you have any questions?",
+			"textFirst": "Do you want to start cooperation?",
+			"textSecond": "Contact us now!",
+			"alt": "The person sitting on the chair at the table fills out the contact form. And there's a concert in the background."
+		},
+		"form": {
+			"title": "Contact Form",
+			"email": "Email",
+			"subject": "Subject",
+			"message": "Message",
+			"btn": "Send message"
+		}
+	},
+	"auth": {
+		"wp_content": {
+			"title": "Welcome!",
+			"textFirst": "Stay up to date!",
+			"textSecond": "Achieve success now!",
+			"alt": "A person sitting on a chair at a table fills out a contact form. And in the background is a concert."
+		},
+
+		"registration": {
+			"title": "Registration",
+			"email": "Email",
+			"password": "Password",
+			"confirmPassword": "Confrim password",
+			"terms": "Accepts the terms of the agreement",
+			"btn": "Register",
+			"question": "Do you have an account?",
+			"questionLink": "Login"
+		},
+
+		"logging": {
+			"title": "Logging",
+			"email": "Email",
+			"password": "Password",
+			"forgotPass": "Forgot password?",
+			"btn": "Login",
+			"question": "Don't have an account?",
+			"questionLink": "Sign up"
+		},
+
+		"forgotPass": {
+			"title": "Did you forget your password?",
+			"email": "Email",
+			"btnReset": "Reset password",
+			"question": "Don't have an account?",
+			"questionLink": "Sign up"
+		},
+
+		"forgotResetPass": {
+			"newPassword": "New password",
+			"confirmPassword": "Confirm password",
+			"code": "Password reset code",
+			"btn": "Change password"
+		}
+	},
+	"activation": {
+		"btns": {
+			"btn_registration": "Registration",
+			"btn_events": "Events",
+			"btn_cooperation": "Collaboration"
+		},
+		"valid": {
+			"textFirst": "The account activation was successful.",
+			"textSecond": "Have a great day."
+		},
+		"inValid": {
+			"textFirst": "Account activation failed. ",
+			"textSecond": "Please contact the administrator."
+		}
+	},
+	"events": {
+		"title": "Events",
+		"btn_createEvent": "Create event",
+		"btn_checkEvents": "Check events",
+		"event": {
+			"btn_seeDetails": "See details",
+			"startEvent": "Start of the event"
+		},
+		"newEvent": {
+			"wp_content": {
+				"title": "Add with ease.",
+				"testFirst": "Promote with passion.",
+				"textSecond": "Your fun, our satisfaction!",
+				"alt": "People enjoying the concert in front of the big stage."
+			},
+			"form": {
+				"title": "Adding an event",
+				"eventTitle": "Event title",
+				"town": "Town",
+				"codePost": "Code post",
+				"street": "Street",
+				"date": "Date",
+				"startTime": "startTime",
+				"picture": "Picture",
+				"eventDesc": "Event description",
+				"btn_createEvent": "Create event"
+			}
+		}
+	}
+}
