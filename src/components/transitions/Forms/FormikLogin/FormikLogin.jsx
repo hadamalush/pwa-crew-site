@@ -13,7 +13,7 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
-const FormikLogin = ({ className, dict, lang, ...props }) => {
+const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
 	const forgotPassUrl =
 		lang === "pl" ? "/zapomniane-haslo" : "/forgot-password";
@@ -27,6 +27,9 @@ const FormikLogin = ({ className, dict, lang, ...props }) => {
 		trl_question,
 		trl_questionLink,
 	} = dict;
+
+	const { trl_err_404, trl_err_422, trl_generalError, trl_welcome } =
+		dictNotifi;
 
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
@@ -72,11 +75,14 @@ const FormikLogin = ({ className, dict, lang, ...props }) => {
 				redirect: false,
 				email: email,
 				password: password,
+				lang: lang,
 			});
+
+			const selectedErr = response.error === "404" ? trl_err_404 : trl_err_422;
 
 			if (response.error) {
 				dispatchNotification(
-					showResult({ message: response.error, variant: "warning" })
+					showResult({ message: selectedErr, variant: "warning" })
 				);
 				dispatchLoading(toggleLoading());
 				return;
@@ -84,7 +90,7 @@ const FormikLogin = ({ className, dict, lang, ...props }) => {
 		} catch (error) {
 			dispatchNotification(
 				showResult({
-					message: "Coś poszło nie tak. Skontaktuj się z administratorem.",
+					message: trl_generalError,
 					variant: "warning",
 				})
 			);
@@ -92,7 +98,7 @@ const FormikLogin = ({ className, dict, lang, ...props }) => {
 		}
 
 		dispatchNotification(
-			showResult({ message: "Witamy ponownie!", variant: "success" })
+			showResult({ message: trl_welcome, variant: "success" })
 		);
 		dispatchLoading(toggleLoading());
 	};

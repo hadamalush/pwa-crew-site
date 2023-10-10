@@ -8,14 +8,14 @@ export const POST = async request => {
 	const session = await getServerSession();
 	const data = await request.json();
 	const { lang } = data;
-	const disc = await getDictionaryNotifi(lang);
+	const dict = await getDictionaryNotifi(lang);
 
 	const notification = {
-		trl_err_401: disc.notifications.err_401,
-		trl_err_422: disc.notifications.err_422,
-		trl_err_500: disc.notifications.err_500,
-		trl_generalError: disc.notifications.newEvent.generalError,
-		trl_success: disc.notifications.newEvent.success,
+		trl_err_401: dict.notifications.err_401,
+		trl_err_422: dict.notifications.err_422,
+		trl_err_500: dict.notifications.err_500,
+		trl_generalError: dict.notifications.newEvent.generalError,
+		trl_success: dict.notifications.newEvent.success,
 	};
 
 	if (!session) {

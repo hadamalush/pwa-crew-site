@@ -12,7 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
-const FormikRegister = ({ className, dict, lang, ...props }) => {
+const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 	const loginUrl = lang === "pl" ? "/logowanie" : "/login";
 	const router = useRouter();
 	const {
@@ -56,15 +56,16 @@ const FormikRegister = ({ className, dict, lang, ...props }) => {
 		const password = values.password;
 		const confirmPassword = values.confirmPassword;
 		const terms = values.terms;
+		let data;
 
 		try {
 			const response = await fetch("/api/auth/registration", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password, confirmPassword, terms }),
+				body: JSON.stringify({ email, password, confirmPassword, terms, lang }),
 			});
 
-			const data = await response.json();
+			data = await response.json();
 
 			if (!response.ok) {
 				dispatch(
@@ -76,13 +77,17 @@ const FormikRegister = ({ className, dict, lang, ...props }) => {
 				return;
 			}
 		} catch (error) {
-			return;
+			dispatch(
+				showResult({
+					message: trl_error,
+					variant: "warning",
+				})
+			);
 		}
 
 		dispatch(
 			showResult({
-				message:
-					"Udało się zarejestrować, wysłaliśmy link rejestracyjny na Twój adres email.",
+				message: data.message,
 				variant: "success",
 			})
 		);

@@ -10,7 +10,6 @@ export const authOptions = {
 	},
 	pages: {
 		signIn: "/logowanie",
-		// signOut: "/rejestracja",
 	},
 	providers: [
 		CredentialsProvider({
@@ -24,7 +23,7 @@ export const authOptions = {
 				if (!user) {
 					client.close();
 
-					const error = new Error("Nie znaleziono takiego użytkownika.");
+					const error = new Error("404");
 
 					throw error;
 				}
@@ -35,14 +34,14 @@ export const authOptions = {
 				);
 
 				if (!isValid) {
-					// client.close();
+					client.close();
 
-					const error = new Error("Hasło jest niepoprawne", { status: 422 });
+					const error = new Error("422");
 
 					throw error;
 				}
 
-				// client.close();
+				client.close();
 				return { email: user.email };
 			},
 		}),

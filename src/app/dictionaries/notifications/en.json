@@ -3,6 +3,7 @@
 		"generalError": "Failed, try again",
 		"err_400": "Page not found",
 		"err_401": "You must be logged in",
+		"err_409": "Conflict. Such data already exists",
 		"err_422": "The data entered is not correct",
 		"err_429": "Limit exceeded ,try again in 30minutes",
 		"err_500": "Failed to connect to the database",
@@ -13,6 +14,17 @@
 		},
 		"sendMessage": {
 			"success": "Message sent"
+		},
+		"registration": {
+			"err_409": "A user with such an email address already exists.",
+			"err_sendLink": "Registered successfully , but the activation link could not be created. We will send it to you as soon as possible.",
+			"generalError": "Failed to add user.",
+			"success": "Registered successfully , we sent the registration link to your email address."
+		},
+		"login": {
+			"err_404": "User such not found.",
+			"err_422": "Invalid password.",
+			"welcome": "Welcome back!"
 		}
 	}
 }
