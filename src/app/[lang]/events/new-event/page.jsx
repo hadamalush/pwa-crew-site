@@ -12,8 +12,6 @@ const NewEventPage = params => {
 		alt: "Concert",
 	};
 
-	console.log(params);
-
 	return (
 		<WrapperSection className={styles["section__new-event"]} id='formularz'>
 			<WrapperFormWithContent

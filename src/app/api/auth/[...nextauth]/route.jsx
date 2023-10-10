@@ -15,7 +15,6 @@ export const authOptions = {
 	providers: [
 		CredentialsProvider({
 			async authorize(credentials) {
-				console.log("logowanie");
 				const client = await connectDatabase();
 
 				const user = await findDocument(client, "Users", {

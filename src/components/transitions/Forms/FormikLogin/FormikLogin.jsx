@@ -14,12 +14,10 @@ import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
 const FormikLogin = ({ className, dict, lang, ...props }) => {
-	console.log(lang);
 	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
 	const forgotPassUrl =
 		lang === "pl" ? "/zapomniane-haslo" : "/forgot-password";
 
-	console.log("check: ", forgotPassUrl);
 	const {
 		trl_title,
 		trl_email,

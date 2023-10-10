@@ -11,7 +11,6 @@ import { headers } from "next/headers";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
 const ActivationPage = async ({ params: { activationId, lang } }) => {
-	// const activationId = params.activation;
 	const dict = await getDictionaryElements(lang);
 
 	const ip = headers().get("x-forwarded-for");
@@ -24,9 +23,9 @@ const ActivationPage = async ({ params: { activationId, lang } }) => {
 	//limit request for ip ,because we didnt want
 	const result = await insertLimitByIp("ActivationPage", ip, 5, 86400);
 
-	// if (result?.limit) {
-	// 	redirect("/");
-	// }
+	if (result?.limit) {
+		redirect("/");
+	}
 
 	try {
 		clientActivationLinks = await connectDbMongo("ActivationLinks");
@@ -42,9 +41,9 @@ const ActivationPage = async ({ params: { activationId, lang } }) => {
 		return (status = 500);
 	}
 
-	// if (!foundDocument) {
-	// 	redirect("/");
-	// }
+	if (!foundDocument) {
+		redirect("/");
+	}
 
 	if (foundDocument && !status) {
 		const { email } = foundDocument;

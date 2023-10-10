@@ -66,8 +66,6 @@ const FormikRegister = ({ className, dict, lang, ...props }) => {
 
 			const data = await response.json();
 
-			console.log("response: ", response, data);
-
 			if (!response.ok) {
 				dispatch(
 					showResult({

@@ -80,7 +80,5 @@ export const POST = async request => {
 
 	const link = await file.link();
 
-	console.log(link);
-
 	return NextResponse.json({ message: link }, { status: 200 });
 };

@@ -45,7 +45,7 @@ const MainHeader = ({ disc, lang, ...props }) => {
 					disc={disc}
 					lang={lang}
 				/>
-				<NavbarMobile />
+				<NavbarMobile disc={disc} lang={lang} />
 				<IconRender variant='glob' className={styles["header__glob"]} />
 				<ul className={styles["header__leanguages"]}>
 					<li

@@ -41,8 +41,6 @@ export async function middleware(request) {
 
 	const locale = getLocale(request);
 
-	console.log(locale);
-
 	request.nextUrl.pathname = `/${locale}${pathname}`;
 
 	const headers = new Headers(request.headers);
