@@ -21,13 +21,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 		query: "(min-width: 768px)",
 	});
 
-	useEffect(() => {
-		const newPath = "/pl/kontakt";
-		const newUrl =
-			window.location.protocol + "//" + window.location.host + newPath;
-
-		window.history.replaceState({}, "", newUrl);
-	}, []);
+	const isClient = typeof window !== "undefined";
 
 	if (!isMediumScreen && isClient) {
 		window.scrollTo(0, 100);
