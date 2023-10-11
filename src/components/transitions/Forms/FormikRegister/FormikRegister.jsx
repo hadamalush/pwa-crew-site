@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
 const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
-	const loginUrl = lang === "pl" ? "/logowanie" : "/login";
 	const router = useRouter();
 	const {
 		trl_title,
@@ -47,7 +46,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push(loginUrl);
+			router.push("login");
 		}, 500);
 	};
 
@@ -136,7 +135,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 
 						<p>
 							{trl_question}
-							<Link href={`${loginUrl}`} onClick={changeWebstiteHandler}>
+							<Link href='/login' onClick={changeWebstiteHandler}>
 								{trl_questionLink}
 							</Link>
 						</p>

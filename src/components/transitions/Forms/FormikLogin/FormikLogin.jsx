@@ -53,7 +53,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 		}
 	}, [session, status]);
 
-	const changeWebstiteHandler = async (website, event) => {
+	const changeWebstiteHandler = (event, path) => {
 		event.preventDefault();
 
 		const form = document
@@ -61,7 +61,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push(`${website}`);
+			router.push(path);
 		}, 500);
 	};
 
@@ -130,8 +130,10 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 						/>
 
 						<Link
-							href={`${forgotPassUrl}`}
-							onClick={changeWebstiteHandler.bind(null, forgotPassUrl)}>
+							href={"/forgot-password"}
+							onClick={event =>
+								changeWebstiteHandler(event, "/forgot-password")
+							}>
 							{trl_forgotPass}
 						</Link>
 
@@ -142,8 +144,10 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 						<p>
 							{trl_question}
 							<Link
-								href={`${registrationUrl}`}
-								onClick={changeWebstiteHandler.bind(null, registrationUrl)}>
+								href='/registration'
+								onClick={event =>
+									changeWebstiteHandler(event, "/registration")
+								}>
 								{trl_questionLink}
 							</Link>
 						</p>

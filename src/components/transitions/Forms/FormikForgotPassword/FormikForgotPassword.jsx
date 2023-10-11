@@ -24,7 +24,6 @@ const FormikForgotPassword = ({
 	className,
 	...props
 }) => {
-	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
 	const {
 		trl_title,
 		trl_email,
@@ -72,7 +71,7 @@ const FormikForgotPassword = ({
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push(registrationUrl);
+			router.push("/registration");
 		}, 500);
 	};
 
@@ -185,7 +184,7 @@ const FormikForgotPassword = ({
 
 						<p>
 							{trl_question}
-							<Link href={`${registrationUrl}`} onClick={changeWebstiteHandler}>
+							<Link href='/registration' onClick={changeWebstiteHandler}>
 								{trl_questionLink}
 							</Link>
 						</p>

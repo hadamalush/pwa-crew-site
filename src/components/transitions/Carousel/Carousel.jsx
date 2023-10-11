@@ -12,19 +12,11 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, lang }) => {
 	const path = usePathname();
 	const endOfPath = path.split("/").pop();
 
-	const newEventUrl =
-		lang === "pl"
-			? "/wydarzenia/nowe-wydarzenie#form"
-			: "/events/new-event#form";
-	const eventsUrl = lang === "pl" ? "/wydarzenia" : "/events";
+	const btn_pathDependent =
+		endOfPath === "events" ? btn_createEvents : btn_checkEvents;
 
-	const btn_pathDependent = new RegExp(`(events|wydarzenia)`).test(endOfPath)
-		? btn_createEvents
-		: btn_checkEvents;
-
-	const url_pathDependent = new RegExp(`(events|wydarzenia)`).test(endOfPath)
-		? newEventUrl
-		: eventsUrl;
+	const url_pathDependent =
+		endOfPath === "events" ? "/events/new-event#form" : "/events";
 
 	const changeMiddleHandler = async () => {
 		if (isClient) {
