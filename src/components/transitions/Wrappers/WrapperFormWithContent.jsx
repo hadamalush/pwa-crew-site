@@ -35,7 +35,7 @@ const WrapperFormWithContent = ({
 			<ImageFill
 				src={imageSrc}
 				alt={alt}
-				priority
+				priority={true}
 				sizes={"(max-width: 768px) 10vw, (min-width: 1200px) 70vw"}
 			/>
 			<div className={styles["container__content"]}>
