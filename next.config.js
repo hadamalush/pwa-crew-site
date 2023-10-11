@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	reactStrictMode: true,
 	images: {
 		domains: ["9gncloqefz8xwgjl.public.blob.vercel-storage.com", "mega.nz"],
 	},
