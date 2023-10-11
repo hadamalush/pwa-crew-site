@@ -61,7 +61,7 @@ export async function middleware(request) {
 		return NextResponse.redirect(new URL("/logowanie", request.url));
 	}
 
-	return Response.redirect(request.nextUrl);
+	return NextResponse.redirect(request.nextUrl);
 
 	// return NextResponse.next({
 	// 	request: {

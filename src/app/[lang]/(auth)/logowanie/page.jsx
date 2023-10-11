@@ -1,9 +1,8 @@
-import { redirect } from "next/navigation";
+import RegistrationPage from "../registration/page";
 
 const Wydarzenia = ({ params: { lang } }) => {
-	redirect("/pl/login");
-
-	return null;
+	//
+	return;
 };
 
 export default Wydarzenia;
