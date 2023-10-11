@@ -4,7 +4,7 @@ import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 
 const NavbarDesktop = ({ disc, lang, ...props }) => {
-	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
+	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc;
 
 	const classes = `${styles.nav} ${props.className}`;
 	const { data: session, status } = useSession();

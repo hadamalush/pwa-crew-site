@@ -30,10 +30,10 @@ const MainHeader = ({ disc, lang, ...props }) => {
 			body: JSON.stringify(language),
 		});
 
-		// if (response.ok) {
-		// 	router.refresh();
-		// 	router.replace(`/${language}/${pathname}`);
-		// }
+		if (response.ok) {
+			router.refresh();
+			router.replace(`/${language}/${pathname}`);
+		}
 	};
 
 	return (
