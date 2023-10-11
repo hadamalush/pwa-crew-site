@@ -4,7 +4,7 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
 let defaultLocale = "pl";
-let locales = ["pl", "en", "dk"];
+let locales = ["pl", "en"];
 
 const getLangFromCookies = request => {
 	const lang = request.cookies.get("lang");
