@@ -10,6 +10,7 @@ import { contactSchema } from "@/components/Schemas/FormSchem";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
+import { useEffect } from "react";
 
 const FormikContact = ({ className, dict, lang, ...props }) => {
 	const { trl_title, trl_email, trl_subject, trl_message, trl_btn, trl_error } =
@@ -20,7 +21,13 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 		query: "(min-width: 768px)",
 	});
 
-	const isClient = typeof window !== "undefined";
+	useEffect(() => {
+		const newPath = "/pl/kontakt";
+		const newUrl =
+			window.location.protocol + "//" + window.location.host + newPath;
+
+		window.history.replaceState({}, "", newUrl);
+	}, []);
 
 	if (!isMediumScreen && isClient) {
 		window.scrollTo(0, 100);

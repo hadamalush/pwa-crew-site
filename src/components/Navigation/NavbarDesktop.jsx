@@ -33,7 +33,7 @@ const NavbarDesktop = ({ disc, lang, ...props }) => {
 				</li>
 
 				<li>
-					<Link href={contactUrl} className={styles["nav__list-link"]}>
+					<Link href='/contact' className={styles["nav__list-link"]}>
 						{trl_contact}
 					</Link>
 				</li>
