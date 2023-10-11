@@ -18,11 +18,11 @@ const getLangFromCookies = request => {
 };
 
 const getLocale = request => {
-	const lang = getLangFromCookies(request);
+	const lang = null;
 
-	// const acceptedLanguage = lang
-	// 	? lang
-	// 	: request.headers.get("accept-language") ?? undefined;
+	const acceptedLanguage = lang
+		? lang
+		: request.headers.get("accept-language") ?? undefined;
 
 	let headers = { "accept-language": lang };
 
