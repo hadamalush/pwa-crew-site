@@ -10,16 +10,16 @@ const HomeStartContent = ({
 	btn_registration,
 	btn_events,
 	btn_cooperation,
-	lang,
+	className,
+	...props
 }) => {
 	const { data: session, status } = useSession();
-
 	const isLoginLink = !session ? "/registration" : "/events";
-
 	const isLoginLinkNameBtn = !session ? btn_registration : btn_events;
+	const classes = `${styles.introduction} ${className || ""}`;
 
 	return (
-		<WrapperStart className={styles.introduction}>
+		<WrapperStart className={classes}>
 			<div className={styles["introduction__text"]}>
 				<h1 className={styles["introduction__h1"]}>{title}</h1>
 				<p className={styles["introduction__text"]}>{text}</p>

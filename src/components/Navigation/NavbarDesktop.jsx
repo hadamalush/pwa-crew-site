@@ -1,6 +1,6 @@
-import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
 import { signOut, useSession } from "next-auth/react";
 
 const NavbarDesktop = ({ disc, lang, ...props }) => {
