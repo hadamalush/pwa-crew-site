@@ -6,41 +6,48 @@
 
 	&__list {
 		display: flex;
-		&-link {
-			position: relative;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			height: 100%;
-			width: 100%;
-			padding: 0 1.5em;
-			transition: opacity 0.3s, color 0.3s;
-			text-shadow: 0 0 2px #c7c7c7;
+	}
 
-			&:hover {
-				color: $secondary-color;
-			}
+	&__item {
+		@include flex(column, null, center);
+		position: relative;
+		height: 100%;
+		width: 100%;
+		padding: 0 1.5em;
+		transition: opacity 0.3s, color 0.3s;
 
-			&:before {
-				content: "";
-				position: absolute;
-				transform: rotate(5deg);
-				width: 50%;
-				height: 1px;
-				background-color: $secondary-color;
-				opacity: 0;
-				transition: opacity 0.3s, transform 0.3s;
-			}
-
-			&:hover:before {
-				opacity: 1;
-				transform: rotate(20deg);
-			}
+		&:hover {
+			color: $secondary-color;
 		}
 
-		&__icon {
-			display: block;
+		&:before,
+		&:after {
+			content: "";
+			@include position(absolute, 0.7em, 1em, 0, 1em);
+			border: 3px solid $secondary-color;
+			border-width: 3px 10px;
+			border-color: $secondary-color transparent transparent;
+			opacity: 0;
+			transform: scale(0);
+			transition: transform 0.3s, opacity 0.3s;
+		}
+
+		&:after {
+			border-top-color: transparent;
+			border-bottom-color: $secondary-color;
+		}
+
+		&:hover:before {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	&__item--active {
+		color: $secondary-color;
+		&:after {
+			opacity: 1;
+			transform: scale(1);
 		}
 	}
 }

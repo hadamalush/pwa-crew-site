@@ -2,12 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
 import { signOut, useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
-const NavbarDesktop = ({ disc, lang, ...props }) => {
+const NavbarDesktop = ({ disc, lang, className, ...props }) => {
 	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
 
-	const classes = `${styles.nav} ${props.className}`;
+	const classes = `${styles.nav} ${className || ""}`;
+	const classesNavItemActive = `${styles["nav__item"]} ${styles["nav__item--active"]}`;
 	const { data: session, status } = useSession();
+	const pathname = usePathname();
 
 	const logoutHandler = e => {
 		e.preventDefault();
@@ -19,29 +22,53 @@ const NavbarDesktop = ({ disc, lang, ...props }) => {
 		<nav className={classes}>
 			<ul className={styles["nav__list"]}>
 				<li>
-					<Link href='/' className={styles["nav__list-link"]}>
+					<Link
+						href='/'
+						className={
+							pathname === `/${lang}`
+								? classesNavItemActive
+								: styles["nav__item"]
+						}>
 						{trl_home}
 					</Link>
 				</li>
 				<li>
-					<Link href='/events' className={styles["nav__list-link"]}>
+					<Link
+						href='/events'
+						className={
+							pathname === `/${lang}/events`
+								? classesNavItemActive
+								: styles["nav__item"]
+						}>
 						{trl_events}
 					</Link>
 				</li>
 
 				<li>
-					<Link href='/contact' className={styles["nav__list-link"]}>
+					<Link
+						href='/contact'
+						className={
+							pathname === `/${lang}/contact`
+								? classesNavItemActive
+								: styles["nav__item"]
+						}>
 						{trl_contact}
 					</Link>
 				</li>
 				<li>
 					{!session && (
-						<Link href='/login' className={styles["nav__list-link"]}>
+						<Link
+							href='/login'
+							className={
+								pathname === `/${lang}/login`
+									? classesNavItemActive
+									: styles["nav__item"]
+							}>
 							{trl_login}
 						</Link>
 					)}
 					{session && (
-						<Link href='/' className={styles["nav__list-link"]}>
+						<Link href='/' className={styles["nav__item"]}>
 							{trl_chat}
 						</Link>
 					)}
