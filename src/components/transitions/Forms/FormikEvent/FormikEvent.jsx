@@ -169,7 +169,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 					fileImg: "",
 				}}
 				onSubmit={addEventhandler}
-				validationSchema={eventSchema}
+				validationSchema={eventSchema(lang)}
 				className={styles.form}>
 				{({ setFieldValue, setFieldTouched, ...props }) => (
 					<Form className={styles.form}>

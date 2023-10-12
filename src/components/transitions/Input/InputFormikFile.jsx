@@ -3,7 +3,7 @@ import IconRender from "@/components/Icons/IconRender";
 import WrapperInput from "../Wrappers/WrapperInput";
 import styles from "../../../styles/components/transitions/Inputs/InputFormik.module.scss";
 import { useField } from "formik";
-import { eventSchema } from "@/components/Schemas/FormSchem";
+import { fileSchema } from "@/components/Schemas/FormSchem";
 
 /**
  * @description This component is input type file ,exactly for image type PNG,JPEG,WEBP,JPG and allow size maximum 4MB . There is connected with eventSchema(fileImg).
@@ -26,7 +26,7 @@ const InputFormikFile = ({
 		setFieldValue("fileImg", event.target.files[0]);
 
 		try {
-			await eventSchema.validateAt(name, {
+			await fileSchema.validateAt(name, {
 				fileImg: event.target.files[0],
 			});
 		} catch (error) {
