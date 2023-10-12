@@ -13,6 +13,15 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
+/**
+ * @description This component returns form for login.
+ * @param {String} className Enter some class as String
+ * @param {Object} dict Enter object with dictionary, that object should include (trl_title,trl_email, trl_password, trl_forgotPass, trl_btn, trl_question, trl_questionLink). All of properties are type of string. For example: trl_title: "Sign in" or trl_title: "Logowanie". Should come from internationalization directory.
+ * @param {Object} dictNotifi Enter object with notification dictionary, that object should include (trl_err_404,trl_err_422, trl_generalError, trl_welcome). All of properties are type of string. For example: trl_generalError: in eng - "Something went wrong" or in pl - "Coś poszło nie tak". Should come from internationalization directory.
+ * @param {String} lang Enter lang as String. For example: 'pl' or 'en' - but should come from params.
+ * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
+ */
+
 const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	const {
 		trl_title,

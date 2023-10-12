@@ -12,6 +12,15 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
+/**
+ * @description This component returns form for registration.
+ * @param {String} className Enter some class as String
+ * @param {Object} dict Enter object with dictionary, that object should include (trl_title,trl_email, trl_password, trl_confirmPassword, trl_terms, trl_btn, trl_error, trl_question, trl_questionLink). All of properties are type of string. For example: trl_title: "Sign up" or trl_title: "Rejestracja". Should come from internationalization directory.
+ * @param {String} lang Enter lang as String. For example: 'pl' or 'en' - but should come from params.
+ * @param {String} trl_error Enter dictionary of error - will be visible in notifications if an error occurs. For example: in eng: 'Something went wrong...' or in pl 'Coś poszło nie tak'. Should come from nextjs internationalization directory.
+ * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
+ */
+
 const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 	const router = useRouter();
 	const {

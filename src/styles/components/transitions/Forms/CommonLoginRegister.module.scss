@@ -1,6 +1,6 @@
 @import "../../../transitions/variables";
 @import "../../../mixins/mixins";
-// Registration and Login forms
+// Registration Login, forgot-password forms
 
 .logreg-box {
 	transition: transform 0.6s;
@@ -25,10 +25,17 @@
 	p {
 		display: flex;
 		justify-content: center;
+		margin-top: 2em;
 
 		a {
 			color: $secondary-color;
 			margin-left: 1em;
+		}
+	}
+
+	@include media-query(foldScreen) {
+		form {
+			width: 26rem;
 		}
 	}
 

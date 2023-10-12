@@ -11,7 +11,7 @@ const SUPPORTED_FORMATS = [
 const message = {
 	pl: {
 		wrongEmail: "Proszę podać poprawny adres email!",
-		passMin: "Hasło musi posiadać przynajmniej 7 znaków.",
+		passMin: "Hasło musi posiadać min. 7 znaków.",
 		passStrong: "Min. 1 znak,1 cyfra ,1 duża i mała litera.",
 		passIdentical: "Hasła muszą być udentyczne",
 		terms: "Musisz zaakceptować warunki umowy",
@@ -19,10 +19,10 @@ const message = {
 	},
 	en: {
 		wrongEmail: "Please provide a valid email address!",
-		passMin: "The password must have at least 7 characters.",
-		passStrong: "Min. 1 char. ,1 num, 1 upper. and lowercase",
+		passMin: "The password must have at least 7 char.",
+		passStrong: "Min. 1 char. ,1 num, 1 upper. and lower",
 		passIdentical: "Passwords must be udentical",
-		terms: "You must accept the terms of the agreement",
+		terms: "You must accept the terms.",
 		required: "Required.",
 	},
 };

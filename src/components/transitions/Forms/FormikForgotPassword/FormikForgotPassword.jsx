@@ -2,8 +2,8 @@
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 import InputFormik from "../../Input/InputFormik";
-import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import FormContainerBlur from "@/components/Containers/FormContainerBlur";
+import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -15,6 +15,15 @@ import {
 import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
+
+/**
+ * @description This component returns form for forgot-password with reset link or reset-password. Info: If you want use form with just link you have to forwards this params: dict, trl_error,lang or if you want form with reset password you should forwards in addition resetId - should come from url param.
+ * @param {String} className Enter some class as String
+ * @param {Object} dict Enter object with dictionary, that object should include (trl_title,trl_email, trl_btnReset, trl_question, trl_questionLink, trl_newPassword, trl_confirmPassword, trl_code, trl_btnChange). All of properties are type of string. For example: trl_title: "Sign up" or trl_title: "Rejestracja". Should come from internationalization directory.
+ * @param {String} lang Enter lang as String. For example: 'pl' or 'en' - but should come from params.
+ * @param {String} trl_error Enter dictionary of error - will be visible in notifications if an error occurs. For example: in eng: 'Something went wrong...' or in pl 'Coś poszło nie tak'. Should come from nextjs internationalization directory.
+ * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
+ */
 
 const FormikForgotPassword = ({
 	resetId,
@@ -44,7 +53,7 @@ const FormikForgotPassword = ({
 		: forgotLinkSchema(lang);
 
 	const router = useRouter();
-	const classes = `${styles["logreg-box"]} ${className}`;
+	const classes = `${styles["logreg-box"]} ${className || ""}`;
 	const { data: session, status } = useSession();
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",

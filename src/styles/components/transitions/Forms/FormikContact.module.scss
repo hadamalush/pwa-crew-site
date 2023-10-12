@@ -3,9 +3,9 @@
 // Registration and Login forms
 
 .logreg-box {
-	transition: transform 0.6s;
-	transform-origin: right;
 	animation: show 0.6s;
+	transform-origin: right;
+	transition: transform 0.6s;
 
 	form {
 		width: 28rem;
@@ -39,6 +39,12 @@
 
 	button {
 		margin: 2em 0 1em;
+	}
+
+	@include media-query(foldScreen) {
+		form {
+			width: 26rem;
+		}
 	}
 
 	@include media-query(mediumScreen) {
