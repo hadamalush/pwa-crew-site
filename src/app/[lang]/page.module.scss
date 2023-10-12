@@ -12,13 +12,24 @@
 	padding: 15em 3em 10em;
 
 	h3 {
-		color: $primary-color;
 		position: absolute;
-		z-index: 10;
 		top: 5rem;
 		left: 50%;
+		z-index: 10;
 		transform: translateX(-50%);
 		text-align: center;
+		color: $primary-color;
+		text-shadow: $text-shadow-tertiary;
+	}
+
+	> div {
+		&:before {
+			transform: none;
+		}
+
+		&:hover:before {
+			transform: scale(1.05);
+		}
 	}
 
 	> div > div {
@@ -27,14 +38,33 @@
 	}
 
 	> div > h4 {
-		color: $secondary-color;
 		padding: 0.2em 0 2em;
 		letter-spacing: 0.2rem;
+		color: $secondary-color;
 	}
 
 	> div:nth-child(3) {
 		margin: 4em 0;
 	}
+
+	@include media-query(foldScreen) {
+		div:first-of-type {
+			margin-top: 2em;
+		}
+	}
+
+	@include media-query(smallScreen) {
+		> div {
+			&::before {
+				transform: skew(-7deg);
+			}
+
+			&:hover:before {
+				transform: skew(-7deg) scale(1.05);
+			}
+		}
+	}
+
 	@include media-query(mediumScreen) {
 		padding: 15em 5em 10em;
 	}
@@ -74,12 +104,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 5rem;
-
 	background-color: $section-bg-primary;
-
-	> img {
-		position: absolute;
-	}
 
 	& > div {
 		display: grid;
@@ -92,16 +117,26 @@
 		overflow: hidden;
 		border-bottom-left-radius: 10px;
 		border-top-right-radius: 10px;
+
+		img {
+			position: absolute;
+			transition: transform 1s;
+		}
+
+		&:hover img {
+			transform: scale(1.2);
+		}
 	}
 
 	> h3 {
-		color: $primary-color;
 		position: absolute;
 		z-index: 10;
 		top: 5rem;
 		left: 50%;
 		transform: translateX(-50%);
 		text-align: center;
+		color: $primary-color;
+		text-shadow: $text-shadow-tertiary;
 	}
 
 	> div > h4 {

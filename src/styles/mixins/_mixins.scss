@@ -1,5 +1,9 @@
 @mixin media-query($breakpoint) {
-	@if $breakpoint == smallScreen {
+	@if $breakpoint == foldScreen {
+		@media (max-width: #{$foldScreen}) {
+			@content;
+		}
+	} @else if $breakpoint == smallScreen {
 		@media (min-width: #{$smallScreen}) {
 			@content;
 		}
