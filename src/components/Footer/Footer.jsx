@@ -1,4 +1,3 @@
-import styles from "../../styles/components/Footer/Footer.module.scss";
 import IconRender from "../Icons/IconRender";
 import ButtonMain from "../transitions/Button/ButtonMain";
 import Input from "../transitions/Input/Input";
@@ -6,6 +5,7 @@ import Logo from "../transitions/Logo/Logo";
 import WrapperInput from "../transitions/Wrappers/WrapperInput";
 import Link from "next/link";
 import SocialMedia from "../transitions/SocialMedia/SocialMedia";
+import styles from "../../styles/components/Footer/Footer.module.scss";
 
 const Footer = props => {
 	return (
@@ -40,10 +40,10 @@ const Footer = props => {
 						<Link href='#team'>O nas</Link>
 					</li>
 					<li>
-						<Link href='/sklep'>Sklep</Link>
+						<Link href='#'>Kolekcja</Link>
 					</li>
 					<li>
-						<Link href='/kontakt'>Kontakt</Link>
+						<Link href='/contact'>Kontakt</Link>
 					</li>
 				</ul>
 			</div>
@@ -52,22 +52,22 @@ const Footer = props => {
 				<h5>Wydarzenia</h5>
 				<ul>
 					<li>
-						<Link href='/wydarzenia'>Wszystkie wydarzenia</Link>
+						<Link href='/events'>Wszystkie wydarzenia</Link>
 					</li>
 					<li>
-						<Link href='/wyderzenia/nadchodzace'>Nadchodzące wydarzenia</Link>
+						<Link href='/events/new-event#form'>Utwórz wydarzenie</Link>
 					</li>
 				</ul>
 			</div>
 
 			<div className={styles["footer__box"]}>
 				<h5>Address</h5>
-				<address className={styles.address}>
+				<address className={styles["footer__address"]}>
 					<ul>
 						<li>
 							<Link href='/wydarzenia'>
 								<IconRender variant='location' />
-								Neastved, KildeBakakken 8
+								Warszawa, ul. Dobra 2
 							</Link>
 						</li>
 						<li>
@@ -86,12 +86,11 @@ const Footer = props => {
 				</address>
 			</div>
 
-			<Logo className={styles["footer__logo"]} />
-
-			<span className={styles["footer__box"]}>
+			<div className={styles["footer__box"]}>
+				<Logo className={styles["footer__logo"]} />
 				<h5>Social media</h5>
 				<SocialMedia />
-			</span>
+			</div>
 
 			<p>&copy; 2023 PwaCrew - Wszystkie prawa zastrzeżone</p>
 		</footer>
