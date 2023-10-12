@@ -7,16 +7,14 @@
 }
 
 .history {
-	display: flex;
-	flex-direction: column;
+	@include flex(column);
+	max-width: 250rem;
 	padding: 15em 3em 10em;
+	margin: 0 auto;
 
 	h3 {
-		position: absolute;
-		top: 5rem;
-		left: 50%;
-		z-index: 10;
-		transform: translateX(-50%);
+		@include position(absolute, 5rem, 50%, null, null, 10);
+		transform: translateX(50%);
 		text-align: center;
 		color: $primary-color;
 		text-shadow: $text-shadow-tertiary;
@@ -98,13 +96,19 @@
 }
 
 .aboutus {
-	display: flex;
-	flex-direction: column;
+	@include flex(column, null, center);
 	position: relative;
 	flex-wrap: wrap;
-	justify-content: center;
+	max-width: 250rem;
+	margin: 0 auto;
 	gap: 5rem;
 	background-color: $section-bg-primary;
+
+	&::before {
+		content: "";
+		@include position(absolute, 0, -500rem, 0, -500rem);
+		background-color: $section-bg-primary;
+	}
 
 	& > div {
 		display: grid;
@@ -129,19 +133,15 @@
 	}
 
 	> h3 {
-		position: absolute;
-		z-index: 10;
-		top: 5rem;
-		left: 50%;
-		transform: translateX(-50%);
+		@include position(absolute, 5rem, 50%, null, null, 10);
+		transform: translateX(50%);
 		text-align: center;
 		color: $primary-color;
 		text-shadow: $text-shadow-tertiary;
 	}
 
 	> div > h4 {
-		position: relative;
-		z-index: 10;
+		@include position(relative, null, null, null, null, 10);
 		margin-top: 20px;
 		font-size: 2rem;
 		font-style: italic;
@@ -169,7 +169,6 @@
 
 	@include media-query(mediumScreen) {
 		flex-direction: row;
-
 		> div {
 			flex-basis: 40%;
 		}
@@ -197,7 +196,7 @@
 		}
 
 		> div > p {
-			padding: 0 5em 2em;
+			padding: 0 3em 2em;
 		}
 		> div {
 			min-height: 50rem;

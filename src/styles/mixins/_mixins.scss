@@ -47,6 +47,29 @@
 	}
 }
 
+@mixin flex($direction: row, $align: null, $justify: null) {
+	display: flex;
+	flex-direction: $direction;
+	align-content: $align;
+	justify-content: $justify;
+}
+
+@mixin position(
+	$pos: static,
+	$t: null,
+	$r: null,
+	$b: null,
+	$l: null,
+	$z: auto
+) {
+	position: $pos;
+	top: $t;
+	right: $r;
+	bottom: $b;
+	left: $l;
+	z-index: $z;
+}
+
 @mixin borderIn($distance, $size, $skew, $color: $secondary-color) {
 	&:before {
 		content: "";
