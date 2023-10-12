@@ -14,10 +14,6 @@ import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
 const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
-	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
-	const forgotPassUrl =
-		lang === "pl" ? "/zapomniane-haslo" : "/forgot-password";
-
 	const {
 		trl_title,
 		trl_email,
@@ -111,7 +107,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 					password: "",
 				}}
 				onSubmit={onSubmit}
-				validationSchema={loginSchema}>
+				validationSchema={loginSchema(lang)}>
 				{props => (
 					<Form>
 						<h1>{trl_title}</h1>

@@ -39,7 +39,9 @@ const FormikForgotPassword = ({
 	//resetForm - it is for check which page is now, for choose right api/route and right form.
 	const resetForm = resetId ? true : false;
 
-	const schema = resetForm ? forgotNewPasswordSchema : forgotLinkSchema;
+	const schema = resetForm
+		? forgotNewPasswordSchema(lang)
+		: forgotLinkSchema(lang);
 
 	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;

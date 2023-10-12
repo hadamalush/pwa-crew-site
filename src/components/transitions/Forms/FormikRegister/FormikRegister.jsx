@@ -103,7 +103,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 					terms: false,
 				}}
 				onSubmit={onSubmit}
-				validationSchema={registerSchema}>
+				validationSchema={registerSchema(lang)}>
 				{props => (
 					<Form>
 						<h1>{trl_title}</h1>

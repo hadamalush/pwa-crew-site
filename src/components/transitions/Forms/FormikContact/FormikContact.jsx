@@ -81,7 +81,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 					message: "",
 				}}
 				onSubmit={onSubmit}
-				validationSchema={contactSchema}>
+				validationSchema={contactSchema(lang)}>
 				{props => (
 					<Form>
 						<h1>{trl_title}</h1>
