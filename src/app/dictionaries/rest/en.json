@@ -42,7 +42,7 @@
 		},
 
 		"logging": {
-			"title": "Logging",
+			"title": "Sign in",
 			"email": "Email",
 			"password": "Password",
 			"forgotPass": "Forgot password?",

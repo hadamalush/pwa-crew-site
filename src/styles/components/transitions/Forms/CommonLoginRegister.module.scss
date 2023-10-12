@@ -7,6 +7,12 @@
 	transform-origin: right;
 	animation: show 0.6s;
 
+	&::before {
+		@include position(absolute, 0, 0, 0, 0, -1);
+		content: "";
+		background-color: rgba(22, 22, 22, 0.178);
+	}
+
 	form {
 		width: 28rem;
 		margin: 0 auto;

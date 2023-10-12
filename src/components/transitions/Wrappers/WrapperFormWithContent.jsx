@@ -1,4 +1,3 @@
-import ImageFill from "../Image/ImageFill";
 import Logo2 from "../Logo/Logo";
 import SocialMedia from "../SocialMedia/SocialMedia";
 import React from "react";
@@ -33,20 +32,14 @@ const WrapperFormWithContent = ({
 
 	return (
 		<div className={classes}>
-			{/* <ImageFill
-				src={imageSrc}
-				alt={alt}
-				priority={true}
-				sizes={"(max-width: 768px) 10vw, (min-width: 1200px) 70vw"}
-			/> */}
-			{/* <Image
+			<Image
 				priority={true}
 				src={imageSrc}
 				alt={alt}
 				fill
-				// className={styles.img}
+				className={styles["container__img"]}
 				sizes={"(max-width: 768px) 10vw, (min-width: 1200px) 70vw"}
-			/> */}
+			/>
 			<div className={styles["container__content"]}>
 				<Logo2 />
 				<div className={styles["container__content-text"]}>

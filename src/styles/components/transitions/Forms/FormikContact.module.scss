@@ -1,11 +1,15 @@
 @import "../../../transitions/variables";
 @import "../../../mixins/mixins";
-// Registration and Login forms
 
 .logreg-box {
 	animation: show 0.6s;
 	transform-origin: right;
 	transition: transform 0.6s;
+	&::before {
+		@include position(absolute, 0, 0, 0, 0, -1);
+		content: "";
+		background-color: rgba(22, 22, 22, 0.178);
+	}
 
 	form {
 		width: 28rem;
