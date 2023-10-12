@@ -2,6 +2,7 @@ import ImageFill from "../Image/ImageFill";
 import Logo2 from "../Logo/Logo";
 import SocialMedia from "../SocialMedia/SocialMedia";
 import React from "react";
+import Image from "next/image";
 import styles from "../../../styles/components/transitions/Wrappers/WrapperFormWithContent.module.scss";
 
 /**
@@ -32,12 +33,20 @@ const WrapperFormWithContent = ({
 
 	return (
 		<div className={classes}>
-			<ImageFill
+			{/* <ImageFill
 				src={imageSrc}
 				alt={alt}
 				priority={true}
 				sizes={"(max-width: 768px) 10vw, (min-width: 1200px) 70vw"}
-			/>
+			/> */}
+			{/* <Image
+				priority={true}
+				src={imageSrc}
+				alt={alt}
+				fill
+				// className={styles.img}
+				sizes={"(max-width: 768px) 10vw, (min-width: 1200px) 70vw"}
+			/> */}
 			<div className={styles["container__content"]}>
 				<Logo2 />
 				<div className={styles["container__content-text"]}>
