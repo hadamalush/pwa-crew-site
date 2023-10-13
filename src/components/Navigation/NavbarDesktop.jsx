@@ -1,16 +1,21 @@
 import Link from "next/link";
-import Image from "next/image";
+import Avatar from "../transitions/Avatar/Avatar";
 import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import NavDropdown from "./NavDropdown";
 
 const NavbarDesktop = ({ disc, lang, className, ...props }) => {
 	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
 
 	const classes = `${styles.nav} ${className || ""}`;
 	const classesNavItemActive = `${styles["nav__item"]} ${styles["nav__item--active"]}`;
+
 	const { data: session, status } = useSession();
 	const pathname = usePathname();
+	const isActivePathEvents = new RegExp(
+		`${lang}/(events|events/new-event)`
+	).test(pathname);
 
 	const logoutHandler = e => {
 		e.preventDefault();
@@ -18,6 +23,16 @@ const NavbarDesktop = ({ disc, lang, className, ...props }) => {
 		signOut();
 	};
 
+	const dropdownItemsEvents = [
+		{ title: "Wszystkie wydarzenia", href: "/events" },
+		{ title: "Utwórz wydarzenie", href: "/events/new-event" },
+	];
+
+	const dropdownItemsAvatar = [
+		{ title: "Powiadomienia", href: "/" },
+		{ title: "Ustawienia konta", href: "/" },
+		{ title: "Wyloguj", href: "/", onClick: logoutHandler },
+	];
 	return (
 		<nav className={classes}>
 			<ul className={styles["nav__list"]}>
@@ -36,12 +51,11 @@ const NavbarDesktop = ({ disc, lang, className, ...props }) => {
 					<Link
 						href='/events'
 						className={
-							pathname === `/${lang}/events`
-								? classesNavItemActive
-								: styles["nav__item"]
+							isActivePathEvents ? classesNavItemActive : styles["nav__item"]
 						}>
 						{trl_events}
 					</Link>
+					<NavDropdown dropdownItems={dropdownItemsEvents} />
 				</li>
 
 				<li>
@@ -76,30 +90,12 @@ const NavbarDesktop = ({ disc, lang, className, ...props }) => {
 			</ul>
 
 			{session && (
-				<>
-					<div className={styles["avatar"]}>
-						<Image
-							src='/images/profil/anonymous.jpg'
-							height={50}
-							width={50}
-							alt='Lama'
-							className={styles["avatar__img"]}
-						/>
-					</div>
-					<ul className={styles["avatar__tooltip"]}>
-						<li>
-							<Link href='/'>Zmień avatar</Link>
-						</li>
-						<li>
-							<Link href='/konto'>Ustawienia konta</Link>
-						</li>
-						<li>
-							<Link href='/' onClick={logoutHandler}>
-								Wyloguj
-							</Link>
-						</li>
-					</ul>
-				</>
+				<Avatar className={styles["avatar"]}>
+					<NavDropdown
+						className={styles["avatar__dropdown"]}
+						dropdownItems={dropdownItemsAvatar}
+					/>
+				</Avatar>
 			)}
 		</nav>
 	);

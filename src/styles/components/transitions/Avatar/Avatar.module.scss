@@ -1,0 +1,19 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.avatar {
+	@include position(absolute, 0, 1em);
+	@include flex(row, center, center);
+	align-items: center;
+	width: 7rem;
+	height: 7rem;
+
+	cursor: pointer;
+
+	&__img {
+		object-fit: cover;
+		object-position: center;
+		border-radius: 50%;
+		box-shadow: 0 0 5px white;
+	}
+}

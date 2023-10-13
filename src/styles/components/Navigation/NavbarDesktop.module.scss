@@ -6,6 +6,14 @@
 
 	&__list {
 		display: flex;
+
+		> li {
+			position: relative;
+
+			&:hover > ul {
+				transform: scale(1) translateX(50%);
+			}
+		}
 	}
 
 	&__item {
@@ -20,32 +28,22 @@
 			color: $secondary-color;
 		}
 
-		&:before,
-		&:after {
+		&:before {
 			content: "";
 			@include position(absolute, 0.7em, 1em, 0, 1em);
+			top: 0;
 			border: 3px solid $secondary-color;
-			border-width: 3px 10px;
+			border-width: 5px 10px;
 			border-color: $secondary-color transparent transparent;
-			opacity: 0;
+			opacity: 1;
 			transform: scale(0);
 			transition: transform 0.3s, opacity 0.3s;
-		}
-
-		&:after {
-			border-top-color: transparent;
-			border-bottom-color: $secondary-color;
-		}
-
-		&:hover:before {
-			opacity: 1;
-			transform: scale(1);
 		}
 	}
 
 	&__item--active {
 		color: $secondary-color;
-		&:after {
+		&:before {
 			opacity: 1;
 			transform: scale(1);
 		}
@@ -53,80 +51,21 @@
 }
 
 .avatar {
-	position: absolute;
-	width: 7rem;
-	height: 7rem;
-	right: 0;
-	top: 0;
-	transition: transform 1s opacity 1s;
-	cursor: pointer;
-
-	&__img {
-		position: absolute;
-		right: 2em;
-		top: 50%;
-		transform: translateY(-50%);
-		box-shadow: 0 0 5px white;
-		border-radius: 50%;
-		object-fit: cover;
-		object-position: center;
-	}
-
-	&__tooltip {
-		display: block;
-		opacity: 0;
-		position: absolute;
-		text-align: center;
-		right: 0;
-		top: 100%;
-		width: 15em;
-		background-color: #161b22;
+	&__dropdown {
+		right: -2rem;
+		bottom: -9.5em;
+		transform: translateX(0), scale(1, 0);
 		transform-origin: top right;
-		transform: scale(0);
-
-		transition: transform 0.3s, opacity 0.3s;
-
-		li {
-			box-shadow: 0px 10px 10px #0000003f;
-			height: 100%;
-
-			a {
-				position: relative;
-				align-items: center;
-				justify-content: center;
-				display: flex;
-				padding: 1em;
-
-				&:hover {
-					color: $secondary-color;
-				}
-
-				&:before {
-					content: "";
-					position: absolute;
-					transform: rotate(0deg);
-					width: 40%;
-					height: 1px;
-					background-color: $secondary-color;
-					opacity: 0;
-					transition: opacity 0.3s, transform 0.3s;
-				}
-
-				&:hover:before {
-					opacity: 1;
-					transform: rotate(10deg);
-				}
-			}
-		}
-
-		&:hover {
-			transform: scale(1);
-			opacity: 1;
-		}
 	}
 
-	&:hover ~ .avatar__tooltip {
+	&:hover > &__dropdown {
 		transform: scale(1);
 		opacity: 1;
+	}
+
+	@include media-query(xx-largeScreen) {
+		&__dropdown {
+			bottom: -8.4em;
+		}
 	}
 }

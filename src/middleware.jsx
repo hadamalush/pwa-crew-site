@@ -45,9 +45,9 @@ export async function middleware(request) {
 	headers.set("x-forwarded-for", ip);
 
 	const registerUrl = pathname.startsWith("/rejestracja");
-	const loginUrl = pathname.startsWith("/logowanie");
+	const loginUrl = pathname.startsWith("/login");
 	const forgotPasswordUrl = pathname.startsWith("/forgot-password");
-	const newEventUrl = pathname.startsWith("/wydarzenia/nowe-wydarzenie");
+	const newEventUrl = pathname.startsWith("/wydarzenia/new-event");
 
 	const session =
 		request.cookies.has("next-auth.session-token") ||
