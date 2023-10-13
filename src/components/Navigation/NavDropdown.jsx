@@ -9,11 +9,13 @@ import styles from "../../styles/components/Navigation/NavDropdown.module.scss";
 
 const NavDropdown = ({ dropdownItems, className, ...props }) => {
 	const classes = `${styles.dropdown} ${className || ""}`;
+	let i = 0;
 	return (
 		<ul className={classes}>
 			{dropdownItems.map(item => {
+				i++;
 				return (
-					<li>
+					<li key={i}>
 						<Link
 							href={item.href}
 							onClick={item.onClick || ""}
