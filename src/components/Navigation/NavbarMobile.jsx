@@ -5,8 +5,8 @@ import IconRender from "../Icons/IconRender";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const NavbarMobile = ({ disc, lang }) => {
-	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
+const NavbarMobile = ({ dict, lang }) => {
+	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = dict; //Translation
 	const eventUrl = lang === "pl" ? "/wydarzenia" : "/events";
 	const contactUrl = lang === "pl" ? "/kontakt" : "/contact";
 	const loginUrl = lang === "pl" ? "/logowanie" : "/login";

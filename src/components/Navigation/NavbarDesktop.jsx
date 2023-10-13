@@ -5,8 +5,19 @@ import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import NavDropdown from "./NavDropdown";
 
-const NavbarDesktop = ({ disc, lang, className, ...props }) => {
-	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = disc; //Translation
+const NavbarDesktop = ({ dict, lang, className, ...props }) => {
+	const {
+		trl_home,
+		trl_events,
+		trl_contact,
+		trl_login,
+		trl_chat,
+		trl_allEvents,
+		trl_createEvent,
+		trl_notifications,
+		trl_settings,
+		trl_signOut,
+	} = dict;
 
 	const classes = `${styles.nav} ${className || ""}`;
 	const classesNavItemActive = `${styles["nav__item"]} ${styles["nav__item--active"]}`;
@@ -24,14 +35,14 @@ const NavbarDesktop = ({ disc, lang, className, ...props }) => {
 	};
 
 	const dropdownItemsEvents = [
-		{ title: "Wszystkie wydarzenia", href: "/events" },
-		{ title: "Utwórz wydarzenie", href: "/events/new-event" },
+		{ title: trl_allEvents, href: "/events" },
+		{ title: trl_createEvent, href: "/events/new-event" },
 	];
 
 	const dropdownItemsAvatar = [
-		{ title: "Powiadomienia", href: "/" },
-		{ title: "Ustawienia konta", href: "/" },
-		{ title: "Wyloguj", href: "/", onClick: logoutHandler },
+		{ title: trl_notifications, href: "/" },
+		{ title: trl_settings, href: "/" },
+		{ title: trl_signOut, href: "/", onClick: logoutHandler },
 	];
 	return (
 		<nav className={classes}>

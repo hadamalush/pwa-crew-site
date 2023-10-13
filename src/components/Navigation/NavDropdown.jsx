@@ -13,12 +13,14 @@ const NavDropdown = ({ dropdownItems, className, ...props }) => {
 		<ul className={classes}>
 			{dropdownItems.map(item => {
 				return (
-					<Link
-						href={item.href}
-						onClick={item.onClick || ""}
-						className={styles["dropdown__item"]}>
-						{item.title}
-					</Link>
+					<li>
+						<Link
+							href={item.href}
+							onClick={item.onClick || ""}
+							className={styles["dropdown__item"]}>
+							{item.title}
+						</Link>
+					</li>
 				);
 			})}
 		</ul>

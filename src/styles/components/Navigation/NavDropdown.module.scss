@@ -16,7 +16,7 @@
 	}
 
 	&__item {
-		@include flex(row, center, center);
+		@include flex(row, null, center);
 		padding: 1em 1em;
 		font-size: 1.6rem;
 		transition: color 0.3s;

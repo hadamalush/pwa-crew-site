@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-const MainHeader = ({ disc, lang, ...props }) => {
+const MainHeader = ({ dict, lang, ...props }) => {
 	const { data: session, status } = useSession();
 	const isLoading = useSelector(state => state.notification.isLoading);
 	const router = useRouter();
@@ -42,10 +42,10 @@ const MainHeader = ({ disc, lang, ...props }) => {
 				<Logo className={styles["header__logo"]} />
 				<NavbarDesktop
 					className={styles["header__nav"]}
-					disc={disc}
+					dict={dict}
 					lang={lang}
 				/>
-				<NavbarMobile disc={disc} lang={lang} />
+				<NavbarMobile dict={dict} lang={lang} />
 				<IconRender variant='glob' className={styles["header__glob"]} />
 				<ul className={styles["header__leanguages"]}>
 					<li

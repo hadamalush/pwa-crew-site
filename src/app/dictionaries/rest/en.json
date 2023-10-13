@@ -5,7 +5,15 @@
 		"contact": "Contact",
 		"login": "Login",
 		"logout": "Logout",
-		"chat": "Chat"
+		"chat": "Chat",
+
+		"dropdown": {
+			"allEvents": "All events",
+			"createEvent": "Create event",
+			"notifications": "Notifications",
+			"settings": "Settings",
+			"signOut": "Sign out"
+		}
 	},
 	"contact": {
 		"wp_content": {
