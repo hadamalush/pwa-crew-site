@@ -23,7 +23,7 @@
 		flex: 1;
 	}
 
-	&__item:hover,
+	// &__item:hover,
 	&__link:hover,
 	.nav__link--isActive {
 		color: $secondary-color;
@@ -63,6 +63,14 @@
 			transform: scale(1);
 		}
 	}
+
+	&__item-options {
+		top: -20rem;
+		z-index: -1;
+	}
+
+	// @media (max-height: ) {
+	// }
 
 	@include media-query(mediumScreen) {
 		display: none;

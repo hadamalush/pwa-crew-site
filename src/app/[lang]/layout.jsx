@@ -40,7 +40,7 @@ export default async function RootLayout({ children, params: { lang } }) {
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
-						<NavOptions />
+						{/* <NavOptions /> */}
 						{children}
 						<Footer />
 					</ReduxProvider>

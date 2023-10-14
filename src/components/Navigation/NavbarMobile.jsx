@@ -4,6 +4,7 @@ import IconRender from "../Icons/IconRender";
 import styles from "../../styles/components/Navigation/NavbarMobile.module.scss";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import NavOptions from "./NavOptions";
 
 const NavbarMobile = ({ dict, lang }) => {
 	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = dict; //Translation
@@ -20,6 +21,7 @@ const NavbarMobile = ({ dict, lang }) => {
 	const navStyles = `${styles["nav"]} ${styles.isShow}`;
 
 	const [isScrollChange, setIsScrollChange] = useState(false);
+	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
 
 	//Scroll checking
 
@@ -37,6 +39,10 @@ const NavbarMobile = ({ dict, lang }) => {
 	// 	});
 	// }, []);
 
+	const showOptionsMenuHandler = () => {
+		setIsOptionsMenuVisible(!isOptionsMenuVisible);
+	};
+
 	return (
 		<nav className={!isScrollChange ? styles["nav"] : navStyles}>
 			<ul className={styles["nav__list"]}>
@@ -52,11 +58,16 @@ const NavbarMobile = ({ dict, lang }) => {
 				</li>
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/events'
-						className={isActiveEventsPath ? isActive : styles["nav__link"]}>
+						href='/'
+						className={isActiveEventsPath ? isActive : styles["nav__link"]}
+						onClick={showOptionsMenuHandler}>
 						<IconRender variant='calendar' />
 						<p>{trl_events}</p>
 					</Link>
+
+					{isOptionsMenuVisible && (
+						<NavOptions className={styles["nav__item-options"]} />
+					)}
 				</li>
 
 				<li className={styles["nav__item"]}>
