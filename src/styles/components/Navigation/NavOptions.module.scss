@@ -8,7 +8,7 @@
 	z-index: 999;
 	border-radius: 50%;
 	position: fixed;
-	width: 20rem;
+	width: 768px;
 	height: 20rem;
 	// background-color: #fff;
 
@@ -16,6 +16,9 @@
 		content: "";
 		@include position(absolute, -100rem, -100em, -100rem, -100rem, -1);
 		background-color: #161b22e3;
+		transform: translateY(0);
+		animation: move-shadow 0.5s;
+		transition: transform 0.5s;
 	}
 
 	.menu &__cutout {
@@ -41,9 +44,13 @@
 		);
 		background-color: #64616138;
 
+		&--inVisible {
+			opacity: 0;
+		}
+
 		&:hover svg {
 			color: $secondary-color;
-			rotate: 45deg;
+			rotate: 180deg;
 		}
 
 		svg {
@@ -61,6 +68,8 @@
 		width: 50px;
 		height: 50px;
 		background-color: transparent;
+		transition: transform 0.5s, opacity 0.5s;
+		animation-duration: 0.5s;
 	}
 
 	&__item-link {
@@ -72,6 +81,10 @@
 		background-color: transparent;
 		z-index: 1;
 		outline: none;
+
+		&:hover ~ p {
+			color: $secondary-color;
+		}
 	}
 
 	&__item-hexagon {
@@ -95,6 +108,7 @@
 		bottom: -2rem;
 		font-size: 1.3rem;
 		text-align: center;
+		transition: color 0.3s;
 
 		&--bottom {
 			bottom: -3.5rem;
@@ -103,30 +117,30 @@
 
 	&__item:nth-child(1) {
 		transform: translate(-50%, -250%);
-		animation: move-top 1s;
+		animation-name: move-top;
 	}
 
 	&__item:nth-child(2) {
 		transform: translate(145%, -50%);
-		animation: move-right 1s;
+		animation-name: move-right;
 	}
 	&__item:nth-child(3) {
 		transform: translate(-240%, -50%);
-		animation: move-left 1s;
+		animation-name: move-left;
 	}
 
 	&__item:nth-child(4) {
 		transform: translate(-50%, 145%);
-		animation: move-bottom 1s;
+		animation-name: move-bottom;
 	}
 
 	&__item--second:nth-child(1) {
 		transform: translate(-240%, -50%);
-		animation: move-right 1s;
+		animation-name: move-right;
 	}
 	&__item--second:nth-child(2) {
 		transform: translate(145%, -50%);
-		animation: move-left 1s;
+		animation-name: move-left;
 	}
 
 	@media (max-height: 500px) {
@@ -140,33 +154,44 @@
 
 		&__item:nth-child(1) {
 			transform: translate(-50%, -30%);
-			animation: landscape-move-bottom 1s;
+			animation-name: landscape-move-bottom;
 		}
 
 		&__item:nth-child(2) {
 			transform: translate(145%, -30%);
-			animation: landscape-move-right 1s;
+			animation-name: landscape-move-right;
 		}
 
 		&__item:nth-child(3) {
 			transform: translate(-240%, -30%);
-			animation: landscape-move-left 1s;
+			animation-name: landscape-move-left;
 		}
 
 		&__item:nth-child(4) {
 			transform: translate(-50%, -230%);
-			animation: landscape-move-top 1s;
+			animation-name: landscape-move-top;
 		}
 
 		&__item--second:nth-child(1) {
 			transform: translate(-240%, -30%);
-			animation: landscape-move-left 1s;
+			animation-name: landscape-move-left;
 		}
 
 		&__item--second:nth-child(2) {
 			transform: translate(145%, -30%);
-			animation: landscape-move-right 1s;
+			animation-name: landscape-move-right;
 		}
+	}
+}
+
+.menu .menu__item--reverse {
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+.menu-hide {
+	&::after {
+		transform: translateY(100%);
 	}
 }
 
@@ -176,6 +201,15 @@
 	}
 	to {
 		opacity: 1;
+	}
+}
+
+@keyframes move-shadow {
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0);
 	}
 }
 

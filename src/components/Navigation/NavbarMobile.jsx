@@ -8,20 +8,17 @@ import NavOptions from "./NavOptions";
 
 const NavbarMobile = ({ dict, lang }) => {
 	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = dict; //Translation
-	const eventUrl = lang === "pl" ? "/wydarzenia" : "/events";
-	const contactUrl = lang === "pl" ? "/kontakt" : "/contact";
-	const loginUrl = lang === "pl" ? "/logowanie" : "/login";
 	const pathname = usePathname();
 	const isActiveEventsPath = new RegExp(
 		`${lang}/(events|events/new-event)`
 	).test(pathname);
 
-	console.log(isActiveEventsPath);
 	const isActive = `${styles["nav__link"]} ${styles["nav__link--isActive"]}`;
 	const navStyles = `${styles["nav"]} ${styles.isShow}`;
 
 	const [isScrollChange, setIsScrollChange] = useState(false);
 	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
+	const [isAnimationQuit, setIsAnimationQuit] = useState(false);
 
 	//Scroll checking
 
@@ -40,7 +37,26 @@ const NavbarMobile = ({ dict, lang }) => {
 	// }, []);
 
 	const showOptionsMenuHandler = () => {
-		setIsOptionsMenuVisible(!isOptionsMenuVisible);
+		if (isOptionsMenuVisible) {
+			setIsAnimationQuit(true);
+
+			setTimeout(() => {
+				setIsOptionsMenuVisible(!isOptionsMenuVisible);
+			}, 600);
+		} else {
+			setIsAnimationQuit(false);
+			setIsOptionsMenuVisible(!isOptionsMenuVisible);
+		}
+	};
+
+	const closeOptionsHandler = () => {
+		if (isOptionsMenuVisible) {
+			setIsAnimationQuit(true);
+
+			setTimeout(() => {
+				setIsOptionsMenuVisible(!isOptionsMenuVisible);
+			}, 600);
+		}
 	};
 
 	return (
@@ -49,9 +65,8 @@ const NavbarMobile = ({ dict, lang }) => {
 				<li className={styles["nav__item"]}>
 					<Link
 						href='/'
-						className={
-							pathname === `/${lang}` ? isActive : styles["nav__link"]
-						}>
+						className={pathname === `/${lang}` ? isActive : styles["nav__link"]}
+						onClick={closeOptionsHandler}>
 						<IconRender variant='home' />
 						<p>{trl_home}</p>
 					</Link>
@@ -66,14 +81,18 @@ const NavbarMobile = ({ dict, lang }) => {
 					</Link>
 
 					{isOptionsMenuVisible && (
-						<NavOptions className={styles["nav__item-options"]} />
+						<NavOptions
+							className={styles["nav__item-options"]}
+							animationQuit={isAnimationQuit}
+						/>
 					)}
 				</li>
 
 				<li className={styles["nav__item"]}>
 					<Link
 						href='/'
-						className={pathname === "/chat" ? isActive : styles["nav__link"]}>
+						className={pathname === "/chat" ? isActive : styles["nav__link"]}
+						onClick={closeOptionsHandler}>
 						<IconRender variant='chat' />
 						<p>{trl_chat}</p>
 					</Link>
@@ -84,7 +103,8 @@ const NavbarMobile = ({ dict, lang }) => {
 						href='/contact'
 						className={
 							pathname === `/${lang}/contact` ? isActive : styles["nav__link"]
-						}>
+						}
+						onClick={closeOptionsHandler}>
 						<IconRender variant='contact' />
 						<p>{trl_contact}</p>
 					</Link>
@@ -95,7 +115,8 @@ const NavbarMobile = ({ dict, lang }) => {
 						href='/login'
 						className={
 							pathname === `/${lang}/login` ? isActive : styles["nav__link"]
-						}>
+						}
+						onClick={closeOptionsHandler}>
 						<IconRender variant='user' />
 						<p>{trl_login}</p>
 					</Link>
