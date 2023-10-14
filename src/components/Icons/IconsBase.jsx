@@ -96,7 +96,7 @@ export function IconsBase() {
 				viewBox='0 0 24 24'
 				fill='none'
 				stroke='currentColor'
-				strokWidth='2'
+				strokeWidth='2'
 				strokeLinecap='round'
 				strokeLinejoin='round'
 				className='feather feather-calendar'>

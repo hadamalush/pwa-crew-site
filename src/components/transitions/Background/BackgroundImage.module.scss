@@ -28,7 +28,8 @@
 	min-height: 70rem;
 
 	@include media-query(mediumScreen) {
-		max-height: 95rem;
+		min-height: 95rem;
+		max-height: 100rem;
 	}
 
 	&::before {
