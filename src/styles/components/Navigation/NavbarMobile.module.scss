@@ -69,8 +69,11 @@
 		z-index: -1;
 	}
 
-	// @media (max-height: ) {
-	// }
+	@media (max-height: 500px) {
+		&__item-options {
+			top: -10rem;
+		}
+	}
 
 	@include media-query(mediumScreen) {
 		display: none;

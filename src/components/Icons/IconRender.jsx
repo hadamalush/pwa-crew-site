@@ -103,6 +103,8 @@ const IconRender = ({ onClick, ...props }) => {
 				return icons.sun;
 			case "moon":
 				return icons.moon;
+			case "cross":
+				return icons.cross;
 			default:
 				return null;
 		}

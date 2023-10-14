@@ -2,16 +2,18 @@ import Link from "next/link";
 import styles from "../../styles/components/Navigation/NavOptions.module.scss";
 import ImageFill from "../transitions/Image/ImageFill";
 import Image from "next/image";
+import IconRender from "../Icons/IconRender";
 
 const NavOptions = ({ className }) => {
 	const array = [
 		{ title: "Wydarzenia", href: "/" },
 		{ title: "Utwórz wydarzenia", href: "/" },
-		// { title: "Utwórz wydarzenia", href: "/" },
-		// { title: "Utwórz wydarzenia", href: "/" },
+		{ title: "Utwórz wydarzenia", href: "/" },
+		{ title: "Utwórz wydarzenia", href: "/" },
 	];
 	const quantityOptions = array.length;
 	const classesGeneral = `${styles.menu} ${className || ""}`;
+	let i = 0;
 
 	return (
 		<ul className={classesGeneral}>
@@ -27,9 +29,10 @@ const NavOptions = ({ className }) => {
 					wordsQuantity > 1
 						? `${styles["menu__item-title"]} ${styles["menu__item-title--bottom"]}`
 						: styles["menu__item-title"];
+				i++;
 
 				return (
-					<li className={classItem}>
+					<li key={i} className={classItem}>
 						<Link href='/' className={styles["menu__item-link"]}></Link>
 						<ImageFill
 							src='/images/background/background-logreg.webp'
@@ -39,43 +42,14 @@ const NavOptions = ({ className }) => {
 					</li>
 				);
 			})}
-
-			{/* <li className={styles["menu__item"]}>
-				<Link href='/' className={styles["menu__item-link"]}></Link>
-				<ImageFill
-					src='/images/background/background-logreg.webp'
-					className={styles["menu__item-hexagon"]}
-				/>
-
-				<p className={styles["menu__item-title"]}>Wydarzenia</p>
-			</li>
-
-			<li className={`${styles["menu__item"]} ${styles["menu__item--second"]}`}>
-				<Link href='/' className={styles["menu__item-link"]}></Link>
-				<ImageFill
-					src='/images/background/background-logreg.webp'
-					className={styles["menu__item-hexagon"]}
-				/>
-
-				<p className={classesParagraph}>Utwórz wydarzenie</p>
-			</li> */}
-
-			{/* <li className={styles["menu__item"]}>
-				<Link href='/' className={styles["menu__item-link"]}></Link>
-				<ImageFill
-					src='/images/background/background-logreg.webp'
-					className={styles["menu__item-hexagon"]}
-				/>
-				<p className={classesParagraph}>Utwórz wydarzenie</p>
-			</li>
-			<li className={styles["menu__item"]}>
-				<Link href='/' className={styles["menu__item-link"]}></Link>
-				<ImageFill
-					src='/images/background/background-logreg.webp'
-					className={styles["menu__item-hexagon"]}
-				/>
-				<p className={classesParagraph}>Utwórz wydarzenie</p>
-			</li> */}
+			<IconRender
+				variant='cross'
+				className={
+					quantityOptions === 4
+						? `${styles["menu__cutout"]} ${styles["menu__cutout--second"]}`
+						: styles["menu__cutout"]
+				}
+			/>
 		</ul>
 	);
 };
