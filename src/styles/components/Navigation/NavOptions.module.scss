@@ -2,37 +2,23 @@
 @import "../../mixins/mixins";
 
 .menu {
-	top: 50%;
-	left: 50%;
+	@include position(fixed, 50%, null, null, 50%, 999);
 	transform: translate(-50%, -50%);
-	z-index: 999;
-	border-radius: 50%;
-	position: fixed;
 	width: 768px;
 	height: 20rem;
-	// background-color: #fff;
+	border-radius: 50%;
 
 	&::after {
 		content: "";
 		@include position(absolute, -100rem, -100em, -100rem, -100rem, -1);
-		background-color: #161b22e3;
+		transition: transform 0.5s;
 		transform: translateY(0);
 		animation: move-shadow 0.5s;
-		transition: transform 0.5s;
+		background-color: #161b22e3;
 	}
 
-	.menu &__cutout {
-		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 4rem;
-		height: 4rem;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		cursor: pointer;
-		animation: visible 1s;
+	.menu &__cutout,
+	&__item-hexagon {
 		clip-path: polygon(
 			50% 0%,
 			90% 20%,
@@ -42,7 +28,17 @@
 			0% 60%,
 			10% 20%
 		);
+	}
+
+	.menu &__cutout {
+		@include position(absolute, 50%, null, null, 50%);
+		@include flex(row, center, center);
+		width: 4rem;
+		height: 4rem;
+		transform: translate(-50%, -50%);
+		animation: visible 1s;
 		background-color: #64616138;
+		cursor: pointer;
 
 		&--inVisible {
 			opacity: 0;
@@ -59,56 +55,40 @@
 		}
 	}
 
-	&__item {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		margin: 0 auto;
+	&__item,
+	&__item-hexagon {
 		width: 50px;
 		height: 50px;
-		background-color: transparent;
+	}
+
+	&__item {
+		@include position(absolute, 50%, null, null, 50%);
+		transform: translate(-50%, -50%);
 		transition: transform 0.5s, opacity 0.5s;
 		animation-duration: 0.5s;
+		background-color: transparent;
 	}
 
 	&__item-link {
-		position: absolute;
-		left: 50%;
+		@include position(absolute, null, null, null, 50%, 1);
 		width: 70px;
 		height: 80px;
 		transform: translateX(-50%);
-		background-color: transparent;
-		z-index: 1;
 		outline: none;
+		background-color: transparent;
+		color: transparent;
 
 		&:hover ~ p {
 			color: $secondary-color;
 		}
 	}
 
-	&__item-hexagon {
-		width: 50px;
-		height: 50px;
-		clip-path: polygon(
-			50% 0%,
-			90% 20%,
-			100% 60%,
-			75% 100%,
-			25% 100%,
-			0% 60%,
-			10% 20%
-		);
-	}
-
 	&__item-title {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		bottom: -2rem;
+		@include position(absolute, null, null, -2rem, 50%);
 		font-size: 1.3rem;
-		text-align: center;
+		transform: translateX(-50%);
 		transition: color 0.3s;
+		text-align: center;
 
 		&--bottom {
 			bottom: -3.5rem;

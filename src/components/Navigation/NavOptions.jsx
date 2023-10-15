@@ -4,15 +4,17 @@ import styles from "../../styles/components/Navigation/NavOptions.module.scss";
 import ImageFill from "../transitions/Image/ImageFill";
 import IconRender from "../Icons/IconRender";
 
-const NavOptions = ({ className, animationQuit }) => {
-	const array = [
-		{ title: "Wydarzenia", href: "/" },
-		{ title: "Utwórz wydarzenia", href: "/" },
-		{ title: "Utwórz wydarzenia", href: "/" },
-		{ title: "Utwórz wydarzenia", href: "/" },
-	];
+/**
+ * @description This component is for navigation options. Maximum 4 elements.
+ * @param {String} className Enter className as string.
+ * @param {String} imgSrc Enter image source as string.
+ * @param {Boolean} animationQuit Enter varible with boolean. When true then animation close will start.
+ * @param {Array} options Enter array with objects. Object should includes title and href properties. For example: [{title: 'Events', href: '/events'}] Those properties are type string.
+ * @returns {JSX.Element} Return the whole component with options menu. Prefer mobile devices.
+ */
 
-	const quantityOptions = array.length;
+const NavOptions = ({ className, animationQuit, options }) => {
+	const quantityOptions = options.length;
 	const classesGeneral = `${styles.menu} ${className || ""}`;
 	let i = 0;
 
@@ -31,7 +33,7 @@ const NavOptions = ({ className, animationQuit }) => {
 
 	return (
 		<ul className={classesGeneral}>
-			{array.map(item => {
+			{options.map(item => {
 				const wordsQuantity = item.title.split(" ").length;
 
 				const classItem =
@@ -47,9 +49,12 @@ const NavOptions = ({ className, animationQuit }) => {
 
 				return (
 					<li key={i} className={classItem}>
-						<Link href='/' className={styles["menu__item-link"]}></Link>
+						<Link
+							href={item.href}
+							className={styles["menu__item-link"]}
+							onClick={closeMenuHandler}></Link>
 						<ImageFill
-							src='/images/background/background-logreg.webp'
+							src={item.imgSrc}
 							className={styles["menu__item-hexagon"]}
 							alt='dsad'
 						/>

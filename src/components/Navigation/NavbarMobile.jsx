@@ -7,7 +7,14 @@ import { useEffect, useState } from "react";
 import NavOptions from "./NavOptions";
 
 const NavbarMobile = ({ dict, lang }) => {
-	const { trl_home, trl_events, trl_contact, trl_login, trl_chat } = dict; //Translation
+	const {
+		trl_home,
+		trl_events,
+		trl_contact,
+		trl_login,
+		trl_chat,
+		trl_createEvent,
+	} = dict; //Translation
 	const pathname = usePathname();
 	const isActiveEventsPath = new RegExp(
 		`${lang}/(events|events/new-event)`
@@ -19,6 +26,19 @@ const NavbarMobile = ({ dict, lang }) => {
 	const [isScrollChange, setIsScrollChange] = useState(false);
 	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
 	const [isAnimationQuit, setIsAnimationQuit] = useState(false);
+
+	const optionsEvents = [
+		{
+			title: trl_events,
+			href: "/events",
+			imgSrc: "/images/options/option-events.webp",
+		},
+		{
+			title: trl_createEvent,
+			href: "/events/new-event",
+			imgSrc: "/images/options/option-new-event.webp",
+		},
+	];
 
 	//Scroll checking
 
@@ -36,7 +56,9 @@ const NavbarMobile = ({ dict, lang }) => {
 	// 	});
 	// }, []);
 
-	const showOptionsMenuHandler = () => {
+	const showOptionsMenuHandler = e => {
+		e.preventDefault();
+
 		if (isOptionsMenuVisible) {
 			setIsAnimationQuit(true);
 
@@ -73,7 +95,7 @@ const NavbarMobile = ({ dict, lang }) => {
 				</li>
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/'
+						href='/contact'
 						className={isActiveEventsPath ? isActive : styles["nav__link"]}
 						onClick={showOptionsMenuHandler}>
 						<IconRender variant='calendar' />
@@ -84,6 +106,7 @@ const NavbarMobile = ({ dict, lang }) => {
 						<NavOptions
 							className={styles["nav__item-options"]}
 							animationQuit={isAnimationQuit}
+							options={optionsEvents}
 						/>
 					)}
 				</li>
