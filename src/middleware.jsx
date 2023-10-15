@@ -4,7 +4,7 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
 let defaultLocale = "pl";
-let locales = ["pl", "en", "dk"];
+let locales = ["pl", "en"];
 
 const getLangFromCookies = request => {
 	const lang = request.cookies.get("lang");
@@ -19,10 +19,6 @@ const getLangFromCookies = request => {
 
 const getLocale = request => {
 	const lang = getLangFromCookies(request);
-
-	// const acceptedLanguage = lang
-	// 	? lang
-	// 	: request.headers.get("accept-language") ?? undefined;
 
 	let headers = { "accept-language": lang };
 
@@ -49,9 +45,9 @@ export async function middleware(request) {
 	headers.set("x-forwarded-for", ip);
 
 	const registerUrl = pathname.startsWith("/rejestracja");
-	const loginUrl = pathname.startsWith("/logowanie");
+	const loginUrl = pathname.startsWith("/login");
 	const forgotPasswordUrl = pathname.startsWith("/forgot-password");
-	const newEventUrl = pathname.startsWith("/wydarzenia/nowe-wydarzenie");
+	const newEventUrl = pathname.startsWith("/wydarzenia/new-event");
 
 	const session =
 		request.cookies.has("next-auth.session-token") ||
@@ -65,7 +61,7 @@ export async function middleware(request) {
 		return NextResponse.redirect(new URL("/logowanie", request.url));
 	}
 
-	return Response.redirect(request.nextUrl);
+	return NextResponse.redirect(request.nextUrl);
 
 	// return NextResponse.next({
 	// 	request: {

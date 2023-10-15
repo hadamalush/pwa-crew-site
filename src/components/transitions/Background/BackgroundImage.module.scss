@@ -1,3 +1,6 @@
+@import "../../../styles/transitions/variables";
+@import "../../../styles/mixins/mixins";
+
 .hero {
 	position: absolute;
 	top: 0;
@@ -23,6 +26,11 @@
 	height: 100vh;
 	max-height: 80rem;
 	min-height: 70rem;
+
+	@include media-query(mediumScreen) {
+		min-height: 95rem;
+		max-height: 100rem;
+	}
 
 	&::before {
 		content: "";

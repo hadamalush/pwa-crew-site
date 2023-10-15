@@ -11,11 +11,19 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
 
+/**
+ * @description This component returns form for contact.
+ * @param {String} className Enter some class as String
+ * @param {Object} dict Enter object with dictionary, that object should include (trl_title, trl_subject, trl_email, trl_message, trl_btn, trl_error). All of properties are type of string. For example: trl_title: in eng - "Contact" or in pl -  "Kontakt". Should come from internationalization directory.
+ * @param {String} lang Enter lang as String. For example: 'pl' or 'en' - but should come from params.
+ * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
+ */
+
 const FormikContact = ({ className, dict, lang, ...props }) => {
 	const { trl_title, trl_email, trl_subject, trl_message, trl_btn, trl_error } =
 		dict;
 
-	const classes = `${styles["logreg-box"]} ${className}`;
+	const classes = `${styles["logreg-box"]} ${className || ""}`;
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",
 	});
@@ -80,7 +88,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 					message: "",
 				}}
 				onSubmit={onSubmit}
-				validationSchema={contactSchema}>
+				validationSchema={contactSchema(lang)}>
 				{props => (
 					<Form>
 						<h1>{trl_title}</h1>
@@ -101,7 +109,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 							<p>{trl_message}:</p>
 						</label>
 						<TextareaFormik name='message' id='message' />
-						<ButtonMain type='submit' variant={"btnSkewRight"}>
+						<ButtonMain type='submit' variant='btnSkewRight'>
 							{trl_btn}
 						</ButtonMain>
 					</Form>

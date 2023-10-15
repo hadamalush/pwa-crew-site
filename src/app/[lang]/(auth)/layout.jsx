@@ -10,7 +10,7 @@ export default async function Layout({ children, params: { lang } }) {
 		trl_title: dict.auth.wp_content.title,
 		trl_textFirst: dict.auth.wp_content.textFirst,
 		trl_textSecond: dict.auth.wp_content.textSecond,
-		imageSrc: "/images/header/concert.jpg",
+		imageSrc: "/images/background/background-logreg.webp",
 		trl_alt: dict.auth.wp_content.alt,
 	};
 

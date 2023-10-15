@@ -13,11 +13,16 @@ import { useMediaQuery } from "react-responsive";
 import { showResult, toggleLoading } from "@/global/notification-slice";
 import { useDispatch } from "react-redux";
 
-const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
-	const registrationUrl = lang === "pl" ? "/rejestracja" : "/registration";
-	const forgotPassUrl =
-		lang === "pl" ? "/zapomniane-haslo" : "/forgot-password";
+/**
+ * @description This component returns form for login.
+ * @param {String} className Enter some class as String
+ * @param {Object} dict Enter object with dictionary, that object should include (trl_title,trl_email, trl_password, trl_forgotPass, trl_btn, trl_question, trl_questionLink). All of properties are type of string. For example: trl_title: "Sign in" or trl_title: "Logowanie". Should come from internationalization directory.
+ * @param {Object} dictNotifi Enter object with notification dictionary, that object should include (trl_err_404,trl_err_422, trl_generalError, trl_welcome). All of properties are type of string. For example: trl_generalError: in eng - "Something went wrong" or in pl - "Coś poszło nie tak". Should come from internationalization directory.
+ * @param {String} lang Enter lang as String. For example: 'pl' or 'en' - but should come from params.
+ * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
+ */
 
+const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	const {
 		trl_title,
 		trl_email,
@@ -53,7 +58,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 		}
 	}, [session, status]);
 
-	const changeWebstiteHandler = async (website, event) => {
+	const changeWebstiteHandler = (event, path) => {
 		event.preventDefault();
 
 		const form = document
@@ -61,7 +66,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 			.classList.toggle(styles.active);
 
 		setTimeout(() => {
-			router.push(`${website}`);
+			router.push(path);
 		}, 500);
 	};
 
@@ -111,7 +116,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 					password: "",
 				}}
 				onSubmit={onSubmit}
-				validationSchema={loginSchema}>
+				validationSchema={loginSchema(lang)}>
 				{props => (
 					<Form>
 						<h1>{trl_title}</h1>
@@ -130,8 +135,10 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 						/>
 
 						<Link
-							href={`${forgotPassUrl}`}
-							onClick={changeWebstiteHandler.bind(null, forgotPassUrl)}>
+							href={"/forgot-password"}
+							onClick={event =>
+								changeWebstiteHandler(event, "/forgot-password")
+							}>
 							{trl_forgotPass}
 						</Link>
 
@@ -142,8 +149,10 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 						<p>
 							{trl_question}
 							<Link
-								href={`${registrationUrl}`}
-								onClick={changeWebstiteHandler.bind(null, registrationUrl)}>
+								href='/registration'
+								onClick={event =>
+									changeWebstiteHandler(event, "/registration")
+								}>
 								{trl_questionLink}
 							</Link>
 						</p>

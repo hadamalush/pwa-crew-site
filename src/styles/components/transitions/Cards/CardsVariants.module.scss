@@ -11,6 +11,7 @@
 		bottom: 0;
 		right: 0;
 		background-color: $card-color-primary;
+		box-shadow: $boxshadow-primary;
 		transition: transform 0.3s;
 	}
 
@@ -21,6 +22,7 @@
 
 .normal {
 	text-align: center;
+	box-shadow: $boxshadow-primary;
 
 	&:before {
 		content: "";

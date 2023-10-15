@@ -13,7 +13,7 @@ export default function ImageFill({
 	return (
 		<div className={className}>
 			<Image
-				priority={priority}
+				priority={true}
 				src={src}
 				alt={alt}
 				fill

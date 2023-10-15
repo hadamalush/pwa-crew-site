@@ -67,7 +67,7 @@ const EventItem = ({
 			id={id + 7}>
 			{isDescription && (
 				<Link
-					href={`/wydarzenia#${id + 7}`}
+					href={`/events#${id + 7}`}
 					className={styles["event-item__arrow-back"]}>
 					<IconRender variant='arrow_back' />
 				</Link>
@@ -126,7 +126,7 @@ const EventItem = ({
 							/>
 							<div className={styles["details__item-link"]}>
 								<LinkAsBtn
-									href={`/wydarzenia/${replacedTitle}/${id}#section_detail-item`}>
+									href={`/events/${replacedTitle}/${id}#section_detail-item`}>
 									{trl_btnEventDetails}
 								</LinkAsBtn>
 							</div>

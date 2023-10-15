@@ -25,8 +25,6 @@ const BackgroundImageGeneral = ({ lang }) => {
 					alt='Crowd on the concert'
 					src='/images/header/concert.jpg'
 					priority={true}
-					width={0}
-					height={0}
 					fill
 					sizes='100vw'
 				/>

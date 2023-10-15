@@ -10,6 +10,7 @@
 	background-color: $background-nav;
 	opacity: 1;
 	animation: show 1s forwards;
+	box-shadow: $boxshadow-primary;
 
 	&__list {
 		display: flex;
@@ -17,13 +18,14 @@
 	}
 
 	&__item {
+		position: relative;
 		height: 100%;
 		flex: 1;
 	}
 
-	&__item:hover,
+	// &__item:hover,
 	&__link:hover,
-	&__link--isActive {
+	.nav__link--isActive {
 		color: $secondary-color;
 		fill: $secondary-color;
 	}
@@ -38,8 +40,38 @@
 		fill: $link-color-primary;
 		transition: color 0.3s, fill 0.3s;
 
+		&:before {
+			content: "";
+			@include position(absolute, 0.7em, 1em, 0, 1em);
+			top: 0;
+			border: 3px solid $secondary-color;
+			border-width: 4px 10px;
+			border-color: transparent transparent $secondary-color;
+			opacity: 1;
+			transform: scale(0);
+			transition: transform 0.3s, opacity 0.3s;
+		}
+
 		p {
 			font-size: 1.2rem;
+		}
+	}
+
+	.nav__link--isActive {
+		&:before {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	&__item-options {
+		top: -20rem;
+		z-index: -1;
+	}
+
+	@media (max-height: 500px) {
+		&__item-options {
+			top: -10rem;
 		}
 	}
 

@@ -1,40 +1,5 @@
 @import "../../transitions/variables";
 @import "../../mixins/mixins";
-.btnSkewRight {
-	//temporarty - need to change
-	display: inline-block;
-	width: 100%;
-	text-align: center;
-	padding: 14px 26px;
-	background-color: $background-secondary;
-	border-radius: 3px;
-	border: 0;
-	font-weight: bold;
-	color: $primary-color;
-	cursor: pointer;
-	position: relative;
-	background-color: rgba(14, 14, 14, 0.9);
-	transform: skew(-10deg);
-	font-size: 1.4rem;
-	transition: transform 0.3s, color 0.3s;
-
-	&:hover {
-		transform: scale(1.04) skew(-10deg);
-		color: $secondary-color;
-	}
-
-	&:before {
-		content: "";
-		position: absolute;
-		display: flex;
-		top: 4px;
-		right: 4px;
-		bottom: 4px;
-		left: 4px;
-		border: solid 1px $secondary-color;
-		border-radius: 2px;
-	}
-}
 
 .introduction {
 	&__h1 {
@@ -61,6 +26,12 @@
 			text-transform: uppercase;
 		}
 		margin: 0 0.2em;
+	}
+
+	@include media-query(foldScreen) {
+		a:first-of-type {
+			margin-bottom: 0.3em;
+		}
 	}
 
 	@include media-query(largeScreen) {

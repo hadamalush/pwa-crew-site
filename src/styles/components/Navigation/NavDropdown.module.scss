@@ -1,0 +1,28 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+
+.dropdown {
+	@include position(absolute, null, 50%);
+	width: 20rem;
+	transform: scale(0) translateX(50%);
+	transition: transform 0.3s, opacity 0.3s, color 0.3s;
+	transform-origin: top right;
+	text-align: center;
+	box-shadow: $boxshadow-senary;
+	background-color: $background-nav;
+
+	li {
+		box-shadow: $boxshadow-septenary;
+	}
+
+	&__item {
+		@include flex(row, null, center);
+		padding: 1em 1em;
+		font-size: 1.6rem;
+		transition: color 0.3s;
+
+		&:hover {
+			color: $secondary-color;
+		}
+	}
+}

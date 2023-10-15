@@ -2,16 +2,11 @@ import styles from "../../../styles/components/transitions/Buttons/ButtonMain.mo
 import btnVariant from "../../../styles/components/transitions/Buttons/ButtonVariants.module.scss";
 /** 
 @param variant - default, borderIn, btnSkewRight
-
-
 **/
 
-const ButtonMain = props => {
-	//variants: default,
-	const variant = props.variant;
-
+const ButtonMain = ({ className, variant, ...props }) => {
 	const classes = `${styles.button} ${btnVariant[`${variant}`]} ${
-		props.className
+		className || ""
 	}`;
 	return (
 		<button

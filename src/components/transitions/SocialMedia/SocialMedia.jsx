@@ -1,5 +1,5 @@
-import styles from "../../../styles/components/transitions/SocialMedia/SocialMedia.module.scss";
 import IconRender from "@/components/Icons/IconRender";
+import styles from "../../../styles/components/transitions/SocialMedia/SocialMedia.module.scss";
 
 export default function SocialMedia() {
 	return (

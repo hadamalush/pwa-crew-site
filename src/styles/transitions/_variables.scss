@@ -45,6 +45,7 @@ $link-color-primary: #adb0bc;
 
 //breakpoints
 
+$foldScreen: 280px;
 $smallScreen: 568px;
 $mediumScreen: 768px;
 $largeScreen: 992px;
@@ -62,8 +63,15 @@ $heading-primary-shadow: 2px 2px 2px black;
 //box-shadow
 $boxshadow-primary: 0 5px 15px 0 rgba(0, 0, 0, 0.8);
 $boxshadow-secondary: 0 0 15px black; // WrapperFormWithContent
+$boxshadow-quinary: 0 0 5px #fff; //Avatar
+$boxshadow-senary: inset 0px -5px 5px black; // dropdownmenu box
+$boxshadow-septenary: 0px 10px 10px #0000003f;
 
 //heroshadow-bgc
 
 $hero-primay-bgc: #00000098;
 $hero-secondary-bgc: #000000d3;
+
+//text-shadow
+$text-shadow-primary: 2px 2px 2px black;
+$text-shadow-tertiary: 3px 3px 4px rgb(82, 55, 5);

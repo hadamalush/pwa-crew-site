@@ -2,27 +2,25 @@
 @import "../../mixins/mixins";
 
 .footer {
-	display: flex;
-	flex-direction: column;
+	@include flex(column);
 	flex-wrap: wrap;
 	position: relative;
 	width: 100%;
+	max-width: 250rem;
 	min-height: 30rem;
+	margin: 0 auto;
 	padding: 15em 2em 13em;
 
 	h3 {
-		color: $primary-color;
-		position: absolute;
-		z-index: 10;
-		top: 5rem;
-		left: 50%;
-		transform: translateX(-50%);
+		@include position(absolute, 5rem, 50%, null, null, 10);
+		transform: translateX(50%);
 		text-align: center;
+		color: $primary-color;
+		text-shadow: $text-shadow-tertiary;
 	}
 
 	.newsletter {
-		display: flex;
-		flex-direction: column;
+		@include flex(column);
 		width: 100%;
 
 		label {
@@ -45,19 +43,16 @@
 			width: 100%;
 		}
 
+		//icon
 		div {
-			// icon
-			position: absolute;
-			right: 0;
-			top: 50%;
+			@include position(absolute, 50%, 0);
 			transform: translateY(-50%);
 		}
 	}
 
 	&__box {
-		// flex: 1;
-		margin: 0 auto;
 		height: 100%;
+		margin: 0 auto;
 		text-align: center;
 
 		h5 {
@@ -81,6 +76,7 @@
 					position: relative;
 					height: 100%;
 					padding: 0.5em 3em;
+					transition: color 0.3s;
 
 					//icon
 					div {
@@ -93,31 +89,39 @@
 				}
 			}
 		}
+	}
 
-		.address a {
+	.footer__address {
+		a {
 			display: flex;
 			align-items: center;
+		}
+
+		div {
+			width: 2rem;
 		}
 	}
 
 	&__logo {
 		margin: 1em auto 0;
-		font-size: 3.4rem;
+		font-size: 2.5rem;
+		width: 25rem;
+
+		div {
+			width: 2.5rem;
+		}
 	}
 
 	.footer__box:last-of-type {
 		width: 100%;
-
 		h5 {
 			margin-bottom: 1em;
 		}
 	}
 
 	p:last-of-type {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		bottom: 4rem;
+		@include position(absolute, null, 50%, 4rem);
+		transform: translateX(50%);
 		text-align: center;
 	}
 
@@ -129,20 +133,9 @@
 	}
 	@include media-query(largeScreen) {
 		flex-direction: row;
-
 		&__box {
 			display: block;
-			width: 33%;
-		}
-
-		.logo {
-			align-items: center;
-			width: 100%;
-
-			:first-child {
-				// flex-direction: row;
-				margin: 0 auto;
-			}
+			width: 30%;
 		}
 	}
 
@@ -156,6 +149,15 @@
 				font-size: 1.7rem;
 			}
 		}
+
+		.footer__logo {
+			margin: 1em auto 0;
+			font-size: 3rem;
+
+			div {
+				width: 3rem;
+			}
+		}
 	}
 
 	@include media-query(hugeScreen) {
@@ -166,7 +168,7 @@
 		}
 
 		span:last-of-type {
-			div:all {
+			div {
 				width: 4rem;
 			}
 		}

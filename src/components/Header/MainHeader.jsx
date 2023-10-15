@@ -8,9 +8,11 @@ import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
-const MainHeader = ({ disc, lang, ...props }) => {
+const MainHeader = ({ dict, lang, ...props }) => {
 	const { data: session, status } = useSession();
+	const [isLight, setIsLight] = useState(false);
 	const isLoading = useSelector(state => state.notification.isLoading);
 	const router = useRouter();
 	let pathname = usePathname();
@@ -22,6 +24,7 @@ const MainHeader = ({ disc, lang, ...props }) => {
 	const classesHeader = !isLoading
 		? `${styles.header}`
 		: `${styles.header} ${styles.loading}`;
+	const classesLangIsActive = `${styles["header__leanguages-item"]} ${styles["header__leanguages-item--active"]}`;
 
 	const changeLanguageHandler = async language => {
 		const response = await fetch("/api/cookies", {
@@ -36,25 +39,42 @@ const MainHeader = ({ disc, lang, ...props }) => {
 		}
 	};
 
+	const changeThemeHandler = () => {
+		setIsLight(!isLight);
+	};
+
 	return (
 		<>
 			<header className={classesHeader}>
 				<Logo className={styles["header__logo"]} />
 				<NavbarDesktop
 					className={styles["header__nav"]}
-					disc={disc}
+					dict={dict}
 					lang={lang}
 				/>
-				<NavbarMobile disc={disc} lang={lang} />
+				<NavbarMobile dict={dict} lang={lang} />
+				<IconRender
+					variant={isLight ? "moon" : "sun"}
+					className={styles["header__theme-switcher"]}
+					onClick={changeThemeHandler}
+				/>
 				<IconRender variant='glob' className={styles["header__glob"]} />
 				<ul className={styles["header__leanguages"]}>
 					<li
-						className={styles["header__leanguages-item"]}
+						className={
+							lang === "en"
+								? classesLangIsActive
+								: styles["header__leanguages-item"]
+						}
 						onClick={() => changeLanguageHandler("en")}>
 						EN
 					</li>
 					<li
-						className={styles["header__leanguages-item"]}
+						className={
+							lang === "pl"
+								? classesLangIsActive
+								: styles["header__leanguages-item"]
+						}
 						onClick={() => changeLanguageHandler("pl")}>
 						PL
 					</li>

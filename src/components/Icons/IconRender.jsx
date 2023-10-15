@@ -6,7 +6,7 @@ import styles from "../../styles/components/transitions/Icons/IconRender.module.
  * @param {string} variant - Variants of icons (Available: youtube, film, powerOff, settings, user, event, calendar, info, contact, shop, home, user, users, history, chartRadar, email)
  * @returns icon svg wrapped div
  */
-const IconRender = props => {
+const IconRender = ({ onClick, ...props }) => {
 	const icons = IconsBase();
 	const variant = props.variant;
 	const classes = `${styles.icon} ${props.className}`;
@@ -99,6 +99,12 @@ const IconRender = props => {
 				return icons.flagUS;
 			case "glob":
 				return icons.glob;
+			case "sun":
+				return icons.sun;
+			case "moon":
+				return icons.moon;
+			case "cross":
+				return icons.cross;
 			default:
 				return null;
 		}
@@ -107,7 +113,7 @@ const IconRender = props => {
 	const selectedIcon = iconsSwitch(variant);
 
 	return (
-		<div className={classes} style={props.style}>
+		<div className={classes} style={props.style} onClick={onClick || null}>
 			{selectedIcon}
 		</div>
 	);

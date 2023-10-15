@@ -13,7 +13,7 @@ export default async function ContactPage({ params: { lang } }) {
 		trl_title: dict.contact.wp_content.title,
 		trl_textFirst: dict.contact.wp_content.textFirst,
 		trl_textSecond: dict.contact.wp_content.textSecond,
-		imageSrc: "/images/background/background-contact.jpg",
+		imageSrc: "/images/background/background-test.webp",
 		trl_alt: dict.contact.wp_content.alt,
 	};
 
