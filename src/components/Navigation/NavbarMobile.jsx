@@ -81,6 +81,9 @@ const NavbarMobile = ({ dict, lang }) => {
 		}
 	};
 
+	const removeOptionsFromStructureHandler = () => {
+		setIsOptionsMenuVisible(false);
+	};
 	return (
 		<nav className={!isScrollChange ? styles["nav"] : navStyles}>
 			<ul className={styles["nav__list"]}>
@@ -107,6 +110,7 @@ const NavbarMobile = ({ dict, lang }) => {
 							className={styles["nav__item-options"]}
 							animationQuit={isAnimationQuit}
 							options={optionsEvents}
+							onClickCross={removeOptionsFromStructureHandler}
 						/>
 					)}
 				</li>

@@ -10,10 +10,11 @@ import IconRender from "../Icons/IconRender";
  * @param {String} imgSrc Enter image source as string.
  * @param {Boolean} animationQuit Enter varible with boolean. When true then animation close will start.
  * @param {Array} options Enter array with objects. Object should includes title and href properties. For example: [{title: 'Events', href: '/events'}] Those properties are type string.
+ * @param {Function} onClickCross Enter function which remove NavOptions from structure.
  * @returns {JSX.Element} Return the whole component with options menu. Prefer mobile devices.
  */
 
-const NavOptions = ({ className, animationQuit, options }) => {
+const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 	const quantityOptions = options.length;
 	const classesGeneral = `${styles.menu} ${className || ""}`;
 	let i = 0;
@@ -25,6 +26,8 @@ const NavOptions = ({ className, animationQuit, options }) => {
 		menu.classList.add(styles["menu-hide"]);
 		itemExit.classList.add(styles["menu__cutout--inVisible"]);
 		items.forEach(item => item.classList.add(styles["menu__item--reverse"]));
+
+		setTimeout(() => onClickCross(), 600);
 	};
 
 	if (animationQuit) {
