@@ -59,7 +59,8 @@ const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 						<ImageFill
 							src={item.imgSrc}
 							className={styles["menu__item-hexagon"]}
-							alt='dsad'
+							alt={item.title}
+							sizes='(min-width: 250px) 20vw'
 						/>
 						<p className={classesParagraph}>{item.title}</p>
 					</li>

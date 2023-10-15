@@ -1,4 +1,6 @@
 import { File } from "megajs";
+import sharp from "sharp";
+import { Readable } from "nodemailer/lib/xoauth2";
 
 //pass table of links as argument, returns promise
 export const allDownloadBuffersMegaNz = async megaLinks => {
@@ -55,4 +57,43 @@ export const oneConvertFromBuffersToBase64 = buffer => {
 	const convertedBuffer = buffer.toString("base64");
 
 	return convertedBuffer;
+};
+
+/**
+ * @description This function will resize image and change format of image to webp
+ * @param {Buffer} buffer Enter buffer of image.
+ * @param {Number} width Enter width of image.
+ * @param {Number} height Enter hight of image.
+ * @returns Buffer.
+ */
+
+export const convertImageWithSharp = async (buffer, width, height) => {
+	return new Promise((resolve, reject) => {
+		sharp(buffer)
+			.resize(width, height)
+			.toFormat("webp")
+			.toBuffer((error, convertedBuffer) => {
+				if (error) {
+					return reject(error);
+				}
+
+				resolve(convertedBuffer);
+			});
+	});
+};
+
+// CLOUDINARY
+
+export const uploadStream = (buffer, options, cldConfig) => {
+	return new Promise((res, rej) => {
+		const upload_stream = cldConfig.v2.uploader.upload_stream(
+			options,
+			(err, result) => {
+				if (err) return rej(err);
+				res(result);
+			}
+		);
+		let str = Readable.from(buffer);
+		str.pipe(upload_stream);
+	});
 };

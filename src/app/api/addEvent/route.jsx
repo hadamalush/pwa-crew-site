@@ -37,6 +37,7 @@ export const POST = async request => {
 		description,
 		imageSrcVercelBlob,
 		imageSrcMega,
+		imageSrcCld,
 		// imageSrcLocal,
 	} = data;
 	const currentDate = new Date();
@@ -59,7 +60,7 @@ export const POST = async request => {
 		!description ||
 		description.length < 50 ||
 		description.length > 300 ||
-		(!imageSrcVercelBlob && !imageSrcMega) ||
+		(!imageSrcVercelBlob && !imageSrcMega && !imageSrcCld) ||
 		inputDate < currentDate
 	) {
 		return NextResponse.json(
@@ -91,6 +92,7 @@ export const POST = async request => {
 			description: description,
 			image_src_vercelBlob: imageSrcVercelBlob,
 			image_src_mega: imageSrcMega,
+			image_src_cloudinary: imageSrcCld,
 			// image_src_local: imageSrcLocal,
 		});
 	} catch (error) {

@@ -35,9 +35,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 		const file = values.fileImg;
 		const uploadStorage = generalConfig.uploadImageStorageEvent;
 
-		let imgSrcVercelBlob;
-		let imgSrcMega;
-		let imgSrcLocal;
+		let imgSrcVercelBlob, imgSrcMega, imgSrcCld, imgSrcLocal;
 
 		// UPLOAD FILE LOCAL DIRECTORY
 
@@ -59,6 +57,33 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 		// 	console.log(error);
 		// }
 
+		//UPLOAD FILE TO CLOUDINARY
+
+		if (uploadStorage === "cloudinary" || uploadStorage === "all") {
+			try {
+				const response = await fetch(
+					`/api/upload/cloudinary?filename=${file.name}`,
+					{
+						method: "POST",
+						body: file,
+					}
+				);
+				const data = await response.json();
+
+				if (data.message) {
+					imgSrcCld = data.message;
+				}
+			} catch (error) {
+				dispatch(
+					showResult({
+						message: "Something went wrong.",
+						variant: "warning",
+					})
+				);
+				return;
+			}
+		}
+
 		// UPLOAD FILE MEGA DIRECTORY
 
 		if (uploadStorage === "mega" || uploadStorage === "all") {
@@ -73,7 +98,13 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 					imgSrcMega = data.message;
 				}
 			} catch (error) {
-				console.log(error);
+				dispatch(
+					showResult({
+						message: "Something went wrong.",
+						variant: "warning",
+					})
+				);
+				return;
 			}
 		}
 
@@ -97,7 +128,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 				if (!response.ok && !imgSrcMega) {
 					dispatch(
 						showResult({
-							message: "Nie udało się utworzyć wydarzenia ,spróbuj ponownie.",
+							message: "Something went wrong",
 							variant: "warning",
 						})
 					);
@@ -107,7 +138,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 				if (!imgSrcMega) {
 					dispatch(
 						showResult({
-							message: "Nie udało się utworzyć wydarzenia ,spróbuj ponownie.",
+							message: "Something went wrong",
 							variant: "warning",
 						})
 					);
@@ -130,14 +161,13 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 					description: values.description,
 					imageSrcVercelBlob: imgSrcVercelBlob,
 					imageSrcMega: imgSrcMega,
+					imageSrcCld: imgSrcCld,
 					lang: lang,
 					// imageSrcLocal: imgSrcLocal,
 				}),
 			});
 
 			const data = await response.json();
-
-			console.log(data);
 
 			if (!response.ok) {
 				dispatch(showResult({ message: data.error, variant: "warning" }));

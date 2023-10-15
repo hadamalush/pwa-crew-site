@@ -14,7 +14,7 @@ const NavbarMobile = ({ dict, lang }) => {
 		trl_login,
 		trl_chat,
 		trl_createEvent,
-	} = dict; //Translation
+	} = dict;
 	const pathname = usePathname();
 	const isActiveEventsPath = new RegExp(
 		`${lang}/(events|events/new-event)`
@@ -98,7 +98,7 @@ const NavbarMobile = ({ dict, lang }) => {
 				</li>
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/contact'
+						href='/events'
 						className={isActiveEventsPath ? isActive : styles["nav__link"]}
 						onClick={showOptionsMenuHandler}>
 						<IconRender variant='calendar' />

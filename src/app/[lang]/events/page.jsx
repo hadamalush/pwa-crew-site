@@ -56,8 +56,16 @@ const getData = async () => {
 			let uploadStorage = storage[0];
 
 			//If is empty using second storage
-			if (!event[`image_src_${storage[0]}`]) {
+			if (
+				!event[`image_src_${storage[0]}`] &&
+				event[`image_src_${storage[1]}`]
+			) {
 				uploadStorage = storage[1];
+			} else if (
+				!event[`image_src_${storage[0]}`] &&
+				!event[`image_src_${storage[1]}`]
+			) {
+				uploadStorage = storage[2];
 			}
 
 			//Mega links need to download buffer and then convert to base64
