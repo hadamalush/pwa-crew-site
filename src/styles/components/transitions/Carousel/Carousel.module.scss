@@ -23,12 +23,19 @@
 		}
 		time {
 			display: block;
+			clip-path: polygon(
+				50% 0%,
+				90% 20%,
+				100% 60%,
+				75% 100%,
+				25% 100%,
+				0% 60%,
+				10% 20%
+			);
 			padding: 2rem 4rem;
 			min-width: 14rem;
 			background-color: $hero-secondary-bgc;
 			transform: skew(-10deg);
-
-			@include borderIn(5px, 2px, 0);
 		}
 		span {
 			display: block;
@@ -125,7 +132,7 @@
 		}
 		&__item--left {
 			transform: translateX(80%) scale(0.8);
-			animation: move-left 2s;
+			animation: move-left 1s;
 		}
 		&__item--right {
 			transform: translateX(-80%) scale(0.8);

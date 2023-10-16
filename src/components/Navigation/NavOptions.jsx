@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import styles from "../../styles/components/Navigation/NavOptions.module.scss";
 import ImageFill from "../transitions/Image/ImageFill";
 import IconRender from "../Icons/IconRender";
+import styles from "../../styles/components/Navigation/NavOptions.module.scss";
 
 /**
  * @description This component is for navigation options. Maximum 4 elements.

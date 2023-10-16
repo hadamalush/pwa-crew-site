@@ -2,12 +2,21 @@
 
 .carousel-item {
 	position: absolute;
+	clip-path: polygon(
+		20% 0%,
+		80% 0%,
+		100% 20%,
+		100% 80%,
+		80% 100%,
+		20% 100%,
+		0% 80%,
+		0% 20%
+	);
 
 	height: 100%;
 	width: 30%;
 	max-width: 40rem;
 	box-shadow: $heading-primary-shadow;
-	// transform: scale(0.8);
 	transition: transform 1s, opacity 1s;
 
 	&__img {

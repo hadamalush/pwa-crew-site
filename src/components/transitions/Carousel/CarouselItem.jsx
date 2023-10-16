@@ -1,5 +1,5 @@
-import styles from "../../../styles/components/transitions/Carousel/CarouselItem.module.scss";
 import Image from "next/image";
+import styles from "../../../styles/components/transitions/Carousel/CarouselItem.module.scss";
 
 const CarouselItem = ({
 	onClick,

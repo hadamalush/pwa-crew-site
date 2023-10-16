@@ -1,14 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
 import CarouselItem from "./CarouselItem";
 import Link from "next/link";
 import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Carousel/Carousel.module.scss";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const Carousel = ({ btn_checkEvents, btn_createEvents, lang }) => {
 	const isClient = typeof window !== "undefined";
 	const [timer1, setTimer1] = useState(10000);
+	const [block, setBlock] = useState(false);
 	const path = usePathname();
 	const endOfPath = path.split("/").pop();
 
@@ -18,8 +19,10 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, lang }) => {
 	const url_pathDependent =
 		endOfPath === "events" ? "/events/new-event#form" : "/events";
 
-	const changeMiddleHandler = async () => {
-		if (isClient) {
+	const changeMiddleHandler = () => {
+		if (isClient && !block) {
+			setBlock(true);
+
 			const itemOne = document.querySelector(
 				`.${styles["carousel__item--left"]}`
 			);
@@ -35,8 +38,11 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, lang }) => {
 			itemOne.classList.add(styles["carousel__item--middle"]);
 			itemTwo.classList.add(styles["carousel__item--right"]);
 			itemThree.classList.add(styles["carousel__item--left"]);
+
+			setTimeout(() => setBlock(false), 1200);
 		}
-		setTimer1(10000);
+
+		// setTimer1(10000);
 	};
 
 	// useEffect(() => {
