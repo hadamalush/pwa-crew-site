@@ -9,6 +9,7 @@
 	justify-content: center;
 	color: transparent;
 	font-size: 0.01px;
+	cursor: pointer;
 
 	clip-path: polygon(
 		50% 0%,
@@ -22,9 +23,21 @@
 	border: none;
 
 	background-color: #181818;
+	transition: background-color 0.3s;
 
-	svg {
+	&:hover {
+		background-color: $secondary-color;
+	}
+
+	svg:first-of-type {
 		color: $primary-color;
 		width: 2rem;
+	}
+	.prev {
+		margin-right: 2.5px;
+	}
+
+	.next {
+		margin-left: 2.5px;
 	}
 }

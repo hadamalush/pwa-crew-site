@@ -14,7 +14,7 @@ const ButtonPag = ({ className, variant, onClick, children }) => {
 			{variant === "next" && (
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
-					className='icon icon-tabler icon-tabler-chevron-right'
+					className={`icon icon-tabler icon-tabler-chevron-right ${styles.next}`}
 					viewBox='0 0 24 24'
 					strokeWidth='2'
 					stroke='currentColor'
@@ -28,7 +28,7 @@ const ButtonPag = ({ className, variant, onClick, children }) => {
 			{variant === "prev" && (
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
-					className='icon icon-tabler icon-tabler-chevron-left'
+					className={`icon icon-tabler icon-tabler-chevron-left ${styles.prev}`}
 					viewBox='0 0 24 24'
 					strokeWidth='2'
 					stroke='currentColor'

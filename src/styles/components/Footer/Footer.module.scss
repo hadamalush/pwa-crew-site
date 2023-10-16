@@ -95,6 +95,7 @@
 		a {
 			display: flex;
 			align-items: center;
+			padding: 0.5em;
 		}
 
 		div {
@@ -126,17 +127,18 @@
 	}
 
 	@include media-query(mediumScreen) {
-		padding: 15em 5em 10em;
+		padding: 15em 0 10em;
 		p:last-of-type {
 			bottom: 2rem;
 		}
-	}
-	@include media-query(largeScreen) {
 		flex-direction: row;
 		&__box {
 			display: block;
 			width: 30%;
 		}
+	}
+	@include media-query(largeScreen) {
+		padding: 15em 5em 10em;
 	}
 
 	@include media-query(x-largeScreen) {

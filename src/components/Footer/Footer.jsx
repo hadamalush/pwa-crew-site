@@ -73,7 +73,7 @@ const Footer = props => {
 						<li>
 							<Link href='mailto:webmaster@example.com'>
 								<IconRender variant='email' />
-								poncyman@gmail.com
+								example@gmail.com
 							</Link>
 						</li>
 						<li>
