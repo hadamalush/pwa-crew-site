@@ -137,6 +137,15 @@
 		&__item--right {
 			transform: translateX(-80%) scale(0.8);
 		}
+
+		&__item--right-reverse {
+			transform: translateX(80%) scale(0.8);
+		}
+
+		&__item--left-reverse {
+			transform: translateX(-80%) scale(0.8);
+			animation: move-right 1s;
+		}
 	}
 }
 
@@ -156,5 +165,24 @@
 	100% {
 		opacity: 1;
 		transform: translateX(80%) scale(0.8);
+	}
+}
+
+@keyframes move-right {
+	0% {
+		opacity: 1;
+		transform: translateX(80%) scale(0.8);
+	}
+	50% {
+		opacity: 0;
+		transform: translateX(120%) scale(0.8);
+	}
+	52% {
+		opacity: 0;
+		transform: translateX(-100%) scale(0.8);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(-80%) scale(0.8);
 	}
 }
