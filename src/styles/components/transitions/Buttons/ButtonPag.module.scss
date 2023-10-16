@@ -1,0 +1,30 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.btn {
+	width: 3rem;
+	height: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: transparent;
+	font-size: 0.01px;
+
+	clip-path: polygon(
+		50% 0%,
+		90% 20%,
+		100% 60%,
+		75% 100%,
+		25% 100%,
+		0% 60%,
+		10% 20%
+	);
+	border: none;
+
+	background-color: #181818;
+
+	svg {
+		color: $primary-color;
+		width: 2rem;
+	}
+}

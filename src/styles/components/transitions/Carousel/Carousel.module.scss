@@ -6,12 +6,14 @@
 	display: flex;
 	justify-content: center;
 	width: 95%;
+	max-width: 200rem;
 	height: 30rem;
 	margin-bottom: 5rem;
 	z-index: 1;
 
 	&__item {
 		transition: transform 2s, opacity 2s;
+
 		div {
 			display: flex;
 			position: relative;
@@ -36,6 +38,15 @@
 			min-width: 14rem;
 			background-color: $hero-secondary-bgc;
 			transform: skew(-10deg);
+
+			&::before {
+				content: "";
+				position: absolute;
+				background-color: $secondary-color;
+				width: 10px;
+				height: 200px;
+				top: -50px;
+			}
 		}
 		span {
 			display: block;
@@ -69,12 +80,12 @@
 			padding: 1em 0;
 			font-size: 1.8rem;
 			text-align: center;
-			letter-spacing: 2px;
+			letter-spacing: 1px;
 			color: $tertiary-color;
-			background-color: $background-tertiary;
+			background-color: #131313;
 
 			&:hover {
-				background-color: $background-secondary;
+				background-color: #181818;
 			}
 		}
 	}
@@ -94,7 +105,8 @@
 		}
 	}
 
-	&__item--left {
+	&__item--left,
+	&__item--left-animation {
 		opacity: 0;
 		transform: translateX(100%);
 		width: 100%;
@@ -102,6 +114,20 @@
 	}
 
 	&__item--right {
+		opacity: 0;
+		width: 100%;
+		transform: translateX(-300%);
+		z-index: 2;
+	}
+
+	&__item--right-reverse {
+		opacity: 0;
+		transform: translateX(100%);
+		width: 100%;
+		z-index: 2;
+	}
+
+	&__item--left-reverse {
 		opacity: 0;
 		width: 100%;
 		transform: translateX(-300%);
@@ -119,6 +145,18 @@
 		}
 	}
 
+	&__btn-next {
+		position: absolute;
+		bottom: -7rem;
+		right: 1rem;
+	}
+
+	&__btn-next--left {
+		position: absolute;
+		bottom: -7rem;
+		left: 1rem;
+	}
+
 	@include media-query(mediumScreen) {
 		display: flex;
 
@@ -131,6 +169,9 @@
 			width: 40%;
 		}
 		&__item--left {
+			transform: translateX(80%) scale(0.8);
+		}
+		&__item--left-animation {
 			transform: translateX(80%) scale(0.8);
 			animation: move-left 1s;
 		}
@@ -145,6 +186,18 @@
 		&__item--left-reverse {
 			transform: translateX(-80%) scale(0.8);
 			animation: move-right 1s;
+		}
+
+		&__btn-next {
+			position: absolute;
+			bottom: -7rem;
+			right: 30%;
+		}
+
+		&__btn-next--left {
+			position: absolute;
+			bottom: -7rem;
+			left: 30%;
 		}
 	}
 }
