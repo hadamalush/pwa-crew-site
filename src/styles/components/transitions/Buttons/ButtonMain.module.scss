@@ -2,20 +2,19 @@
 @import "../../../mixins/mixins";
 
 .button {
-	width: 100%;
-	text-align: center;
-	padding: 14px 26px;
-	background-color: $background-secondary;
-	border-radius: 3px;
-	border: 0;
-	font-weight: bold;
-	color: $primary-color;
-	cursor: pointer;
 	position: relative;
-	background-color: rgba(14, 14, 14, 0.9);
-	transform: skew(-10deg);
+	border: none;
+	width: 100%;
+	padding: 14px 26px;
 	font-size: 1.4rem;
-	transition: transform 0.3s, color 0.3s;
+	font-weight: bold;
+	transform: skew(-10deg);
+	transition: transform 0.3s, color 0.3s, background-color 0.3s;
+	text-align: center;
+	color: $primary-color;
+	border-radius: 3px;
+	background-color: $background-septenary;
+	cursor: pointer;
 
 	&:hover {
 		transform: scale(1.04) skew(-10deg);

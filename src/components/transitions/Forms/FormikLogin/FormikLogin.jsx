@@ -142,9 +142,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 							{trl_forgotPass}
 						</Link>
 
-						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{trl_btn}
-						</ButtonMain>
+						<ButtonMain type='submit'>{trl_btn}</ButtonMain>
 
 						<p>
 							{trl_question}

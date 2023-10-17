@@ -138,9 +138,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 
 						<CheckboxFormik name='terms' label={trl_terms} type='checkbox' />
 
-						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{trl_btn}
-						</ButtonMain>
+						<ButtonMain type='submit'>{trl_btn}</ButtonMain>
 
 						<p>
 							{trl_question}

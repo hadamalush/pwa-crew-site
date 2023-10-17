@@ -255,9 +255,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 							setFieldValue={setFieldValue}
 							setFieldTouched={setFieldTouched}
 						/>
-						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{trl_btn_createEvent}
-						</ButtonMain>
+						<ButtonMain type='submit'>{trl_btn_createEvent}</ButtonMain>
 					</Form>
 				)}
 			</Formik>

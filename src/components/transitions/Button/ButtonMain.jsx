@@ -1,22 +1,35 @@
 "use client";
-import { usePathname } from "next/navigation";
 import styles from "../../../styles/components/transitions/Buttons/ButtonMain.module.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 /** 
-@param variant - default, borderIn, btnSkewRight
+ @description This component is a skewed button with inside border. When clicked, an animation will be loaded.
+ @param {String} children Enter children as string.
+ @param {String} className - Enter className as string.
+ @param {Boolean} disabled Enter true or false. 
+ @param {Function} onClick Enter function.
+ @returns {JSX.Element} Returns button.
 **/
 
-const ButtonMain = ({ className, variant, children, ...props }) => {
+const ButtonMain = ({
+	className,
+	children,
+	disabled,
+	animation,
+	onClick,
+	...props
+}) => {
 	const [isAnimation, setIsAnimation] = useState(false);
 
-	const classesBtn = isAnimation
-		? `${styles.button} ${styles["button__transparent"]}`
-		: styles.button;
+	const classesBtn =
+		isAnimation && !animation
+			? `${styles.button} ${styles["button__transparent"]}`
+			: styles.button;
 
-	const classesSpan = isAnimation
-		? `${styles["button__border"]} ${styles["rotating-border"]}`
-		: styles["button__border"];
+	const classesSpan =
+		isAnimation && !animation
+			? `${styles["button__border"]} ${styles["rotating-border"]}`
+			: styles["button__border"];
 
 	const animationHandler = () => {
 		props.onClick;
@@ -25,6 +38,7 @@ const ButtonMain = ({ className, variant, children, ...props }) => {
 
 	return (
 		<button
+			disabled={disabled}
 			className={classesBtn}
 			onClick={animationHandler}
 			type={props.type}

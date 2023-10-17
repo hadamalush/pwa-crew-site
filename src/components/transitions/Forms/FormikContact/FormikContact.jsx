@@ -41,6 +41,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 		const subject = values.title;
 		const message = values.message;
 		let data;
+		actions.setStatus("SENDING");
 
 		try {
 			const response = await fetch("/api/sendMessage", {
@@ -58,6 +59,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 						variant: "warning",
 					})
 				);
+				actions.setStatus("WARNING");
 				return;
 			}
 		} catch (error) {
@@ -67,6 +69,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 					variant: "warning",
 				})
 			);
+			actions.setStatus("WARNING");
 			return;
 		}
 
@@ -76,6 +79,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 				variant: "success",
 			})
 		);
+		actions.setStatus("SUCCESS");
 		router.push("/");
 	};
 
@@ -89,31 +93,37 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 				}}
 				onSubmit={onSubmit}
 				validationSchema={contactSchema(lang)}>
-				{props => (
-					<Form>
-						<h1>{trl_title}</h1>
-						<InputFormik
-							name='email'
-							placeholder={trl_email}
-							aria-label={trl_email}
-							type='text'
-						/>
-						<InputFormik
-							name='title'
-							placeholder={trl_subject}
-							aria-label={trl_subject}
-							type='text'
-						/>
-						<label htmlFor='message' className={styles["logreg-box__message"]}>
-							<IconRender variant='description' />
-							<p>{trl_message}:</p>
-						</label>
-						<TextareaFormik name='message' id='message' />
-						<ButtonMain type='submit' variant='btnSkewRight'>
-							{trl_btn}
-						</ButtonMain>
-					</Form>
-				)}
+				{props => {
+					const isAnimation = props.status !== "SENDING";
+
+					return (
+						<Form>
+							<h1>{trl_title}</h1>
+							<InputFormik
+								name='email'
+								placeholder={trl_email}
+								aria-label={trl_email}
+								type='text'
+							/>
+							<InputFormik
+								name='title'
+								placeholder={trl_subject}
+								aria-label={trl_subject}
+								type='text'
+							/>
+							<label
+								htmlFor='message'
+								className={styles["logreg-box__message"]}>
+								<IconRender variant='description' />
+								<p>{trl_message}:</p>
+							</label>
+							<TextareaFormik name='message' id='message' />
+							<ButtonMain type='submit' animation={isAnimation}>
+								{trl_btn}
+							</ButtonMain>
+						</Form>
+					);
+				}}
 			</Formik>
 		</FormContainerBlur>
 	);

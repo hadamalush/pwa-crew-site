@@ -17,6 +17,7 @@ $background-secondary: #121a23;
 $background-tertiary: #0d141b;
 $background-quaternary: #192737;
 $background-quinary: #131313;
+$background-septenary: rgba(14, 14, 14, 0.9);
 
 //background - section
 $section-bg-primary: #131313;
@@ -69,8 +70,8 @@ $boxshadow-septenary: 0px 10px 10px #0000003f;
 
 //heroshadow-bgc
 
-$hero-primay-bgc: #00000098;
-$hero-secondary-bgc: #000000d3;
+$hero-primay-bgc: rgba(0, 0, 0, 0.596);
+$hero-secondary-bgc: rgba(0, 0, 0, 0.827);
 
 //text-shadow
 $text-shadow-primary: 2px 2px 2px black;

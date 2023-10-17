@@ -189,7 +189,7 @@ const FormikForgotPassword = ({
 							</>
 						)}
 
-						<ButtonMain type='submit' variant={"btnSkewRight"}>
+						<ButtonMain type='submit'>
 							{resetForm ? trl_btnChange : trl_btnReset}
 						</ButtonMain>
 

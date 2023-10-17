@@ -19,7 +19,7 @@ const CarouselItem = ({
 				width={0}
 				height={0}
 				fill
-				sizes='100vw'
+				sizes='max-width: 768px) 100vw, (min-width: 768px) 33vw'
 				className={styles["carousel-item__img"]}
 			/>
 			{children}
