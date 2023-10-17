@@ -11,7 +11,7 @@
 	z-index: 1;
 
 	&__item {
-		transition: transform 1s, opacity 1s, width 1s;
+		transition: transform 1s, opacity 1s, width 1s, height 1s;
 
 		&::before {
 			transition: background-color 1s;
@@ -109,12 +109,15 @@
 
 	&__item--left,
 	&__item--left-animation,
-	&__item--right,
-	&__item--right-reverse,
 	&__item--left-reverse {
-		// width: 100%;
 		opacity: 0;
-		z-index: 2;
+		z-index: 0;
+	}
+
+	&__item--right,
+	&__item--right-reverse {
+		opacity: 0;
+		z-index: 1;
 	}
 
 	&__item--left,
@@ -202,15 +205,6 @@
 		}
 	}
 }
-
-// @keyframes mid {
-// 	from {
-// 		width: 15%;
-// 	}
-// 	to {
-// 		width: 40%;
-// 	}
-// }
 
 @keyframes move-left {
 	0% {

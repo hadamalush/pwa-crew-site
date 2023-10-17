@@ -95,6 +95,7 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 	};
 
 	const direction = item => {
+		console.log(item);
 		if (
 			item === classesNameConst[0] ||
 			item === classesNameConst[5] ||
@@ -115,6 +116,7 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 					month: "long",
 				}).format(new Date(date.getFullYear(), month));
 				const day = date.getDate();
+				const styles = carouselItems[i];
 
 				i++;
 				return (
@@ -122,10 +124,8 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 						key={carouselItem.id}
 						src={carouselItem.targetSrc}
 						alt={carouselItem.title}
-						className={carouselItems[i - 1]}
-						onClick={() =>
-							changeMiddleHandler(direction(carouselItems[i - 1]))
-						}>
+						className={styles}
+						onClick={() => changeMiddleHandler(direction(styles))}>
 						<div className={styles["carousel__item-time"]}>
 							<time dateTime='2018-07-07'>
 								<span>{day}</span>
