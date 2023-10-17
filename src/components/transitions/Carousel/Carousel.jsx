@@ -2,12 +2,12 @@
 import CarouselItem from "./CarouselItem";
 import Link from "next/link";
 import LinkAsBtn from "../Link/LinkAsBtn";
+import ButtonPag from "../Button/ButtonPag";
 import styles from "../../../styles/components/transitions/Carousel/Carousel.module.scss";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import ButtonPag from "../Button/ButtonPag";
+import { useState } from "react";
 
-const Carousel = ({ btn_checkEvents, btn_createEvents, lang }) => {
+const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 	const isClient = typeof window !== "undefined";
 	const classItem = styles["carousel__item"];
 
@@ -104,57 +104,40 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, lang }) => {
 		if (item === classesNameConst[2] || item === classesNameConst[3])
 			return "right";
 	};
-
+	let i = 0;
 	return (
 		<div className={styles.carousel}>
-			<CarouselItem
-				id='one'
-				src='/images/events/concert1.jpg'
-				alt='dsad'
-				className={carouselItems[0]}
-				onClick={() => changeMiddleHandler(direction(carouselItems[0]))}>
-				<div className={styles["carousel__item-time"]}>
-					<time dateTime='2018-07-07'>
-						<span>1</span>
-						<span>Maj</span>
-						<span>2024</span>
-					</time>
-				</div>
-				<h3>Rockowa Eksplozja Energii</h3>
-				<Link href='/'>Dowiedz się więcej </Link>
-			</CarouselItem>
-			<CarouselItem
-				id='two'
-				alt='dasda'
-				src='/images/events/concert2.jpg'
-				className={carouselItems[1]}
-				onClick={() => changeMiddleHandler(direction(carouselItems[1]))}>
-				<div className={styles["carousel__item-time"]}>
-					<time>
-						<span>18</span>
-						<span>Marzec</span>
-						<span>2018</span>
-					</time>
-				</div>
-				<h3>Muzyczna Noc pod Gwiazdami</h3>
-				<Link href='/'>Dowiedz się więcej </Link>
-			</CarouselItem>
-			<CarouselItem
-				id='three'
-				alt='dasd'
-				src='/images/events/concert6.png'
-				className={carouselItems[2]}
-				onClick={() => changeMiddleHandler(direction(carouselItems[2]))}>
-				<div className={styles["carousel__item-time"]}>
-					<time>
-						<span>27</span>
-						<span>Kwiecień</span>
-						<span>2024</span>
-					</time>
-				</div>
-				<h3>Klasyka w Nowoczesnym Wydaniu</h3>
-				<Link href='/'>Dowiedz się więcej </Link>
-			</CarouselItem>
+			{events.map(carouselItem => {
+				const date = new Date(carouselItem.date);
+				const year = date.getFullYear();
+				const month = date.getMonth();
+				const monthName = new Intl.DateTimeFormat("default", {
+					month: "long",
+				}).format(new Date(date.getFullYear(), month));
+				const day = date.getDate();
+
+				i++;
+				return (
+					<CarouselItem
+						key={carouselItem.id}
+						src={carouselItem.targetSrc}
+						alt={carouselItem.title}
+						className={carouselItems[i - 1]}
+						onClick={() =>
+							changeMiddleHandler(direction(carouselItems[i - 1]))
+						}>
+						<div className={styles["carousel__item-time"]}>
+							<time dateTime='2018-07-07'>
+								<span>{day}</span>
+								<span>{monthName}</span>
+								<span>{year}</span>
+							</time>
+						</div>
+						<h3>{carouselItem.title}</h3>
+						<Link href='/'>Dowiedz się więcej </Link>
+					</CarouselItem>
+				);
+			})}
 			<LinkAsBtn
 				href={`${url_pathDependent}`}
 				className={styles["carousel__event-link"]}>
