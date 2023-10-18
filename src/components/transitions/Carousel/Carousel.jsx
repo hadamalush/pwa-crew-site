@@ -8,6 +8,11 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
+	const [reverse, setReverse] = useState(false);
+	const [block, setBlock] = useState(false);
+	const path = usePathname();
+	const endOfPath = path.split("/").pop();
+
 	const isClient = typeof window !== "undefined";
 	const classItem = styles["carousel__item"];
 
@@ -25,11 +30,6 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 		classesNameConst[1],
 		classesNameConst[2],
 	]);
-
-	const [reverse, setReverse] = useState(false);
-	const [block, setBlock] = useState(false);
-	const path = usePathname();
-	const endOfPath = path.split("/").pop();
 
 	const btn_pathDependent =
 		endOfPath === "events" ? btn_createEvents : btn_checkEvents;
@@ -95,7 +95,6 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 	};
 
 	const direction = item => {
-		console.log(item);
 		if (
 			item === classesNameConst[0] ||
 			item === classesNameConst[5] ||

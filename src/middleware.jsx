@@ -29,9 +29,28 @@ const getLocale = request => {
 
 export async function middleware(request) {
 	const { pathname } = request.nextUrl;
+	const lang = pathname.split("/")[1];
+
 	const pathnameHasLocale = locales.some(
 		locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
 	);
+
+	const registerUrl = pathname.startsWith(`/${lang}/registration`);
+	const loginUrl = pathname.startsWith(`/${lang}/login`);
+	const forgotPasswordUrl = pathname.startsWith(`/${lang}/forgot-password`);
+	const newEventUrl = pathname.startsWith(`/${lang}/events/new-event`);
+
+	const session =
+		request.cookies.has("next-auth.session-token") ||
+		request.cookies.has("__Secure-next-auth.session-token");
+
+	if (session && (registerUrl || loginUrl || forgotPasswordUrl)) {
+		return NextResponse.redirect(new URL("/", request.url));
+	}
+
+	if (!session && newEventUrl) {
+		return NextResponse.redirect(new URL("/login#start", request.url));
+	}
 
 	if (pathnameHasLocale) return;
 
@@ -43,23 +62,6 @@ export async function middleware(request) {
 	const ip = request.ip;
 
 	headers.set("x-forwarded-for", ip);
-
-	const registerUrl = pathname.startsWith("/rejestracja");
-	const loginUrl = pathname.startsWith("/login");
-	const forgotPasswordUrl = pathname.startsWith("/forgot-password");
-	const newEventUrl = pathname.startsWith("/wydarzenia/new-event");
-
-	const session =
-		request.cookies.has("next-auth.session-token") ||
-		request.cookies.has("__Secure-next-auth.session-token");
-
-	if (session && (registerUrl || loginUrl || forgotPasswordUrl)) {
-		return NextResponse.redirect(new URL("/", request.url));
-	}
-
-	if (!session && newEventUrl) {
-		return NextResponse.redirect(new URL("/logowanie", request.url));
-	}
 
 	return NextResponse.redirect(request.nextUrl);
 

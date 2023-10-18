@@ -4,19 +4,25 @@ import Logo from "../transitions/Logo/Logo";
 import NavbarMobile from "../Navigation/NavbarMobile";
 import IconRender from "../Icons/IconRender";
 import styles from "../../styles/components/Header/MainHeader.module.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { loading } from "@/global/notification-slice";
 
 const MainHeader = ({ dict, lang, ...props }) => {
 	const { data: session, status } = useSession();
 	const [isLight, setIsLight] = useState(false);
-	// const isLoading = useSelector(state => state.notification.isLoading);
-	const [isLoading, setIsLoading] = useState();
+	const isLoading = useSelector(state => state.notification.isLoading);
+	const dispatch = useDispatch();
+
 	const router = useRouter();
 	let pathname = usePathname();
+
+	useEffect(() => {
+		dispatch(loading(false));
+	}, [pathname]);
 
 	if (pathname.startsWith("/pl") || pathname.startsWith("/en")) {
 		pathname = pathname.replace(/^\/(pl|en)/, "");
@@ -28,6 +34,7 @@ const MainHeader = ({ dict, lang, ...props }) => {
 	const classesLangIsActive = `${styles["header__leanguages-item"]} ${styles["header__leanguages-item--active"]}`;
 
 	const changeLanguageHandler = async language => {
+		dispatch(loading(true));
 		const response = await fetch("/api/cookies", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -41,7 +48,6 @@ const MainHeader = ({ dict, lang, ...props }) => {
 	};
 
 	const changeThemeHandler = () => {
-		setIsLoading(true);
 		setIsLight(!isLight);
 	};
 

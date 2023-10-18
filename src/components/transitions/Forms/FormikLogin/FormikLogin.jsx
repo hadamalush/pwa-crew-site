@@ -2,16 +2,16 @@
 import Link from "next/link";
 import ButtonMain from "../../Button/ButtonMain";
 import InputFormik from "../../Input/InputFormik";
-import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import FormContainerBlur from "@/components/Containers/FormContainerBlur";
+import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import { loginSchema } from "@/components/Schemas/FormSchem";
-import { useMediaQuery } from "react-responsive";
-import { showResult, toggleLoading } from "@/global/notification-slice";
-import { useDispatch } from "react-redux";
+import { showResult, loading } from "@/global/notification-slice";
 
 /**
  * @description This component returns form for login.
@@ -23,6 +23,16 @@ import { useDispatch } from "react-redux";
  */
 
 const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
+	const { data: session, status } = useSession();
+	const router = useRouter();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (status === "authenticated" && session) {
+			router.push("/");
+		}
+	}, [session, status]);
+
 	const {
 		trl_title,
 		trl_email,
@@ -36,9 +46,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	const { trl_err_404, trl_err_422, trl_generalError, trl_welcome } =
 		dictNotifi;
 
-	const router = useRouter();
 	const classes = `${styles["logreg-box"]} ${className}`;
-	const { data: session, status } = useSession();
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",
 	});
@@ -48,15 +56,6 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	if (!isMediumScreen && isClient) {
 		window.scrollTo(0, 100);
 	}
-
-	const dispatchLoading = useDispatch(toggleLoading);
-	const dispatchNotification = useDispatch(showResult);
-
-	useEffect(() => {
-		if (status === "authenticated" && session) {
-			router.push("/");
-		}
-	}, [session, status]);
 
 	const changeWebstiteHandler = (event, path) => {
 		event.preventDefault();
@@ -73,7 +72,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	const onSubmit = async values => {
 		const email = values.email;
 		const password = values.password;
-		dispatchLoading(toggleLoading());
+		dispatch(loading(true));
 
 		try {
 			const response = await signIn("credentials", {
@@ -86,26 +85,21 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 			const selectedErr = response.error === "404" ? trl_err_404 : trl_err_422;
 
 			if (response.error) {
-				dispatchNotification(
-					showResult({ message: selectedErr, variant: "warning" })
-				);
-				dispatchLoading(toggleLoading());
+				dispatch(loading(false));
+				dispatch(showResult({ message: selectedErr, variant: "warning" }));
 				return;
 			}
 		} catch (error) {
-			dispatchNotification(
+			dispatch(loading(false));
+			dispatch(
 				showResult({
 					message: trl_generalError,
 					variant: "warning",
 				})
 			);
-			dispatchLoading(toggleLoading());
 		}
-
-		dispatchNotification(
-			showResult({ message: trl_welcome, variant: "success" })
-		);
-		dispatchLoading(toggleLoading());
+		dispatch(loading(false));
+		dispatch(showResult({ message: trl_welcome, variant: "success" }));
 	};
 
 	return (
@@ -142,7 +136,10 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 							{trl_forgotPass}
 						</Link>
 
-						<ButtonMain type='submit' animation={!isSubmitting}>
+						<ButtonMain
+							type='submit'
+							disabled={isSubmitting}
+							animation={!isSubmitting}>
 							{trl_btn}
 						</ButtonMain>
 

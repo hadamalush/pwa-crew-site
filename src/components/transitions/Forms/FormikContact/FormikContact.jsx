@@ -5,12 +5,12 @@ import InputFormik from "../../Input/InputFormik";
 import TextareaFormik from "../../Input/TextareaFormik";
 import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../../styles/components/transitions/Forms/FormikContact.module.scss";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import { contactSchema } from "@/components/Schemas/FormSchem";
-import { useMediaQuery } from "react-responsive";
-import { useDispatch } from "react-redux";
-import { showResult } from "@/global/notification-slice";
-import { useRouter } from "next/navigation";
+import { showResult, loading } from "@/global/notification-slice";
 
 /**
  * @description This component returns form for contact.
@@ -21,6 +21,9 @@ import { useRouter } from "next/navigation";
  */
 
 const FormikContact = ({ className, dict, lang, ...props }) => {
+	const router = useRouter();
+	const dispatch = useDispatch(showResult);
+
 	const { trl_title, trl_email, trl_subject, trl_message, trl_btn, trl_error } =
 		dict;
 
@@ -35,10 +38,8 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 		window.scrollTo(0, 100);
 	}
 
-	const dispatch = useDispatch(showResult);
-	const router = useRouter();
-
 	const onSubmit = async (values, actions) => {
+		dispatch(loading(true));
 		const email = values.email;
 		const subject = values.title;
 		const message = values.message;
@@ -54,6 +55,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 			data = await response.json();
 
 			if (!response.ok) {
+				dispatch(loading(false));
 				dispatch(
 					showResult({
 						message: data.error,
@@ -63,6 +65,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 				return;
 			}
 		} catch (error) {
+			dispatch(loading(false));
 			dispatch(
 				showResult({
 					message: trl_error,
@@ -71,7 +74,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 			);
 			return;
 		}
-
+		dispatch(loading(false));
 		dispatch(
 			showResult({
 				message: data.message,
@@ -91,9 +94,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 				}}
 				onSubmit={onSubmit}
 				validationSchema={contactSchema(lang)}>
-				{props => {
-					const isAnimation = !props.isSubmitting;
-
+				{({ isSubmitting, ...props }) => {
 					return (
 						<Form>
 							<h1>{trl_title}</h1>
@@ -116,7 +117,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 								<p>{trl_message}:</p>
 							</label>
 							<TextareaFormik name='message' id='message' />
-							<ButtonMain type='submit' animation={isAnimation}>
+							<ButtonMain type='submit' animation={!isSubmitting}>
 								{trl_btn}
 							</ButtonMain>
 						</Form>

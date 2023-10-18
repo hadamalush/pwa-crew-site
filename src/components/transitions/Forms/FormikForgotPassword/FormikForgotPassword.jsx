@@ -4,17 +4,17 @@ import ButtonMain from "../../Button/ButtonMain";
 import InputFormik from "../../Input/InputFormik";
 import FormContainerBlur from "@/components/Containers/FormContainerBlur";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import {
 	forgotLinkSchema,
 	forgotNewPasswordSchema,
 } from "@/components/Schemas/FormSchem";
-import { useMediaQuery } from "react-responsive";
-import { showResult, toggleLoading } from "@/global/notification-slice";
-import { useDispatch } from "react-redux";
+import { showResult, loading } from "@/global/notification-slice";
 
 /**
  * @description This component returns form for forgot-password with reset link or reset-password. Info: If you want use form with just link you have to forwards this params: dict, trl_error,lang or if you want form with reset password you should forwards in addition resetId - should come from url param.
@@ -33,6 +33,16 @@ const FormikForgotPassword = ({
 	className,
 	...props
 }) => {
+	const { data: session, status } = useSession();
+	const router = useRouter();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (status === "authenticated" && session) {
+			router.push("/");
+		}
+	}, [session, status]);
+
 	const {
 		trl_title,
 		trl_email,
@@ -45,6 +55,11 @@ const FormikForgotPassword = ({
 		trl_btnChange,
 	} = dict;
 
+	const classes = `${styles["logreg-box"]} ${className || ""}`;
+	const isMediumScreen = useMediaQuery({
+		query: "(min-width: 768px)",
+	});
+
 	//resetForm - it is for check which page is now, for choose right api/route and right form.
 	const resetForm = resetId ? true : false;
 
@@ -52,27 +67,11 @@ const FormikForgotPassword = ({
 		? forgotNewPasswordSchema(lang)
 		: forgotLinkSchema(lang);
 
-	const router = useRouter();
-	const classes = `${styles["logreg-box"]} ${className || ""}`;
-	const { data: session, status } = useSession();
-	const isMediumScreen = useMediaQuery({
-		query: "(min-width: 768px)",
-	});
-
 	const isClient = typeof window !== "undefined";
 
 	if (!isMediumScreen && isClient) {
 		window.scrollTo(0, 100);
 	}
-
-	const dispatchLoading = useDispatch(toggleLoading);
-	const dispatchNotification = useDispatch(showResult);
-
-	useEffect(() => {
-		if (status === "authenticated" && session) {
-			router.push("/");
-		}
-	}, [session, status]);
 
 	const changeWebstiteHandler = async event => {
 		event.preventDefault();
@@ -87,7 +86,7 @@ const FormikForgotPassword = ({
 	};
 
 	const onSubmit = async values => {
-		dispatchLoading(toggleLoading());
+		dispatch(loading(true));
 
 		const email = values?.email;
 		const password = values?.password;
@@ -115,7 +114,8 @@ const FormikForgotPassword = ({
 			data = await response.json();
 
 			if (!response.ok) {
-				dispatchNotification(
+				dispatch(loading(false));
+				dispatch(
 					showResult({
 						message: data.error,
 						variant: "warning",
@@ -124,7 +124,8 @@ const FormikForgotPassword = ({
 				return;
 			}
 		} catch (error) {
-			dispatchNotification(
+			dispatch(loading(false));
+			dispatch(
 				showResult({
 					message: trl_error,
 					variant: "warning",
@@ -132,8 +133,8 @@ const FormikForgotPassword = ({
 			);
 			return;
 		}
-
-		dispatchNotification(
+		dispatch(loading(false));
+		dispatch(
 			showResult({
 				message: data.message,
 				variant: "success",

@@ -3,11 +3,14 @@ import Link from "next/link";
 import styles from "../../../styles/components/transitions/Link/LinkAsButton.module.scss";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { loading } from "@/global/notification-slice";
 
 const LinkAsBtn = ({ href, children, className, variant, ...props }) => {
 	const [isAnimation, setIsAnimation] = useState(false);
 
 	const pathname = usePathname();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		setIsAnimation(false);
@@ -26,6 +29,7 @@ const LinkAsBtn = ({ href, children, className, variant, ...props }) => {
 		: styles["link__border"];
 
 	const animationHandler = e => {
+		dispatch(loading(true));
 		setIsAnimation(true);
 	};
 
