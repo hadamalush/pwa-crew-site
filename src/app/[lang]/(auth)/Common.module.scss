@@ -20,6 +20,11 @@ main .start {
 	box-shadow: $boxshadow-secondary;
 	font-size: 12px;
 	border-radius: 15px;
+
+	&::before {
+		@include position(absolute, 0, 0, 0, 0, -1);
+		background-color: $background-senary;
+	}
 	@include media-query(mediumScreen) {
 		margin-bottom: 10rem;
 	}

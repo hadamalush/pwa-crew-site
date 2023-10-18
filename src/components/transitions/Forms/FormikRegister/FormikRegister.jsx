@@ -11,6 +11,7 @@ import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import { registerSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
+import { useEffect } from "react";
 
 /**
  * @description This component returns form for registration.
@@ -40,11 +41,11 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 		query: "(min-width: 768px)",
 	});
 
-	const isClient = typeof window !== "undefined";
-
-	if (!isMediumScreen && isClient) {
-		window.scrollTo(0, 100);
-	}
+	useEffect(() => {
+		if (!isMediumScreen) {
+			window.scrollTo(0, 75);
+		}
+	}, []);
 
 	const changeWebstiteHandler = async event => {
 		event.preventDefault();

@@ -25,4 +25,9 @@ main .start {
 	height: 70rem;
 	box-shadow: $boxshadow-secondary;
 	margin-bottom: 5em;
+
+	&::before {
+		@include position(absolute, 0, 0, 0, 0, -1);
+		background-color: rgba(0, 0, 0, 0.39);
+	}
 }

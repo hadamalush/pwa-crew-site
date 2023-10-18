@@ -38,7 +38,7 @@ const WrapperFormWithContent = ({
 				alt={alt}
 				fill
 				className={styles["container__img"]}
-				sizes={"(max-width: 768px) 10vw, (min-width: 1200px) 70vw"}
+				sizes={"(max-width: 768px) 10vw, (min-width: 768px) 70vw"}
 			/>
 			<div className={styles["container__content"]}>
 				<Logo2 />

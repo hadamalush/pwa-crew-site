@@ -4,7 +4,7 @@ import ButtonMain from "../../Button/ButtonMain";
 import InputFormik from "../../Input/InputFormik";
 import FormContainerBlur from "@/components/Containers/FormContainerBlur";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -27,12 +27,6 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (status === "authenticated" && session) {
-			router.push("/");
-		}
-	}, [session, status]);
-
 	const {
 		trl_title,
 		trl_email,
@@ -51,11 +45,14 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 		query: "(min-width: 768px)",
 	});
 
-	const isClient = typeof window !== "undefined";
-
-	if (!isMediumScreen && isClient) {
-		window.scrollTo(0, 100);
-	}
+	useEffect(() => {
+		if (!isMediumScreen) {
+			window.scrollTo(0, 75);
+		}
+		if (status === "authenticated" && session) {
+			router.push("/");
+		}
+	}, [session, status]);
 
 	const changeWebstiteHandler = (event, path) => {
 		event.preventDefault();

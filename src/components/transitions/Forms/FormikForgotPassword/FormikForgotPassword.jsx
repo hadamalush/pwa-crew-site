@@ -37,12 +37,6 @@ const FormikForgotPassword = ({
 	const router = useRouter();
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (status === "authenticated" && session) {
-			router.push("/");
-		}
-	}, [session, status]);
-
 	const {
 		trl_title,
 		trl_email,
@@ -60,18 +54,21 @@ const FormikForgotPassword = ({
 		query: "(min-width: 768px)",
 	});
 
+	useEffect(() => {
+		if (!isMediumScreen) {
+			window.scrollTo(0, 75);
+		}
+		if (status === "authenticated" && session) {
+			router.push("/");
+		}
+	}, [session, status]);
+
 	//resetForm - it is for check which page is now, for choose right api/route and right form.
 	const resetForm = resetId ? true : false;
 
 	const schema = resetForm
 		? forgotNewPasswordSchema(lang)
 		: forgotLinkSchema(lang);
-
-	const isClient = typeof window !== "undefined";
-
-	if (!isMediumScreen && isClient) {
-		window.scrollTo(0, 100);
-	}
 
 	const changeWebstiteHandler = async event => {
 		event.preventDefault();

@@ -2,11 +2,15 @@
 @import "../../mixins/mixins";
 
 main .section__new-event {
-	display: flex;
-	justify-content: center;
+	@include flex(row, null, center);
 	padding: 15em 0 10em;
 }
 .section__new-event .container {
 	height: 115rem;
 	box-shadow: $boxshadow-secondary;
+
+	&::before {
+		@include position(absolute, 0, 0, 0, 0, -1);
+		background-color: $background-senary;
+	}
 }

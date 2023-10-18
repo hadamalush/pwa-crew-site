@@ -13,7 +13,7 @@ const NewEventPage = async ({ params: { lang } }) => {
 		title: dict.events.newEvent.wp_content.title,
 		textFirst: dict.events.newEvent.wp_content.textFirst,
 		textSecond: dict.events.newEvent.wp_content.textSecond,
-		imageSrc: "/images/header/concert2.jpg",
+		imageSrc: "/images/background/background-new-event.webp",
 		alt: dict.events.newEvent.wp_content.alt,
 	};
 
