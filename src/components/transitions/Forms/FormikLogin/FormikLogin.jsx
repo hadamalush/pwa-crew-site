@@ -40,7 +40,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	const { trl_err_404, trl_err_422, trl_generalError, trl_welcome } =
 		dictNotifi;
 
-	const classes = `${styles["logreg-box"]} ${className}`;
+	const classes = `${styles["logreg-box"]} ${className || ""}`;
 	const isMediumScreen = useMediaQuery({
 		query: "(min-width: 768px)",
 	});
@@ -48,7 +48,10 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 	useEffect(() => {
 		if (!isMediumScreen) {
 			window.scrollTo(0, 75);
+		} else if (isMediumScreen) {
+			window.scrollTo(0, 0);
 		}
+
 		if (status === "authenticated" && session) {
 			router.push("/");
 		}

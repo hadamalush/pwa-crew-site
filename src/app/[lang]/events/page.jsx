@@ -20,7 +20,7 @@ export default async function Events({ params: { lang } }) {
 
 	return (
 		<>
-			<WrapperSection className={styles["section-events"]}>
+			<WrapperSection id='events1' className={styles["section-events"]}>
 				<h1>{trl_title}</h1>
 				<EventsList
 					events={events}

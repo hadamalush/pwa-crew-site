@@ -33,7 +33,7 @@ const NewEventPage = async ({ params: { lang } }) => {
 	const trl_error = dictNotifi.notifications.newEvent.generalError;
 
 	return (
-		<WrapperSection className={styles["section__new-event"]} id='form'>
+		<WrapperSection className={styles["section__new-event"]}>
 			<WrapperFormWithContent
 				headingType='h3'
 				title={dataWrapper.title}

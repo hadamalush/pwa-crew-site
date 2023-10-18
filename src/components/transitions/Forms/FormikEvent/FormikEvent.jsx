@@ -10,6 +10,8 @@ import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
+import { useMediaQuery } from "react-responsive";
+import { useEffect } from "react";
 
 /**
  * @description This component returns form for event.
@@ -34,6 +36,12 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 		trl_picture,
 		trl_btn_createEvent,
 	} = dict;
+
+	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
+	useEffect(() => {
+		if (isMediumScreen) window.scrollTo(window.scrollX, window.scrollY - 70);
+	}, []);
 
 	const addEventhandler = async values => {
 		dispatch(loading(true));
@@ -195,7 +203,7 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 				className={styles.form}>
 				{({ setFieldValue, setFieldTouched, isSubmitting, ...props }) => {
 					return (
-						<Form className={styles.form}>
+						<Form className={styles.form} id='form'>
 							<h1>{trl_title}</h1>
 
 							<InputFormik

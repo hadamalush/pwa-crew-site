@@ -35,8 +35,11 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 		endOfPath === "events" ? btn_createEvents : btn_checkEvents;
 
 	const url_pathDependent =
-		endOfPath === "events" ? "/events/new-event#form" : "/events";
+		endOfPath === "events"
+			? "/events/new-event#form"
+			: "/events#section-events";
 
+	console.log(url_pathDependent);
 	const changeMiddleHandler = direction => {
 		if (!direction) return;
 		if (isClient && !block) {
@@ -137,11 +140,6 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 					</CarouselItem>
 				);
 			})}
-			<LinkAsBtn
-				href={`${url_pathDependent}`}
-				className={styles["carousel__event-link"]}>
-				{btn_pathDependent}
-			</LinkAsBtn>
 			<ButtonPag
 				className={styles["carousel__btn-next"]}
 				variant='next'
@@ -154,6 +152,11 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 				onClick={() => changeMiddleHandler("left")}>
 				Previous event.
 			</ButtonPag>
+			<LinkAsBtn
+				href={`${url_pathDependent}`}
+				className={styles["carousel__event-link"]}>
+				{btn_pathDependent}
+			</LinkAsBtn>
 		</div>
 	);
 };

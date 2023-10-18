@@ -9,7 +9,7 @@ import styles from "../../styles/components/Containers/FormContainerBlur.module.
  */
 
 const FormContainerBlur = ({ id, className, children, ...props }) => {
-	const classes = `${styles.container} ${className}`;
+	const classes = `${styles.container} ${className || ""}`;
 	return (
 		<div className={classes} id={id}>
 			{children}
