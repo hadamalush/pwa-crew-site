@@ -121,24 +121,25 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 				const styles = carouselItems[i];
 
 				i++;
-				// return (
-				// 	<CarouselItem
-				// 		key={carouselItem.id}
-				// 		src={carouselItem.targetSrc}
-				// 		alt={carouselItem.title}
-				// 		className={styles}
-				// 		onClick={() => changeMiddleHandler(direction(styles))}>
-				// 		<div className={styles["carousel__item-time"]}>
-				// 			<time dateTime='2018-07-07'>
-				// 				<span>{day}</span>
-				// 				<span>{monthName}</span>
-				// 				<span>{year}</span>
-				// 			</time>
-				// 		</div>
-				// 		<h3>{carouselItem.title}</h3>
-				// 		<Link href='/'>Dowiedz się więcej </Link>
-				// 	</CarouselItem>
-				// );
+				return (
+					<CarouselItem
+						key={carouselItem.id}
+						id={carouselItem.id}
+						src={carouselItem.targetSrc}
+						alt={carouselItem.title}
+						className={styles}
+						onClick={() => changeMiddleHandler(direction(styles))}>
+						<div className={styles["carousel__item-time"]}>
+							<time dateTime='2018-07-07'>
+								<span>{day}</span>
+								<span>{monthName}</span>
+								<span>{year}</span>
+							</time>
+						</div>
+						<h3>{carouselItem.title}</h3>
+						<Link href='/'>Dowiedz się więcej </Link>
+					</CarouselItem>
+				);
 			})}
 			<ButtonPag
 				className={styles["carousel__btn-next"]}
