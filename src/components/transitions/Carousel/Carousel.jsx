@@ -6,6 +6,7 @@ import ButtonPag from "../Button/ButtonPag";
 import styles from "../../../styles/components/transitions/Carousel/Carousel.module.scss";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { format } from "date-fns";
 
 const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 	const [reverse, setReverse] = useState(false);
@@ -112,11 +113,13 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 		<div className={styles.carousel}>
 			{events.map(carouselItem => {
 				const date = new Date(carouselItem.date);
-				const year = date.getFullYear();
-				const month = date.getMonth();
-				// const monthName = date.toLocaleString("default", { month: "long" });
-				const day = date.getDate();
+				const monthName = format(date, "MMMM");
+				const day = format(date, "dd");
+				const year = format(date, "yyyy");
+
 				const styles = carouselItems[i];
+
+				console.log(monthName);
 
 				i++;
 				return (
@@ -130,7 +133,7 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 						<div className={styles["carousel__item-time"]}>
 							<time dateTime='2018-07-07'>
 								<span>{day}</span>
-								{/* <span>{monthName}</span> */}
+								<span>{monthName}</span>
 								<span>{year}</span>
 							</time>
 						</div>
