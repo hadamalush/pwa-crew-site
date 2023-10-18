@@ -174,6 +174,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 				return;
 			}
 			dispatch(showResult({ message: data.message, variant: "success" }));
+
 			return;
 		} catch (error) {
 			dispatch(
@@ -201,63 +202,67 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 				onSubmit={addEventhandler}
 				validationSchema={eventSchema(lang)}
 				className={styles.form}>
-				{({ setFieldValue, setFieldTouched, ...props }) => (
-					<Form className={styles.form}>
-						<h1>{trl_title}</h1>
+				{({ setFieldValue, setFieldTouched, isSubmitting, ...props }) => {
+					return (
+						<Form className={styles.form}>
+							<h1>{trl_title}</h1>
 
-						<InputFormik
-							name='title'
-							placeholder={trl_eventTitle}
-							aria-label={trl_eventTitle}
-							type='text'
-						/>
-						<InputFormik
-							name='town'
-							placeholder={trl_town}
-							aria-label={trl_town}
-							type='text'
-						/>
-						<InputFormik
-							name='codePost'
-							placeholder={trl_codePost}
-							aria-label={trl_codePost}
-							type='text'
-						/>
-						<InputFormik
-							name='street'
-							placeholder={trl_street}
-							aria-label={trl_street}
-							type='text'
-						/>
-						<InputFormik
-							name='date'
-							placeholder={trl_date}
-							aria-label={trl_date}
-							type='date'
-						/>
-						<InputFormik
-							name='time'
-							placeholder={trl_startTime}
-							aria-label={trl_startTime}
-							type='time'
-						/>
+							<InputFormik
+								name='title'
+								placeholder={trl_eventTitle}
+								aria-label={trl_eventTitle}
+								type='text'
+							/>
+							<InputFormik
+								name='town'
+								placeholder={trl_town}
+								aria-label={trl_town}
+								type='text'
+							/>
+							<InputFormik
+								name='codePost'
+								placeholder={trl_codePost}
+								aria-label={trl_codePost}
+								type='text'
+							/>
+							<InputFormik
+								name='street'
+								placeholder={trl_street}
+								aria-label={trl_street}
+								type='text'
+							/>
+							<InputFormik
+								name='date'
+								placeholder={trl_date}
+								aria-label={trl_date}
+								type='date'
+							/>
+							<InputFormik
+								name='time'
+								placeholder={trl_startTime}
+								aria-label={trl_startTime}
+								type='time'
+							/>
 
-						<TextareaFormik
-							name='description'
-							aria-label={trl_eventDesc}
-							placeholder={trl_eventDesc}
-							type='textarea'
-						/>
+							<TextareaFormik
+								name='description'
+								aria-label={trl_eventDesc}
+								placeholder={trl_eventDesc}
+								type='textarea'
+							/>
 
-						<InputFormikFile
-							name='fileImg'
-							aria-label={trl_picture}
-							setFieldValue={setFieldValue}
-							setFieldTouched={setFieldTouched}
-						/>
-						<ButtonMain type='submit'>{trl_btn_createEvent}</ButtonMain>
-					</Form>
-				)}
+							<InputFormikFile
+								name='fileImg'
+								aria-label={trl_picture}
+								setFieldValue={setFieldValue}
+								setFieldTouched={setFieldTouched}
+							/>
+							<ButtonMain type='submit' animation={!isSubmitting}>
+								{trl_btn_createEvent}
+							</ButtonMain>
+						</Form>
+					);
+				}}
 			</Formik>
 		</FormContainerBlur>
 	);

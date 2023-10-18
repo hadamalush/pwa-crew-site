@@ -113,7 +113,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 				}}
 				onSubmit={onSubmit}
 				validationSchema={registerSchema(lang)}>
-				{props => (
+				{({ isSubmitting, ...props }) => (
 					<Form>
 						<h1>{trl_title}</h1>
 
@@ -138,7 +138,9 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 
 						<CheckboxFormik name='terms' label={trl_terms} type='checkbox' />
 
-						<ButtonMain type='submit'>{trl_btn}</ButtonMain>
+						<ButtonMain type='submit' animation={!isSubmitting}>
+							{trl_btn}
+						</ButtonMain>
 
 						<p>
 							{trl_question}

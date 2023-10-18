@@ -13,7 +13,8 @@ import { useState } from "react";
 const MainHeader = ({ dict, lang, ...props }) => {
 	const { data: session, status } = useSession();
 	const [isLight, setIsLight] = useState(false);
-	const isLoading = useSelector(state => state.notification.isLoading);
+	// const isLoading = useSelector(state => state.notification.isLoading);
+	const [isLoading, setIsLoading] = useState();
 	const router = useRouter();
 	let pathname = usePathname();
 
@@ -40,6 +41,7 @@ const MainHeader = ({ dict, lang, ...props }) => {
 	};
 
 	const changeThemeHandler = () => {
+		setIsLoading(true);
 		setIsLight(!isLight);
 	};
 
@@ -80,6 +82,10 @@ const MainHeader = ({ dict, lang, ...props }) => {
 					</li>
 				</ul>
 			</header>
+			{isLoading && (
+				<span
+					className={`${styles["header__loading"]} ${styles["rotating-border"]}`}></span>
+			)}
 		</>
 	);
 };

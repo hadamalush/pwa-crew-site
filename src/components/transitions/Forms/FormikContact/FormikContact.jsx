@@ -10,6 +10,7 @@ import { contactSchema } from "@/components/Schemas/FormSchem";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { showResult } from "@/global/notification-slice";
+import { useRouter } from "next/navigation";
 
 /**
  * @description This component returns form for contact.
@@ -35,13 +36,13 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 	}
 
 	const dispatch = useDispatch(showResult);
+	const router = useRouter();
 
 	const onSubmit = async (values, actions) => {
 		const email = values.email;
 		const subject = values.title;
 		const message = values.message;
 		let data;
-		actions.setStatus("SENDING");
 
 		try {
 			const response = await fetch("/api/sendMessage", {
@@ -59,7 +60,6 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 						variant: "warning",
 					})
 				);
-				actions.setStatus("WARNING");
 				return;
 			}
 		} catch (error) {
@@ -69,7 +69,6 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 					variant: "warning",
 				})
 			);
-			actions.setStatus("WARNING");
 			return;
 		}
 
@@ -79,7 +78,6 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 				variant: "success",
 			})
 		);
-		actions.setStatus("SUCCESS");
 		router.push("/");
 	};
 
@@ -94,7 +92,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 				onSubmit={onSubmit}
 				validationSchema={contactSchema(lang)}>
 				{props => {
-					const isAnimation = props.status !== "SENDING";
+					const isAnimation = !props.isSubmitting;
 
 					return (
 						<Form>

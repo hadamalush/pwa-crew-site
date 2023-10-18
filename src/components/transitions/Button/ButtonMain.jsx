@@ -6,7 +6,7 @@ import { useState } from "react";
  @description This component is a skewed button with inside border. When clicked, an animation will be loaded.
  @param {String} children Enter children as string.
  @param {String} className - Enter className as string.
- @param {Boolean} disabled Enter true or false. 
+ @param {Boolean} animation Enter true when you want to start animation. Animation will start only if button clicked and animation true.
  @param {Function} onClick Enter function.
  @returns {JSX.Element} Returns button.
 **/

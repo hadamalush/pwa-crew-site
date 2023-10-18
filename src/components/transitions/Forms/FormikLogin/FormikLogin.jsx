@@ -117,7 +117,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 				}}
 				onSubmit={onSubmit}
 				validationSchema={loginSchema(lang)}>
-				{props => (
+				{({ isSubmitting, ...props }) => (
 					<Form>
 						<h1>{trl_title}</h1>
 
@@ -142,7 +142,9 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 							{trl_forgotPass}
 						</Link>
 
-						<ButtonMain type='submit'>{trl_btn}</ButtonMain>
+						<ButtonMain type='submit' animation={!isSubmitting}>
+							{trl_btn}
+						</ButtonMain>
 
 						<p>
 							{trl_question}

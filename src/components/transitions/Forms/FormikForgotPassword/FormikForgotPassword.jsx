@@ -117,7 +117,7 @@ const FormikForgotPassword = ({
 			if (!response.ok) {
 				dispatchNotification(
 					showResult({
-						message: data.error + " Kod błędu: " + response.status,
+						message: data.error,
 						variant: "warning",
 					})
 				);
@@ -154,7 +154,7 @@ const FormikForgotPassword = ({
 				}}
 				onSubmit={onSubmit}
 				validationSchema={schema}>
-				{props => (
+				{({ isSubmitting, ...props }) => (
 					<Form>
 						<h1>{trl_title}</h1>
 
@@ -189,7 +189,7 @@ const FormikForgotPassword = ({
 							</>
 						)}
 
-						<ButtonMain type='submit'>
+						<ButtonMain type='submit' animation={!isSubmitting}>
 							{resetForm ? trl_btnChange : trl_btnReset}
 						</ButtonMain>
 
