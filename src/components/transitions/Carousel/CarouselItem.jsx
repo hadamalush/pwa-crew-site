@@ -12,7 +12,7 @@ const CarouselItem = ({
 }) => {
 	const classes = `${styles["carousel-item"]} ${className}`;
 	return (
-		<div className={classes} onClick={onClick}>
+		<div id={id} className={classes} onClick={onClick}>
 			<Image
 				src={src}
 				alt={alt}

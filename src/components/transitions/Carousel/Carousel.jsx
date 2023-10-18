@@ -129,13 +129,13 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 						alt={carouselItem.title}
 						className={styles}
 						onClick={() => changeMiddleHandler(direction(styles))}>
-						<div className={styles["carousel__item-time"]}>
+						{/* <div className={styles["carousel__item-time"]}>
 							<time dateTime='2018-07-07'>
 								<span>{day}</span>
 								<span>{monthName}</span>
 								<span>{year}</span>
 							</time>
-						</div>
+						</div> */}
 						<h3>{carouselItem.title}</h3>
 						<Link href='/'>Dowiedz się więcej </Link>
 					</CarouselItem>
