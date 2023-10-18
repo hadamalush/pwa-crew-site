@@ -125,8 +125,7 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 						id={carouselItem.id}
 						src={carouselItem.targetSrc}
 						alt={carouselItem.title}
-						className={styles}
-						onClick={() => changeMiddleHandler(() => direction(styles))}>
+						className={styles}>
 						<div className={styles["carousel__item-time"]}>
 							<time dateTime='2018-07-07'>
 								<span>{day}</span>
