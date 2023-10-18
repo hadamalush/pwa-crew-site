@@ -3,6 +3,9 @@ import Link from "next/link";
 import ImageFill from "../transitions/Image/ImageFill";
 import IconRender from "../Icons/IconRender";
 import styles from "../../styles/components/Navigation/NavOptions.module.scss";
+import { useDispatch } from "react-redux";
+import { loading } from "@/global/notification-slice";
+import { usePathname } from "next/navigation";
 
 /**
  * @description This component is for navigation options. Maximum 4 elements.
@@ -15,11 +18,16 @@ import styles from "../../styles/components/Navigation/NavOptions.module.scss";
  */
 
 const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
+	const dispatch = useDispatch();
+	const pathname = usePathname();
+
 	const quantityOptions = options.length;
 	const classesGeneral = `${styles.menu} ${className || ""}`;
 	let i = 0;
 
-	const closeMenuHandler = () => {
+	const closeMenuHandler = (loadingAnimation, path) => {
+		if (loadingAnimation && !pathname.includes(path)) dispatch(loading(true));
+
 		const items = document.querySelectorAll(`.${styles["menu__item"]}`);
 		const itemExit = document.querySelector(`.${styles["menu__cutout"]}`);
 		const menu = document.querySelector(`.${styles.menu}`);
@@ -55,7 +63,7 @@ const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 						<Link
 							href={item.href}
 							className={styles["menu__item-link"]}
-							onClick={closeMenuHandler}></Link>
+							onClick={() => closeMenuHandler(true, item.href)}></Link>
 						<ImageFill
 							src={item.imgSrc}
 							className={styles["menu__item-hexagon"]}
@@ -68,7 +76,7 @@ const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 			})}
 			<IconRender
 				variant='cross'
-				onClick={closeMenuHandler}
+				onClick={() => closeMenuHandler(false)}
 				className={
 					quantityOptions === 4
 						? `${styles["menu__cutout"]} ${styles["menu__cutout--second"]}`

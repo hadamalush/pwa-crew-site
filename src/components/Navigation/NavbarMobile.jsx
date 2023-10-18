@@ -1,12 +1,19 @@
 "use client";
 import Link from "next/link";
 import IconRender from "../Icons/IconRender";
-import styles from "../../styles/components/Navigation/NavbarMobile.module.scss";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import NavOptions from "./NavOptions";
+import styles from "../../styles/components/Navigation/NavbarMobile.module.scss";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { loading } from "@/global/notification-slice";
 
 const NavbarMobile = ({ dict, lang }) => {
+	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
+	const [isAnimationQuit, setIsAnimationQuit] = useState(false);
+	const dispatch = useDispatch();
+	const pathname = usePathname();
+
 	const {
 		trl_home,
 		trl_events,
@@ -15,17 +22,12 @@ const NavbarMobile = ({ dict, lang }) => {
 		trl_chat,
 		trl_createEvent,
 	} = dict;
-	const pathname = usePathname();
+
 	const isActiveEventsPath = new RegExp(
 		`${lang}/(events|events/new-event)`
 	).test(pathname);
 
 	const isActive = `${styles["nav__link"]} ${styles["nav__link--isActive"]}`;
-	const navStyles = `${styles["nav"]} ${styles.isShow}`;
-
-	const [isScrollChange, setIsScrollChange] = useState(false);
-	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
-	const [isAnimationQuit, setIsAnimationQuit] = useState(false);
 
 	const optionsEvents = [
 		{
@@ -39,22 +41,6 @@ const NavbarMobile = ({ dict, lang }) => {
 			imgSrc: "/images/options/option-new-event.webp",
 		},
 	];
-
-	//Scroll checking
-
-	// useEffect(() => {
-	// 	let initScrollValue = window.scrollY;
-	// 	window.addEventListener("scroll", () => {
-	// 		if (window.scrollY > initScrollValue + 50) {
-	// 			initScrollValue = window.scrollY;
-	// 			setIsScrollChange(true);
-	// 		}
-	// 		if (window.scrollY + 50 < initScrollValue) {
-	// 			initScrollValue = window.scrollY;
-	// 			setIsScrollChange(false);
-	// 		}
-	// 	});
-	// }, []);
 
 	const showOptionsMenuHandler = e => {
 		e.preventDefault();
@@ -71,7 +57,11 @@ const NavbarMobile = ({ dict, lang }) => {
 		}
 	};
 
-	const closeOptionsHandler = () => {
+	const closeOptionsHandler = path => {
+		if (path !== pathname) {
+			dispatch(loading(true));
+		}
+
 		if (isOptionsMenuVisible) {
 			setIsAnimationQuit(true);
 
@@ -85,13 +75,13 @@ const NavbarMobile = ({ dict, lang }) => {
 		setIsOptionsMenuVisible(false);
 	};
 	return (
-		<nav className={!isScrollChange ? styles["nav"] : navStyles}>
+		<nav className={styles.nav}>
 			<ul className={styles["nav__list"]}>
 				<li className={styles["nav__item"]}>
 					<Link
 						href='/'
 						className={pathname === `/${lang}` ? isActive : styles["nav__link"]}
-						onClick={closeOptionsHandler}>
+						onClick={() => closeOptionsHandler(`/${lang}`)}>
 						<IconRender variant='home' />
 						<p>{trl_home}</p>
 					</Link>
@@ -119,7 +109,7 @@ const NavbarMobile = ({ dict, lang }) => {
 					<Link
 						href='/'
 						className={pathname === "/chat" ? isActive : styles["nav__link"]}
-						onClick={closeOptionsHandler}>
+						onClick={() => closeOptionsHandler(`/${lang}`)}>
 						<IconRender variant='chat' />
 						<p>{trl_chat}</p>
 					</Link>
@@ -131,7 +121,7 @@ const NavbarMobile = ({ dict, lang }) => {
 						className={
 							pathname === `/${lang}/contact` ? isActive : styles["nav__link"]
 						}
-						onClick={closeOptionsHandler}>
+						onClick={() => closeOptionsHandler(`/${lang}/contact`)}>
 						<IconRender variant='contact' />
 						<p>{trl_contact}</p>
 					</Link>
@@ -143,7 +133,7 @@ const NavbarMobile = ({ dict, lang }) => {
 						className={
 							pathname === `/${lang}/login` ? isActive : styles["nav__link"]
 						}
-						onClick={closeOptionsHandler}>
+						onClick={() => closeOptionsHandler(`/${lang}/login`)}>
 						<IconRender variant='user' />
 						<p>{trl_login}</p>
 					</Link>

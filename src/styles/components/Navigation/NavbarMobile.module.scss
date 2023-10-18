@@ -9,7 +9,7 @@
 	z-index: 1000;
 	background-color: $background-nav;
 	opacity: 1;
-	// animation: show 1s forwards;
+	animation: show 1s forwards;
 	box-shadow: $boxshadow-primary;
 
 	&__list {
@@ -86,24 +86,24 @@
 	animation: hide 1s forwards;
 }
 
-// @keyframes hide {
-// 	from {
-// 		opacity: 1;
-// 		transform: translateY(0);
-// 	}
-// 	to {
-// 		opacity: 0;
-// 		transform: translateY(100%);
-// 	}
-// }
+@keyframes hide {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+}
 
-// @keyframes show {
-// 	from {
-// 		opacity: 0;
-// 		transform: translateY(100%);
-// 	}
-// 	to {
-// 		opacity: 1;
-// 		transform: translateY(0);
-// 	}
-// }
+@keyframes show {
+	from {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
