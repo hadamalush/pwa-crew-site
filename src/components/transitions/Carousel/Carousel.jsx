@@ -114,7 +114,7 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 				const date = new Date(carouselItem.date);
 				const year = date.getFullYear();
 				const month = date.getMonth();
-				const monthName = date.toLocaleString("default", { month: "long" });
+				// const monthName = date.toLocaleString("default", { month: "long" });
 				const day = date.getDate();
 				const styles = carouselItems[i];
 
@@ -130,7 +130,7 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 						<div className={styles["carousel__item-time"]}>
 							<time dateTime='2018-07-07'>
 								<span>{day}</span>
-								<span>{monthName}</span>
+								{/* <span>{monthName}</span> */}
 								<span>{year}</span>
 							</time>
 						</div>
