@@ -13,12 +13,12 @@ export default async function Layout({ params: { lang }, children, ...props }) {
 	return (
 		<main>
 			<WrapperStart className={styles.container}>
-				<Carousel
+				{/* <Carousel
 					btn_checkEvents={btn_checkEvents}
 					btn_createEvents={btn_createEvents}
 					events={events}
 					lang={lang}
-				/>
+				/> */}
 			</WrapperStart>
 			{children}
 		</main>
