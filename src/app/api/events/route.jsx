@@ -10,9 +10,14 @@ export const GET = async request => {
 	// setting which storage should be using
 	const storage = generalConfig.downloadImageStorageEvent;
 
-	const db = await connectDb();
+	let result;
+	try {
+		const db = await connectDb();
 
-	const result = await db.collection("AllEvents").find().toArray();
+		result = await db.collection("AllEvents").find().toArray();
+	} catch (error) {
+		console.log(error);
+	}
 
 	const convertedEvenets = await Promise.all(
 		result.map(async event => {
