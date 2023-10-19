@@ -36,6 +36,9 @@ const EventItem1 = ({
 	const classDNone = styles["event__element-invisible"];
 
 	const classEvent = {
+		details: isDescription
+			? `${styles.event} ${styles["event--details"]}`
+			: styles.event,
 		address: isDescription
 			? styles["event__address"]
 			: `${styles["event__address"]} ${classDNone}`,
@@ -73,7 +76,7 @@ const EventItem1 = ({
 	// }, []);
 
 	return (
-		<li className={styles.event}>
+		<li className={classEvent.details}>
 			<ImageFill
 				src={imageSrc}
 				alt={title}

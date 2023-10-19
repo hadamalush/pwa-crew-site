@@ -8,6 +8,7 @@
 	width: 100%;
 	background-color: $background-quinary;
 	box-shadow: $boxshadow-primary;
+	max-width: 65rem;
 
 	&__img {
 		position: relative;
@@ -52,7 +53,6 @@
 	}
 
 	&__text {
-		margin-top: 1em;
 		width: 100%;
 		padding: 1em 2em;
 		background-color: #161515;
@@ -73,6 +73,7 @@
 
 	&__link-details {
 		z-index: 1;
+		min-width: 30%;
 	}
 
 	@include media-query(smallScreen) {
@@ -85,7 +86,7 @@
 			height: 200px;
 
 			&--isSmall {
-				height: 30rem;
+				height: 33rem;
 			}
 		}
 
@@ -95,6 +96,31 @@
 
 		h2 {
 			padding: 1em 1em;
+		}
+	}
+
+	@include media-query(mediumScreen) {
+		&__text {
+			p {
+				padding: 1em 5em;
+			}
+		}
+	}
+
+	@include media-query(mediumScreen) {
+		&__text {
+			p {
+				padding: 1em 5em;
+			}
+		}
+	}
+
+	@include media-query(largeScreen) {
+		&--details {
+			max-width: 110rem;
+		}
+		h2 {
+			font-size: 2.5rem;
 		}
 	}
 }
