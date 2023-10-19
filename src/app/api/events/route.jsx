@@ -6,9 +6,11 @@ const {
 	oneConvertFromBuffersToBase64,
 } = require("@/lib/storage/storage");
 
-export default async function GET(request) {
+export async function GET(request) {
 	// setting which storage should be using
 	const storage = generalConfig.downloadImageStorageEvent;
+
+	console.log("siemano");
 
 	let result;
 	try {
