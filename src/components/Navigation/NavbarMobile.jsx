@@ -37,7 +37,7 @@ const NavbarMobile = ({ dict, lang }) => {
 		},
 		{
 			title: trl_createEvent,
-			href: "/events/new-event",
+			href: "/events/new-event#form",
 			imgSrc: "/images/options/option-new-event.webp",
 		},
 	];

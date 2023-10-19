@@ -40,7 +40,6 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 			? "/events/new-event#form"
 			: "/events#section-events";
 
-	console.log(url_pathDependent);
 	const changeMiddleHandler = direction => {
 		if (!direction) return;
 		if (isClient && !block) {
