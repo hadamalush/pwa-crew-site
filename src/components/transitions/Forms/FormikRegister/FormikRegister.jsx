@@ -6,11 +6,12 @@ import CheckboxFormik from "../../Input/CheckboxFormik";
 import InputFormik from "../../Input/InputFormik";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import { registerSchema } from "@/components/Schemas/FormSchem";
-import { useMediaQuery } from "react-responsive";
-import { useDispatch } from "react-redux";
-import { showResult } from "@/global/notification-slice";
+import { showResult, loading } from "@/global/notification-slice";
+import { useEffect } from "react";
 
 /**
  * @description This component returns form for registration.
@@ -23,6 +24,7 @@ import { showResult } from "@/global/notification-slice";
 
 const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 	const router = useRouter();
+	const dispatch = useDispatch();
 	const {
 		trl_title,
 		trl_email,
@@ -39,13 +41,11 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 		query: "(min-width: 768px)",
 	});
 
-	const isClient = typeof window !== "undefined";
-
-	if (!isMediumScreen && isClient) {
-		window.scrollTo(0, 100);
-	}
-
-	const dispatch = useDispatch(showResult);
+	useEffect(() => {
+		if (!isMediumScreen) {
+			window.scrollTo(0, 75);
+		}
+	}, []);
 
 	const changeWebstiteHandler = async event => {
 		event.preventDefault();
@@ -60,6 +60,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 	};
 
 	const onSubmit = async (values, actions) => {
+		dispatch(loading(true));
 		const email = values.email;
 		const password = values.password;
 		const confirmPassword = values.confirmPassword;
@@ -76,6 +77,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 			data = await response.json();
 
 			if (!response.ok) {
+				dispatch(loading(false));
 				dispatch(
 					showResult({
 						message: data.message,
@@ -85,6 +87,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 				return;
 			}
 		} catch (error) {
+			dispatch(loading(false));
 			dispatch(
 				showResult({
 					message: trl_error,
@@ -92,14 +95,15 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 				})
 			);
 		}
-
+		dispatch(loading(false));
 		dispatch(
 			showResult({
 				message: data.message,
 				variant: "success",
 			})
 		);
-		router.push("/");
+
+		router.push("/login");
 	};
 
 	return (
@@ -113,7 +117,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 				}}
 				onSubmit={onSubmit}
 				validationSchema={registerSchema(lang)}>
-				{props => (
+				{({ isSubmitting, ...props }) => (
 					<Form>
 						<h1>{trl_title}</h1>
 
@@ -138,7 +142,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 
 						<CheckboxFormik name='terms' label={trl_terms} type='checkbox' />
 
-						<ButtonMain type='submit' variant={"btnSkewRight"}>
+						<ButtonMain type='submit' animation={!isSubmitting}>
 							{trl_btn}
 						</ButtonMain>
 

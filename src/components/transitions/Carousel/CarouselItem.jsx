@@ -12,14 +12,14 @@ const CarouselItem = ({
 }) => {
 	const classes = `${styles["carousel-item"]} ${className}`;
 	return (
-		<div id={id} className={classes} onClick={onClick}>
+		<div className={classes} onClick={onClick}>
 			<Image
 				src={src}
 				alt={alt}
 				width={0}
 				height={0}
 				fill
-				sizes='100vw'
+				sizes='max-width: 768px) 100vw, (min-width: 768px) 33vw'
 				className={styles["carousel-item__img"]}
 			/>
 			{children}

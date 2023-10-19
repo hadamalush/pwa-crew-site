@@ -41,23 +41,17 @@ const EventItem = ({
 	const classesAccordion = !isDescription
 		? styles["event-item__accordion"]
 		: `${styles["event-item__accordion"]} ${styles["event-item__accordion--control"]}`;
-	const isMaxMedium = useMediaQuery({ maxWidth: 768 });
+	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	const showDetailHandler = () => {
 		const detailsList = document.getElementById(id);
 		detailsList.classList.toggle(styles["event-item__accordion--control"]);
 	};
 
-	const handlingScroll = () => {
-		if (!isDescription) {
-			return window.scrollBy(0, -100);
-		} else if (isDescription && !isMaxMedium) {
+	useEffect(() => {
+		if (isMediumScreen) {
 			return window.scrollBy(0, -70);
 		}
-	};
-
-	useEffect(() => {
-		handlingScroll();
 	}, []);
 
 	return (

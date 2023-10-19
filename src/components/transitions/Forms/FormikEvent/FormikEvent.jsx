@@ -5,18 +5,25 @@ import InputFormikFile from "../../Input/InputFormikFile";
 import ButtonMain from "../../Button/ButtonMain";
 import TextareaFormik from "../../Input/TextareaFormik";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
+import { useDispatch } from "react-redux";
+import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
-import { useDispatch } from "react-redux";
-import { showResult } from "@/global/notification-slice";
-import { generalConfig } from "@/config/gerenalConfig";
+import { showResult, loading } from "@/global/notification-slice";
+import { useMediaQuery } from "react-responsive";
+import { useEffect } from "react";
 
 /**
- * @description This component returns form for create new event.
- * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component withoud that wrapper.
+ * @description This component returns form for event.
+ * @param {String} className Enter some class as String
+ * @param {Object} dict Enter object with dictionary, that object should include (trl_title,trl_eventTitle, trl_town, trl_codePost, trl_street, trl_eventDesc, trl_date, trl_startTime, trl_picture, trl_btn_createEvent). All of properties are type of string. For example: trl_title: "Events" or trl_eventTitle: "Event title". Should come from internationalization directory.
+ * @param {String} lang Enter lang as String. For example: 'pl' or 'en' - but should come from params.
+ * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikEvent = ({ dict, lang, trl_error }) => {
+const FormikEvent = ({ className, dict, lang, trl_error }) => {
+	const dispatch = useDispatch();
+
 	const {
 		trl_title,
 		trl_eventTitle,
@@ -29,33 +36,19 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 		trl_picture,
 		trl_btn_createEvent,
 	} = dict;
-	const dispatch = useDispatch(showResult);
+
+	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
+	useEffect(() => {
+		if (isMediumScreen) window.scrollTo(window.scrollX, window.scrollY - 70);
+	}, []);
 
 	const addEventhandler = async values => {
+		dispatch(loading(true));
 		const file = values.fileImg;
 		const uploadStorage = generalConfig.uploadImageStorageEvent;
 
-		let imgSrcVercelBlob, imgSrcMega, imgSrcCld, imgSrcLocal;
-
-		// UPLOAD FILE LOCAL DIRECTORY
-
-		// try {
-		// 	const response = await fetch(`/api/upload/local?filename=${file.name}`, {
-		// 		method: "POST",
-		// 		body: file,
-		// 	});
-
-		// 	const data = await response.json();
-
-		// 	console.log(data);
-
-		// 	if (response.ok) {
-		// 		imgSrcLocal = data.message;
-		// 	}
-		// } catch (error) {
-		// 	//wstawic powiadomienie o bledzie
-		// 	console.log(error);
-		// }
+		let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 
 		//UPLOAD FILE TO CLOUDINARY
 
@@ -74,6 +67,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 					imgSrcCld = data.message;
 				}
 			} catch (error) {
+				dispatch(loading(false));
 				dispatch(
 					showResult({
 						message: "Something went wrong.",
@@ -98,6 +92,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 					imgSrcMega = data.message;
 				}
 			} catch (error) {
+				dispatch(loading(false));
 				dispatch(
 					showResult({
 						message: "Something went wrong.",
@@ -126,6 +121,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 				}
 
 				if (!response.ok && !imgSrcMega) {
+					dispatch(loading(false));
 					dispatch(
 						showResult({
 							message: "Something went wrong",
@@ -136,6 +132,7 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 				}
 			} catch (error) {
 				if (!imgSrcMega) {
+					dispatch(loading(false));
 					dispatch(
 						showResult({
 							message: "Something went wrong",
@@ -163,19 +160,22 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 					imageSrcMega: imgSrcMega,
 					imageSrcCld: imgSrcCld,
 					lang: lang,
-					// imageSrcLocal: imgSrcLocal,
 				}),
 			});
 
 			const data = await response.json();
 
 			if (!response.ok) {
+				dispatch(loading(false));
 				dispatch(showResult({ message: data.error, variant: "warning" }));
 				return;
 			}
+			dispatch(loading(false));
 			dispatch(showResult({ message: data.message, variant: "success" }));
+
 			return;
 		} catch (error) {
+			dispatch(loading(false));
 			dispatch(
 				showResult({
 					message: trl_error,
@@ -201,65 +201,67 @@ const FormikEvent = ({ dict, lang, trl_error }) => {
 				onSubmit={addEventhandler}
 				validationSchema={eventSchema(lang)}
 				className={styles.form}>
-				{({ setFieldValue, setFieldTouched, ...props }) => (
-					<Form className={styles.form}>
-						<h1>{trl_title}</h1>
+				{({ setFieldValue, setFieldTouched, isSubmitting, ...props }) => {
+					return (
+						<Form className={styles.form} id='form'>
+							<h1>{trl_title}</h1>
 
-						<InputFormik
-							name='title'
-							placeholder={trl_eventTitle}
-							aria-label={trl_eventTitle}
-							type='text'
-						/>
-						<InputFormik
-							name='town'
-							placeholder={trl_town}
-							aria-label={trl_town}
-							type='text'
-						/>
-						<InputFormik
-							name='codePost'
-							placeholder={trl_codePost}
-							aria-label={trl_codePost}
-							type='text'
-						/>
-						<InputFormik
-							name='street'
-							placeholder={trl_street}
-							aria-label={trl_street}
-							type='text'
-						/>
-						<InputFormik
-							name='date'
-							placeholder={trl_date}
-							aria-label={trl_date}
-							type='date'
-						/>
-						<InputFormik
-							name='time'
-							placeholder={trl_startTime}
-							aria-label={trl_startTime}
-							type='time'
-						/>
+							<InputFormik
+								name='title'
+								placeholder={trl_eventTitle}
+								aria-label={trl_eventTitle}
+								type='text'
+							/>
+							<InputFormik
+								name='town'
+								placeholder={trl_town}
+								aria-label={trl_town}
+								type='text'
+							/>
+							<InputFormik
+								name='codePost'
+								placeholder={trl_codePost}
+								aria-label={trl_codePost}
+								type='text'
+							/>
+							<InputFormik
+								name='street'
+								placeholder={trl_street}
+								aria-label={trl_street}
+								type='text'
+							/>
+							<InputFormik
+								name='date'
+								placeholder={trl_date}
+								aria-label={trl_date}
+								type='date'
+							/>
+							<InputFormik
+								name='time'
+								placeholder={trl_startTime}
+								aria-label={trl_startTime}
+								type='time'
+							/>
 
-						<TextareaFormik
-							name='description'
-							aria-label={trl_eventDesc}
-							placeholder={trl_eventDesc}
-							type='textarea'
-						/>
+							<TextareaFormik
+								name='description'
+								aria-label={trl_eventDesc}
+								placeholder={trl_eventDesc}
+								type='textarea'
+							/>
 
-						<InputFormikFile
-							name='fileImg'
-							aria-label={trl_picture}
-							setFieldValue={setFieldValue}
-							setFieldTouched={setFieldTouched}
-						/>
-						<ButtonMain type='submit' variant={"btnSkewRight"}>
-							{trl_btn_createEvent}
-						</ButtonMain>
-					</Form>
-				)}
+							<InputFormikFile
+								name='fileImg'
+								aria-label={trl_picture}
+								setFieldValue={setFieldValue}
+								setFieldTouched={setFieldTouched}
+							/>
+							<ButtonMain type='submit' animation={!isSubmitting}>
+								{trl_btn_createEvent}
+							</ButtonMain>
+						</Form>
+					);
+				}}
 			</Formik>
 		</FormContainerBlur>
 	);

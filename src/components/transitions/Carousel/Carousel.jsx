@@ -6,8 +6,14 @@ import ButtonPag from "../Button/ButtonPag";
 import styles from "../../../styles/components/transitions/Carousel/Carousel.module.scss";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { format } from "date-fns";
 
 const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
+	const [reverse, setReverse] = useState(false);
+	const [block, setBlock] = useState(false);
+	const path = usePathname();
+	const endOfPath = path.split("/").pop();
+
 	const isClient = typeof window !== "undefined";
 	const classItem = styles["carousel__item"];
 
@@ -26,16 +32,13 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 		classesNameConst[2],
 	]);
 
-	const [reverse, setReverse] = useState(false);
-	const [block, setBlock] = useState(false);
-	const path = usePathname();
-	const endOfPath = path.split("/").pop();
-
 	const btn_pathDependent =
 		endOfPath === "events" ? btn_createEvents : btn_checkEvents;
 
 	const url_pathDependent =
-		endOfPath === "events" ? "/events/new-event#form" : "/events";
+		endOfPath === "events"
+			? "/events/new-event#form"
+			: "/events#section-events";
 
 	const changeMiddleHandler = direction => {
 		if (!direction) return;
@@ -95,7 +98,6 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 	};
 
 	const direction = item => {
-		console.log(item);
 		if (
 			item === classesNameConst[0] ||
 			item === classesNameConst[5] ||
@@ -110,12 +112,9 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 		<div className={styles.carousel}>
 			{events.map(carouselItem => {
 				const date = new Date(carouselItem.date);
-				const year = date.getFullYear();
-				const month = date.getMonth();
-				const monthName = new Intl.DateTimeFormat("default", {
-					month: "long",
-				}).format(new Date(date.getFullYear(), month));
-				const day = date.getDate();
+				const monthName = format(date, "MMMM");
+				const day = format(date, "dd");
+				const year = format(date, "yyyy");
 				const styles = carouselItems[i];
 
 				i++;
@@ -138,11 +137,6 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 					</CarouselItem>
 				);
 			})}
-			<LinkAsBtn
-				href={`${url_pathDependent}`}
-				className={styles["carousel__event-link"]}>
-				{btn_pathDependent}
-			</LinkAsBtn>
 			<ButtonPag
 				className={styles["carousel__btn-next"]}
 				variant='next'
@@ -155,6 +149,11 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 				onClick={() => changeMiddleHandler("left")}>
 				Previous event.
 			</ButtonPag>
+			<LinkAsBtn
+				href={`${url_pathDependent}`}
+				className={styles["carousel__event-link"]}>
+				{btn_pathDependent}
+			</LinkAsBtn>
 		</div>
 	);
 };

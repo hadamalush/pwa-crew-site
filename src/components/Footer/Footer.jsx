@@ -25,7 +25,7 @@ const Footer = props => {
 					/>
 					<IconRender variant='email' />
 				</WrapperInput>
-				<ButtonMain variant='btnSkewRight'>Subskrybuj</ButtonMain>
+				<ButtonMain>Subskrybuj</ButtonMain>
 			</form>
 
 			<div className={styles["footer__box"]}>

@@ -1,11 +1,17 @@
 import Link from "next/link";
 import Avatar from "../transitions/Avatar/Avatar";
+import NavDropdown from "./NavDropdown";
 import styles from "../../styles/components/Navigation/NavbarDesktop.module.scss";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import NavDropdown from "./NavDropdown";
+import { useDispatch } from "react-redux";
+import { loading } from "@/global/notification-slice";
 
 const NavbarDesktop = ({ dict, lang, className, ...props }) => {
+	const { data: session, status } = useSession();
+	const pathname = usePathname();
+	const dispatch = useDispatch();
+
 	const {
 		trl_home,
 		trl_events,
@@ -22,8 +28,6 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const classes = `${styles.nav} ${className || ""}`;
 	const classesNavItemActive = `${styles["nav__item"]} ${styles["nav__item--active"]}`;
 
-	const { data: session, status } = useSession();
-	const pathname = usePathname();
 	const isActivePathEvents = new RegExp(
 		`${lang}/(events|events/new-event)`
 	).test(pathname);
@@ -34,9 +38,23 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		signOut();
 	};
 
+	const animationHandler = path => {
+		if (path !== pathname) {
+			dispatch(loading(true));
+		}
+	};
+
 	const dropdownItemsEvents = [
-		{ title: trl_allEvents, href: "/events" },
-		{ title: trl_createEvent, href: "/events/new-event" },
+		{
+			title: trl_allEvents,
+			href: "/events",
+			onClick: () => animationHandler(`/${lang}/events`),
+		},
+		{
+			title: trl_createEvent,
+			href: "/events/new-event",
+			onClick: () => animationHandler(`/${lang}/events/new-event`),
+		},
 	];
 
 	const dropdownItemsAvatar = [
@@ -44,12 +62,14 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		{ title: trl_settings, href: "/" },
 		{ title: trl_signOut, href: "/", onClick: logoutHandler },
 	];
+
 	return (
 		<nav className={classes}>
 			<ul className={styles["nav__list"]}>
 				<li>
 					<Link
 						href='/'
+						onClick={() => animationHandler(`/${lang}`)}
 						className={
 							pathname === `/${lang}`
 								? classesNavItemActive
@@ -61,17 +81,22 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 				<li>
 					<Link
 						href='/events'
+						onClick={() => animationHandler(`/${lang}/events`)}
 						className={
 							isActivePathEvents ? classesNavItemActive : styles["nav__item"]
 						}>
 						{trl_events}
 					</Link>
-					<NavDropdown dropdownItems={dropdownItemsEvents} />
+					<NavDropdown
+						dropdownItems={dropdownItemsEvents}
+						loading={animationHandler}
+					/>
 				</li>
 
 				<li>
 					<Link
 						href='/contact'
+						onClick={() => animationHandler(`/${lang}/contact`)}
 						className={
 							pathname === `/${lang}/contact`
 								? classesNavItemActive
@@ -84,6 +109,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 					{!session && (
 						<Link
 							href='/login'
+							onClick={() => animationHandler(`/${lang}/login`)}
 							className={
 								pathname === `/${lang}/login`
 									? classesNavItemActive

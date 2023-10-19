@@ -40,7 +40,7 @@ export default async function Home({ params: { lang } }) {
 					<p>{dict.section_history.card_2.text}</p>
 				</Card>
 				<Card variant={"skew"}>
-					<IconRender variant='chartRadar' />
+					<IconRender variant='friends' />
 					<h4>{dict.section_history.card_3.title}</h4>
 					<p>{dict.section_history.card_3.text}</p>
 				</Card>
