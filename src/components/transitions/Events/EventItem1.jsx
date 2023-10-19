@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import ButtonMain from "../Button/ButtonMain";
+import { useSession } from "next-auth/react";
 
 const EventItem1 = ({
 	className,
@@ -24,15 +25,23 @@ const EventItem1 = ({
 	lang,
 	trl_btnEventDetails,
 	trl_startEvent,
+	owner,
 	...props
 }) => {
+	const { data: session } = useSession();
 	const replacedTitle = title.replaceAll(" ", "-");
 	const pathname = usePathname();
 
+	const isOwner = owner === session?.user.email;
+
 	const lastPartOfLink = pathname.substring(pathname.lastIndexOf("/") + 1);
 	const isDescription = id === lastPartOfLink;
+	const urlLink_dependsPath = isDescription
+		? `/events#${id + 7}`
+		: `/events/${replacedTitle}/${id}#section_detail-item`;
 
-	const isSmallScreen = useMediaQuery({ minWidth: 568 });
+	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
 	const classDNone = styles["event__element-invisible"];
 
 	const classEvent = {
@@ -42,15 +51,17 @@ const EventItem1 = ({
 		address: isDescription
 			? styles["event__address"]
 			: `${styles["event__address"]} ${classDNone}`,
-		time: isDescription
-			? styles["event__time"]
-			: `${styles["event__time"]} ${classDNone}`,
+		time: isDescription ? "" : classDNone,
 		text: isDescription
 			? styles["event__text"]
 			: `${styles["event__text"]} ${classDNone}`,
 		img: isDescription
 			? `${styles["event__img"]} ${styles["event__img--isSmall"]}`
 			: styles["event__img"],
+		link:
+			isDescription && isOwner
+				? `${styles["event__link-details"]} ${styles["event__link-details--isowner"]}`
+				: styles["event__link-details"],
 	};
 
 	const imageSrc =
@@ -69,14 +80,14 @@ const EventItem1 = ({
 	// 	detailsList.classList.toggle(styles["event-item__accordion--control"]);
 	// };
 
-	// useEffect(() => {
-	// 	if (isMediumScreen) {
-	// 		return window.scrollBy(0, -70);
-	// 	}
-	// }, []);
+	useEffect(() => {
+		if (isMediumScreen) {
+			return window.scrollBy(0, -70);
+		}
+	}, []);
 
 	return (
-		<li className={classEvent.details}>
+		<li className={classEvent.details} id={id + 7}>
 			<ImageFill
 				src={imageSrc}
 				alt={title}
@@ -102,11 +113,15 @@ const EventItem1 = ({
 				<p>{description}</p>
 			</div>
 			<div className={styles["event__tools"]}>
-				<LinkAsBtn
-					href={`/events/${replacedTitle}/${id}#section_detail-item`}
-					className={`${styles["event__link-details"]}`}>
-					See details
+				<LinkAsBtn href={urlLink_dependsPath} className={classEvent.link}>
+					{isDescription ? "Previous page" : "See details"}
 				</LinkAsBtn>
+				{isOwner && isDescription && (
+					<div className={styles["event__btns"]}>
+						<ButtonMain>Delete</ButtonMain>
+						<ButtonMain>Edit</ButtonMain>
+					</div>
+				)}
 			</div>
 		</li>
 	);

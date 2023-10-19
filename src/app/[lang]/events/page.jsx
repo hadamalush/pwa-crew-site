@@ -20,7 +20,7 @@ export default async function Events({ params: { lang } }) {
 
 	return (
 		<>
-			<WrapperSection id='events1' className={styles["section-events"]}>
+			<WrapperSection id='section-events' className={styles["section-events"]}>
 				<h1>{trl_title}</h1>
 				<EventsList
 					events={events}
@@ -40,6 +40,7 @@ const getData = async () => {
 		"https://pwa-crew-site-demo.vercel.app/api/events",
 		{
 			next: { revalidate: 3600 },
+			// cache: "no-store",
 		}
 	);
 

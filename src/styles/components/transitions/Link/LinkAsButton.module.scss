@@ -4,7 +4,7 @@
 .link {
 	display: inline-block;
 	position: relative;
-	max-width: 30rem;
+	max-width: 20rem;
 	text-align: center;
 	padding: 14px 26px;
 	border-radius: 3px;
@@ -42,7 +42,6 @@
 		@include flex(row, center, center);
 		align-items: center;
 		content: "";
-		max-width: 30rem;
 		font-size: 1.4rem;
 		font-weight: bold;
 		transform: skew(-10deg);

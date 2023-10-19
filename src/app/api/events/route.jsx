@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-
-console.log("gowno");
 import { generalConfig } from "@/config/gerenalConfig";
 const { connectDb } = require("@/lib/mongodb");
 const {

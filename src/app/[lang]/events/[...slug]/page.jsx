@@ -42,7 +42,16 @@ const EventPage = async ({ params }) => {
 		console.log("ERROR: ", error);
 	}
 
-	const { title, town, code_post, street, date, time, description } = result;
+	const {
+		title,
+		town,
+		code_post,
+		street,
+		date,
+		time,
+		description,
+		user_email,
+	} = result;
 
 	const storage = generalConfig.downloadImageStorageEvent;
 	let uploadStorage = storage[0];
@@ -79,6 +88,7 @@ const EventPage = async ({ params }) => {
 				description={description}
 				image={targetSrc}
 				upload={uploadStorage}
+				owner={user_email}
 				className={styles["section-detail__item"]}
 			/>
 		</WrapperSection>
