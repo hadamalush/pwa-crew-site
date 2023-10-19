@@ -34,6 +34,7 @@ main .container {
 		transform: translateX(-50%);
 		text-align: center;
 		font-size: 3.6rem;
+		letter-spacing: 1px;
 	}
 	@include media-query(largeScreen) {
 		flex-direction: column;

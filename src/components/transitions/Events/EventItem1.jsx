@@ -21,8 +21,7 @@ const EventItem1 = ({
 	description,
 	id,
 	lang,
-	trl_btnEventDetails,
-	trl_startEvent,
+	dict,
 	owner,
 	...props
 }) => {
@@ -32,6 +31,16 @@ const EventItem1 = ({
 	const isOwner = owner === session?.user.email;
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
+	const {
+		trl_startEvent,
+		trl_address,
+		trl_description,
+		trl_btnEventDetails,
+		trl_btnDelete,
+		trl_btnEdit,
+		trl_btnPreviousPage,
+	} = dict;
 
 	useEffect(() => {
 		if (isMediumScreen) {
@@ -81,29 +90,29 @@ const EventItem1 = ({
 			<div className={styles["event__informations"]}>
 				<h2>{title}</h2>
 				<address className={classEvent.address}>
-					<h3>Address</h3>
+					<h3>{trl_address}</h3>
 					<p>{town}</p>
 					<p>{codePost}</p>
 					<p>{street}</p>
 				</address>
 				<time className={`${styles["event__time"]}`}>
-					<h3>Start event</h3>
+					<h3>{trl_startEvent}</h3>
 					<p>{date}</p>
 					<p className={classEvent.time}>{time}</p>
 				</time>
 			</div>
 			<div className={classEvent.text}>
-				<h3>Description</h3>
+				<h3>{trl_description}</h3>
 				<p>{description}</p>
 			</div>
 			<div className={styles["event__tools"]}>
 				<LinkAsBtn href={urlLink_dependsPath} className={classEvent.link}>
-					{isDescription ? "Previous page" : "See details"}
+					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
-						<ButtonMain>Delete</ButtonMain>
-						<ButtonMain>Edit</ButtonMain>
+						<ButtonMain>{trl_btnDelete}</ButtonMain>
+						<ButtonMain>{trl_btnEdit}</ButtonMain>
 					</div>
 				)}
 			</div>

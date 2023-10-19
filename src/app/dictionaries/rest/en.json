@@ -95,7 +95,12 @@
 		"btn_checkEvents": "Check events",
 		"event": {
 			"btn_seeDetails": "See details",
-			"startEvent": "Start of the event"
+			"btn_delete": "Delete",
+			"btn_edit": "Edit",
+			"btn_previousPage": "Previous page",
+			"startEvent": "Start of the event",
+			"address": "Address",
+			"description": "Description"
 		},
 		"newEvent": {
 			"wp_content": {

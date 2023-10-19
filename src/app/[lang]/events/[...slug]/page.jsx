@@ -1,5 +1,6 @@
 import EventItem from "@/components/transitions/Events/EventItem";
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
+import EventItem1 from "@/components/transitions/Events/EventItem1";
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { generalConfig } from "@/config/gerenalConfig";
 import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
@@ -8,10 +9,10 @@ import {
 	oneDownloadBuffersMegaNz,
 } from "@/lib/storage/storage";
 import { ObjectId } from "mongodb";
-import EventItem1 from "@/components/transitions/Events/EventItem1";
+import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
-const EventPage = async ({ params }) => {
-	const slug = params.slug;
+const EventPage = async ({ params: { slug, lang } }) => {
+	const dict = await getDictionaryElements(lang);
 	const eventId = slug[slug.length - 1];
 
 	if (eventId.length !== 24) {
@@ -53,6 +54,16 @@ const EventPage = async ({ params }) => {
 		user_email,
 	} = result;
 
+	const translationEvent = {
+		trl_startEvent: dict.events.event.startEvent,
+		trl_address: dict.events.event.address,
+		trl_description: dict.events.event.description,
+		trl_btnEventDetails: dict.events.event.btn_seeDetails,
+		trl_btnDelete: dict.events.event.btn_delete,
+		trl_btnEdit: dict.events.event.btn_edit,
+		trl_btnPreviousPage: dict.events.event.btn_previousPage,
+	};
+
 	const storage = generalConfig.downloadImageStorageEvent;
 	let uploadStorage = storage[0];
 
@@ -89,6 +100,7 @@ const EventPage = async ({ params }) => {
 				image={targetSrc}
 				upload={uploadStorage}
 				owner={user_email}
+				dict={translationEvent}
 				className={styles["section-detail__item"]}
 			/>
 		</WrapperSection>
