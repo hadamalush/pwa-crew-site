@@ -1,14 +1,12 @@
 "use client";
-import IconRender from "@/components/Icons/IconRender";
 import ImageFill from "../Image/ImageFill";
 import LinkAsBtn from "../Link/LinkAsBtn";
+import ButtonMain from "../Button/ButtonMain";
 import styles from "../../../styles/components/transitions/Events/EventItem1.module.scss";
-import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import ButtonMain from "../Button/ButtonMain";
-import { useSession } from "next-auth/react";
 
 const EventItem1 = ({
 	className,
@@ -29,18 +27,23 @@ const EventItem1 = ({
 	...props
 }) => {
 	const { data: session } = useSession();
-	const replacedTitle = title.replaceAll(" ", "-");
 	const pathname = usePathname();
 
 	const isOwner = owner === session?.user.email;
+	const replacedTitle = title.replaceAll(" ", "-");
+	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
+	useEffect(() => {
+		if (isMediumScreen) {
+			return window.scrollBy(0, -70);
+		}
+	}, []);
 
 	const lastPartOfLink = pathname.substring(pathname.lastIndexOf("/") + 1);
 	const isDescription = id === lastPartOfLink;
 	const urlLink_dependsPath = isDescription
 		? `/events#${id + 7}`
 		: `/events/${replacedTitle}/${id}#section_detail-item`;
-
-	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	const classDNone = styles["event__element-invisible"];
 
@@ -67,31 +70,12 @@ const EventItem1 = ({
 	const imageSrc =
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
-	// const classes = `${styles["event-item"]} ${className}`;
-	// const classesEventItem = !isDescription
-	// 	? classes
-	// 	: `${classes} ${styles["event-item__alone"]}`;
-	// const classesAccordion = !isDescription
-	// 	? styles["event-item__accordion"]
-	// 	: `${styles["event-item__accordion"]} ${styles["event-item__accordion--control"]}`;
-
-	// const showDetailHandler = () => {
-	// 	const detailsList = document.getElementById(id);
-	// 	detailsList.classList.toggle(styles["event-item__accordion--control"]);
-	// };
-
-	useEffect(() => {
-		if (isMediumScreen) {
-			return window.scrollBy(0, -70);
-		}
-	}, []);
-
 	return (
 		<li className={classEvent.details} id={id + 7}>
 			<ImageFill
 				src={imageSrc}
 				alt={title}
-				sizes='(max-width: 991px) 10vw, (min-width: 992px) 30vw'
+				sizes='(max-width: 568px) 80vw, (min-width: 568px) 30vw'
 				className={classEvent.img}
 			/>
 			<div className={styles["event__informations"]}>
