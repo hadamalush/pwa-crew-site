@@ -6,7 +6,7 @@ const {
 	oneConvertFromBuffersToBase64,
 } = require("@/lib/storage/storage");
 
-export const GET = async request => {
+export default async function GET(request) {
 	// setting which storage should be using
 	const storage = generalConfig.downloadImageStorageEvent;
 
@@ -62,4 +62,4 @@ export const GET = async request => {
 	);
 
 	return NextResponse.json({ message: convertedEvenets });
-};
+}
