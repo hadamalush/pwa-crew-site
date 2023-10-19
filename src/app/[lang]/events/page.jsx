@@ -38,15 +38,22 @@ export default async function Events({ params: { lang } }) {
 }
 
 const getData = async () => {
-	const response = await fetch(
-		"https://pwa-crew-site-demo.vercel.app/api/events",
-		{
-			next: { revalidate: 3600 },
-			// cache: "no-store",
-		}
-	);
+	let data;
 
-	const data = await response.json();
+	try {
+		const response = await fetch(
+			"https://pwa-crew-site-demo.vercel.app/api/events",
+			{
+				// next: { revalidate: 1 },
+				cache: "no-store",
+			}
+		);
+
+		data = await response.json();
+	} catch (error) {
+		console.log(error);
+	}
+
 	const events = data.message;
 
 	return events;
