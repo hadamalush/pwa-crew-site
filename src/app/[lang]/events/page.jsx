@@ -1,5 +1,6 @@
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import EventsList from "@/components/transitions/Events/EventsList";
+import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
 import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
@@ -16,13 +17,14 @@ export default async function Events({ params: { lang } }) {
 		trl_btnPreviousPage: dict.events.event.btn_previousPage,
 	};
 
-	const trl_title = dict.events.title;
+	const events = await getData();
 
-	const [events] = await Promise.all([getData()]);
+	const trl_title = dict.events.title;
 
 	return (
 		<>
 			<WrapperSection id='section-events' className={styles["section-events"]}>
+				<ImgBgBlur src={"/images/background/background-events.webp"} />
 				<h1>{trl_title}</h1>
 				<EventsList
 					events={events}

@@ -1,5 +1,6 @@
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import EventItem from "@/components/transitions/Events/EventItem";
+import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { generalConfig } from "@/config/gerenalConfig";
 import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
@@ -9,7 +10,6 @@ import {
 } from "@/lib/storage/storage";
 import { ObjectId } from "mongodb";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
-import Image from "next/image";
 const EventPage = async ({ params: { slug, lang } }) => {
 	const dict = await getDictionaryElements(lang);
 	const eventId = slug[slug.length - 1];
@@ -87,10 +87,7 @@ const EventPage = async ({ params: { slug, lang } }) => {
 			className={styles["section-detail"]}
 			id='section_detail-item'>
 			<h1>{title}</h1>
-			<span className={styles["section-detail__img"]}>
-				<Image src={targetSrc} fill alt='Background with blur' />
-			</span>
-
+			<ImgBgBlur src={targetSrc} className={styles["section-detail__img"]} />
 			<EventItem
 				id={eventId}
 				title={title}

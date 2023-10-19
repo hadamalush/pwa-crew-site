@@ -36,6 +36,26 @@ main .container {
 		font-size: 3.6rem;
 		letter-spacing: 1px;
 	}
+
+	&__img {
+		@include position(absolute, 0, 0, 0, 0, -1000);
+
+		&::before,
+		&::after {
+			@include position(absolute, 0, 0, 0, 0, 1);
+		}
+		&::before {
+			content: "";
+			backdrop-filter: blur(55px);
+		}
+
+		&::after {
+			content: "";
+			background-color: $background-senary;
+			z-index: 2;
+		}
+	}
+
 	@include media-query(largeScreen) {
 		flex-direction: column;
 	}

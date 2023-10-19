@@ -1,11 +1,11 @@
 @import "../../transitions/variables";
 @import "../../mixins/mixins";
 
-main .section__new-event {
+main .section-newEvent {
 	@include flex(row, null, center);
 	padding: 15em 0 10em;
 }
-.section__new-event .container {
+.section-newEvent .container {
 	height: 115rem;
 	box-shadow: $boxshadow-secondary;
 
