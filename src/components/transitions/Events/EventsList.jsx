@@ -1,8 +1,6 @@
 "use client";
-
 import styles from "../../../styles/components/transitions/Events/EventsList.module.scss";
 import EventItem from "./EventItem";
-import EventItem1 from "./EventItem1";
 
 const EventsList = ({ events, className, children, lang, dict, ...props }) => {
 	const classes = `${styles.events} ${className}`;
@@ -10,7 +8,7 @@ const EventsList = ({ events, className, children, lang, dict, ...props }) => {
 	return (
 		<ul className={classes}>
 			{events.map(event => (
-				<EventItem1
+				<EventItem
 					key={event.id}
 					id={event.id}
 					title={event.title}

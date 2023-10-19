@@ -11,6 +11,25 @@ main .section-detail {
 		margin-top: 5em;
 	}
 
+	&__img {
+		z-index: -1;
+
+		&::before,
+		&::after {
+			@include position(absolute, 0, 0, 0, 0, 1);
+		}
+		&::before {
+			content: "";
+			backdrop-filter: blur(20px);
+		}
+
+		&::after {
+			content: "";
+			background-color: $background-senary;
+			z-index: 2;
+		}
+	}
+
 	h1 {
 		text-align: center;
 		font-size: 3rem;
