@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-
-console.log("gowno");
 import { generalConfig } from "@/config/gerenalConfig";
 const { connectDb } = require("@/lib/mongodb");
 const {
@@ -8,7 +6,7 @@ const {
 	oneConvertFromBuffersToBase64,
 } = require("@/lib/storage/storage");
 
-export const GET = async () => {
+export const GET = async request => {
 	// setting which storage should be using
 	const storage = generalConfig.downloadImageStorageEvent;
 

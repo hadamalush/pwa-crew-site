@@ -1,17 +1,8 @@
 "use client";
-
 import styles from "../../../styles/components/transitions/Events/EventsList.module.scss";
 import EventItem from "./EventItem";
 
-const EventsList = ({
-	events,
-	className,
-	children,
-	lang,
-	trl_btnEventDetails,
-	trl_startEvent,
-	...props
-}) => {
+const EventsList = ({ events, className, children, lang, dict, ...props }) => {
 	const classes = `${styles.events} ${className}`;
 
 	return (
@@ -29,8 +20,7 @@ const EventsList = ({
 					image={event.targetSrc}
 					upload={event.upload}
 					lang={lang}
-					trl_btnEventDetails={trl_btnEventDetails}
-					trl_startEvent={trl_startEvent}
+					dict={dict}
 				/>
 			))}
 		</ul>

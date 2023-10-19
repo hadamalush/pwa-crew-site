@@ -1,9 +1,11 @@
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import WrapperFormWithContent from "@/components/transitions/Wrappers/WrapperFormWithContent";
 import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
+import Image from "next/image";
 import styles from "../../../../styles/components/Pages/NewEventPage.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
+import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
 
 const NewEventPage = async ({ params: { lang } }) => {
 	const dict = await getDictionaryElements(lang);
@@ -33,7 +35,8 @@ const NewEventPage = async ({ params: { lang } }) => {
 	const trl_error = dictNotifi.notifications.newEvent.generalError;
 
 	return (
-		<WrapperSection className={styles["section__new-event"]}>
+		<WrapperSection className={styles["section-newEvent"]}>
+			<ImgBgBlur src={"/images/background/background-events.webp"} />
 			<WrapperFormWithContent
 				headingType='h3'
 				title={dataWrapper.title}

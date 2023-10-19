@@ -95,7 +95,12 @@
 		"btn_checkEvents": "Sprawdź wydarzenia",
 		"event": {
 			"btn_seeDetails": "Zobacz szczegóły",
-			"startEvent": "Start wydarzenia"
+			"btn_delete": "Usuń",
+			"btn_edit": "Edytuj",
+			"btn_previousPage": "Poprzednia strona",
+			"startEvent": "Start wydarzenia",
+			"address": "Adres",
+			"description": "Opis"
 		},
 		"newEvent": {
 			"wp_content": {

@@ -21,10 +21,11 @@ const ButtonMain = ({
 }) => {
 	const [isAnimation, setIsAnimation] = useState(false);
 
-	const classesBtn =
+	const classesBtnAnimation =
 		isAnimation && !animation
 			? `${styles.button} ${styles["button__transparent"]}`
 			: styles.button;
+	const classesBtn = `${classesBtnAnimation} ${className || ""} `;
 
 	const classesSpan =
 		isAnimation && !animation

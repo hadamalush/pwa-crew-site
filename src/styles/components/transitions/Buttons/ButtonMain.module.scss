@@ -2,6 +2,7 @@
 @import "../../../mixins/mixins";
 
 .button {
+	@include borderIn(4px, 1px, -10deg);
 	position: relative;
 	border: none;
 	width: 100%;
@@ -9,20 +10,25 @@
 	padding: 14px 26px;
 	font-size: 1.4rem;
 	font-weight: bold;
-	transform: skew(-10deg);
+	// transform: skew(-10deg);
 	transition: transform 0.3s, color 0.3s, background-color 0.3s;
 	text-align: center;
 	color: $primary-color;
 	border-radius: 3px;
-	background-color: $background-septenary;
+	background-color: transparent;
 	cursor: pointer;
 
 	&:hover {
-		transform: scale(1.04) skew(-10deg);
+		transform: scale(1.04);
 		color: $secondary-color;
 	}
 
-	@include borderIn(4px, 1px, 0);
+	&::after {
+		@include position(absolute, 0, 0, 0, 0, -1);
+		content: "";
+		background-color: $background-septenary;
+		transform: skew(-10deg);
+	}
 
 	&__transparent {
 		background-color: transparent;
@@ -39,7 +45,7 @@
 		content: "";
 		font-size: 1.4rem;
 		font-weight: bold;
-		transform: skew(-5deg);
+		transform: skew(-10deg);
 		transition: opacity 0.3s;
 		opacity: 0;
 		background-color: transparent;
@@ -50,9 +56,9 @@
 	--border-size: 0.2rem;
 	--padding: 1.2rem;
 	--border-radius: 0.2rem;
+	transform: scale(0.95) skew(-10deg);
 	position: absolute;
 	display: inline-block;
-	transform: scale(0.95);
 	overflow: hidden;
 	padding: calc(var(--padding) + var(--border-size));
 	border-radius: var(--border-radius);
@@ -64,7 +70,7 @@
 		display: block;
 		width: calc(100% * 1.41421356237);
 		padding-bottom: calc(100% * 1.41421356237);
-		transform: translate(-50%, -50%) skew(-5deg);
+		transform: translate(-50%, -50%);
 		border-radius: 100%;
 		animation: spin 5s linear infinite;
 		background: $bgc-animation;

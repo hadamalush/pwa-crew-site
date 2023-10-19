@@ -11,9 +11,17 @@ main .section-detail {
 		margin-top: 5em;
 	}
 
+	&__img {
+		&::before {
+			content: "";
+			backdrop-filter: blur(20px);
+		}
+	}
+
 	h1 {
 		text-align: center;
 		font-size: 3rem;
+		margin-bottom: 1.5em;
 	}
 
 	@include media-query(mediumScreen) {

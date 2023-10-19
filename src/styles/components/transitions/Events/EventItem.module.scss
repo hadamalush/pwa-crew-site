@@ -1,517 +1,238 @@
 @import "../../../transitions/variables";
 @import "../../../mixins/mixins";
 
-.event-item {
-	position: relative;
+.event {
 	display: flex;
 	flex-direction: column;
-	min-height: 15em;
 	width: 100%;
-	background-color: $background-quinary;
+	max-width: 65rem;
+	word-wrap: break-word;
 	box-shadow: $boxshadow-primary;
-	overflow: hidden;
-	cursor: pointer;
-	box-shadow: 0 0 10px black;
-
-	&__alone {
-		cursor: unset;
-	}
-
-	&__arrow-back {
-		top: 3.5em;
-		left: 1em;
-		z-index: 500;
-		position: absolute;
-		transition: color 0.3s;
-		cursor: pointer;
-
-		div {
-			width: 3em;
-		}
-
-		&:hover {
-			color: $secondary-color;
-		}
-	}
-
-	&__box {
-		position: relative;
-		display: flex;
-		width: 100%;
-
-		&::before,
-		&::after {
-			content: "";
-			position: absolute;
-			top: 20%;
-			right: 10%;
-			width: 1em;
-			height: 1em;
-			background-color: $background-primary;
-			border: 3px solid $secondary-color;
-			border-style: inset;
-			transform: skew(-15deg);
-			transition: transform 0.3s;
-		}
-		&:hover::before,
-		&:hover::after {
-			transform: scale(1.1);
-		}
-
-		&::after {
-			top: 80%;
-			left: 40%;
-			transform: skew(15deg);
-			border-color: $septenary-color;
-		}
-	}
-
-	&__content {
-		display: flex;
-		flex-direction: column;
-		padding: 0 1em;
-		width: 70%;
-	}
+	background-color: $background-quinary;
 
 	&__img {
 		position: relative;
-		margin: auto 0;
-		width: 30%;
-		height: 10.5rem;
-		overflow: hidden;
-		background-color: $background-quinary;
-		border-bottom: 0;
+		width: 100%;
+		min-width: 10rem;
+		height: 200px;
+	}
 
-		img {
-			position: relative;
-			object-position: center;
-			height: 100%;
-		}
+	&__informations {
+		position: relative;
+		display: flex;
+		justify-content: space-around;
+		z-index: 10;
+		flex-wrap: wrap;
 
-		&:before,
-		&:after {
-			content: "";
-			position: absolute;
-			height: 20px;
-			width: 20px;
-			top: -10px;
-			border: none;
-			transform: rotate(45deg);
-			background-color: $background-quinary;
-			z-index: 10;
-		}
-
-		&::before {
-			left: -10px;
-		}
+		&::before,
 		&::after {
-			right: -10px;
+			@include position(absolute, null, 2rem, 0.5rem, null, -1);
+			content: "";
+			rotate: 10deg;
+			width: 5rem;
+			height: 5rem;
+			background-image: url("/images/decorations/violin.webp");
+			background-position: center;
+			background-size: contain;
+		}
+
+		&::after {
+			@include position(absolute, null, null, 10%, 2rem, -1);
+			rotate: -10deg;
+			background-image: url("/images/decorations/percussion.webp");
 		}
 	}
 
-	&__town {
-		position: relative;
-		margin: 1em auto 0;
-		width: 100%;
+	&__element-invisible {
+		display: none;
+	}
+
+	h2 {
+		color: $secondary-color;
 		text-align: center;
-		word-wrap: break-word;
+		padding: 1em 0.5em;
+		max-width: 28rem;
 	}
 
-	&__date {
-		display: block;
-		margin: 0 auto;
-		+ p {
-			text-align: center;
-			margin: 1em auto 0;
-			font-size: 1rem;
-			color: $secondary-color;
-			z-index: 1;
-		}
-	}
-
-	&__time {
-		position: relative;
-		margin: 0 auto;
-		font-size: 1.2rem;
-		z-index: 1;
-	}
-
-	&__title {
-		display: flex;
-		justify-content: center;
-		width: 100%;
-		word-wrap: break-word;
-		padding: 1em 1rem;
+	h3 {
+		font-size: 1.6rem;
+		font-weight: normal;
 		color: $tertiary-color;
-		background-color: $background-secondary;
-		box-shadow: 0 5px 10px black;
-		font-size: 1.3rem;
+	}
 
-		h4 {
-			width: 70%;
-			margin-left: auto;
-			text-align: center;
-			margin: auto 0 auto auto;
+	&__address,
+	&__time,
+	&__text {
+		width: 100%;
+		padding: 0 0.5em 1em;
+		text-align: center;
+		p {
+			padding: 0.2em 0;
+			font-size: 1.3rem;
 		}
 	}
 
-	&__accordion {
-		display: grid;
-		grid-template-rows: 0fr;
-		transition: grid-template-rows 500ms;
+	&__address p {
+		max-width: 23rem;
+		margin: 0 auto;
+	}
 
-		&-bgc {
-			display: none;
+	&__text {
+		width: 100%;
+		padding: 1em 2em;
+		background-color: $bgc-eventItem-primary;
+		p {
+			text-align: left;
+			text-wrap: pretty;
+			padding: 1em 0 0 1em;
 		}
-
-		&--control {
-			grid-template-rows: 1fr;
-		}
-	}
-}
-
-.details {
-	position: relative;
-	margin-top: 1em;
-	overflow: hidden;
-
-	&__item:nth-child(even) {
-		background-color: $background-secondary;
-	}
-	&__item:nth-child(odd) {
-		background-color: $background-tertiary;
 	}
 
-	&__item {
+	&__tools {
 		display: flex;
-		align-items: center;
-		box-shadow: 0 5px 10px black;
-		padding: 1em;
+		flex-direction: column;
+		width: 100%;
+		padding: 1em 0;
+		word-wrap: normal;
+		background-color: $bgc-eventItem-secondary;
+	}
 
-		address {
-			width: 70%;
-			text-align: center;
-			margin-left: auto;
-			font-size: 1.2rem;
-			word-wrap: break-word;
+	&__link-details {
+		min-width: 30%;
+		margin: 0 auto;
+		z-index: 1;
 
-			p {
-				padding: 0.3em 0;
-				font-size: 1.2rem;
-			}
-		}
-
-		time {
-			width: 70%;
-			margin-left: auto;
-			text-align: center;
-			p {
-				padding: 0.3em 0;
-				font-size: 1.2rem;
-			}
-		}
-
-		&-link {
-			width: 70%;
-			margin-left: auto;
-			a {
-				display: block;
-				margin: 0 auto;
-				padding: 1em 1.4em;
-				font-size: 1.2rem;
-			}
-		}
-
-		//class description is only for eventPage
-		&-description {
-			width: 70%;
-			margin-left: auto;
-			line-height: 1.5em;
-			padding: 0 1em;
-			text-align: center;
-			word-wrap: break-word;
-			font-size: 1.2rem;
+		&--isowner {
+			width: 80%;
+			margin: 0 auto;
 		}
 	}
-}
 
-.details .details__item .details__item-icon,
-.event-item__title .details__item-icon {
-	margin: 0 7% 0;
-	width: 3rem;
-}
-
-@media (max-width: 280px) {
-	.event-item__box::after {
-		left: 88%;
-		z-index: 0;
-	}
-}
-
-@include media-query(smallScreen) {
-	.event-item {
-		&__box::after {
-			left: 33%;
+	&__btns {
+		display: flex;
+		justify-content: space-around;
+		margin-top: 1em;
+		button {
+			width: 33%;
+			padding: 1.3rem;
+			transform: skew(0);
 		}
+	}
+
+	@include media-query(foldScreen) {
+		&__informations {
+			&::before {
+				right: 1rem;
+			}
+
+			&::after {
+				left: 1rem;
+			}
+		}
+	}
+
+	@include media-query(smallScreen) {
+		@include flex(row, null, center);
+		flex-wrap: wrap;
+
 		&__img {
-			width: 20%;
+			width: 40%;
+			height: 200px;
+
+			&--isSmall {
+				height: 33rem;
+			}
 		}
 
-		&__town,
-		&__date,
-		&__time {
-			padding: 0;
+		&__informations {
+			width: 60%;
 
-			+ p {
+			&::after {
+				bottom: 30%;
+			}
+		}
+
+		h2 {
+			padding: 1em 1em;
+		}
+	}
+
+	@include media-query(mediumScreen) {
+		&__text p {
+			padding: 1em 5em;
+		}
+
+		h2,
+		&__address p {
+			max-width: 100%;
+		}
+	}
+
+	@include media-query(mediumScreen) {
+		&__text {
+			p {
+				padding: 1em 5em;
+			}
+		}
+
+		&__tools {
+			@include flex(row, null, center);
+			align-items: center;
+		}
+
+		.event__link-details--isowner {
+			width: 30%;
+			min-width: 20%;
+			margin: 0 auto;
+			a {
 				padding: 0;
 			}
 		}
 
-		&__content {
-			width: 80%;
-		}
-
-		&__title {
-			display: flex;
-			justify-content: center;
-			width: 100%;
-
-			h4 {
-				width: 80%;
-				text-align: center;
-				margin: auto 0 auto auto;
+		&__btns {
+			justify-content: space-around;
+			width: 50%;
+			margin-top: 0;
+			button {
+				width: 30%;
+				padding: 1em 2em;
 			}
 		}
 	}
 
-	.details {
-		&__item {
-			padding: 1em 0;
-			address {
-				margin: 0;
-				margin-left: auto;
-				width: 80%;
-			}
-
-			time {
-				margin: 0;
-				margin-left: auto;
-				width: 80%;
-			}
-
-			&-link {
-				width: 80%;
-				margin-left: auto;
-			}
-
-			&-description {
-				width: 80%;
-				margin-left: auto;
-			}
+	@include media-query(largeScreen) {
+		&--details {
+			max-width: 110rem;
 		}
-	}
-}
-
-@include media-query(largeScreen) {
-	.details .details__item .details__item-icon,
-	.event-item__title .details__item-icon {
-		display: none;
-	}
-
-	.event-item {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: repeat(7, 1fr);
-		height: 70rem;
-		max-width: 55rem;
-		border-width: 3px;
-		border-radius: 3px;
-		background-color: $background-tertiary;
-		cursor: default;
-
-		//class alone is only for eventPage
-		&__alone {
-			height: 95rem;
+		h2 {
+			font-size: 2.5rem;
+		}
+		h3 {
+			font-size: 2rem;
 		}
 
-		&__box {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			grid-template-rows: repeat(3, 1fr);
-			grid-row: 1/4;
-			grid-column: 1/3;
-			background-color: $background-quinary;
+		&__informations p,
+		&__text p {
+			font-size: 1.7rem;
+		}
 
+		&__informations {
 			&::before {
-				top: 90%;
-				right: 7%;
-				width: 20px;
-				height: 20px;
-				border-width: 5px;
+				width: 8rem;
+				height: 8rem;
+				right: 10%;
 			}
+
 			&::after {
-				top: 90%;
-				left: 7%;
-				width: 20px;
-				height: 20px;
-				border-width: 5px;
+				left: 10%;
+				bottom: 20%;
+				width: 7rem;
+				height: 7rem;
 			}
 		}
 
-		&__img {
-			position: relative;
-			display: grid;
-			grid-column: 1/4;
-			grid-row: 1/3;
-			width: 80%;
-			height: 80%;
-			margin: auto auto;
-			min-height: 15rem;
-			margin-top: 4rem;
-			border-color: transparent;
-			border-width: 3px;
-		}
-
-		&__content {
-			position: relative;
-			width: 90%;
-			grid-column: 1/4;
-			grid-row: 3/4;
-			height: max-content;
-			margin: 0 auto;
-			padding: 0.5em;
-			border-width: 6px 70px 3px;
-			border-style: solid;
-			border-color: $secondary-color transparent;
-			border-bottom-color: transparent;
-			border-top-color: $secondary-color;
-
-			address {
-				grid-column: 1/3;
-				grid-row: 2/3;
-				font-size: 1.6rem;
-
-				+ p {
-					display: none;
-				}
-			}
-
-			time {
-				display: none;
-			}
-		}
-
-		&__town {
-			text-align: center;
-			font-size: 2.4rem;
-			letter-spacing: 1.5px;
-
-			margin: 0.2em 0;
-			font-weight: bold;
-		}
-
-		&__title {
-			grid-column: 1/3;
-			grid-row: 4/5;
-			background-color: $background-quinary;
-
-			box-shadow: unset;
-
-			h4 {
-				width: 100%;
-				font-size: 2.4rem;
-				letter-spacing: 1px;
-			}
-		}
-
-		&__accordion {
-			position: relative;
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			grid-template-rows: repeat(2, 1fr);
-			grid-column: 1/3;
-			grid-row: 5/8;
-
-			&-bgc {
-				display: block;
-			}
-			&::before {
-				content: "";
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				position: absolute;
-				z-index: 2;
-				background-color: #242121ab;
-			}
-		}
-	}
-
-	.details {
-		display: grid;
-		width: 100%;
-		height: 100%;
-		grid-column: 1/-1;
-		grid-row: 1/-1;
-		overflow: visible;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(3, 1fr);
-
-		.details__item {
-			position: relative;
-			z-index: 5;
-			background-color: transparent;
-			box-shadow: none;
-		}
-
-		li:nth-child(1) {
-			grid-column: 1/4;
-			grid-row: 1/2;
-		}
-		li:nth-child(2) {
-			grid-column: 1/4;
-			grid-row: 2/3;
-		}
-		li:nth-child(3) {
-			grid-column: 1/4;
-			grid-row: 3/4;
-		}
-
-		address {
-			width: 100%;
-
-			p {
-				font-size: 1.8rem;
-				font-weight: bold;
-			}
-		}
-
-		time {
-			width: 100%;
-			p {
-				font-size: 1.8rem;
-				font-weight: bold;
-			}
-		}
-
-		&__item-link {
-			width: 100%;
-			a {
-				font-size: 1.6rem;
-				// padding: 0.8em 10em;
-
-				&::before {
-					border-color: $septenary-color;
-				}
-			}
-		}
-
-		//class description is only for eventPage
-		&__item-description {
-			width: 100%;
-			margin-bottom: 2em;
-			font-size: 1.6rem;
+		.event__link-details--isowner {
+			width: 20%;
 		}
 	}
 }

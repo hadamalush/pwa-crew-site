@@ -1,5 +1,6 @@
-import EventItem from "@/components/transitions/Events/EventItem";
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
+import EventItem from "@/components/transitions/Events/EventItem";
+import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { generalConfig } from "@/config/gerenalConfig";
 import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
@@ -8,9 +9,9 @@ import {
 	oneDownloadBuffersMegaNz,
 } from "@/lib/storage/storage";
 import { ObjectId } from "mongodb";
-
-const EventPage = async ({ params }) => {
-	const slug = params.slug;
+import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+const EventPage = async ({ params: { slug, lang } }) => {
+	const dict = await getDictionaryElements(lang);
 	const eventId = slug[slug.length - 1];
 
 	if (eventId.length !== 24) {
@@ -41,7 +42,26 @@ const EventPage = async ({ params }) => {
 		console.log("ERROR: ", error);
 	}
 
-	const { title, town, code_post, street, date, time, description } = result;
+	const {
+		title,
+		town,
+		code_post,
+		street,
+		date,
+		time,
+		description,
+		user_email,
+	} = result;
+
+	const translationEvent = {
+		trl_startEvent: dict.events.event.startEvent,
+		trl_address: dict.events.event.address,
+		trl_description: dict.events.event.description,
+		trl_btnEventDetails: dict.events.event.btn_seeDetails,
+		trl_btnDelete: dict.events.event.btn_delete,
+		trl_btnEdit: dict.events.event.btn_edit,
+		trl_btnPreviousPage: dict.events.event.btn_previousPage,
+	};
 
 	const storage = generalConfig.downloadImageStorageEvent;
 	let uploadStorage = storage[0];
@@ -67,6 +87,7 @@ const EventPage = async ({ params }) => {
 			className={styles["section-detail"]}
 			id='section_detail-item'>
 			<h1>{title}</h1>
+			<ImgBgBlur src={targetSrc} className={styles["section-detail__img"]} />
 			<EventItem
 				id={eventId}
 				title={title}
@@ -78,6 +99,8 @@ const EventPage = async ({ params }) => {
 				description={description}
 				image={targetSrc}
 				upload={uploadStorage}
+				owner={user_email}
+				dict={translationEvent}
 				className={styles["section-detail__item"]}
 			/>
 		</WrapperSection>
