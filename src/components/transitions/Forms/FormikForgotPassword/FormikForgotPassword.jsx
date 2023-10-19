@@ -56,7 +56,7 @@ const FormikForgotPassword = ({
 
 	useEffect(() => {
 		if (!isMediumScreen) {
-			window.scrollTo(0, 75);
+			window.scrollTo(0, 70);
 		}
 		if (status === "authenticated" && session) {
 			router.push("/");

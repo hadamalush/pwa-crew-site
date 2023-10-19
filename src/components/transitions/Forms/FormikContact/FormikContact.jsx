@@ -7,6 +7,7 @@ import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../../styles/components/transitions/Forms/FormikContact.module.scss";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import { contactSchema } from "@/components/Schemas/FormSchem";
@@ -32,11 +33,13 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 		query: "(min-width: 768px)",
 	});
 
-	const isClient = typeof window !== "undefined";
-
-	if (!isMediumScreen && isClient) {
-		window.scrollTo(0, 100);
-	}
+	useEffect(() => {
+		if (!isMediumScreen) {
+			window.scrollTo(0, 70);
+		} else if (isMediumScreen) {
+			window.scrollTo(0, 0);
+		}
+	}, []);
 
 	const onSubmit = async (values, actions) => {
 		dispatch(loading(true));

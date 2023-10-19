@@ -43,7 +43,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 
 	useEffect(() => {
 		if (!isMediumScreen) {
-			window.scrollTo(0, 75);
+			window.scrollTo(0, 70);
 		}
 	}, []);
 

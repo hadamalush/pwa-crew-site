@@ -47,7 +47,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 
 	useEffect(() => {
 		if (!isMediumScreen) {
-			window.scrollTo(0, 75);
+			window.scrollTo(0, 70);
 		} else if (isMediumScreen) {
 			window.scrollTo(0, 0);
 		}
