@@ -65,7 +65,7 @@ const Footer = props => {
 				<address className={styles["footer__address"]}>
 					<ul>
 						<li>
-							<Link href='/wydarzenia'>
+							<Link href='/'>
 								<IconRender variant='location' />
 								Warszawa, ul. Dobra 2
 							</Link>
