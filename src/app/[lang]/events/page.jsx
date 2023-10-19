@@ -37,6 +37,8 @@ export default async function Events({ params: { lang } }) {
 	);
 }
 
+export const dynamic = "force-dynamic";
+
 const getData = async () => {
 	let data;
 
