@@ -8,6 +8,7 @@ import {
 	oneDownloadBuffersMegaNz,
 } from "@/lib/storage/storage";
 import { ObjectId } from "mongodb";
+import EventItem1 from "@/components/transitions/Events/EventItem1";
 
 const EventPage = async ({ params }) => {
 	const slug = params.slug;
@@ -67,7 +68,7 @@ const EventPage = async ({ params }) => {
 			className={styles["section-detail"]}
 			id='section_detail-item'>
 			<h1>{title}</h1>
-			<EventItem
+			<EventItem1
 				id={eventId}
 				title={title}
 				date={date}

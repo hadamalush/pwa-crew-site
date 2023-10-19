@@ -2,6 +2,7 @@
 
 import styles from "../../../styles/components/transitions/Events/EventsList.module.scss";
 import EventItem from "./EventItem";
+import EventItem1 from "./EventItem1";
 
 const EventsList = ({
 	events,
@@ -17,7 +18,7 @@ const EventsList = ({
 	return (
 		<ul className={classes}>
 			{events.map(event => (
-				<EventItem
+				<EventItem1
 					key={event.id}
 					id={event.id}
 					title={event.title}

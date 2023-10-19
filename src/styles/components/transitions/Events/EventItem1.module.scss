@@ -1,0 +1,100 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.event {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	background-color: $background-quinary;
+	box-shadow: $boxshadow-primary;
+
+	&__img {
+		position: relative;
+		width: 100%;
+		min-width: 10rem;
+		height: 200px;
+	}
+
+	&__informations {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+
+	&__element-invisible {
+		display: none;
+	}
+
+	h2 {
+		color: $secondary-color;
+		text-align: center;
+		padding: 1em 0.5em;
+		width: 100%;
+	}
+
+	h3 {
+		color: $tertiary-color;
+		font-size: 1.6rem;
+		font-weight: normal;
+	}
+
+	&__address,
+	&__time,
+	&__text {
+		width: 100%;
+		padding: 0 0.5em 1em;
+		text-align: center;
+		p {
+			padding: 0.2em 0;
+			font-size: 1.3rem;
+		}
+	}
+
+	&__text {
+		margin-top: 1em;
+		width: 100%;
+		padding: 1em 2em;
+		background-color: #161515;
+		p {
+			text-align: left;
+			text-wrap: pretty;
+			padding: 1em 0 0 1em;
+		}
+	}
+
+	&__tools {
+		display: flex;
+		justify-content: center;
+		padding: 1em 0;
+		width: 100%;
+		background-color: #1b1a1a;
+	}
+
+	&__link-details {
+		z-index: 1;
+	}
+
+	@include media-query(smallScreen) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		&__img {
+			width: 40%;
+			height: 200px;
+
+			&--isSmall {
+				height: 30rem;
+			}
+		}
+
+		&__informations {
+			width: 60%;
+		}
+
+		h2 {
+			padding: 1em 1em;
+		}
+	}
+}
