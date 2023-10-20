@@ -10,8 +10,6 @@ export async function GET(request) {
 	// setting which storage should be using
 	const storage = generalConfig.downloadImageStorageEvent;
 
-	console.log("siemano");
-
 	let result;
 	try {
 		const db = await connectDb();
@@ -63,7 +61,10 @@ export async function GET(request) {
 		})
 	);
 
-	// const response = NextResponse.json({ message: convertedEvenets });
+	const response = NextResponse.json(
+		{ message: convertedEvenets },
+		{ status: 200 }
+	);
 	// response.headers.set("Cache-Control", "no-store");
 	// response.headers.set("content-type", "no-store");
 	// response.headers.delete("content-type");
@@ -71,9 +72,9 @@ export async function GET(request) {
 
 	// console.log(response);
 
-	return new Response(JSON.stringify({ message: convertedEvenets }), {
-		status: 200,
-	});
+	// return new Response(JSON.stringify({ message: convertedEvenets }), {
+	// 	status: 200,
+	// });
 
-	// return response;
+	return response;
 }

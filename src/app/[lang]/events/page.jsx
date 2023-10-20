@@ -5,6 +5,8 @@ import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { cache } from "react";
 
+export const dynamic = "force-dynamic";
+
 export default async function Events({ params: { lang } }) {
 	const dict = await getDictionaryElements(lang);
 
@@ -38,8 +40,7 @@ export default async function Events({ params: { lang } }) {
 	);
 }
 
-// export const dynamic = "force-dynamic";
-export const revalidate = 1;
+// export const revalidate = 1;
 
 const getData = cache(async id => {
 	let data;
@@ -47,9 +48,9 @@ const getData = cache(async id => {
 	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/events?timestamp=${timestamp}`;
 
 	try {
-		const response = await fetch("http://localhost:3000/api/events", {
+		const response = await fetch(apiUrl, {
 			// next: { revalidate: 1 },
-			cache: "no-store",
+			cache: "force-cache",
 		});
 
 		data = await response.json();
