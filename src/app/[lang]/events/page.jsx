@@ -3,6 +3,7 @@ import EventsList from "@/components/transitions/Events/EventsList";
 import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
 import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import { cache } from "react";
 
 export default async function Events({ params: { lang } }) {
 	const dict = await getDictionaryElements(lang);
@@ -37,16 +38,17 @@ export default async function Events({ params: { lang } }) {
 	);
 }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+export const revalidate = 1;
 
-const getData = async () => {
+const getData = cache(async id => {
 	let data;
 	const timestamp = Date.now();
 	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/events?timestamp=${timestamp}`;
 
 	try {
-		const response = await fetch("http://localhost:3000/api/events", {
-			// next: { revalidate: 1 },
+		const response = await fetch(apiUrl, {
+			next: { revalidate: 1 },
 			cache: "no-store",
 		});
 
@@ -58,4 +60,4 @@ const getData = async () => {
 	const events = data.message;
 
 	return events;
-};
+});
