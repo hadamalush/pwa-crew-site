@@ -64,8 +64,12 @@ export async function GET(request) {
 	);
 
 	const response = NextResponse.json({ message: convertedEvenets });
-
 	response.headers.set("Cache-Control", "no-store");
+	response.headers.set("content-type", "no-store");
+	response.headers.delete("content-type");
+	response.headers.delete("Cache-Control");
+
+	console.log(response);
 
 	return response;
 }
