@@ -9,4 +9,8 @@
 		font-size: 3rem;
 		text-align: center;
 	}
+
+	@include media-query(foldScreen) {
+		width: 26rem;
+	}
 }

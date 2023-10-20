@@ -6,7 +6,7 @@ const {
 	oneConvertFromBuffersToBase64,
 } = require("@/lib/storage/storage");
 
-export const revalidate = 3600;
+export const revalidate = 1200;
 
 export async function GET(request) {
 	// setting which storage should be using
