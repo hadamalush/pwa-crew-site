@@ -5,8 +5,6 @@ import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { cache } from "react";
 
-export const dynamic = "force-dynamic";
-
 export default async function Events({ params: { lang } }) {
 	const dict = await getDictionaryElements(lang);
 
@@ -49,8 +47,7 @@ const getData = cache(async id => {
 
 	try {
 		const response = await fetch(apiUrl, {
-			// next: { revalidate: 1 },
-			cache: "force-cache",
+			next: { revalidate: 3600 },
 		});
 
 		data = await response.json();

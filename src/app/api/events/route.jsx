@@ -6,7 +6,8 @@ const {
 	oneConvertFromBuffersToBase64,
 } = require("@/lib/storage/storage");
 
-export const dynamic = "force-dynamic";
+export const dynamic = "auto";
+export const revalidate = 100;
 
 export async function GET(request) {
 	// setting which storage should be using
@@ -67,16 +68,6 @@ export async function GET(request) {
 		{ message: convertedEvenets },
 		{ status: 200 }
 	);
-	// response.headers.set("Cache-Control", "no-store");
-	// response.headers.set("content-type", "no-store");
-	// response.headers.delete("content-type");
-	// response.headers.delete("Cache-Control");
-
-	// console.log(response);
-
-	// return new Response(JSON.stringify({ message: convertedEvenets }), {
-	// 	status: 200,
-	// });
 
 	return response;
 }
