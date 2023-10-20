@@ -47,8 +47,8 @@ const getData = cache(async id => {
 	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/events?timestamp=${timestamp}`;
 
 	try {
-		const response = await fetch(apiUrl, {
-			next: { revalidate: 1 },
+		const response = await fetch("http://localhost:3000/api/events", {
+			// next: { revalidate: 1 },
 			cache: "no-store",
 		});
 

@@ -63,7 +63,7 @@ export async function GET(request) {
 		})
 	);
 
-	const response = NextResponse.json({ message: convertedEvenets });
+	// const response = NextResponse.json({ message: convertedEvenets });
 	// response.headers.set("Cache-Control", "no-store");
 	// response.headers.set("content-type", "no-store");
 	// response.headers.delete("content-type");
@@ -71,5 +71,9 @@ export async function GET(request) {
 
 	// console.log(response);
 
-	return response;
+	return new Response(JSON.stringify({ message: convertedEvenets }), {
+		status: 200,
+	});
+
+	// return response;
 }
