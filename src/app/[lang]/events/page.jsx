@@ -41,15 +41,14 @@ export const dynamic = "force-dynamic";
 
 const getData = async () => {
 	let data;
+	const timestamp = Date.now();
+	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/events?timestamp=${timestamp}`;
 
 	try {
-		const response = await fetch(
-			"https://pwa-crew-site-demo.vercel.app/api/events",
-			{
-				// next: { revalidate: 1 },
-				cache: "no-store",
-			}
-		);
+		const response = await fetch(apiUrl, {
+			// next: { revalidate: 1 },
+			cache: "no-store",
+		});
 
 		data = await response.json();
 	} catch (error) {

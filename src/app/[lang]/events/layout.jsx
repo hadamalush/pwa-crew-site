@@ -27,6 +27,7 @@ export default async function Layout({ params: { lang }, children, ...props }) {
 
 const getData = async () => {
 	// setting which storage should be using
+
 	const response = await fetch(
 		"https://pwa-crew-site-demo.vercel.app/api/events",
 		{

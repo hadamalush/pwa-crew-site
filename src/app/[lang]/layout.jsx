@@ -8,6 +8,7 @@ import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
 import NavOptions from "@/components/Navigation/NavOptions";
+import { Refresh } from "@/components/Containers/Refresh";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
@@ -38,6 +39,7 @@ export default async function RootLayout({ children, params: { lang } }) {
 				<SessionProvider session={session}>
 					<ReduxProvider>
 						<MainHeader dict={navTranslation} lang={lang} />
+						<Refresh />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
 						{/* <NavOptions /> */}

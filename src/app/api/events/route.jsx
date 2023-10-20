@@ -63,5 +63,9 @@ export async function GET(request) {
 		})
 	);
 
-	return NextResponse.json({ message: convertedEvenets });
+	const response = NextResponse.json({ message: convertedEvenets });
+
+	response.headers.set("Cache-Control", "no-store");
+
+	return response;
 }
