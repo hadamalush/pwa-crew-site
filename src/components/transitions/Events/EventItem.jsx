@@ -5,8 +5,11 @@ import ButtonMain from "../Button/ButtonMain";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import { setIsShow, setModalComponent } from "@/global/modal-slice";
+import FormikEvent from "../Forms/FormikEvent/FormikEvent";
 
 /**
  *
@@ -46,11 +49,13 @@ const EventItem = ({
 }) => {
 	const { data: session } = useSession();
 	const pathname = usePathname();
+	const dispatch = useDispatch();
 
 	const isOwner = owner === session?.user.email;
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
+	//dictionary elements EventItem
 	const {
 		trl_startEvent,
 		trl_address,
@@ -60,6 +65,21 @@ const EventItem = ({
 		trl_btnEdit,
 		trl_btnPreviousPage,
 	} = dict;
+
+	////dictionary elements FormikEvent
+
+	const dictEventFormik = {
+		trl_title: "title",
+		trl_eventTitle: "dasdkoaskdok",
+		trl_town: "Town",
+		trl_codePost: "77777",
+		trl_street: "Street",
+		trl_eventDesc: "Description",
+		trl_date: "Date",
+		trl_picture: "Picture",
+		trl_createEvent: "Create Event",
+		trl_startTime: "Start event",
+	};
 
 	useEffect(() => {
 		if (isMediumScreen) {
@@ -98,6 +118,20 @@ const EventItem = ({
 	const imageSrc =
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
+	const editEventHandler = () => {
+		// e.preventDefault();
+		console.log("raz");
+
+		dispatch(
+			setModalComponent({
+				modalComponent: (
+					<FormikEvent dict={dictEventFormik} lang={lang} scroll='block' />
+				),
+			})
+		);
+		dispatch(setIsShow({ isShow: false }));
+	};
+
 	return (
 		<li className={classEvent.details} id={id + 7}>
 			<ImageFill
@@ -106,6 +140,7 @@ const EventItem = ({
 				sizes='(max-width: 568px) 80vw, (min-width: 568px) 30vw'
 				className={classEvent.img}
 			/>
+
 			<div className={styles["event__informations"]}>
 				<h2>{title}</h2>
 				<address className={classEvent.address}>
@@ -131,7 +166,7 @@ const EventItem = ({
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
 						<ButtonMain>{trl_btnDelete}</ButtonMain>
-						<ButtonMain>{trl_btnEdit}</ButtonMain>
+						<ButtonMain onClick={editEventHandler}>{trl_btnEdit}</ButtonMain>
 					</div>
 				)}
 			</div>

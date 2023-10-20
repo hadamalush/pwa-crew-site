@@ -1,36 +1,36 @@
 "use client";
-import FormikEvent from "../Forms/FormikEvent/FormikEvent";
 import ImgBgBlur from "../Image/ImgBgBlur";
 import styles from "../../../styles/components/transitions/Modal/Modal.module.scss";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Modal = ({ className, lang }) => {
-	const classes = `${styles.modal} ${className || ""}`;
+	const component = useSelector(state => state.modal.modalComponent);
 
-	const dict = {
-		trl_title: "title",
-		trl_eventTitle: "dasdkoaskdok",
-		trl_town: "Town",
-		trl_codePost: "77777",
-		trl_street: "Street",
-		trl_eventDesc: "Description",
-		trl_date: "Date",
-		trl_picture: "Picture",
-		trl_createEvent: "Create Event",
-		trl_startTime: "Start event",
-	};
+	const classesBg = component
+		? `${styles.bg} ${styles["bg__visibility"]}`
+		: `${styles.bg}`;
+	const classes = component
+		? `${styles.modal} ${styles.modal__visibility} ${className || ""}`
+		: `${styles.modal} ${className || ""}`;
+	const isShow = useSelector(state => state.modal.isShow);
+
+	useEffect(() => {
+		if (component) {
+			const style = document.createElement("style");
+			style.innerHTML = "body { overflow: hidden; }";
+			document.head.appendChild(style);
+		}
+	}, [component]);
 
 	return (
-		<div className={classes}>
-			<ImgBgBlur
-				src={"/images/background/background-events.webp"}
-				className={styles["modal__imgBlur"]}
-			/>
-			<div className={styles["modal__content"]}>
-				<FormikEvent
-					dict={dict}
-					lang={lang}
-					className={styles["modal__form"]}
+		<div className={classesBg}>
+			<div className={classes}>
+				<ImgBgBlur
+					src={"/images/background/background-events.webp"}
+					className={styles["modal__imgBlur"]}
 				/>
+				<div className={styles["modal__content"]}>{component}</div>
 			</div>
 		</div>
 	);

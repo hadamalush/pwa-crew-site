@@ -21,7 +21,7 @@ import { useEffect } from "react";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikEvent = ({ className, dict, lang, trl_error }) => {
+const FormikEvent = ({ className, dict, lang, trl_error, scroll }) => {
 	const dispatch = useDispatch();
 
 	const {
@@ -40,7 +40,8 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	useEffect(() => {
-		if (isMediumScreen) window.scrollTo(window.scrollX, window.scrollY - 70);
+		if (isMediumScreen && scroll !== "block")
+			window.scrollTo(window.scrollX, window.scrollY - 70);
 	}, []);
 
 	const addEventhandler = async values => {

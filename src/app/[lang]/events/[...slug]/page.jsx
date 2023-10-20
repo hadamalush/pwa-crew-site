@@ -101,6 +101,7 @@ const EventPage = async ({ params: { slug, lang } }) => {
 				upload={uploadStorage}
 				owner={user_email}
 				dict={translationEvent}
+				lang={lang}
 				className={styles["section-detail__item"]}
 			/>
 		</WrapperSection>
