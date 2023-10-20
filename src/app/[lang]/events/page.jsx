@@ -47,7 +47,7 @@ const getData = cache(async id => {
 
 	try {
 		const response = await fetch(apiUrl, {
-			next: { revalidate: 3600 },
+			next: { revalidate: 100 },
 		});
 
 		data = await response.json();
