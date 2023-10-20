@@ -6,6 +6,8 @@ const {
 	oneConvertFromBuffersToBase64,
 } = require("@/lib/storage/storage");
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request) {
 	// setting which storage should be using
 	const storage = generalConfig.downloadImageStorageEvent;
