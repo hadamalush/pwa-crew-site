@@ -12,7 +12,10 @@ import { ObjectId } from "mongodb";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 const EventPage = async ({ params: { slug, lang } }) => {
 	const dict = await getDictionaryElements(lang);
-	const eventId = slug[slug.length - 1];
+
+	const eventId = slug;
+
+	console.log(eventId);
 
 	if (eventId.length !== 24) {
 		return <p>Nie znaleziono takiego wydarzenia.</p>;

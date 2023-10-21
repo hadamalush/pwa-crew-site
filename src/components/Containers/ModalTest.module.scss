@@ -1,0 +1,8 @@
+@import "../../styles/transitions/variables";
+@import "../../styles/mixins/mixins";
+.div {
+	@include position(fixed, 50%, null, null, 50%, 1000);
+	width: 100px;
+	height: 100px;
+	background-color: #fff;
+}

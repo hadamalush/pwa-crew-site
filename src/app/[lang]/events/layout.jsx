@@ -2,13 +2,21 @@ import WrapperStart from "@/components/transitions/Wrappers/WrapperStart";
 import Carousel from "@/components/transitions/Carousel/Carousel";
 import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import ModalText from "@/components/Containers/ModalText";
 
-export default async function Layout({ params: { lang }, children, ...props }) {
+export default async function Layout({
+	params: { lang },
+	edit,
+	children,
+	...props
+}) {
 	const events = await getData();
 	const dict = await getDictionaryElements(lang);
 
 	const btn_checkEvents = dict.events.btn_checkEvents;
 	const btn_createEvents = dict.events.btn_createEvent;
+
+	console.log(edit);
 
 	return (
 		<main>
@@ -20,6 +28,8 @@ export default async function Layout({ params: { lang }, children, ...props }) {
 					lang={lang}
 				/>
 			</WrapperStart>
+			{edit}
+
 			{children}
 		</main>
 	);
