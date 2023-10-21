@@ -14,7 +14,7 @@
 		transition: transform 0.5s;
 		transform: translateY(0);
 		animation: move-shadow 0.5s;
-		background-color: #000000e3;
+		background-color: $background-octonary;
 	}
 
 	.menu &__cutout,

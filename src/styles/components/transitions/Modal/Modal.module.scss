@@ -3,9 +3,10 @@
 
 .bg {
 	@include position(fixed, 0, 0, 0, 0, 1500);
-	background-color: #2b2a2a7c;
+	background-color: $background-octonary;
 	visibility: hidden;
-	transition: visibility 0.3s, opacity 0.3s;
+	transition: visibility 0.5s, opacity 0.5s;
+
 	opacity: 0;
 
 	&__visibility {
@@ -24,10 +25,24 @@
 	border-radius: 5px;
 	box-shadow: $boxshadow-primary;
 	background-color: $background-primary;
-	transition: transform 0.3s;
+	transition: transform 0.5s;
 
 	&__visibility {
 		transform: translate(-50%, -50%);
+	}
+
+	&__exit {
+		@include position(absolute, 2rem, null, null, 2rem);
+		transform-origin: center;
+		cursor: pointer;
+		&:hover svg {
+			color: $secondary-color;
+			transform: rotate(180deg);
+		}
+
+		svg {
+			transition: transform 0.3s, color 0.3s;
+		}
 	}
 
 	&__content {

@@ -1,19 +1,24 @@
 "use client";
 import ImgBgBlur from "../Image/ImgBgBlur";
 import styles from "../../../styles/components/transitions/Modal/Modal.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { setIsShow, setModalComponent } from "@/global/modal-slice";
+import IconRender from "@/components/Icons/IconRender";
 
 const Modal = ({ className, lang }) => {
 	const component = useSelector(state => state.modal.modalComponent);
+	const isShowModal = useSelector(state => state.modal.isShow);
+	const dispatch = useDispatch();
 
-	const classesBg = component
+	console.log(isShowModal);
+
+	const classesBg = isShowModal
 		? `${styles.bg} ${styles["bg__visibility"]}`
 		: `${styles.bg}`;
-	const classes = component
+	const classes = isShowModal
 		? `${styles.modal} ${styles.modal__visibility} ${className || ""}`
 		: `${styles.modal} ${className || ""}`;
-	const isShow = useSelector(state => state.modal.isShow);
 
 	useEffect(() => {
 		if (component) {
@@ -23,9 +28,22 @@ const Modal = ({ className, lang }) => {
 		}
 	}, [component]);
 
+	const closeModalHandler = () => {
+		dispatch(setIsShow({ isShow: false }));
+
+		setTimeout(() => {
+			dispatch(setModalComponent({ modalComponent: null }));
+		}, 500);
+	};
+
 	return (
 		<div className={classesBg}>
 			<div className={classes}>
+				<IconRender
+					variant='cross'
+					onClick={closeModalHandler}
+					className={styles["modal__exit"]}
+				/>
 				<ImgBgBlur
 					src={"/images/background/background-events.webp"}
 					className={styles["modal__imgBlur"]}

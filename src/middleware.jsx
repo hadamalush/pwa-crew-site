@@ -49,7 +49,7 @@ export async function middleware(request) {
 	}
 
 	if (!session && newEventUrl) {
-		return NextResponse.redirect(new URL("/login#start", request.url));
+		return NextResponse.redirect(new URL("/login", request.url));
 	}
 
 	if (pathnameHasLocale) return;

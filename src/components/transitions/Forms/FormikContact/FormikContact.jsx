@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import { contactSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
+import Link from "next/link";
 
 /**
  * @description This component returns form for contact.
@@ -123,6 +124,7 @@ const FormikContact = ({ className, dict, lang, ...props }) => {
 							<ButtonMain type='submit' animation={!isSubmitting}>
 								{trl_btn}
 							</ButtonMain>
+							<Link href='/contact/edit'> dasdasd</Link>
 						</Form>
 					);
 				}}

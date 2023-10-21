@@ -3,19 +3,29 @@ import MainHeader from "@/components/Header/MainHeader";
 import Footer from "@/components/Footer/Footer";
 import BackgroundImageGeneral from "@/components/transitions/Background/BackgroundImageGeneral";
 import SessionProvider from "./SessionProvider";
+import Modal from "@/components/transitions/Modal/Modal";
 import Notification from "@/components/transitions/Notification/Notification";
 import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
-import Modal from "@/components/transitions/Modal/Modal";
-
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
 	description: "PwaCrew - najlepsza muzyka",
 };
 
-export default async function RootLayout({ children, params: { lang } }) {
+export default async function RootLayout({ children, modal, params }) {
+	if (!params) {
+		console.log("params is undefined");
+		return null;
+	}
+	const lang = await params.lang;
 	const dict = await getDictionaryElements(lang);
+
+	console.log(modal);
+
+	console.log(params);
+
+	console.log(lang);
 
 	const navTranslation = {
 		trl_home: dict.navigation.home,
@@ -31,6 +41,7 @@ export default async function RootLayout({ children, params: { lang } }) {
 	};
 
 	const session = await getServerSession();
+	// console.log("modal;", modal);
 
 	return (
 		<html lang={lang}>
@@ -38,9 +49,11 @@ export default async function RootLayout({ children, params: { lang } }) {
 				<SessionProvider session={session}>
 					<ReduxProvider>
 						<MainHeader dict={navTranslation} lang={lang} />
+						{modal}
+						{/* <div className='div'>dasodiadasdsadasdsjd</div> */}
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
-						<Modal lang={lang} />
+						{/* <Modal lang={lang} /> */}
 						{children}
 						<Footer />
 					</ReduxProvider>

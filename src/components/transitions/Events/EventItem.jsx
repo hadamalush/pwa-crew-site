@@ -122,6 +122,7 @@ const EventItem = ({
 		// e.preventDefault();
 		console.log("raz");
 
+		dispatch(setIsShow({ isShow: true }));
 		dispatch(
 			setModalComponent({
 				modalComponent: (
@@ -129,7 +130,6 @@ const EventItem = ({
 				),
 			})
 		);
-		dispatch(setIsShow({ isShow: false }));
 	};
 
 	return (
