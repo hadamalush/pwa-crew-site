@@ -2,6 +2,7 @@ import WrapperStart from "@/components/transitions/Wrappers/WrapperStart";
 import Carousel from "@/components/transitions/Carousel/Carousel";
 import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import Client from "@/components/Containers/Client";
 
 export default async function Layout({
 	params: { lang },
@@ -19,9 +20,12 @@ export default async function Layout({
 	const btn_checkEvents = dict.events.btn_checkEvents;
 	const btn_createEvents = dict.events.btn_createEvent;
 
+	console.log(eventModal);
+
 	return (
 		<main>
 			<WrapperStart className={styles.container}>
+				<Client eventModal={eventModal} />
 				<Carousel
 					btn_checkEvents={btn_checkEvents}
 					btn_createEvents={btn_createEvents}
