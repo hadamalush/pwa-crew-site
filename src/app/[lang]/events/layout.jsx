@@ -3,12 +3,7 @@ import Carousel from "@/components/transitions/Carousel/Carousel";
 import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
-export default async function Layout({
-	params: { lang },
-	eventModal,
-	children,
-	...props
-}) {
+export default async function Layout({ params: { lang }, children, ...props }) {
 	if (!lang) {
 		return null;
 	}
@@ -19,12 +14,9 @@ export default async function Layout({
 	const btn_checkEvents = dict.events.btn_checkEvents;
 	const btn_createEvents = dict.events.btn_createEvent;
 
-	console.log(eventModal);
-
 	return (
 		<main>
 			<WrapperStart className={styles.container}>
-				{eventModal}
 				<Carousel
 					btn_checkEvents={btn_checkEvents}
 					btn_createEvents={btn_createEvents}

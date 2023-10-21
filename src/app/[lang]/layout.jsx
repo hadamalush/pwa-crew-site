@@ -13,12 +13,14 @@ export const metadata = {
 	description: "PwaCrew - najlepsza muzyka",
 };
 
-export default async function RootLayout({ children, params }) {
+export default async function RootLayout({ children, eventModal, params }) {
 	if (!params) {
 		return null;
 	}
 	const lang = params.lang;
 	const dict = await getDictionaryElements(lang);
+
+	console.log("modal", eventModal);
 
 	// console.log("modal: ", modal);
 
