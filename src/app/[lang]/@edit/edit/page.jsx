@@ -1,4 +1,4 @@
 export default function EditEvent() {
-	console.log("dasda111111111111111111sdas");
+	console.log("dasda11111111dd1111111111sdas");
 	return <div>dasodiadasdsadasdsjd</div>;
 }
