@@ -160,9 +160,7 @@ const EventItem = ({
 				<p>{description}</p>
 			</div>
 			<div className={styles["event__tools"]}>
-				<LinkAsBtn
-					href='/events/doiasjoiasjdij/edit'
-					className={classEvent.link}>
+				<LinkAsBtn href='/events/edit/dasokdoiasjd' className={classEvent.link}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
 				{isOwner && isDescription && (
