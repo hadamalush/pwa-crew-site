@@ -13,8 +13,6 @@ export default async function Layout({
 		return null;
 	}
 
-	console.log("eventModal", eventModal);
-
 	const events = await getData();
 	const dict = await getDictionaryElements(lang);
 
@@ -24,7 +22,6 @@ export default async function Layout({
 	return (
 		<main>
 			<WrapperStart className={styles.container}>
-				{eventModal}
 				<Carousel
 					btn_checkEvents={btn_checkEvents}
 					btn_createEvents={btn_createEvents}
