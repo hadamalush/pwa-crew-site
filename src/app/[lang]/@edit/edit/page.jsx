@@ -1,6 +1,4 @@
-"use client";
-
-export default async function EventModal({ params }) {
+export default function EditEvent() {
 	console.log("dasda111111111111111111sdas");
 	return <div>dasodiadasdsadasdsjd</div>;
 }

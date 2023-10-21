@@ -13,7 +13,7 @@ export const metadata = {
 	description: "PwaCrew - najlepsza muzyka",
 };
 
-export default async function RootLayout({ children, modal, params }) {
+export default async function RootLayout({ children, edit, modal, params }) {
 	if (!params) {
 		return null;
 	}
@@ -35,13 +35,16 @@ export default async function RootLayout({ children, modal, params }) {
 
 	const session = await getServerSession();
 
+	console.log(edit);
+
 	return (
 		<html lang={lang}>
 			<body>
 				<SessionProvider session={session}>
 					<ReduxProvider>
 						<MainHeader dict={navTranslation} lang={lang} />
-						{modal}
+						{edit}
+
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
 						{/* <Modal lang={lang} /> */}

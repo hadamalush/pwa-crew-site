@@ -23,8 +23,9 @@ const HomeStartContent = ({
 			<div className={styles["introduction__text"]}>
 				<h1 className={styles["introduction__h1"]}>{title}</h1>
 				<p className={styles["introduction__text"]}>{text}</p>
+
 				<LinkAsBtn href={`${isLoginLink}`}>{isLoginLinkNameBtn}</LinkAsBtn>
-				<LinkAsBtn href='/contact'>{btn_cooperation}</LinkAsBtn>
+				<LinkAsBtn href='/edit'>{btn_cooperation}</LinkAsBtn>
 			</div>
 		</WrapperStart>
 	);

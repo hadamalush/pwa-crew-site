@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { loading } from "@/global/notification-slice";
+import Link from "next/link";
 
 const MainHeader = ({ dict, lang, ...props }) => {
 	const { data: session, status } = useSession();
@@ -55,6 +56,7 @@ const MainHeader = ({ dict, lang, ...props }) => {
 		<>
 			<header className={classesHeader}>
 				<Logo className={styles["header__logo"]} />
+
 				<NavbarDesktop
 					className={styles["header__nav"]}
 					dict={dict}
