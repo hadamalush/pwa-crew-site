@@ -20,6 +20,8 @@ export default async function RootLayout({ children, params }) {
 	const lang = params.lang;
 	const dict = await getDictionaryElements(lang);
 
+	// console.log("modal: ", modal);
+
 	const navTranslation = {
 		trl_home: dict.navigation.home,
 		trl_events: dict.navigation.events,

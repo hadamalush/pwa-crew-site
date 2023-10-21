@@ -5,7 +5,7 @@ import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
 export default async function Layout({
 	params: { lang },
-	modal,
+	eventModal,
 	children,
 	...props
 }) {
@@ -13,17 +13,18 @@ export default async function Layout({
 		return null;
 	}
 
-	console.log(modal);
-
 	const events = await getData();
 	const dict = await getDictionaryElements(lang);
 
 	const btn_checkEvents = dict.events.btn_checkEvents;
 	const btn_createEvents = dict.events.btn_createEvent;
 
+	console.log(eventModal);
+
 	return (
 		<main>
 			<WrapperStart className={styles.container}>
+				{eventModal}
 				<Carousel
 					btn_checkEvents={btn_checkEvents}
 					btn_createEvents={btn_createEvents}
