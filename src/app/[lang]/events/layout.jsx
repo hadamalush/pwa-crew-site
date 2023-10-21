@@ -3,7 +3,18 @@ import Carousel from "@/components/transitions/Carousel/Carousel";
 import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
-export default async function Layout({ params: { lang }, children, ...props }) {
+export default async function Layout({
+	params: { lang },
+	modal,
+	children,
+	...props
+}) {
+	if (!lang) {
+		return null;
+	}
+
+	console.log(modal);
+
 	const events = await getData();
 	const dict = await getDictionaryElements(lang);
 

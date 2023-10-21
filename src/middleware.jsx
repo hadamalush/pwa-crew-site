@@ -6,6 +6,17 @@ import Negotiator from "negotiator";
 let defaultLocale = "pl";
 let locales = ["pl", "en"];
 
+// export function blockDirectAccess(req) {
+// 	const url = req.nextUrl;
+// 	const { pathname } = url;
+// 	if (pathname.startsWith(`/api/events`)) {
+// 		if (!req.headers.get("referer")?.includes("http://localhost:3000/")) {
+// 			return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+// 		}
+// 	}
+// 	return NextResponse.next();
+// }
+
 const getLangFromCookies = request => {
 	const lang = request.cookies.get("lang");
 	let acceptedLang = null;
@@ -30,6 +41,11 @@ const getLocale = request => {
 export async function middleware(request) {
 	const { pathname } = request.nextUrl;
 	const lang = pathname.split("/")[1];
+
+	// const blockDirectAccessResult = blockDirectAccess(request);
+	// if (blockDirectAccessResult.status === 401) {
+	// 	return blockDirectAccessResult;
+	// }
 
 	const pathnameHasLocale = locales.some(
 		locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -76,6 +92,7 @@ export const config = {
 	matcher: [
 		// Skip all internal paths (_next, assets, api)
 		"/((?!api|assets|.*\\..*|_next).*)",
+		// "/( (?!_next|fonts|examples|svg| [\\w-]+\\.\\w+).*)",
 		// Optional: only run on root (/) URL
 		// '/'
 	],

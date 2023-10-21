@@ -163,6 +163,7 @@ const EventItem = ({
 				<LinkAsBtn href={urlLink_dependsPath} className={classEvent.link}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
+				<LinkAsBtn href='/events/edit-event/dasdasd'></LinkAsBtn>
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
 						<ButtonMain>{trl_btnDelete}</ButtonMain>

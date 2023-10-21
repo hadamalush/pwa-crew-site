@@ -13,19 +13,12 @@ export const metadata = {
 	description: "PwaCrew - najlepsza muzyka",
 };
 
-export default async function RootLayout({ children, modal, params }) {
+export default async function RootLayout({ children, params }) {
 	if (!params) {
-		console.log("params is undefined");
 		return null;
 	}
-	const lang = await params.lang;
+	const lang = params.lang;
 	const dict = await getDictionaryElements(lang);
-
-	console.log(modal);
-
-	console.log(params);
-
-	console.log(lang);
 
 	const navTranslation = {
 		trl_home: dict.navigation.home,
@@ -41,7 +34,8 @@ export default async function RootLayout({ children, modal, params }) {
 	};
 
 	const session = await getServerSession();
-	// console.log("modal;", modal);
+
+	// console.log("layout1", modal);
 
 	return (
 		<html lang={lang}>
@@ -49,8 +43,7 @@ export default async function RootLayout({ children, modal, params }) {
 				<SessionProvider session={session}>
 					<ReduxProvider>
 						<MainHeader dict={navTranslation} lang={lang} />
-						{modal}
-						{/* <div className='div'>dasodiadasdsadasdsjd</div> */}
+						{/* {modal} */}
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
 						{/* <Modal lang={lang} /> */}
