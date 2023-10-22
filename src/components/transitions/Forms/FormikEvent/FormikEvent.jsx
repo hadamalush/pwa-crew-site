@@ -71,103 +71,112 @@ const FormikEvent = ({
 
 		let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 
-		//UPLOAD FILE TO CLOUDINARY
+		//CHECKING VARIANT
 
-		if (uploadStorage === "cloudinary" || uploadStorage === "all") {
-			try {
-				const response = await fetch(
-					`/api/upload/cloudinary?filename=${file.name}`,
-					{
-						method: "POST",
-						body: file,
-					}
-				);
-				const data = await response.json();
+		if ((variant && values.fileImg) || !variant) {
+			//UPLOAD FILE TO CLOUDINARY
 
-				if (data.message) {
-					imgSrcCld = data.message;
-				}
-			} catch (error) {
-				dispatch(loading(false));
-				dispatch(
-					showResult({
-						message: "Something went wrong.",
-						variant: "warning",
-					})
-				);
-				return;
-			}
-		}
-
-		// UPLOAD FILE MEGA DIRECTORY
-
-		if (uploadStorage === "mega" || uploadStorage === "all") {
-			try {
-				const response = await fetch(`/api/upload/mega?filename=${file.name}`, {
-					method: "POST",
-					body: file,
-				});
-				const data = await response.json();
-
-				if (data.message) {
-					imgSrcMega = data.message;
-				}
-			} catch (error) {
-				dispatch(loading(false));
-				dispatch(
-					showResult({
-						message: "Something went wrong.",
-						variant: "warning",
-					})
-				);
-				return;
-			}
-		}
-
-		// // UPLOAD FILE TO VERCEL BLOB
-
-		if (uploadStorage === "vercelBlob" || uploadStorage === "all") {
-			try {
-				const response = await fetch(
-					`/api/upload/vercelBlob?filename=${file.name}`,
-					{
-						method: "POST",
-						body: file,
-					}
-				);
-
-				if (response.ok) {
+			if (uploadStorage === "cloudinary" || uploadStorage === "all") {
+				try {
+					const response = await fetch(
+						`/api/upload/cloudinary?filename=${file.name}`,
+						{
+							method: "POST",
+							body: file,
+						}
+					);
 					const data = await response.json();
-					imgSrcVercelBlob = data.url;
-				}
 
-				if (!response.ok && !imgSrcMega) {
+					if (data.message) {
+						imgSrcCld = data.message;
+					}
+				} catch (error) {
 					dispatch(loading(false));
 					dispatch(
 						showResult({
-							message: "Something went wrong",
-							variant: "warning",
-						})
-					);
-					return;
-				}
-			} catch (error) {
-				if (!imgSrcMega) {
-					dispatch(loading(false));
-					dispatch(
-						showResult({
-							message: "Something went wrong",
+							message: "Something went wrong.",
 							variant: "warning",
 						})
 					);
 					return;
 				}
 			}
+
+			// UPLOAD FILE MEGA DIRECTORY
+
+			if (uploadStorage === "mega" || uploadStorage === "all") {
+				try {
+					const response = await fetch(
+						`/api/upload/mega?filename=${file.name}`,
+						{
+							method: "POST",
+							body: file,
+						}
+					);
+					const data = await response.json();
+
+					if (data.message) {
+						imgSrcMega = data.message;
+					}
+				} catch (error) {
+					dispatch(loading(false));
+					dispatch(
+						showResult({
+							message: "Something went wrong.",
+							variant: "warning",
+						})
+					);
+					return;
+				}
+			}
+
+			// // UPLOAD FILE TO VERCEL BLOB
+
+			if (uploadStorage === "vercelBlob" || uploadStorage === "all") {
+				try {
+					const response = await fetch(
+						`/api/upload/vercelBlob?filename=${file.name}`,
+						{
+							method: "POST",
+							body: file,
+						}
+					);
+
+					if (response.ok) {
+						const data = await response.json();
+						imgSrcVercelBlob = data.url;
+					}
+
+					if (!response.ok && !imgSrcMega) {
+						dispatch(loading(false));
+						dispatch(
+							showResult({
+								message: "Something went wrong",
+								variant: "warning",
+							})
+						);
+						return;
+					}
+				} catch (error) {
+					if (!imgSrcMega) {
+						dispatch(loading(false));
+						dispatch(
+							showResult({
+								message: "Something went wrong",
+								variant: "warning",
+							})
+						);
+						return;
+					}
+				}
+			}
 		}
+
+		const apiLinkDependsVariant = variant ? "/api/editEvent" : "/api/addEvent";
 
 		try {
-			const response = await fetch("/api/addEvent", {
-				method: "POST",
+			const response = await fetch(apiLinkDependsVariant, {
+				method: variant ? "PATCH" : "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
 					title: values.title,
@@ -181,6 +190,7 @@ const FormikEvent = ({
 					imageSrcMega: imgSrcMega,
 					imageSrcCld: imgSrcCld,
 					lang: lang,
+					eventId: searchParams?.id,
 				}),
 			});
 

@@ -3,6 +3,7 @@
 		"generalError": "Failed, try again",
 		"err_400": "Page not found",
 		"err_401": "You must be logged in",
+		"err_401_unAuth": "Unauthorized access",
 		"err_409": "Conflict. Such data already exists",
 		"err_422": "The data entered is not correct",
 		"err_429": "Limit exceeded ,try again in 30minutes",
@@ -12,6 +13,12 @@
 			"generalError": "Failed to create event",
 			"success": "Added event"
 		},
+
+		"editEvent": {
+			"generalError": "Failed to edit event",
+			"success": "Event edited"
+		},
+
 		"sendMessage": {
 			"success": "Message sent"
 		},

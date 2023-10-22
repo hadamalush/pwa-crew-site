@@ -180,8 +180,6 @@ export const eventSchema = (lang, variant) => {
 
 	const fileImgDependsVariant = variant ? fileImgIfIsEdit : fileImgIfIsAdd;
 
-	console.log("file! ", fileImgDependsVariant);
-
 	return yup.object().shape({
 		title: yup
 			.string()
