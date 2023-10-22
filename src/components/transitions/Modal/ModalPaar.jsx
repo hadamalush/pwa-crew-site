@@ -19,7 +19,7 @@ const ModalPaar = React.memo(({ className, searchParams, children, lang }) => {
 
 	useEffect(() => {
 		if (param) {
-			setVisible(true);
+			setTimeout(() => setVisible(true), 100);
 			const styleBody = document.createElement("style");
 			styleBody.innerHTML = "body { overflow: hidden; }";
 			document.head.appendChild(styleBody);
