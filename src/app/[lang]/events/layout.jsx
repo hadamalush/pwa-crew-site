@@ -4,6 +4,7 @@ import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import ModalText from "@/components/Containers/ModalText";
 import Client from "@/components/Containers/Client";
+import ModalPaar from "@/components/transitions/Modal/ModalPaar";
 
 export default async function Layout({
 	params: { lang },
@@ -27,7 +28,8 @@ export default async function Layout({
 					lang={lang}
 				/>
 			</WrapperStart>
-			<Client Edit={edit} />
+			{/* <Client Edit={edit} /> */}
+			{edit}
 			{children}
 		</main>
 	);

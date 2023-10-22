@@ -99,9 +99,6 @@ const EventItem = ({
 
 	// console.log(check);
 
-	console.log(params.slug);
-	console.log(id);
-
 	if (params?.slug) {
 		const slug = params.slug;
 		const eventId = slug.substring(slug.lastIndexOf("-") + 1);
@@ -191,7 +188,9 @@ const EventItem = ({
 					className={classEvent.link}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
-				<Link href={`/events/${replacedTitle}-${id}/edit`} scroll={false}>
+				<Link
+					href={`/events/${replacedTitle}-${id}/edit?modal=true`}
+					scroll={false}>
 					dasdasd{" "}
 				</Link>
 				{isOwner && isDescription && (
