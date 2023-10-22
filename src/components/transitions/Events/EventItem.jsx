@@ -2,16 +2,12 @@
 import ImageFill from "../Image/ImageFill";
 import LinkAsBtn from "../Link/LinkAsBtn";
 import ButtonMain from "../Button/ButtonMain";
+import Link from "next/link";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { setIsShow, setModalComponent } from "@/global/modal-slice";
-import FormikEvent from "../Forms/FormikEvent/FormikEvent";
-import Link from "next/link";
 
 /**
  *
@@ -50,14 +46,13 @@ const EventItem = ({
 	...props
 }) => {
 	const { data: session } = useSession();
-	const pathname = usePathname();
-	const dispatch = useDispatch();
-	const router = useRouter();
 
 	const isOwner = owner === session?.user.email;
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
 	const params = useParams();
+	const editLink = `/events/${replacedTitle}-${id}/edit?modal=true&title=${title}&town=${town}&codePost=${codePost}&street=${street}&date=${date}&time=${time}&description=${description}&id=${id}`;
 
 	//dictionary elements EventItem
 	const {
@@ -70,34 +65,13 @@ const EventItem = ({
 		trl_btnPreviousPage,
 	} = dict;
 
-	////dictionary elements FormikEvent
-
-	const dictEventFormik = {
-		trl_title: "title",
-		trl_eventTitle: "dasdkoaskdok",
-		trl_town: "Town",
-		trl_codePost: "77777",
-		trl_street: "Street",
-		trl_eventDesc: "Description",
-		trl_date: "Date",
-		trl_picture: "Picture",
-		trl_createEvent: "Create Event",
-		trl_startTime: "Start event",
-	};
-
 	useEffect(() => {
 		if (isMediumScreen) {
 			return window.scrollBy(0, -70);
 		}
 	}, []);
 
-	// const lastPartOfLink = pathname.substring(pathname.lastIndexOf("/") + 1);
 	let isDescription;
-
-	// const url = `fsdfsdfsdf-653262315db34842102ac980/edit`;
-	// const check = url.substring(url.lastIndexOf("-") + 1);
-
-	// console.log(check);
 
 	if (params?.slug) {
 		const slug = params.slug;
@@ -134,26 +108,6 @@ const EventItem = ({
 	const imageSrc =
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
-	const editEventHandler = () => {
-		// e.preventDefault();
-		console.log("raz");
-
-		dispatch(
-			setModalComponent({
-				modalComponent: (
-					<FormikEvent dict={dictEventFormik} lang={lang} scroll='block' />
-				),
-			})
-		);
-		dispatch(setIsShow({ isShow: false }));
-	};
-
-	// const showEdit = e => {
-	// 	e.preventDefault();
-
-	// 	router.push(`/events/${replacedTitle}-${id}/edit`);
-	// };
-
 	return (
 		<li className={classEvent.details} id={id + 7}>
 			<ImageFill
@@ -188,15 +142,17 @@ const EventItem = ({
 					className={classEvent.link}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
-				<Link
-					href={`/events/${replacedTitle}-${id}/edit?modal=true`}
-					scroll={false}>
-					dasdasd{" "}
-				</Link>
+
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
-						<ButtonMain>{trl_btnDelete}</ButtonMain>
-						<ButtonMain onClick={editEventHandler}>{trl_btnEdit}</ButtonMain>
+						<LinkAsBtn
+							href={`/events/${replacedTitle}-${id}/delete?modal=true&title=dasdsad`}
+							scroll={false}>
+							{trl_btnDelete}
+						</LinkAsBtn>
+						<LinkAsBtn href={editLink} scroll={false}>
+							{trl_btnEdit}
+						</LinkAsBtn>
 					</div>
 				)}
 			</div>

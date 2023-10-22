@@ -6,7 +6,14 @@ import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
 
-const LinkAsBtn = ({ href, children, className, variant, ...props }) => {
+const LinkAsBtn = ({
+	href,
+	scroll,
+	children,
+	className,
+	variant,
+	...props
+}) => {
 	const [isAnimation, setIsAnimation] = useState(false);
 
 	const pathname = usePathname();
@@ -34,7 +41,11 @@ const LinkAsBtn = ({ href, children, className, variant, ...props }) => {
 	};
 
 	return (
-		<Link href={href} className={classes} onClick={animationHandler}>
+		<Link
+			href={href}
+			scroll={scroll}
+			className={classes}
+			onClick={animationHandler}>
 			{children}
 			<span className={classesSpan}>{children}</span>
 		</Link>

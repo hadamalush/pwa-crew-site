@@ -21,7 +21,15 @@ import { useEffect } from "react";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikEvent = ({ className, dict, lang, trl_error, scroll }) => {
+const FormikEvent = ({
+	className,
+	dict,
+	lang,
+	trl_error,
+	scroll,
+	variant,
+	searchParams,
+}) => {
 	const dispatch = useDispatch();
 
 	const {
@@ -38,6 +46,18 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll }) => {
 	} = dict;
 
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
+	//Switcher between initial values edit/add form
+	const initialValuesForm = {
+		title: variant ? searchParams?.title : "",
+		town: variant ? searchParams?.town : "",
+		codePost: variant ? searchParams?.codePost : "",
+		street: variant ? searchParams?.street : "",
+		date: variant ? searchParams?.date : "",
+		time: variant ? searchParams?.time : "",
+		description: variant ? searchParams?.description : "",
+		fileImg: "",
+	};
 
 	useEffect(() => {
 		if (isMediumScreen && scroll !== "block")
@@ -189,18 +209,9 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll }) => {
 	return (
 		<FormContainerBlur>
 			<Formik
-				initialValues={{
-					title: "",
-					town: "",
-					codePost: "",
-					street: "",
-					date: "",
-					time: "",
-					description: "",
-					fileImg: "",
-				}}
+				initialValues={initialValuesForm}
 				onSubmit={addEventhandler}
-				validationSchema={eventSchema(lang)}
+				validationSchema={eventSchema(lang, variant)}
 				className={styles.form}>
 				{({ setFieldValue, setFieldTouched, isSubmitting, ...props }) => {
 					return (

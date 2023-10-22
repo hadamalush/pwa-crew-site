@@ -3,7 +3,7 @@
 
 .bg {
 	@include position(fixed, 0, 0, 0, 0, 1500);
-	background-color: #2b2a2a;
+	background-color: $background-octonary;
 	visibility: hidden;
 	transition: visibility 0.3s, opacity 0.3s;
 	opacity: 0;
@@ -15,11 +15,12 @@
 }
 
 .modal {
-	@include position(absolute, 50%, null, null, 50%, 1600);
+	@include position(absolute, 50%, null, null, 50%, 500);
 	width: 100%;
 	max-width: 500px;
 	padding: 1em 0.3em;
 	transform: translate(-50%, 200%);
+	overflow: hidden;
 	border-radius: 5px;
 	box-shadow: $boxshadow-primary;
 	background-color: $background-primary;
@@ -27,6 +28,20 @@
 
 	&__visibility {
 		transform: translate(-50%, -50%);
+	}
+
+	&__quit {
+		@include position(absolute, 2rem, null, null, 2rem, 1);
+		cursor: pointer;
+
+		svg {
+			transition: transform 0.3s, color 0.3s;
+		}
+
+		&:hover svg {
+			transform: rotate(180deg);
+			color: $secondary-color;
+		}
 	}
 
 	&__content {

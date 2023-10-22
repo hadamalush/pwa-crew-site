@@ -113,7 +113,7 @@ export const contactSchema = lang => {
 	});
 };
 
-export const eventSchema = lang => {
+export const eventSchema = (lang, variant) => {
 	const messageEvent = {
 		pl: {
 			titleMin: "Minimum 5 znaków",
@@ -147,6 +147,41 @@ export const eventSchema = lang => {
 		},
 	};
 
+	const fileImgIfIsEdit = yup.mixed().when("file", (val, schema) => {
+		if (val?.length > 0) {
+			return yup
+				.mixed()
+				.test("fileSize", messageEvent[lang].fileMaxSize, function (value) {
+					if (value?.size) {
+						return value?.size <= 4 * 1024 * 1024;
+					}
+					return true;
+				})
+				.test("fileType", messageEvent[lang].allowedFormats, function (value) {
+					if (value?.type) {
+						return SUPPORTED_FORMATS.includes(value.type);
+					}
+					return true;
+				});
+		} else {
+			return yup.mixed().notRequired();
+		}
+	});
+
+	const fileImgIfIsAdd = yup
+		.mixed()
+		.required(message[lang].required)
+		.test("fileSize", messageEvent[lang].fileMaxSize, function (value) {
+			return value && value.size <= 4 * 1024 * 1024;
+		})
+		.test("fileType", messageEvent[lang].allowedFormats, function (value) {
+			return value && SUPPORTED_FORMATS.includes(value.type);
+		});
+
+	const fileImgDependsVariant = variant ? fileImgIfIsEdit : fileImgIfIsAdd;
+
+	console.log("file! ", fileImgDependsVariant);
+
 	return yup.object().shape({
 		title: yup
 			.string()
@@ -178,15 +213,7 @@ export const eventSchema = lang => {
 			.min(50, messageEvent[lang].descriptionMin)
 			.max(300, messageEvent[lang].descriptionMax)
 			.required(message[lang].required),
-		fileImg: yup
-			.mixed()
-			.required(message[lang].required)
-			.test("fileSize", messageEvent[lang].fileMaxSize, function (value) {
-				return value && value.size <= 4 * 1024 * 1024;
-			})
-			.test("fileType", messageEvent[lang].allowedFormats, function (value) {
-				return value && SUPPORTED_FORMATS.includes(value.type);
-			}),
+		fileImg: fileImgDependsVariant,
 	});
 };
 
