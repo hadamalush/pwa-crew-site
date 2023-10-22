@@ -1,5 +1,6 @@
 "use client";
 import ImgBgBlur from "../Image/ImgBgBlur";
+import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../styles/components/transitions/Modal/Modal.module.scss";
 import { useEffect, useState } from "react";
 
@@ -13,28 +14,31 @@ const ModalParallel = ({ className, isVisible, children, onClose, lang }) => {
 		? `${styles.modal} ${styles.modal__visibility} ${className || ""}`
 		: `${styles.modal} ${className || ""}`;
 
-	let styleBody;
-
 	useEffect(() => {
 		if (isVisible) {
-			setVisible(true);
-			styleBody = document.createElement("style");
+			const animate = setTimeout(() => setVisible(true), 100);
+			const styleBody = document.createElement("style");
 			styleBody.innerHTML = "body { overflow: hidden; }";
 			document.head.appendChild(styleBody);
 		}
 	}, [isVisible]);
 
-	const closeModalHandler = () => {
+	const closeModalHandler = event => {
 		setVisible(false);
-
-		styleBody.innerHTML = "body { overflow: hidden; }";
+		const styleBody = document.createElement("style");
+		styleBody.innerHTML = "body { overflow: visible; overflow-x: hidden }";
 		document.head.appendChild(styleBody);
 		setTimeout(() => onClose(), 500);
 	};
 
+	const modalClickHandler = event => {
+		event.stopPropagation();
+	};
+
 	return (
 		<div className={classesBg} onClick={closeModalHandler}>
-			<div className={classes}>
+			<div className={classes} onClick={modalClickHandler} id='modal'>
+				<IconRender variant='cross' />
 				<ImgBgBlur
 					src={"/images/background/background-events.webp"}
 					className={styles["modal__imgBlur"]}

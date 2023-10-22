@@ -9,21 +9,21 @@ export default function Client({ Edit }) {
 	const loginSegments = useSelectedLayoutSegment("edit");
 	const router = useRouter();
 
-	const [animation, setAnimation] = useState();
+	// const [animation, setAnimation] = useState();
 	const visible = loginSegments === "children" ? true : false;
 
-	useEffect(() => {
-		if (visible) {
-			setAnimation(true);
-		}
-	}, [visible]);
+	// useEffect(() => {
+	// 	if (visible) {
+	// 		setAnimation(true);
+	// 	}
+	// }, [visible]);
 
 	const removeModalHandler = () => {
 		router.back();
 	};
 
 	const returnedComponent = visible && (
-		<ModalParallel isVisible={animation} onClose={removeModalHandler}>
+		<ModalParallel isVisible={visible} onClose={removeModalHandler}>
 			{Edit}
 		</ModalParallel>
 	);

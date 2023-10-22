@@ -3,7 +3,7 @@
 
 .bg {
 	@include position(fixed, 0, 0, 0, 0, 1500);
-	background-color: #2b2a2a7c;
+	background-color: #2b2a2a;
 	visibility: hidden;
 	transition: visibility 0.3s, opacity 0.3s;
 	opacity: 0;
@@ -15,12 +15,11 @@
 }
 
 .modal {
-	@include position(fixed, 50%, null, null, 50%, 500);
+	@include position(absolute, 50%, null, null, 50%, 1600);
 	width: 100%;
 	max-width: 500px;
 	padding: 1em 0.3em;
 	transform: translate(-50%, 200%);
-	overflow: hidden;
 	border-radius: 5px;
 	box-shadow: $boxshadow-primary;
 	background-color: $background-primary;

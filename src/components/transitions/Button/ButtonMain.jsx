@@ -33,7 +33,6 @@ const ButtonMain = ({
 			: styles["button__border"];
 
 	const animationHandler = () => {
-		onClick();
 		setIsAnimation(true);
 	};
 
