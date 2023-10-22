@@ -4,12 +4,14 @@ import LinkAsBtn from "../Link/LinkAsBtn";
 import ButtonMain from "../Button/ButtonMain";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { setIsShow, setModalComponent } from "@/global/modal-slice";
 import FormikEvent from "../Forms/FormikEvent/FormikEvent";
+import Link from "next/link";
 
 /**
  *
@@ -50,10 +52,12 @@ const EventItem = ({
 	const { data: session } = useSession();
 	const pathname = usePathname();
 	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const isOwner = owner === session?.user.email;
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+	const params = useParams();
 
 	//dictionary elements EventItem
 	const {
@@ -87,11 +91,26 @@ const EventItem = ({
 		}
 	}, []);
 
-	const lastPartOfLink = pathname.substring(pathname.lastIndexOf("/") + 1);
-	const isDescription = id === lastPartOfLink;
+	// const lastPartOfLink = pathname.substring(pathname.lastIndexOf("/") + 1);
+	let isDescription;
+
+	// const url = `fsdfsdfsdf-653262315db34842102ac980/edit`;
+	// const check = url.substring(url.lastIndexOf("-") + 1);
+
+	// console.log(check);
+
+	console.log(params.slug);
+	console.log(id);
+
+	if (params?.slug) {
+		const slug = params.slug;
+		const eventId = slug.substring(slug.lastIndexOf("-") + 1);
+		isDescription = id === eventId;
+	}
+
 	const urlLink_dependsPath = isDescription
 		? `/events#${id + 7}`
-		: `/events/${replacedTitle}/${id}#section_detail-item`;
+		: `/events/${replacedTitle}-${id}#section_detail-item`;
 
 	const classDNone = styles["event__element-invisible"];
 
@@ -132,6 +151,12 @@ const EventItem = ({
 		dispatch(setIsShow({ isShow: false }));
 	};
 
+	// const showEdit = e => {
+	// 	e.preventDefault();
+
+	// 	router.push(`/events/${replacedTitle}-${id}/edit`);
+	// };
+
 	return (
 		<li className={classEvent.details} id={id + 7}>
 			<ImageFill
@@ -160,9 +185,15 @@ const EventItem = ({
 				<p>{description}</p>
 			</div>
 			<div className={styles["event__tools"]}>
-				<LinkAsBtn href='/events/edit/dasokdoiasjd' className={classEvent.link}>
+				<LinkAsBtn
+					href={urlLink_dependsPath}
+					scroll={false}
+					className={classEvent.link}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
+				<Link href={`/events/${replacedTitle}-${id}/edit`} scroll={false}>
+					dasdasd{" "}
+				</Link>
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
 						<ButtonMain>{trl_btnDelete}</ButtonMain>

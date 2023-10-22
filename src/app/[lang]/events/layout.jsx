@@ -3,6 +3,7 @@ import Carousel from "@/components/transitions/Carousel/Carousel";
 import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import ModalText from "@/components/Containers/ModalText";
+import Client from "@/components/Containers/Client";
 
 export default async function Layout({
 	params: { lang },
@@ -16,8 +17,6 @@ export default async function Layout({
 	const btn_checkEvents = dict.events.btn_checkEvents;
 	const btn_createEvents = dict.events.btn_createEvent;
 
-	console.log(edit);
-
 	return (
 		<main>
 			<WrapperStart className={styles.container}>
@@ -28,8 +27,7 @@ export default async function Layout({
 					lang={lang}
 				/>
 			</WrapperStart>
-			{edit}
-
+			<Client Edit={edit} />
 			{children}
 		</main>
 	);
