@@ -12,6 +12,7 @@ import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
 import { useMediaQuery } from "react-responsive";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 /**
  * @description This component returns form for event.
@@ -31,6 +32,8 @@ const FormikEvent = ({
 	searchParams,
 }) => {
 	const dispatch = useDispatch();
+	const router = useRouter();
+	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	const {
 		trl_title,
@@ -44,8 +47,6 @@ const FormikEvent = ({
 		trl_picture,
 		trl_btn_createEvent,
 	} = dict;
-
-	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	//Switcher between initial values edit/add form
 	const initialValuesForm = {
@@ -203,6 +204,11 @@ const FormikEvent = ({
 			}
 			dispatch(loading(false));
 			dispatch(showResult({ message: data.message, variant: "success" }));
+
+			if (variant) {
+				router.back();
+				router.refresh();
+			}
 
 			return;
 		} catch (error) {

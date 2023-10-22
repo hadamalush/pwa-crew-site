@@ -74,7 +74,7 @@ export const PATCH = async request => {
 			{ status: 422 }
 		);
 	}
-	console.log("No to siup BEFOREEEEEEEEEE");
+
 	let client;
 
 	try {
@@ -128,7 +128,7 @@ export const PATCH = async request => {
 	console.log(update);
 
 	try {
-		updateDocument(client, "AllEvents", filter, update);
+		await updateDocument(client, "AllEvents", filter, update);
 	} catch (err) {
 		client.close();
 		return NextResponse.json(

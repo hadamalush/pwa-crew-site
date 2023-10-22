@@ -136,10 +136,7 @@ const EventItem = ({
 				<p>{description}</p>
 			</div>
 			<div className={styles["event__tools"]}>
-				<LinkAsBtn
-					href={urlLink_dependsPath}
-					scroll={false}
-					className={classEvent.link}>
+				<LinkAsBtn href={urlLink_dependsPath} className={classEvent.link}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
 
