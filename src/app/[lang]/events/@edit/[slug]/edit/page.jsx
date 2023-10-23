@@ -18,23 +18,25 @@ export default async function Test({
 	}
 
 	// const formTranslation = {
-	// 	trl_title: dict.events.editEvent.form.title,
-	// 	// trl_eventTitle: dict.events.newEvent.form.eventTitle,
-	// 	// trl_town: dict.events.newEvent.form.town,
-	// 	// trl_codePost: dict.events.newEvent.form.codePost,
-	// 	// trl_street: dict.events.newEvent.form.street,
-	// 	// trl_date: dict.events.newEvent.form.date,
-	// 	// trl_startTime: dict.events.newEvent.form.startTime,
-	// 	// trl_picture: dict.events.newEvent.form.picture,
-	// 	// trl_eventDesc: dict.events.newEvent.form.eventDesc,
-	// 	// trl_btn_createEvent: dict.events.editEvent.form.btn_confirm,
+	// trl_title: dict.events.editEvent.form.title,
+	// trl_eventTitle: dict.events.newEvent.form.eventTitle,
+	// trl_town: dict.events.newEvent.form.town,
+	// trl_codePost: dict.events.newEvent.form.codePost,
+	// trl_street: dict.events.newEvent.form.street,
+	// trl_date: dict.events.newEvent.form.date,
+	// trl_startTime: dict.events.newEvent.form.startTime,
+	// trl_picture: dict.events.newEvent.form.picture,
+	// trl_eventDesc: dict.events.newEvent.form.eventDesc,
+	// trl_btn_createEvent: dict.events.editEvent.form.btn_confirm,
 	// };
 
 	// console.log(formTranslation);
 
 	console.log(dict, dictNotifi);
 
-	// const trl_error = dictNotifi.notifications.newEvent.generalError;
+	const trl_error = dictNotifi.notifications.newEvent.generalError;
+
+	console.log(trl_error);
 
 	return (
 		<ModalParallel searchParams={searchParams}>
