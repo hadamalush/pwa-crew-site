@@ -1,4 +1,4 @@
-// import ModalParallel from "@/components/transitions/Modal/ModalParallel";
+import ModalParallel from "@/components/transitions/Modal/ModalParallel";
 // import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
 // import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 // import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
@@ -27,9 +27,8 @@ export default async function Test({
 	// const trl_error = dictNotifi.notifications.newEvent.generalError;
 
 	return (
-		<div>dsaddddddddddddddd</div>
-		// <ModalParallel searchParams={searchParams}>
-		// 	{/* <FormikEvent
+		<ModalParallel searchParams={searchParams}>
+			{/* <FormikEvent
 		// 		dict={formTranslation}
 		// 		trl_error={trl_error}
 		// 		lang={lang}
@@ -37,7 +36,7 @@ export default async function Test({
 		// 		variant='edit'
 		// 		scroll='block'
 		// 	/> */}
-		// 	dasdasd
-		// </ModalParallel>
+			dasdasd
+		</ModalParallel>
 	);
 }
