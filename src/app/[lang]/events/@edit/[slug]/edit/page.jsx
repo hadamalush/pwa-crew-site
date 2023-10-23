@@ -32,7 +32,7 @@ export default async function Test({
 
 	// console.log(formTranslation);
 
-	console.log(dict, dictNotifi);
+	console.log(dict);
 
 	const trl_error = dictNotifi.notifications.newEvent.generalError;
 
