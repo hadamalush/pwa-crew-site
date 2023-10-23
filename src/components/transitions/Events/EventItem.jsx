@@ -1,8 +1,6 @@
 "use client";
 import ImageFill from "../Image/ImageFill";
 import LinkAsBtn from "../Link/LinkAsBtn";
-import ButtonMain from "../Button/ButtonMain";
-import Link from "next/link";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
@@ -40,6 +38,7 @@ const EventItem = ({
 	upload,
 	description,
 	id,
+	key,
 	lang,
 	dict,
 	owner,
@@ -109,7 +108,7 @@ const EventItem = ({
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
 	return (
-		<li className={classEvent.details} id={id + 7}>
+		<li className={classEvent.details}>
 			<ImageFill
 				src={imageSrc}
 				alt={title}
