@@ -206,7 +206,7 @@ const FormikEvent = ({
 			dispatch(showResult({ message: data.message, variant: "success" }));
 
 			if (variant) {
-				router.back();
+				router.push("edit&modal=false");
 				router.refresh();
 			}
 

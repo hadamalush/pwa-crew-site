@@ -3,7 +3,7 @@ import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent"
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
-export default async function Test({
+export default async function EventEditModal({
 	params: { lang },
 	searchParams,
 	...props
@@ -42,7 +42,6 @@ export default async function Test({
 				variant='edit'
 				scroll='block'
 			/>
-			{lang}
 		</ModalParallel>
 	);
 }

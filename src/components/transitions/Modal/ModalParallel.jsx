@@ -29,6 +29,9 @@ const ModalParallel = React.memo(
 				styleBody.innerHTML = "body { overflow: hidden; }";
 				document.head.appendChild(styleBody);
 			}
+			if (!param) {
+				closeModalHandler();
+			}
 		}, [param]);
 
 		const closeModalHandler = useCallback(event => {

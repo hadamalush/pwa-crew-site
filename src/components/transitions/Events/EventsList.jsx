@@ -9,7 +9,7 @@ const EventsList = ({ events, className, children, lang, dict, ...props }) => {
 		<ul className={classes}>
 			{events.map(event => (
 				<EventItem
-					key={event.id + event.title}
+					key={event.id}
 					id={event.id}
 					title={event.title}
 					date={event.date}
