@@ -107,7 +107,7 @@ const EventItem = ({
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
 	return (
-		<li className={classEvent.details} id={id + "7"}>
+		<li className={classEvent.details} id={id}>
 			<ImageFill
 				src={imageSrc}
 				alt={title}
