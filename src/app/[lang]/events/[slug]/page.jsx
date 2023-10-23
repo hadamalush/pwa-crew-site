@@ -86,7 +86,7 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 	return (
 		<WrapperSection
 			className={styles["section-detail"]}
-			id='section_detail-item'>
+			id='section_detail-event'>
 			<h1>{title}</h1>
 			<ImgBgBlur src={targetSrc} className={styles["section-detail__img"]} />
 			<EventItem
