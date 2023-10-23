@@ -120,12 +120,12 @@
 				"picture": "Zdjęcie",
 				"eventDesc": "Opis wydarzenia",
 				"btn_createEvent": "Utwórz wydarzenie"
-			},
-			"editEvent": {
-				"form": {
-					"title": "Edytowanie wydarzenia",
-					"btn_confirm": "Zatwierdź"
-				}
+			}
+		},
+		"editEvent": {
+			"form": {
+				"title": "Edytowanie wydarzenia",
+				"btn_confirm": "Zatwierdź"
 			}
 		}
 	}
