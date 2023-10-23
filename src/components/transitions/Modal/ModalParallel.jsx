@@ -7,6 +7,13 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setDataModal, setIsVisible } from "@/global/modal-slice";
 
+/**
+ * @description This component should be used in the parallel routes modal. Modal will show after change route. If you want to close modal from another part of aplication you should set dispatch(setIsVisible({ isVisible: "close" })). Default closing is when you click behind the modal or if you click the cross.
+ * @param {String} className Enter className as string.
+ * @param {JSX.Element} children Enter jsx element as children.
+ * @returns {JSX.Element} Returns the whole modal with animations.
+ */
+
 const ModalParallel = React.memo(({ className, children, lang }) => {
 	const isVisible = useSelector(state => state.modal.isVisible);
 	const dispatch = useDispatch();
@@ -46,6 +53,7 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 			dispatch(setDataModal({ dataModal: null }));
 			clearTimeout(timer);
 			router.back();
+			router.refresh();
 		}, 500);
 	});
 

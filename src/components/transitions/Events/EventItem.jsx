@@ -174,12 +174,12 @@ const EventItem = ({
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
 						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/delete?modal=true&title=dasdsad`}
+							href={`/events/${replacedTitle}-${id}/delete`}
 							scroll={false}>
 							{trl_btnDelete}
 						</LinkAsBtn>
 						<LinkAsBtn
-							href={editLink}
+							href={`/events/${replacedTitle}-${id}/edit`}
 							scroll={false}
 							onClick={loadDataModalHandler}>
 							{trl_btnEdit}

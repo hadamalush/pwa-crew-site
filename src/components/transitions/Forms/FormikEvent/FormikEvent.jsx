@@ -25,9 +25,7 @@ import { setIsVisible } from "@/global/modal-slice";
 
 const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 	const dispatch = useDispatch();
-	const router = useRouter();
 	const dataEvent = useSelector(state => state.modal.dataModal);
-
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	const {
