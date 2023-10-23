@@ -1,5 +1,5 @@
 import ModalParallel from "@/components/transitions/Modal/ModalParallel";
-// import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
+import FormikEvent from "@/components/transitions/Forms/FormikEvent/FormikEvent";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 
@@ -8,8 +8,14 @@ export default async function Test({
 	searchParams,
 	...props
 }) {
-	const dict = await getDictionaryElements(lang);
-	const dictNotifi = await getDictionaryNotifi(lang);
+	let dict, dictNotifi;
+
+	try {
+		dict = await getDictionaryElements(lang);
+		dictNotifi = await getDictionaryNotifi(lang);
+	} catch (err) {
+		console.log(err);
+	}
 
 	const formTranslation = {
 		trl_title: dict.events.editEvent.form.title,
@@ -26,19 +32,18 @@ export default async function Test({
 
 	console.log(formTranslation);
 
-	// const trl_error = dictNotifi.notifications.newEvent.generalError;
+	const trl_error = dictNotifi.notifications.newEvent.generalError;
 
 	return (
 		<ModalParallel searchParams={searchParams}>
-			{/* <FormikEvent
-		// 		dict={formTranslation}
-		// 		trl_error={trl_error}
-		// 		lang={lang}
-		// 		searchParams={searchParams}
-		// 		variant='edit'
-		// 		scroll='block'
-		// 	/> */}
-			dasdasd
+			<FormikEvent
+				dict={formTranslation}
+				trl_error={trl_error}
+				lang={lang}
+				searchParams={searchParams}
+				variant='edit'
+				scroll='block'
+			/>
 		</ModalParallel>
 	);
 }
