@@ -7,15 +7,6 @@ import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
-passiveSupport({
-	debug: false,
-	listeners: [
-		{
-			element: "div#__next-route-announcer__",
-			event: "touchstart",
-		},
-	],
-});
 
 /**
  *
@@ -61,6 +52,10 @@ const EventItem = ({
 
 	const params = useParams();
 	const editLink = `/events/${replacedTitle}-${id}/edit?modal=true&title=${title}&town=${town}&codePost=${codePost}&street=${street}&date=${date}&time=${time}&description=${description}&id=${id}`;
+
+	passiveSupport({
+		debug: true,
+	});
 
 	//dictionary elements EventItem
 	const {
