@@ -17,22 +17,22 @@ export default async function Test({
 		console.log(err);
 	}
 
-	// const formTranslation = {
-	// trl_title: dict.events.editEvent.form.title,
-	// trl_eventTitle: dict.events.newEvent.form.eventTitle,
-	// trl_town: dict.events.newEvent.form.town,
-	// trl_codePost: dict.events.newEvent.form.codePost,
-	// trl_street: dict.events.newEvent.form.street,
-	// trl_date: dict.events.newEvent.form.date,
-	// trl_startTime: dict.events.newEvent.form.startTime,
-	// trl_picture: dict.events.newEvent.form.picture,
-	// trl_eventDesc: dict.events.newEvent.form.eventDesc,
-	// trl_btn_createEvent: dict.events.editEvent.form.btn_confirm,
-	// };
+	const formTranslation = {
+		// trl_title: dict.events.editEvent.form.title,
+		trl_eventTitle: dict.events.newEvent.form.eventTitle,
+		// trl_town: dict.events.newEvent.form.town,
+		// trl_codePost: dict.events.newEvent.form.codePost,
+		// trl_street: dict.events.newEvent.form.street,
+		// trl_date: dict.events.newEvent.form.date,
+		// trl_startTime: dict.events.newEvent.form.startTime,
+		// trl_picture: dict.events.newEvent.form.picture,
+		// trl_eventDesc: dict.events.newEvent.form.eventDesc,
+		// trl_btn_createEvent: dict.events.editEvent.form.btn_confirm,
+	};
 
-	// console.log(formTranslation);
+	console.log(formTranslation);
 
-	console.log(dict);
+	// console.log(dict);
 
 	const trl_error = dictNotifi.notifications.newEvent.generalError;
 
