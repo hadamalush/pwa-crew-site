@@ -53,10 +53,7 @@ const EventItem = ({
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 	const dispatch = useDispatch();
-	const router = useRouter();
-
 	const params = useParams();
-	const editLink = `/events/${replacedTitle}-${id}/edit?modal=true&title=${title}&town=${town}&codePost=${codePost}&street=${street}&date=${date}&time=${time}&description=${description}&id=${id}`;
 
 	passiveSupport({
 		listeners: [
@@ -167,7 +164,10 @@ const EventItem = ({
 				<p>{description}</p>
 			</div>
 			<div className={styles["event__tools"]}>
-				<LinkAsBtn href={urlLink_dependsPath} className={classEvent.link}>
+				<LinkAsBtn
+					href={urlLink_dependsPath}
+					className={classEvent.link}
+					prefetch={isDescription ? true : false}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
 

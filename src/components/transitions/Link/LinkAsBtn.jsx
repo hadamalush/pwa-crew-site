@@ -12,6 +12,7 @@ const LinkAsBtn = ({
 	children,
 	className,
 	variant,
+	prefetch,
 	onClick,
 	...props
 }) => {
@@ -52,6 +53,7 @@ const LinkAsBtn = ({
 			href={href}
 			scroll={scroll}
 			className={classes}
+			prefetch={prefetch}
 			onClick={animationHandler}>
 			{children}
 			<span className={classesSpan}>{children}</span>
