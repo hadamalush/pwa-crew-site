@@ -10,12 +10,12 @@ export default async function Test({
 }) {
 	let dict, dictNotifi;
 
-	// try {
-	// 	dict = await getDictionaryElements(lang);
-	// 	dictNotifi = await getDictionaryNotifi(lang);
-	// } catch (err) {
-	// 	console.log(err);
-	// }
+	try {
+		dict = await getDictionaryElements(lang);
+		dictNotifi = await getDictionaryNotifi(lang);
+	} catch (err) {
+		console.log(err);
+	}
 
 	// const formTranslation = {
 	// 	trl_title: dict.events.editEvent.form.title,
