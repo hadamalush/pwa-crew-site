@@ -113,7 +113,7 @@ const IconRender = ({ onClick, ...props }) => {
 	const selectedIcon = iconsSwitch(variant);
 
 	return (
-		<div className={classes} style={props.style} onClick={onClick || null}>
+		<div className={classes} onClick={onClick || null}>
 			{selectedIcon}
 		</div>
 	);

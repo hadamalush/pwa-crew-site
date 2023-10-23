@@ -1,12 +1,15 @@
 "use client";
 import ImageFill from "../Image/ImageFill";
 import LinkAsBtn from "../Link/LinkAsBtn";
-import ButtonMain from "../Button/ButtonMain";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import { passiveSupport } from "passive-events-support/src/utils";
+import { useDispatch } from "react-redux";
+import { setDataModal } from "@/global/modal-slice";
+import { useRouter } from "next/navigation";
 
 /**
  *
@@ -45,12 +48,27 @@ const EventItem = ({
 	...props
 }) => {
 	const { data: session } = useSession();
-	const pathname = usePathname();
 
 	const isOwner = owner === session?.user.email;
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+	const dispatch = useDispatch();
+	const router = useRouter();
 
+	const params = useParams();
+	const editLink = `/events/${replacedTitle}-${id}/edit?modal=true&title=${title}&town=${town}&codePost=${codePost}&street=${street}&date=${date}&time=${time}&description=${description}&id=${id}`;
+
+	passiveSupport({
+		listeners: [
+			{
+				element: "document-fragment",
+				event: "touchstart",
+				passive: false,
+			},
+		],
+	});
+
+	//dictionary elements EventItem
 	const {
 		trl_startEvent,
 		trl_address,
@@ -67,11 +85,17 @@ const EventItem = ({
 		}
 	}, []);
 
-	const lastPartOfLink = pathname.substring(pathname.lastIndexOf("/") + 1);
-	const isDescription = id === lastPartOfLink;
+	let isDescription;
+
+	if (params?.slug) {
+		const slug = params.slug;
+		const eventId = slug.substring(slug.lastIndexOf("-") + 1);
+		isDescription = id === eventId;
+	}
+
 	const urlLink_dependsPath = isDescription
-		? `/events#${id + 7}`
-		: `/events/${replacedTitle}/${id}#section_detail-item`;
+		? `/events#${"E" + id}`
+		: `/events/${replacedTitle}-${id}#section_detail-item`;
 
 	const classDNone = styles["event__element-invisible"];
 
@@ -98,14 +122,32 @@ const EventItem = ({
 	const imageSrc =
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
+	const loadDataModalHandler = () => {
+		dispatch(
+			setDataModal({
+				dataModal: {
+					title,
+					town,
+					codePost,
+					street,
+					date,
+					time,
+					description,
+					id,
+				},
+			})
+		);
+	};
+
 	return (
-		<li className={classEvent.details} id={id + 7}>
+		<li className={classEvent.details} id={"E" + id}>
 			<ImageFill
 				src={imageSrc}
 				alt={title}
 				sizes='(max-width: 568px) 80vw, (min-width: 568px) 30vw'
 				className={classEvent.img}
 			/>
+
 			<div className={styles["event__informations"]}>
 				<h2>{title}</h2>
 				<address className={classEvent.address}>
@@ -128,10 +170,20 @@ const EventItem = ({
 				<LinkAsBtn href={urlLink_dependsPath} className={classEvent.link}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
+
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
-						<ButtonMain>{trl_btnDelete}</ButtonMain>
-						<ButtonMain>{trl_btnEdit}</ButtonMain>
+						<LinkAsBtn
+							href={`/events/${replacedTitle}-${id}/delete`}
+							scroll={false}>
+							{trl_btnDelete}
+						</LinkAsBtn>
+						<LinkAsBtn
+							href={`/events/${replacedTitle}-${id}/edit`}
+							scroll={false}
+							onClick={loadDataModalHandler}>
+							{trl_btnEdit}
+						</LinkAsBtn>
 					</div>
 				)}
 			</div>

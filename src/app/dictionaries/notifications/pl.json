@@ -3,6 +3,7 @@
 		"generalError": "Niepowiodło się, spróbuj ponownie",
 		"err_400": "Nie znaleziono strony",
 		"err_401": "Musisz być zalogowany",
+		"err_401_unAuth": "Nieautoryzowany dostęp",
 		"err_409": "Konflikt. Takie dane już istnieją",
 		"err_422": "Wrowadzone dane są nie prawidłowe",
 		"err_429": "Przekroczono limit, spróbuj ponownie za 30 minut",
@@ -11,6 +12,10 @@
 		"newEvent": {
 			"generalError": "Nie udało się utworzyć wydarzenia",
 			"success": "Dodano wydarzenie"
+		},
+		"editEvent": {
+			"generalError": "Nie udało się edytować wydarzenia",
+			"success": "Edytowano wydarzenie"
 		},
 		"sendMessage": {
 			"success": "Wysłano wiadomość"

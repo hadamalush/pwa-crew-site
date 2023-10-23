@@ -5,13 +5,15 @@ import InputFormikFile from "../../Input/InputFormikFile";
 import ButtonMain from "../../Button/ButtonMain";
 import TextareaFormik from "../../Input/TextareaFormik";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
-import { useMediaQuery } from "react-responsive";
-import { useEffect } from "react";
+import { setIsVisible } from "@/global/modal-slice";
 
 /**
  * @description This component returns form for event.
@@ -21,8 +23,10 @@ import { useEffect } from "react";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikEvent = ({ className, dict, lang, trl_error }) => {
+const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 	const dispatch = useDispatch();
+	const dataEvent = useSelector(state => state.modal.dataModal);
+	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	const {
 		trl_title,
@@ -37,10 +41,21 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 		trl_btn_createEvent,
 	} = dict;
 
-	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+	//Switcher between initial values edit/add form
+	const initialValuesForm = {
+		title: variant ? dataEvent?.title : "",
+		town: variant ? dataEvent?.town : "",
+		codePost: variant ? dataEvent?.codePost : "",
+		street: variant ? dataEvent?.street : "",
+		date: variant ? dataEvent?.date : "",
+		time: variant ? dataEvent?.time : "",
+		description: variant ? dataEvent?.description : "",
+		fileImg: "",
+	};
 
 	useEffect(() => {
-		if (isMediumScreen) window.scrollTo(window.scrollX, window.scrollY - 70);
+		if (isMediumScreen && scroll !== "block")
+			window.scrollTo(window.scrollX, window.scrollY - 70);
 	}, []);
 
 	const addEventhandler = async values => {
@@ -50,103 +65,112 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 
 		let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 
-		//UPLOAD FILE TO CLOUDINARY
+		//CHECKING VARIANT
 
-		if (uploadStorage === "cloudinary" || uploadStorage === "all") {
-			try {
-				const response = await fetch(
-					`/api/upload/cloudinary?filename=${file.name}`,
-					{
-						method: "POST",
-						body: file,
-					}
-				);
-				const data = await response.json();
+		if ((variant && values.fileImg) || !variant) {
+			//UPLOAD FILE TO CLOUDINARY
 
-				if (data.message) {
-					imgSrcCld = data.message;
-				}
-			} catch (error) {
-				dispatch(loading(false));
-				dispatch(
-					showResult({
-						message: "Something went wrong.",
-						variant: "warning",
-					})
-				);
-				return;
-			}
-		}
-
-		// UPLOAD FILE MEGA DIRECTORY
-
-		if (uploadStorage === "mega" || uploadStorage === "all") {
-			try {
-				const response = await fetch(`/api/upload/mega?filename=${file.name}`, {
-					method: "POST",
-					body: file,
-				});
-				const data = await response.json();
-
-				if (data.message) {
-					imgSrcMega = data.message;
-				}
-			} catch (error) {
-				dispatch(loading(false));
-				dispatch(
-					showResult({
-						message: "Something went wrong.",
-						variant: "warning",
-					})
-				);
-				return;
-			}
-		}
-
-		// // UPLOAD FILE TO VERCEL BLOB
-
-		if (uploadStorage === "vercelBlob" || uploadStorage === "all") {
-			try {
-				const response = await fetch(
-					`/api/upload/vercelBlob?filename=${file.name}`,
-					{
-						method: "POST",
-						body: file,
-					}
-				);
-
-				if (response.ok) {
+			if (uploadStorage === "cloudinary" || uploadStorage === "all") {
+				try {
+					const response = await fetch(
+						`/api/upload/cloudinary?filename=${file.name}`,
+						{
+							method: "POST",
+							body: file,
+						}
+					);
 					const data = await response.json();
-					imgSrcVercelBlob = data.url;
-				}
 
-				if (!response.ok && !imgSrcMega) {
+					if (data.message) {
+						imgSrcCld = data.message;
+					}
+				} catch (error) {
 					dispatch(loading(false));
 					dispatch(
 						showResult({
-							message: "Something went wrong",
-							variant: "warning",
-						})
-					);
-					return;
-				}
-			} catch (error) {
-				if (!imgSrcMega) {
-					dispatch(loading(false));
-					dispatch(
-						showResult({
-							message: "Something went wrong",
+							message: "Something went wrong.",
 							variant: "warning",
 						})
 					);
 					return;
 				}
 			}
+
+			// UPLOAD FILE MEGA DIRECTORY
+
+			if (uploadStorage === "mega" || uploadStorage === "all") {
+				try {
+					const response = await fetch(
+						`/api/upload/mega?filename=${file.name}`,
+						{
+							method: "POST",
+							body: file,
+						}
+					);
+					const data = await response.json();
+
+					if (data.message) {
+						imgSrcMega = data.message;
+					}
+				} catch (error) {
+					dispatch(loading(false));
+					dispatch(
+						showResult({
+							message: "Something went wrong.",
+							variant: "warning",
+						})
+					);
+					return;
+				}
+			}
+
+			// // UPLOAD FILE TO VERCEL BLOB
+
+			if (uploadStorage === "vercelBlob" || uploadStorage === "all") {
+				try {
+					const response = await fetch(
+						`/api/upload/vercelBlob?filename=${file.name}`,
+						{
+							method: "POST",
+							body: file,
+						}
+					);
+
+					if (response.ok) {
+						const data = await response.json();
+						imgSrcVercelBlob = data.url;
+					}
+
+					if (!response.ok && !imgSrcMega) {
+						dispatch(loading(false));
+						dispatch(
+							showResult({
+								message: "Something went wrong",
+								variant: "warning",
+							})
+						);
+						return;
+					}
+				} catch (error) {
+					if (!imgSrcMega) {
+						dispatch(loading(false));
+						dispatch(
+							showResult({
+								message: "Something went wrong",
+								variant: "warning",
+							})
+						);
+						return;
+					}
+				}
+			}
 		}
+
+		const apiLinkDependsVariant = variant ? "/api/editEvent" : "/api/addEvent";
 
 		try {
-			const response = await fetch("/api/addEvent", {
-				method: "POST",
+			const response = await fetch(apiLinkDependsVariant, {
+				method: variant ? "PATCH" : "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
 					title: values.title,
@@ -160,6 +184,7 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 					imageSrcMega: imgSrcMega,
 					imageSrcCld: imgSrcCld,
 					lang: lang,
+					eventId: dataEvent?.id,
 				}),
 			});
 
@@ -172,6 +197,10 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 			}
 			dispatch(loading(false));
 			dispatch(showResult({ message: data.message, variant: "success" }));
+
+			if (variant) {
+				dispatch(setIsVisible({ isVisible: "close" }));
+			}
 
 			return;
 		} catch (error) {
@@ -188,18 +217,9 @@ const FormikEvent = ({ className, dict, lang, trl_error }) => {
 	return (
 		<FormContainerBlur>
 			<Formik
-				initialValues={{
-					title: "",
-					town: "",
-					codePost: "",
-					street: "",
-					date: "",
-					time: "",
-					description: "",
-					fileImg: "",
-				}}
+				initialValues={initialValuesForm}
 				onSubmit={addEventhandler}
-				validationSchema={eventSchema(lang)}
+				validationSchema={eventSchema(lang, variant)}
 				className={styles.form}>
 				{({ setFieldValue, setFieldTouched, isSubmitting, ...props }) => {
 					return (

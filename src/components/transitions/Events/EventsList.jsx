@@ -1,9 +1,20 @@
 "use client";
 import styles from "../../../styles/components/transitions/Events/EventsList.module.scss";
 import EventItem from "./EventItem";
+import { passiveSupport } from "passive-events-support/src/utils";
 
 const EventsList = ({ events, className, children, lang, dict, ...props }) => {
 	const classes = `${styles.events} ${className}`;
+
+	passiveSupport({
+		listeners: [
+			{
+				element: "document-fragment",
+				event: "touchstart",
+				passive: false,
+			},
+		],
+	});
 
 	return (
 		<ul className={classes}>

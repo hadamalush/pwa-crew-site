@@ -121,6 +121,12 @@
 				"eventDesc": "Event description",
 				"btn_createEvent": "Create event"
 			}
+		},
+		"editEvent": {
+			"form": {
+				"title": "Editing an event",
+				"btn_confirm": "Confirm"
+			}
 		}
 	}
 }

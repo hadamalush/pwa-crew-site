@@ -10,9 +10,10 @@ import {
 } from "@/lib/storage/storage";
 import { ObjectId } from "mongodb";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
-const EventPage = async ({ params: { slug, lang } }) => {
+const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const dict = await getDictionaryElements(lang);
-	const eventId = slug[slug.length - 1];
+
+	const eventId = slug.substring(slug.lastIndexOf("-") + 1);
 
 	if (eventId.length !== 24) {
 		return <p>Nie znaleziono takiego wydarzenia.</p>;
@@ -101,6 +102,7 @@ const EventPage = async ({ params: { slug, lang } }) => {
 				upload={uploadStorage}
 				owner={user_email}
 				dict={translationEvent}
+				lang={lang}
 				className={styles["section-detail__item"]}
 			/>
 		</WrapperSection>
