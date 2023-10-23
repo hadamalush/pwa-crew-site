@@ -125,10 +125,18 @@ const EventItem = ({
 	const loadDataModalHandler = () => {
 		dispatch(
 			setDataModal({
-				dataModal: { title, town, codePost, street, date, time, description },
+				dataModal: {
+					title,
+					town,
+					codePost,
+					street,
+					date,
+					time,
+					description,
+					id,
+				},
 			})
 		);
-		dispatch(setIsVisible(true));
 	};
 
 	return (

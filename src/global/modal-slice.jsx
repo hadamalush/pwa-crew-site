@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialStateModal = {
-	isVisible: true,
+	isVisible: false,
 	dataModal: null,
 };
 
@@ -13,7 +13,7 @@ const modal = createSlice({
 			state.dataModal = action.payload.dataModal;
 		},
 		setIsVisible: (state, action) => {
-			state.isShow = action.payload.isShow;
+			state.isVisible = action.payload.isVisible;
 		},
 	},
 });

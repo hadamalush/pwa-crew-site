@@ -5,14 +5,15 @@ import InputFormikFile from "../../Input/InputFormikFile";
 import ButtonMain from "../../Button/ButtonMain";
 import TextareaFormik from "../../Input/TextareaFormik";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
-import { useMediaQuery } from "react-responsive";
-import { useCallback, useEffect } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { setIsVisible } from "@/global/modal-slice";
 
 /**
  * @description This component returns form for event.
@@ -22,30 +23,12 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikEvent = ({
-	className,
-	dict,
-	lang,
-	trl_error,
-	scroll,
-	variant,
-	searchParams,
-}) => {
+const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const dataEvent = useSelector(state => state.modal.dataModal);
 
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
-
-	const createQueryString = useCallback(
-		(name, value) => {
-			const params = new URLSearchParams(searchParams);
-			params.set(name, value);
-
-			return params.toString();
-		},
-		[searchParams]
-	);
 
 	const {
 		trl_title,
@@ -203,7 +186,7 @@ const FormikEvent = ({
 					imageSrcMega: imgSrcMega,
 					imageSrcCld: imgSrcCld,
 					lang: lang,
-					eventId: searchParams?.id,
+					eventId: dataEvent?.id,
 				}),
 			});
 
@@ -218,11 +201,7 @@ const FormikEvent = ({
 			dispatch(showResult({ message: data.message, variant: "success" }));
 
 			if (variant) {
-				router.replace(
-					"/events/MonderGro-65325727a9471ca9fbaa0bc0/edit" +
-						"?" +
-						createQueryString("modal", false)
-				);
+				dispatch(setIsVisible({ isVisible: "close" }));
 			}
 
 			return;
