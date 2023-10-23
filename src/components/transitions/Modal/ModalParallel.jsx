@@ -50,10 +50,12 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 		document.head.appendChild(styleBody);
 
 		const timer = setTimeout(() => {
+			const refresh = isVisible === "close";
+
 			dispatch(setDataModal({ dataModal: null }));
 			clearTimeout(timer);
 			router.back();
-			router.refresh();
+			refresh && router.refresh;
 		}, 500);
 	});
 
