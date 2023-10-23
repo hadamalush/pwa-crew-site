@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialStateModal = {
-	isShow: true,
-	modalComponent: null,
+	isVisible: true,
+	dataModal: null,
 };
 
 const modal = createSlice({
 	name: "modal",
 	initialState: initialStateModal,
 	reducers: {
-		setModalComponent: (state, action) => {
-			state.modalComponent = action.payload.modalComponent;
+		setDataModal: (state, action) => {
+			state.dataModal = action.payload.dataModal;
 		},
-		setIsShow: (state, action) => {
+		setIsVisible: (state, action) => {
 			state.isShow = action.payload.isShow;
 		},
 	},
 });
 
-export const { setModalComponent, setIsShow } = modal.actions;
+export const { setDataModal, setIsVisible } = modal.actions;
 export default modal.reducer;

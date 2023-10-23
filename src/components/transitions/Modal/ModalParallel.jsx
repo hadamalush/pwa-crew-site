@@ -19,7 +19,7 @@ const ModalParallel = React.memo(
 			: `${styles.modal} ${className || ""}`;
 
 		useEffect(() => {
-			if (param) {
+			if (param === "true") {
 				const timer = setTimeout(() => {
 					setVisible(true);
 					clearTimeout(timer);
@@ -29,7 +29,7 @@ const ModalParallel = React.memo(
 				styleBody.innerHTML = "body { overflow: hidden; }";
 				document.head.appendChild(styleBody);
 			}
-			if (!param) {
+			if (param === "false") {
 				closeModalHandler();
 			}
 		}, [param]);

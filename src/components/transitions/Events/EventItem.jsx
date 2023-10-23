@@ -7,6 +7,9 @@ import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
+import { useDispatch } from "react-redux";
+import { setDataModal, setIsVisible } from "@/global/modal-slice";
+import { useRouter } from "next/navigation";
 
 /**
  *
@@ -49,12 +52,20 @@ const EventItem = ({
 	const isOwner = owner === session?.user.email;
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const params = useParams();
 	const editLink = `/events/${replacedTitle}-${id}/edit?modal=true&title=${title}&town=${town}&codePost=${codePost}&street=${street}&date=${date}&time=${time}&description=${description}&id=${id}`;
 
 	passiveSupport({
-		debug: true,
+		listeners: [
+			{
+				element: "document-fragment",
+				event: "touchstart",
+				passive: false,
+			},
+		],
 	});
 
 	//dictionary elements EventItem
@@ -111,6 +122,15 @@ const EventItem = ({
 	const imageSrc =
 		upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
+	const loadDataModalHandler = () => {
+		dispatch(
+			setDataModal({
+				dataModal: { title, town, codePost, street, date, time, description },
+			})
+		);
+		dispatch(setIsVisible(true));
+	};
+
 	return (
 		<li className={classEvent.details} id={"E" + id}>
 			<ImageFill
@@ -150,7 +170,10 @@ const EventItem = ({
 							scroll={false}>
 							{trl_btnDelete}
 						</LinkAsBtn>
-						<LinkAsBtn href={editLink} scroll={false}>
+						<LinkAsBtn
+							href={editLink}
+							scroll={false}
+							onClick={loadDataModalHandler}>
 							{trl_btnEdit}
 						</LinkAsBtn>
 					</div>

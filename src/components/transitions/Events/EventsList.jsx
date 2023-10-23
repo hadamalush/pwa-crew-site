@@ -7,7 +7,13 @@ const EventsList = ({ events, className, children, lang, dict, ...props }) => {
 	const classes = `${styles.events} ${className}`;
 
 	passiveSupport({
-		debug: true,
+		listeners: [
+			{
+				element: "document-fragment",
+				event: "touchstart",
+				passive: false,
+			},
+		],
 	});
 
 	return (

@@ -5,14 +5,14 @@ import InputFormikFile from "../../Input/InputFormikFile";
 import ButtonMain from "../../Button/ButtonMain";
 import TextareaFormik from "../../Input/TextareaFormik";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
 import { useMediaQuery } from "react-responsive";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 /**
  * @description This component returns form for event.
@@ -33,7 +33,19 @@ const FormikEvent = ({
 }) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
+	const dataEvent = useSelector(state => state.modal.dataModal);
+
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
+
+	const createQueryString = useCallback(
+		(name, value) => {
+			const params = new URLSearchParams(searchParams);
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
 
 	const {
 		trl_title,
@@ -50,13 +62,13 @@ const FormikEvent = ({
 
 	//Switcher between initial values edit/add form
 	const initialValuesForm = {
-		title: variant ? searchParams?.title : "",
-		town: variant ? searchParams?.town : "",
-		codePost: variant ? searchParams?.codePost : "",
-		street: variant ? searchParams?.street : "",
-		date: variant ? searchParams?.date : "",
-		time: variant ? searchParams?.time : "",
-		description: variant ? searchParams?.description : "",
+		title: variant ? dataEvent?.title : "",
+		town: variant ? dataEvent?.town : "",
+		codePost: variant ? dataEvent?.codePost : "",
+		street: variant ? dataEvent?.street : "",
+		date: variant ? dataEvent?.date : "",
+		time: variant ? dataEvent?.time : "",
+		description: variant ? dataEvent?.description : "",
 		fileImg: "",
 	};
 
@@ -206,8 +218,11 @@ const FormikEvent = ({
 			dispatch(showResult({ message: data.message, variant: "success" }));
 
 			if (variant) {
-				router.push("edit&modal=false");
-				router.refresh();
+				router.replace(
+					"/events/MonderGro-65325727a9471ca9fbaa0bc0/edit" +
+						"?" +
+						createQueryString("modal", false)
+				);
 			}
 
 			return;

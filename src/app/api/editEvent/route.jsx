@@ -125,8 +125,6 @@ export const PATCH = async request => {
 		},
 	};
 
-	console.log(update);
-
 	try {
 		await updateDocument(client, "AllEvents", filter, update);
 	} catch (err) {
