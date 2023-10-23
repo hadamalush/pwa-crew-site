@@ -5,7 +5,7 @@ import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 
 export default async function Layout({
 	params: { lang },
-	edit,
+	modalEvent,
 	children,
 	...props
 }) {
@@ -25,7 +25,7 @@ export default async function Layout({
 					lang={lang}
 				/>
 			</WrapperStart>
-			{edit}
+			{modalEvent}
 			{children}
 		</main>
 	);

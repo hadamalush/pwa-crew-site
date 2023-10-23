@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
-import { setDataModal, setIsVisible } from "@/global/modal-slice";
+import { setDataModal } from "@/global/modal-slice";
 import { useRouter } from "next/navigation";
 
 /**
