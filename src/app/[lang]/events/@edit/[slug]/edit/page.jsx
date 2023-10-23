@@ -28,14 +28,15 @@ export default async function Test({
 
 	return (
 		<ModalParallel searchParams={searchParams}>
-			<FormikEvent
+			{/* <FormikEvent
 				dict={formTranslation}
 				trl_error={trl_error}
 				lang={lang}
 				searchParams={searchParams}
 				variant='edit'
 				scroll='block'
-			/>
+			/> */}
+			dasdasd
 		</ModalParallel>
 	);
 }
