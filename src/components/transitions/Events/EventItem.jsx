@@ -6,6 +6,16 @@ import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import { passiveSupport } from "passive-events-support/src/utils";
+passiveSupport({
+	debug: false,
+	listeners: [
+		{
+			element: "div#__next-route-announcer__",
+			event: "touchstart",
+		},
+	],
+});
 
 /**
  *
@@ -78,7 +88,7 @@ const EventItem = ({
 	}
 
 	const urlLink_dependsPath = isDescription
-		? `/events#${id + 7}`
+		? `/events#${"E" + id}`
 		: `/events/${replacedTitle}-${id}#section_detail-item`;
 
 	const classDNone = styles["event__element-invisible"];
