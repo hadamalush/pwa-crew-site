@@ -51,16 +51,16 @@ const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 				})
 			);
 
-			dispatch(setIsVisible({ isVisible: "close-no-back" }));
-			const timer = setTimeout(() => {
-				clearTimeout(timer);
-				router.push("/events");
-			}, 500);
+			dispatch(setIsVisible({ isVisible: "close" }));
+			// const timer = setTimeout(() => {
+			// 	clearTimeout(timer);
+			// 	router.replace("/events?refresh=true");
+			// }, 500);
 
 			return;
 		}
 
-		dispatch(setIsVisible({ isVisible: "close" }));
+		dispatch(setIsVisible({ isVisible: "close-no-refresh" }));
 	};
 
 	return (

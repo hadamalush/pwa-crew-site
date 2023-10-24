@@ -38,7 +38,7 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 	}, []);
 
 	useEffect(() => {
-		if (isVisible === "close" || isVisible === "close-no-back") {
+		if (isVisible === "close" || isVisible === "close-no-refresh") {
 			closeModalHandler();
 		}
 	}, [isVisible]);
@@ -51,12 +51,12 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 
 		const timer = setTimeout(() => {
 			const refresh = isVisible === "close";
-			const noBack = isVisible === "close-no-back";
+			const noRefresh = isVisible === "close-no-refresh";
 
 			dispatch(setDataModal({ dataModal: null }));
 			clearTimeout(timer);
-			!noBack && router.back();
-			refresh && router.refresh;
+			router.back();
+			refresh && router.refresh();
 		}, 500);
 	});
 

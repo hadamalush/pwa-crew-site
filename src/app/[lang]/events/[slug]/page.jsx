@@ -1,6 +1,7 @@
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import EventItem from "@/components/transitions/Events/EventItem";
 import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
+
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { generalConfig } from "@/config/gerenalConfig";
 import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
@@ -10,37 +11,20 @@ import {
 } from "@/lib/storage/storage";
 import { ObjectId } from "mongodb";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+
 const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const dict = await getDictionaryElements(lang);
 
 	const eventId = slug.substring(slug.lastIndexOf("-") + 1);
-
-	if (eventId.length !== 24) {
-		return <p>Nie znaleziono takiego wydarzenia.</p>;
+	let event;
+	try {
+		event = await getEvent(eventId);
+	} catch (err) {
+		console.log(err);
 	}
 
-	let modifiedEventId;
-	try {
-		modifiedEventId = new ObjectId(eventId);
-	} catch (error) {
-		return <p>Nie poprawny adres.</p>;
-	}
-
-	let client, result;
-	try {
-		client = await connectDatabaseEvents();
-	} catch (error) {
-		console.log(error);
-	}
-
-	try {
-		result = await findDocument(client, "AllEvents", { _id: modifiedEventId });
-
-		if (!result) {
-			return <p>Nie ma takiego wydarzenia.</p>;
-		}
-	} catch (error) {
-		console.log("ERROR: ", error);
+	if (!event || event.error) {
+		throw new Error("No result found");
 	}
 
 	const {
@@ -52,7 +36,9 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 		time,
 		description,
 		user_email,
-	} = result;
+		targetSrc,
+		uploadStorage,
+	} = event?.message ? event.message : null;
 
 	const translationEvent = {
 		trl_startEvent: dict.events.event.startEvent,
@@ -64,49 +50,57 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 		trl_btnPreviousPage: dict.events.event.btn_previousPage,
 	};
 
-	const storage = generalConfig.downloadImageStorageEvent;
-	let uploadStorage = storage[0];
-
-	if (!result[`image_src_${storage[0]}`]) {
-		uploadStorage = storage[1];
-	}
-
-	try {
-		if (uploadStorage === "mega") {
-			const buffer = await oneDownloadBuffersMegaNz(result.image_src_mega);
-			result.image_src_mega = oneConvertFromBuffersToBase64(buffer);
-		}
-	} catch (err) {
-		//set default picture - info
-		console.log(err);
-	}
-
-	const targetSrc = result[`image_src_${uploadStorage}`];
-
 	return (
 		<WrapperSection
 			className={styles["section-detail"]}
 			id='section_detail-event'>
-			<h1>{title}</h1>
-			<ImgBgBlur src={targetSrc} className={styles["section-detail__img"]} />
-			<EventItem
-				id={eventId}
-				title={title}
-				date={date}
-				town={town}
-				street={street}
-				codePost={code_post}
-				time={time}
-				description={description}
-				image={targetSrc}
-				upload={uploadStorage}
-				owner={user_email}
-				dict={translationEvent}
-				lang={lang}
-				className={styles["section-detail__item"]}
-			/>
+			{event.message && (
+				<>
+					<h1>{title}</h1>
+					<ImgBgBlur
+						src={targetSrc}
+						className={styles["section-detail__img"]}
+					/>
+					<EventItem
+						id={eventId}
+						title={title}
+						date={date}
+						town={town}
+						street={street}
+						codePost={code_post}
+						time={time}
+						description={description}
+						image={targetSrc}
+						upload={uploadStorage}
+						owner={user_email}
+						dict={translationEvent}
+						lang={lang}
+						className={styles["section-detail__item"]}
+					/>
+				</>
+			)}
 		</WrapperSection>
 	);
+};
+
+const getEvent = async eventId => {
+	let data;
+
+	const apiUrl = `http://localhost:3000/api/event?eventId=${eventId}`;
+
+	try {
+		const response = await fetch(apiUrl);
+
+		data = await response.json();
+
+		if (!response) {
+			return { error: "Page not found" };
+		}
+	} catch (error) {
+		return { error: "Something went wrong" };
+	}
+
+	return data;
 };
 
 export default EventPage;
