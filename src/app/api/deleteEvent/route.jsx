@@ -64,7 +64,7 @@ export const DELETE = async request => {
 		);
 	}
 
-	if (eventItem.user_email !== email) {
+	if (eventItem?.user_email !== email) {
 		client.close();
 		return NextResponse.json(
 			{ error: notification.trl_err_401_unAuth },

@@ -2,46 +2,65 @@
 
 import ButtonMain from "../transitions/Button/ButtonMain";
 import Heading from "../transitions/Elements/Heading";
-
 import styles from "../../styles/components/transitions/Modal/ModalDelete.module.scss";
 import { useDispatch } from "react-redux";
 import { loading, showResult } from "@/global/notification-slice";
+import { setIsVisible } from "@/global/modal-slice";
+import { useRouter } from "next/navigation";
 
-const ModalDelete = ({
-	className,
-	lang,
-	dict,
-	searchParams,
-	hSize,
-	children,
-}) => {
+const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 	const dispatch = useDispatch();
-	const itemId = searchParams?.event;
+	const router = useRouter();
 
+	const itemId = searchParams?.event;
 	const { trl_title, trl_btn_delete, trl_btn_cancel, trl_err } = dict;
 
-	const deleteItemHandler = async () => {
+	const actionHandler = async cancel => {
 		dispatch(loading(true));
+		let data;
 
-		try {
-			const response = await fetch("/api/deleteEvent", {
-				method: "DELETE",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ id: itemId, lang }),
-			});
+		if (!cancel) {
+			try {
+				const response = await fetch("/api/deleteEvent", {
+					method: "DELETE",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ id: itemId, lang }),
+				});
 
-			const data = await response.json();
+				data = await response.json();
 
-			console.log(data);
-		} catch (err) {
-			dispatch(loading(false));
+				if (!response.ok) {
+					dispatch(loading(false));
+					dispatch(showResult({ message: data.error, variant: "warning" }));
+					return;
+				}
+			} catch (err) {
+				dispatch(loading(false));
+				dispatch(
+					showResult({
+						message: trl_err,
+						variant: "warning",
+					})
+				);
+			}
+
 			dispatch(
 				showResult({
-					message: trl_err,
-					variant: "warning",
+					message: data.message,
+					variant: "success",
 				})
 			);
+
+			dispatch(setIsVisible({ isVisible: "close-no-back" }));
+			const timer = setTimeout(() => {
+				clearTimeout(timer);
+				router.push("/events");
+			}, 500);
+
+			return;
 		}
+
+		dispatch(setIsVisible({ isVisible: "close" }));
 	};
 
 	return (
@@ -50,8 +69,12 @@ const ModalDelete = ({
 				{trl_title}
 			</Heading>
 
-			<ButtonMain>{trl_btn_cancel}</ButtonMain>
-			<ButtonMain onClick={deleteItemHandler}>{trl_btn_delete}</ButtonMain>
+			<ButtonMain onClick={() => actionHandler(true)}>
+				{trl_btn_cancel}
+			</ButtonMain>
+			<ButtonMain onClick={() => actionHandler(false)}>
+				{trl_btn_delete}
+			</ButtonMain>
 		</div>
 	);
 };
