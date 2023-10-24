@@ -33,12 +33,12 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 		}, 100);
 
 		const styleBody = document.createElement("style");
-		styleBody.innerHTML = "body { overflow: hidden; }";
+		styleBody.innerHTML = ":root,body { overflow-y: hidden; }";
 		document.head.appendChild(styleBody);
 	}, []);
 
 	useEffect(() => {
-		if (isVisible === "close") {
+		if (isVisible === "close" || isVisible === "close-no-refresh") {
 			closeModalHandler();
 		}
 	}, [isVisible]);
@@ -46,16 +46,17 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 	const closeModalHandler = useCallback(event => {
 		dispatch(setIsVisible({ isVisible: false }));
 		const styleBody = document.createElement("style");
-		styleBody.innerHTML = "body { overflow: visible; overflow-x: hidden }";
+		styleBody.innerHTML = ":root,body { overflow-y: visible; }";
 		document.head.appendChild(styleBody);
 
 		const timer = setTimeout(() => {
 			const refresh = isVisible === "close";
+			const noRefresh = isVisible === "close-no-refresh";
 
 			dispatch(setDataModal({ dataModal: null }));
 			clearTimeout(timer);
 			router.back();
-			refresh && router.refresh;
+			refresh && router.refresh();
 		}, 500);
 	});
 

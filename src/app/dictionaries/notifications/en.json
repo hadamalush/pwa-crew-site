@@ -18,6 +18,10 @@
 			"generalError": "Failed to edit event",
 			"success": "Event edited"
 		},
+		"deleteEvent": {
+			"generalError": "The event could not be removed",
+			"success": "Deleted event"
+		},
 
 		"sendMessage": {
 			"success": "Message sent"

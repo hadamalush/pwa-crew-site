@@ -7,6 +7,7 @@ export default async function Layout({
 	params: { lang },
 	modalEvent,
 	children,
+	searchParams,
 	...props
 }) {
 	const events = await getData();
@@ -25,6 +26,7 @@ export default async function Layout({
 					lang={lang}
 				/>
 			</WrapperStart>
+
 			{modalEvent}
 			{children}
 		</main>

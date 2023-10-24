@@ -5,7 +5,7 @@ import styles from "./page.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { cache } from "react";
 
-export default async function Events({ params: { lang } }) {
+export default async function Events({ params: { lang }, searchParams }) {
 	const dict = await getDictionaryElements(lang);
 
 	const translationEvent = {

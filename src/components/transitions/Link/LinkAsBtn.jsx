@@ -18,8 +18,6 @@ const LinkAsBtn = ({
 }) => {
 	const [isAnimation, setIsAnimation] = useState(false);
 
-	const data = useSelector(state => state.modal.dataModal);
-
 	const pathname = usePathname();
 	const dispatch = useDispatch();
 

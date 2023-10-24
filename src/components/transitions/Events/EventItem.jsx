@@ -9,7 +9,6 @@ import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
 import { setDataModal } from "@/global/modal-slice";
-import { useRouter } from "next/navigation";
 
 /**
  *
@@ -167,14 +166,14 @@ const EventItem = ({
 				<LinkAsBtn
 					href={urlLink_dependsPath}
 					className={classEvent.link}
-					prefetch={isDescription ? true : false}>
+					scroll={true}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
 
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
 						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/delete`}
+							href={`/events/${replacedTitle}-${id}/delete?event=${id}`}
 							scroll={false}>
 							{trl_btnDelete}
 						</LinkAsBtn>

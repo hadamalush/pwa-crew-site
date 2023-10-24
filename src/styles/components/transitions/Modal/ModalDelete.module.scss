@@ -1,0 +1,27 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.modal {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 300px;
+	padding: 2em;
+
+	&__heading {
+		width: 100%;
+		font-size: 1.6rem;
+		text-align: center;
+	}
+
+	button {
+		width: 40%;
+	}
+
+	@include media-query(mediumScreen) {
+		&__heading {
+			font-size: 2.2rem;
+		}
+	}
+}

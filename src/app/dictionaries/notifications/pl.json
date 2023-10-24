@@ -17,6 +17,10 @@
 			"generalError": "Nie udało się edytować wydarzenia",
 			"success": "Edytowano wydarzenie"
 		},
+		"deleteEvent": {
+			"generalError": "Nie udało się usunąć eventu",
+			"success": "Usunięto event"
+		},
 		"sendMessage": {
 			"success": "Wysłano wiadomość"
 		},
