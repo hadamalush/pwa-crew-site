@@ -1,4 +1,4 @@
-import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { generalConfig } from "@/config/gerenalConfig";
 import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
 import {
@@ -12,13 +12,21 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request) {
 	const url = new URL(request.url);
-
 	const eventId = url.searchParams.get("eventId");
+	const lang = url.searchParams.get("lang");
+
+	const dict = await getDictionaryNotifi(lang);
+
+	const notification = {
+		trl_err_404: dict.notifications.err_404,
+		trl_err_eventTitle: dict.notifications.eventPage.err_404_title,
+		trl_generalErr: dict.notifications.eventPage.generalError,
+	};
 
 	if (eventId.length !== 24) {
 		return NextResponse.json(
-			{ error: "Nie znaleziono takiego eventu" },
-			{ status: 404 }
+			{ error: notification.trl_err_404 },
+			{ status: 500 }
 		);
 	}
 
@@ -28,8 +36,8 @@ export async function GET(request) {
 		modifiedEventId = new ObjectId(eventId);
 	} catch (error) {
 		return NextResponse.json(
-			{ error: "Nie znaleziono takiego eventu" },
-			{ status: 404 }
+			{ error: notification.trl_err_404 },
+			{ status: 500 }
 		);
 	}
 
@@ -45,7 +53,9 @@ export async function GET(request) {
 
 		if (!result)
 			return NextResponse.json(
-				{ error: "Something went wrong" },
+				{
+					error: notification.trl_err_eventTitle,
+				},
 				{ status: 404 }
 			);
 	} catch (error) {

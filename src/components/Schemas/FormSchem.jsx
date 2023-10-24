@@ -1,6 +1,8 @@
 import * as yup from "yup";
 
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+const titleRules = /^[^#<>"'&]*$/;
+
 const SUPPORTED_FORMATS = [
 	"image/jpeg",
 	"image/png",
@@ -129,6 +131,7 @@ export const eventSchema = (lang, variant) => {
 			descriptionMax: "Minimum 300 znaków.",
 			fileMaxSize: "Maksymalny rozmiar pliku to 4 MB",
 			allowedFormats: "Dozwolone formaty: jpg, jpeg, png, webp",
+			illegalSign: "Niedozwolony znak",
 		},
 		en: {
 			titleMin: "Minimum 5 characters",
@@ -144,6 +147,7 @@ export const eventSchema = (lang, variant) => {
 			descriptionMax: "Minimum 300 characters.",
 			fileMaxSize: "The maximum file size is 4 MB",
 			allowedFormats: "Allowed formats: jpg, jpeg, png, webp",
+			illegalSign: "Illegal character",
 		},
 	};
 
@@ -183,6 +187,7 @@ export const eventSchema = (lang, variant) => {
 	return yup.object().shape({
 		title: yup
 			.string()
+			.matches(titleRules, messageEvent[lang].illegalSign)
 			.min(5, messageEvent[lang].titleMin)
 			.max(30, messageEvent[lang].titleMax)
 			.required(message[lang].required),

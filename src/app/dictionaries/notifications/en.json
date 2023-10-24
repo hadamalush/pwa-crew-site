@@ -4,6 +4,7 @@
 		"err_400": "Page not found",
 		"err_401": "You must be logged in",
 		"err_401_unAuth": "Unauthorized access",
+		"err_404": "Page not found",
 		"err_409": "Conflict. Such data already exists",
 		"err_422": "The data entered is not correct",
 		"err_429": "Limit exceeded ,try again in 30minutes",
@@ -25,6 +26,11 @@
 
 		"sendMessage": {
 			"success": "Message sent"
+		},
+		"eventPage": {
+			"generalError": "Something went wrong.",
+			"err_404_title": "No events found.",
+			"err_404_text": "Can be removed by owner."
 		},
 		"registration": {
 			"err_409": "A user with such an email address already exists.",

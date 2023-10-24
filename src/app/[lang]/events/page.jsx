@@ -40,8 +40,8 @@ export default async function Events({ params: { lang }, searchParams }) {
 
 const getData = cache(async id => {
 	let data;
-	const timestamp = Date.now();
-	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/events?timestamp=${timestamp}`;
+
+	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/events`;
 
 	try {
 		const response = await fetch(apiUrl, {

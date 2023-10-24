@@ -30,8 +30,8 @@ const LinkAsBtn = ({
 		: styles.link;
 
 	const classes = variant
-		? `${styles.link} ${className} ${styles[variant]}`
-		: `${classesLink}  ${className} `;
+		? `${styles.link}  ${styles[variant]} ${className || ""}`
+		: `${classesLink}  ${className || ""} `;
 
 	const classesSpan = isAnimation
 		? `${styles["link__border"]} ${styles["rotating-border"]}`
