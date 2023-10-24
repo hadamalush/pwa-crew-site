@@ -1,9 +1,17 @@
-import { NextResponse } from "next/server";
 import cloudinary from "cloudinary";
+import { NextResponse } from "next/server";
 import { convertImageWithSharp, uploadStream } from "@/lib/storage/storage";
 
 export const POST = async request => {
-	const readAbleStream = await request.body;
+	let readAbleStream;
+	try {
+		readAbleStream = await request.body;
+	} catch (err) {
+		return NextResponse.json(
+			{ error: "Failure readAbleStream." },
+			{ status: 304 }
+		);
+	}
 
 	cloudinary.config({
 		cloud_name: process.env.CLD_NAME,
@@ -27,8 +35,13 @@ export const POST = async request => {
 	}
 
 	const finalBuffer = Buffer.concat(buffers);
+	let convertedImage;
 
-	const convertedImage = await convertImageWithSharp(finalBuffer, 450, 300);
+	try {
+		convertedImage = await convertImageWithSharp(finalBuffer, 450, 300);
+	} catch (err) {
+		return NextResponse.json({ error: "Convert failed." }, { status: 304 });
+	}
 
 	let image;
 

@@ -81,10 +81,13 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 					);
 					const data = await response.json();
 
+					console.log(data);
+
 					if (data.message) {
 						imgSrcCld = data.message;
 					}
 				} catch (error) {
+					console.log(error);
 					dispatch(loading(false));
 					dispatch(
 						showResult({
