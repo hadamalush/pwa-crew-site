@@ -86,7 +86,7 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 const getEvent = async eventId => {
 	let data;
 
-	const apiUrl = `http://localhost:3000/api/event?eventId=${eventId}`;
+	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/event?eventId=${eventId}`;
 
 	try {
 		const response = await fetch(apiUrl);
