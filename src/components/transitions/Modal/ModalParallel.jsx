@@ -33,7 +33,7 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 		}, 100);
 
 		const styleBody = document.createElement("style");
-		styleBody.innerHTML = "body { overflow: hidden; }";
+		styleBody.innerHTML = ":root,body { overflow-y: hidden; }";
 		document.head.appendChild(styleBody);
 	}, []);
 
@@ -46,7 +46,7 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 	const closeModalHandler = useCallback(event => {
 		dispatch(setIsVisible({ isVisible: false }));
 		const styleBody = document.createElement("style");
-		styleBody.innerHTML = "body { overflow: visible; overflow-x: hidden }";
+		styleBody.innerHTML = ":root,body { overflow-y: visible; }";
 		document.head.appendChild(styleBody);
 
 		const timer = setTimeout(() => {

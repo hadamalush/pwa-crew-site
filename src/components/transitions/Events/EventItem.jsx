@@ -173,7 +173,7 @@ const EventItem = ({
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
 						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/delete`}
+							href={`/events/${replacedTitle}-${id}/delete?event=${id}`}
 							scroll={false}>
 							{trl_btnDelete}
 						</LinkAsBtn>

@@ -34,6 +34,8 @@ const ButtonMain = ({
 
 	const animationHandler = () => {
 		setIsAnimation(true);
+
+		onClick && onClick();
 	};
 
 	return (

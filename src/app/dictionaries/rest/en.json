@@ -127,6 +127,11 @@
 				"title": "Editing an event",
 				"btn_confirm": "Confirm"
 			}
+		},
+		"deleteEvent": {
+			"title": "Are you sure you want to delete this event?",
+			"btn_delete": "Delete",
+			"btn_cancel": "Cancel"
 		}
 	}
 }

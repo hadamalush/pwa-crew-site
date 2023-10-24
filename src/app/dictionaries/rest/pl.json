@@ -127,6 +127,11 @@
 				"title": "Edytowanie wydarzenia",
 				"btn_confirm": "Zatwierdź"
 			}
+		},
+		"deleteEvent": {
+			"title": "Czy aby na pewno chcesz usunąć to wydarzenie?",
+			"btn_delete": "Usuń",
+			"btn_cancel": "Anuluj"
 		}
 	}
 }

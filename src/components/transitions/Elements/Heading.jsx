@@ -6,10 +6,10 @@
  * @returns {JSX.Element} Returns heading tag.
  */
 
-const Heading = (className, as, children) => {
-	const Heading = as;
+const Heading = ({ className, as, children }) => {
+	const HeadingTag = as;
 
-	return <Heading className={className}>{children}</Heading>;
+	return <HeadingTag className={className}>{children}</HeadingTag>;
 };
 
 export default Heading;

@@ -1,7 +1,7 @@
 import ModalParallel from "@/components/transitions/Modal/ModalParallel";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
-import DeleteItem from "@/components/Tools/DeleteItem";
+import ModalDelete from "@/components/Tools/DeleteModal";
 
 export default async function EventEditModal({
 	params: { lang },
@@ -17,9 +17,21 @@ export default async function EventEditModal({
 		console.log(err);
 	}
 
+	const translationModalDelete = {
+		trl_title: dict.events.deleteEvent.title,
+		trl_btn_delete: dict.events.deleteEvent.btn_delete,
+		trl_btn_cancel: dict.events.deleteEvent.btn_cancel,
+		trl_err: dictNotifi.notifications.deleteEvent.generalError,
+	};
+
 	return (
-		<ModalParallel searchParams={searchParams}>
-			<DeleteItem heading='1'>Children</DeleteItem>
+		<ModalParallel>
+			<ModalDelete
+				lang={lang}
+				dict={translationModalDelete}
+				searchParams={searchParams}
+				hSize='h2'
+			/>
 		</ModalParallel>
 	);
 }
