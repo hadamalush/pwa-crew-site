@@ -85,6 +85,7 @@ export const convertImageWithSharp = async (buffer, width, height) => {
 // CLOUDINARY
 
 export const uploadStream = (buffer, options, cldConfig) => {
+	console.log("NO I SIE WYKONUJE1");
 	return new Promise((res, rej) => {
 		const upload_stream = cldConfig.v2.uploader.upload_stream(
 			options,
@@ -93,7 +94,9 @@ export const uploadStream = (buffer, options, cldConfig) => {
 				res(result);
 			}
 		);
+		console.log("NO I SIE WYKONUJE2");
 		let str = Readable.from(buffer);
 		str.pipe(upload_stream);
+		console.log("dsad");
 	});
 };
