@@ -13,7 +13,11 @@ export const metadata = {
 	description: "PwaCrew - najlepsza muzyka",
 };
 
-export default async function RootLayout({ children, params: { lang } }) {
+export default async function RootLayout({
+	children,
+	modalNotifi,
+	params: { lang },
+}) {
 	const dict = await getDictionaryElements(lang);
 
 	const navTranslation = {
@@ -39,6 +43,7 @@ export default async function RootLayout({ children, params: { lang } }) {
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
+						{modalNotifi}
 
 						{children}
 						<Footer />
