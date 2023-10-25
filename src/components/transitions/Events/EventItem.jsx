@@ -82,6 +82,7 @@ const EventItem = ({
 	}, []);
 
 	let isDescription;
+	const eventLink = `/events/${replacedTitle}-${id}#section_detail-item`;
 
 	if (params?.slug) {
 		const slug = params.slug;
@@ -89,9 +90,7 @@ const EventItem = ({
 		isDescription = id === eventId;
 	}
 
-	const urlLink_dependsPath = isDescription
-		? `/events#${"E" + id}`
-		: `/events/${replacedTitle}-${id}#section_detail-item`;
+	const urlLink_dependsPath = isDescription ? `/events#${"E" + id}` : eventLink;
 
 	const classDNone = styles["event__element-invisible"];
 
@@ -173,12 +172,12 @@ const EventItem = ({
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
 						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/delete?event=${id}`}
+							href={`/events/${replacedTitle}-${id}/delete?event=${id}&title=${title}`}
 							scroll={false}>
 							{trl_btnDelete}
 						</LinkAsBtn>
 						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/edit`}
+							href={`/events/${replacedTitle}-${id}/edit?event=${eventLink}`}
 							scroll={false}
 							onClick={loadDataModalHandler}>
 							{trl_btnEdit}

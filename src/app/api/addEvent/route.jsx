@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { connectDatabaseEvents } from "@/lib/mongodb";
+import { connectDatabaseEvents, connectDbMongo } from "@/lib/mongodb";
 import { insertDocument } from "@/lib/mongodb";
 import { getServerSession } from "next-auth";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
+import { addNotification } from "@/lib/crud";
+import { ObjectId } from "mongodb";
 
 export const POST = async request => {
 	const session = await getServerSession();
@@ -69,7 +71,7 @@ export const POST = async request => {
 		);
 	}
 
-	let client;
+	let client, clientNotifi, resultAddedEvent;
 
 	try {
 		client = await connectDatabaseEvents();
@@ -81,7 +83,7 @@ export const POST = async request => {
 	}
 
 	try {
-		await insertDocument(client, "AllEvents", {
+		resultAddedEvent = await insertDocument(client, "AllEvents", {
 			user_email: email,
 			title,
 			town,
@@ -103,6 +105,34 @@ export const POST = async request => {
 			},
 			{ status: 305 }
 		);
+	}
+
+	const eventId =
+		resultAddedEvent.acknowledged &&
+		new ObjectId(resultAddedEvent.insertedId).toString();
+
+	const replacedTitle = title.replaceAll(" ", "-");
+	const eventLink = `/events/${replacedTitle}-${eventId}#section_detail-item`;
+
+	try {
+		clientNotifi = await connectDbMongo("Users");
+	} catch (error) {
+		console.log(error);
+		console.log("Failed connection to users databse.");
+	}
+
+	const dataNotifi = {
+		email: email,
+		actionTextPL: "Utwórzono wydarzenie.",
+		actionTextEN: "Created event",
+		href: eventLink,
+		title: title,
+	};
+
+	try {
+		await addNotification(clientNotifi, "Notifications", dataNotifi);
+	} catch (err) {
+		console.log("Failed to add notification");
 	}
 
 	client.close();

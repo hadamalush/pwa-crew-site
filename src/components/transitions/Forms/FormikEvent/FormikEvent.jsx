@@ -29,6 +29,7 @@ const FormikEvent = ({
 	lang,
 	trl_error,
 	scroll,
+	searchParams,
 	variant,
 }) => {
 	const dispatch = useDispatch();
@@ -69,8 +70,6 @@ const FormikEvent = ({
 		dispatch(loading(true));
 		const file = values.fileImg;
 		const uploadStorage = generalConfig.uploadImageStorageEvent;
-
-		console.log(file);
 
 		let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 
@@ -180,7 +179,9 @@ const FormikEvent = ({
 			}
 		}
 
-		const apiLinkDependsVariant = variant ? "/api/editEvent" : "/api/addEvent";
+		const apiLinkDependsVariant = variant
+			? `/api/editEvent?eventLink=${searchParams?.event}`
+			: "/api/addEvent";
 
 		try {
 			const response = await fetch(apiLinkDependsVariant, {

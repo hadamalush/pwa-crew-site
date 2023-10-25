@@ -6,11 +6,9 @@ import styles from "../../styles/components/transitions/Modal/ModalDelete.module
 import { useDispatch } from "react-redux";
 import { loading, showResult } from "@/global/notification-slice";
 import { setIsVisible } from "@/global/modal-slice";
-import { useRouter } from "next/navigation";
 
 const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 	const dispatch = useDispatch();
-	const router = useRouter();
 
 	const itemId = searchParams?.event;
 	const { trl_title, trl_btn_delete, trl_btn_cancel, trl_err } = dict;
@@ -21,11 +19,14 @@ const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 
 		if (!cancel) {
 			try {
-				const response = await fetch("/api/deleteEvent", {
-					method: "DELETE",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ id: itemId, lang }),
-				});
+				const response = await fetch(
+					`/api/deleteEvent?title=${searchParams?.title}`,
+					{
+						method: "DELETE",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ id: itemId, lang }),
+					}
+				);
 
 				data = await response.json();
 
@@ -52,10 +53,6 @@ const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 			);
 
 			dispatch(setIsVisible({ isVisible: "close" }));
-			// const timer = setTimeout(() => {
-			// 	clearTimeout(timer);
-			// 	router.replace("/events?refresh=true");
-			// }, 500);
 
 			return;
 		}
