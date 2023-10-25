@@ -11,8 +11,6 @@ export default function Error({ error, reset }) {
 
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
-	console.log(isMediumScreen);
-
 	useEffect(() => {
 		window.scrollTo({ top: isMediumScreen ? 500 : 550 });
 	}, [error]);
