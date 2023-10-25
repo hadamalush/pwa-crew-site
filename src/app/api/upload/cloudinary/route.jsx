@@ -69,7 +69,8 @@ export const POST = async request => {
 		resource_type: "image",
 		folder: "events",
 	};
-	console.log("44444444444444444444444444");
+
+	console.log(convertedImage);
 	try {
 		image = await uploadStream(convertedImage, options, cloudinary);
 	} catch {
