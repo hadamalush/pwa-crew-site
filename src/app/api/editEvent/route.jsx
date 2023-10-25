@@ -7,6 +7,7 @@ import {
 import { getServerSession } from "next-auth";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { ObjectId } from "mongodb";
+import { addNotification } from "@/lib/crud";
 
 export const PATCH = async request => {
 	const session = await getServerSession();
@@ -135,6 +136,25 @@ export const PATCH = async request => {
 			},
 			{ status: 428 }
 		);
+	}
+
+	try {
+		clientNotifi = await connectDbMongo("Users");
+	} catch (error) {
+		console.log("Failed connection to users databse.");
+	}
+
+	const dataNotifi = {
+		email: email,
+		actionTextPL: "Edytowano wydarzenie.",
+		actionTextEN: "Edited the event",
+		title: title,
+	};
+
+	try {
+		await addNotification(clientNotifi, "Notifications", dataNotifi);
+	} catch (err) {
+		console.log("Failed to add notification");
 	}
 
 	client.close();

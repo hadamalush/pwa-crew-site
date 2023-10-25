@@ -7,7 +7,6 @@ import Notification from "@/components/transitions/Notification/Notification";
 import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
-import Modal from "@/components/transitions/Modal/Modal";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
@@ -40,7 +39,7 @@ export default async function RootLayout({ children, params: { lang } }) {
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
-						<Modal lang={lang} />
+
 						{children}
 						<Footer />
 					</ReduxProvider>

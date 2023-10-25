@@ -9,8 +9,6 @@ export const POST = async request => {
 
 	try {
 		readAbleStream = await request.body;
-
-		console.log(readAbleStream);
 	} catch (err) {
 		return NextResponse.json(
 			{ error: "Failure readAbleStream." },
@@ -67,8 +65,6 @@ export const POST = async request => {
 	}
 
 	const { secure_url } = image;
-
-	console.log(secure_url);
 
 	return NextResponse.json({ message: secure_url });
 };

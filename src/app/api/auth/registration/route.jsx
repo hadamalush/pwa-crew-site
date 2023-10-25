@@ -10,6 +10,7 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { generationIdLink, sendActivationLink } from "@/lib/message/message";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
+import { addNotification } from "@/lib/crud";
 
 export async function POST(request) {
 	const data = await request.json();
@@ -42,7 +43,7 @@ export async function POST(request) {
 		);
 	}
 
-	let client;
+	let client, clientNotifi;
 
 	try {
 		client = await connectDatabase();
@@ -132,6 +133,28 @@ export async function POST(request) {
 			},
 			{ status: 400 }
 		);
+	}
+
+	try {
+		clientNotifi = await connectDbMongo("Users");
+	} catch (error) {
+		console.log("Failed connection to users databse.");
+	}
+
+	const dataNotifi = {
+		email: email,
+		actionTextPL: "Zarejestrowałeś się pomyślnie.",
+		actionTextEN: "Registered success",
+	};
+
+	try {
+		const result = await addNotification(
+			clientNotifi,
+			"Notifications",
+			dataNotifi
+		);
+	} catch (err) {
+		console.log("Failed to add notification");
 	}
 
 	client.close();

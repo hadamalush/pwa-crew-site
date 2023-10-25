@@ -41,6 +41,7 @@ export default async function EventEditModal({
 				searchParams={searchParams}
 				variant='edit'
 				scroll='block'
+				style={{ width: "100%" }}
 			/>
 		</ModalParallel>
 	);
