@@ -15,10 +15,17 @@ export const metadata = {
 
 export default async function RootLayout({
 	children,
-	modalNotifi,
 	params: { lang },
+	...props
 }) {
+	// const lang = params?.lang;
 	const dict = await getDictionaryElements(lang);
+
+	// console.log(lang);
+
+	console.log(props);
+
+	// console.log(props.notifications);
 
 	const navTranslation = {
 		trl_home: dict.navigation.home,
@@ -43,7 +50,7 @@ export default async function RootLayout({
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
-						{modalNotifi}
+						{/* {props.notifications} */}
 
 						{children}
 						<Footer />
