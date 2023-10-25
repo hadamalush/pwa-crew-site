@@ -10,15 +10,14 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const eventId = slug.substring(slug.lastIndexOf("-") + 1);
 	let event;
 	try {
-		console.log("dasdijasiudhasuidhasuidh");
 		event = await getEvent(eventId, lang);
 	} catch (err) {
 		console.log(err);
 	}
 
-	// if (!event || event.error) {
-	// 	throw new Error(event.error);
-	// }
+	if (!event || event.error) {
+		throw new Error(event.error);
+	}
 
 	const {
 		title,
