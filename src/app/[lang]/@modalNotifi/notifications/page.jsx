@@ -25,13 +25,14 @@ export default async function DeleteEventModal({
 	};
 
 	return (
-		<ModalParallel>
-			<ModalDelete
-				lang={lang}
-				dict={translationModalDelete}
-				searchParams={searchParams}
-				hSize='h2'
-			/>
-		</ModalParallel>
+		<div>doksaodkasod</div>
+		// <ModalParallel>
+		// 	<ModalDelete
+		// 		lang={lang}
+		// 		dict={translationModalDelete}
+		// 		searchParams={searchParams}
+		// 		hSize='h2'
+		// 	/>
+		// </ModalParallel>
 	);
 }
