@@ -93,12 +93,12 @@ export const uploadStream = (buffer, options, cldConfig) => {
 				if (err) return rej(err);
 				res(result);
 
-				console.log(result);
-				console.log(result.secure_url);
+				console.log("RESUUUUUUUUUUUULT:", result);
+				console.log("SEcUUre", result.secure_url);
 			}
 		);
 
-		console.log(upload_stream);
+		console.log("UPLOAD: ", upload_stream);
 		let str = Readable.from(buffer);
 		str.pipe(upload_stream);
 		console.log("dsad");
