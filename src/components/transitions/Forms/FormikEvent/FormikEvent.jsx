@@ -80,6 +80,7 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 						{
 							method: "POST",
 							body: file,
+							cache: "no-store",
 						}
 					);
 

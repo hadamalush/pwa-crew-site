@@ -2,6 +2,8 @@ import cloudinary from "cloudinary";
 import { NextResponse } from "next/server";
 import { convertImageWithSharp, uploadStream } from "@/lib/storage/storage";
 
+export const dynamic = "force-dynamic";
+
 export const POST = async request => {
 	let readAbleStream;
 
