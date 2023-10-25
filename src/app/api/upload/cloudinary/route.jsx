@@ -4,8 +4,21 @@ import { convertImageWithSharp, uploadStream } from "@/lib/storage/storage";
 
 export const POST = async request => {
 	let readAbleStream;
+
+	// NextResponse.headers.append("Access-Control-Allow-Origin", "*"); // Zastąp '*' swoim rzeczywistym pochodzeniem
+	// NextResponse.headers.append(
+	// 	"Access-Control-Allow-Methods",
+	// 	"GET,DELETE,PATCH,POST,PUT"
+	// );
+	// NextResponse.headers.append(
+	// 	"Access-Control-Allow-Headers",
+	// 	"X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+	// );
+
 	try {
 		readAbleStream = await request.body;
+
+		console.log(readAbleStream);
 	} catch (err) {
 		return NextResponse.json(
 			{ error: "Failure readAbleStream." },

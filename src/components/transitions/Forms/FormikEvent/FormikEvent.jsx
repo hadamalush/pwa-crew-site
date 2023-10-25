@@ -63,12 +63,15 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 		const file = values.fileImg;
 		const uploadStorage = generalConfig.uploadImageStorageEvent;
 
+		console.log(file);
+
 		let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 
 		//CHECKING VARIANT
 
 		if ((variant && values.fileImg) || !variant) {
 			//UPLOAD FILE TO CLOUDINARY
+			// https://pwa-crew-site-demo.vercel.app/api/upload/cloudinary?filename=${file.name}
 
 			if (uploadStorage === "cloudinary" || uploadStorage === "all") {
 				try {
@@ -79,6 +82,7 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 							body: file,
 						}
 					);
+
 					const data = await response.json();
 
 					console.log(data);
