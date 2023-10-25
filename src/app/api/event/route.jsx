@@ -17,8 +17,6 @@ export async function GET(request) {
 
 	const dict = await getDictionaryNotifi(lang);
 
-	console.log(request);
-
 	const notification = {
 		trl_err_404: dict.notifications.err_404,
 		trl_err_eventTitle: dict.notifications.eventPage.err_404_title,

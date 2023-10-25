@@ -3,6 +3,7 @@ import EventItem from "@/components/transitions/Events/EventItem";
 import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import { cache } from "react";
 
 const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const dict = await getDictionaryElements(lang);
@@ -92,7 +93,7 @@ const getEvent = async (eventId, lang) => {
 		data = await response.json();
 
 		if (!response.ok) {
-			return { error: "Page not found" };
+			return { error: data.error };
 		}
 	} catch (error) {
 		return { error: "Something went wrong" };
