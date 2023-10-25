@@ -80,13 +80,12 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 						{
 							method: "POST",
 							body: file,
-							cache: "no-store",
 						}
 					);
 
-					const data = await response.json();
+					console.log(response);
 
-					console.log(data);
+					const data = await response.json();
 
 					if (data.message) {
 						imgSrcCld = data.message;
@@ -113,6 +112,7 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 						{
 							method: "POST",
 							body: file,
+							mode: "no-cors",
 						}
 					);
 					const data = await response.json();
