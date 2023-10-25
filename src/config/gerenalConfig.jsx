@@ -5,7 +5,7 @@ export const generalConfig = {
 
 	/* STORAGE */
 
-	uploadImageStorageEvent: "cloudinary", //local - only working on localhost! | cloudinary | vercelBlob - fast | mega - slow | all - will be send to all bases
+	uploadImageStorageEvent: "mega", //local - only working on localhost! | cloudinary | vercelBlob - fast | mega - slow | all - will be send to all bases
 	downloadImageStorageEvent: ["cloudinary", "mega", "vercelBlob"], // options: 'mega', 'vercelBlob' - The first option takes precedence if will be empty then will be use second option.
 
 	/* EMAILS */
