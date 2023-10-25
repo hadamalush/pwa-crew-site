@@ -38,7 +38,7 @@ export const POST = async request => {
 	} catch (err) {
 		return NextResponse.json({ error: "Failure cloudinary." }, { status: 304 });
 	}
-
+	console.log("111111111111111111");
 	const buffers = [];
 
 	// covert to buffer
@@ -52,7 +52,7 @@ export const POST = async request => {
 			{ status: 304 }
 		);
 	}
-
+	console.log("2222222222222222222222");
 	const finalBuffer = Buffer.concat(buffers);
 	let convertedImage;
 
@@ -61,7 +61,7 @@ export const POST = async request => {
 	} catch (err) {
 		return NextResponse.json({ error: "Convert failed." }, { status: 304 });
 	}
-
+	console.log("3333333333333333333333");
 	let image;
 
 	const options = {
@@ -69,14 +69,16 @@ export const POST = async request => {
 		resource_type: "image",
 		folder: "events",
 	};
-
+	console.log("44444444444444444444444444");
 	try {
 		image = await uploadStream(convertedImage, options, cloudinary);
 	} catch {
 		return NextResponse.json({ error: "Failure upload." }, { status: 422 });
 	}
-
+	console.log("55555555555555555555555555");
 	const { secure_url } = image;
+
+	console.log(secure_url);
 
 	return NextResponse.json({ message: secure_url });
 };
