@@ -3,7 +3,7 @@ import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import ModalDelete from "@/components/Tools/DeleteModal";
 
-export default async function EventEditModal({
+export default async function DeleteEventModal({
 	params: { lang },
 	searchParams,
 	...props

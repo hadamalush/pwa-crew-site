@@ -1,16 +1,33 @@
-import { NextResponse } from "next/server";
 import cloudinary from "cloudinary";
+import { NextResponse } from "next/server";
 import { convertImageWithSharp, uploadStream } from "@/lib/storage/storage";
 
-export const POST = async request => {
-	const readAbleStream = await request.body;
+export const dynamic = "force-dynamic";
 
-	cloudinary.config({
-		cloud_name: process.env.CLD_NAME,
-		api_key: process.env.CLD_API,
-		api_secret: process.env.CLD_SECRET,
-		secure: true,
-	});
+export const POST = async request => {
+	let readAbleStream;
+
+	try {
+		readAbleStream = await request.body;
+
+		console.log(readAbleStream);
+	} catch (err) {
+		return NextResponse.json(
+			{ error: "Failure readAbleStream." },
+			{ status: 304 }
+		);
+	}
+
+	try {
+		cloudinary.config({
+			cloud_name: process.env.CLD_NAME,
+			api_key: process.env.CLD_API,
+			api_secret: process.env.CLD_SECRET,
+			secure: true,
+		});
+	} catch (err) {
+		return NextResponse.json({ error: "Failure cloudinary." }, { status: 304 });
+	}
 
 	const buffers = [];
 
@@ -27,8 +44,13 @@ export const POST = async request => {
 	}
 
 	const finalBuffer = Buffer.concat(buffers);
+	let convertedImage;
 
-	const convertedImage = await convertImageWithSharp(finalBuffer, 450, 300);
+	try {
+		convertedImage = await convertImageWithSharp(finalBuffer, 450, 300);
+	} catch (err) {
+		return NextResponse.json({ error: "Convert failed." }, { status: 304 });
+	}
 
 	let image;
 
@@ -45,6 +67,8 @@ export const POST = async request => {
 	}
 
 	const { secure_url } = image;
+
+	console.log(secure_url);
 
 	return NextResponse.json({ message: secure_url });
 };

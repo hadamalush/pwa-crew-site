@@ -4,6 +4,7 @@
 		"err_400": "Nie znaleziono strony",
 		"err_401": "Musisz być zalogowany",
 		"err_401_unAuth": "Nieautoryzowany dostęp",
+		"err_404": "Nie znaleziono takiej strony",
 		"err_409": "Konflikt. Takie dane już istnieją",
 		"err_422": "Wrowadzone dane są nie prawidłowe",
 		"err_429": "Przekroczono limit, spróbuj ponownie za 30 minut",
@@ -23,6 +24,11 @@
 		},
 		"sendMessage": {
 			"success": "Wysłano wiadomość"
+		},
+		"eventPage": {
+			"generalError": "Coś poszło nie tak.",
+			"err_404_title": "Nie znaleziono takiego wydarzenia.",
+			"err_404_text": "Prawdopodobnie zostało usunięte przez właściciela."
 		},
 		"registration": {
 			"err_409": "Użytkownik z takim adresem email juz istnieje.",

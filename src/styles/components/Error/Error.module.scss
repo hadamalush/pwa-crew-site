@@ -1,0 +1,34 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+
+main .error {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $background-quinary;
+	flex-wrap: wrap;
+	padding: 5em 2em 10em;
+	color: $secondary-color;
+	min-height: 50rem;
+
+	&__heading {
+		text-align: center;
+		max-height: max-content;
+
+		width: 100%;
+	}
+
+	&__text {
+		width: 100%;
+		text-align: center;
+		color: $tertiary-color;
+		align-self: flex-start;
+		margin: 0.5em 0 3em;
+	}
+
+	@include media-query(mediumScreen) {
+		&__link {
+			margin: 0 0.5em;
+		}
+	}
+}

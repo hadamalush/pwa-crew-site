@@ -93,6 +93,7 @@ export const uploadStream = (buffer, options, cldConfig) => {
 				res(result);
 			}
 		);
+
 		let str = Readable.from(buffer);
 		str.pipe(upload_stream);
 	});

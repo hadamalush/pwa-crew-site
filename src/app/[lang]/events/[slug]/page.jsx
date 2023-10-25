@@ -1,16 +1,9 @@
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import EventItem from "@/components/transitions/Events/EventItem";
 import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
-
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
-import { generalConfig } from "@/config/gerenalConfig";
-import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
-import {
-	oneConvertFromBuffersToBase64,
-	oneDownloadBuffersMegaNz,
-} from "@/lib/storage/storage";
-import { ObjectId } from "mongodb";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
+import { cache } from "react";
 
 const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const dict = await getDictionaryElements(lang);
@@ -18,13 +11,17 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const eventId = slug.substring(slug.lastIndexOf("-") + 1);
 	let event;
 	try {
-		event = await getEvent(eventId);
+		event = await getEvent(eventId, lang);
 	} catch (err) {
+		console.log("EORRRRRRRRRRRRRR");
 		console.log(err);
 	}
+	console.log("wykonuje");
+
+	console.log(event);
 
 	if (!event || event.error) {
-		throw new Error("No result found");
+		throw new Error(event.error);
 	}
 
 	const {
@@ -83,18 +80,20 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 	);
 };
 
-const getEvent = async eventId => {
+const getEvent = async (eventId, lang) => {
 	let data;
 
-	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/event?eventId=${eventId}`;
+	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/event?eventId=${eventId}&lang=${lang}`;
 
 	try {
-		const response = await fetch(apiUrl);
+		const response = await fetch(apiUrl, {
+			cache: "no-store",
+		});
 
 		data = await response.json();
 
-		if (!response) {
-			return { error: "Page not found" };
+		if (!response.ok) {
+			return { error: data.error };
 		}
 	} catch (error) {
 		return { error: "Something went wrong" };
