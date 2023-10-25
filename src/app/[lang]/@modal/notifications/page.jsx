@@ -1,15 +1,15 @@
-// import ModalParallel from "@/components/transitions/Modal/ModalParallel";
+import ModalParallel from "@/components/transitions/Modal/ModalParallel";
 
 // import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 // import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 // import ModalDelete from "@/components/Tools/DeleteModal";
 
-export default async function DeleteEventModal({ searchParams, ...props }) {
+export default function DeleteEventModal({ searchParams, ...props }) {
 	// let dict, dictNotifi;
 
 	// const notifications = await getData();
 
-	console.log(notifications);
+	// console.log(notifications);
 
 	// try {
 	// 	dict = await getDictionaryElements(lang);
@@ -18,8 +18,8 @@ export default async function DeleteEventModal({ searchParams, ...props }) {
 	// 	console.log(err);
 	// }
 
-	// return <ModalParallel>dasdasdasdsadsad</ModalParallel>;
-	return <div>csdc</div>;
+	return <ModalParallel>dasdasdasdsadsad</ModalParallel>;
+	// return <div>csdc</div>;
 }
 
 // const getData = async () => {
