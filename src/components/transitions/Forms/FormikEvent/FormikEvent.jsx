@@ -112,7 +112,6 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 						{
 							method: "POST",
 							body: file,
-							mode: "no-cors",
 						}
 					);
 					const data = await response.json();

@@ -16,9 +16,9 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 		console.log(err);
 	}
 
-	if (!event || event.error) {
-		throw new Error(event.error);
-	}
+	// if (!event || event.error) {
+	// 	throw new Error(event.error);
+	// }
 
 	const {
 		title,
