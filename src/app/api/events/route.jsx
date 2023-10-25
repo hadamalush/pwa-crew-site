@@ -12,6 +12,8 @@ export async function GET(request) {
 	// setting which storage should be using
 	const storage = generalConfig.downloadImageStorageEvent;
 
+	console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
 	let result;
 	try {
 		const db = await connectDb();

@@ -12,9 +12,12 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 	try {
 		event = await getEvent(eventId, lang);
 	} catch (err) {
+		console.log("EORRRRRRRRRRRRRR");
 		console.log(err);
 	}
 	console.log("wykonuje");
+
+	console.log(event);
 
 	if (!event || event.error) {
 		throw new Error(event.error);
@@ -88,7 +91,7 @@ const getEvent = async (eventId, lang) => {
 
 		data = await response.json();
 
-		if (!response) {
+		if (!response.ok) {
 			return { error: "Page not found" };
 		}
 	} catch (error) {
