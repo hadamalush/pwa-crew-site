@@ -9,4 +9,43 @@
 		text-align: center;
 		color: $secondary-color;
 	}
+
+	&__pag {
+		display: flex;
+		justify-content: center;
+	}
+
+	&__pag-item {
+		font-size: 1.6rem;
+		margin: 1em 0;
+		padding: 0.5em 1em;
+		color: $primary-color;
+		cursor: pointer;
+		transition: color 0.3s, transform 0.3s;
+
+		&:hover {
+			color: $secondary-color;
+			transform: scale(1.2);
+		}
+
+		&--active {
+			clip-path: polygon(
+				30% 0%,
+				70% 0%,
+				100% 30%,
+				100% 70%,
+				70% 100%,
+				30% 100%,
+				0% 70%,
+				0% 30%
+			);
+
+			&:hover {
+				transform: scale(1);
+			}
+			font-weight: bold;
+
+			background-color: $background-primary;
+		}
+	}
 }
