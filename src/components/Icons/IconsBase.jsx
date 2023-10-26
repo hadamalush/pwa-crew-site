@@ -622,7 +622,7 @@ export function IconsBase() {
 		arrow_back: (
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
-				className='icon icon-tabler icon-tabler-arrow-big-left-line'
+				className='icon icon-tabler icon-tabler-chevron-left'
 				viewBox='0 0 24 24'
 				strokeWidth='2'
 				stroke='currentColor'
@@ -630,8 +630,21 @@ export function IconsBase() {
 				strokeLinecap='round'
 				strokeLinejoin='round'>
 				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-				<path d='M12 15v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h6v6h-6z'></path>
-				<path d='M21 15v-6'></path>
+				<path d='M15 6l-6 6l6 6'></path>
+			</svg>
+		),
+		arrow_next: (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className='icon icon-tabler icon-tabler-chevron-right'
+				viewBox='0 0 24 24'
+				strokeWidth='2'
+				stroke='currentColor'
+				fill='none'
+				strokeLinecap='round'
+				strokeLinejoin='round'>
+				<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+				<path d='M9 6l6 6l-6 6'></path>
 			</svg>
 		),
 		code: (

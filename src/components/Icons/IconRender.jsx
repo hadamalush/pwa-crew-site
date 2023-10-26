@@ -91,6 +91,8 @@ const IconRender = ({ onClick, ...props }) => {
 				return icons.quotes;
 			case "arrow_back":
 				return icons.arrow_back;
+			case "arrow_next":
+				return icons.arrow_next;
 			case "code":
 				return icons.code;
 			case "flagPL":

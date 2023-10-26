@@ -3,16 +3,17 @@
 import NotificationItem from "./NotificationItem";
 import styles from "../../../styles/components/transitions/Notification/NotificationList.module.scss";
 import { useState } from "react";
+import IconRender from "@/components/Icons/IconRender";
 
 const NotificationList = ({ notifications }) => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [notifiPerPage, setNotifiPerPage] = useState(2);
+	const [notifiPerPage, setNotifiPerPage] = useState(4);
+
+	console.log(currentPage);
 
 	const keys = Object.keys(notifications);
 	const allNotices = Object.values(notifications);
 	const maxPage = Math.ceil(allNotices.length / notifiPerPage);
-
-	console.log(maxPage);
 
 	const lastNotifiIndex = currentPage * notifiPerPage;
 	const firstNotifiIndex = lastNotifiIndex - notifiPerPage;
@@ -31,6 +32,30 @@ const NotificationList = ({ notifications }) => {
 		currentPage > 3 && maxPage >= 6 && currentPage + 3 <= maxPage;
 
 	let i = 0;
+
+	const changePageHandler = (event, action) => {
+		console.log(action);
+		if (action) {
+			if (action === "back" && currentPage === 1) return;
+			else if (action === "back") {
+				setCurrentPage(prevState => prevState - 1);
+				return;
+			}
+
+			if (action === "next" && currentPage === maxPage) return;
+			else if (action === "next") {
+				setCurrentPage(prevState => prevState + 1);
+				return;
+			}
+		}
+
+		const liElement = event.target;
+		const value = liElement.textContent.trim();
+		if (isNaN(value)) return;
+
+		const enteredPage = parseInt(value);
+		setCurrentPage(enteredPage);
+	};
 
 	return (
 		<ul className={styles.notifications}>
@@ -52,12 +77,20 @@ const NotificationList = ({ notifications }) => {
 			})}
 
 			<ul className={styles.notifications__pag}>
-				<li className={currentPage === 1 ? classesPagItemActive : classPagItem}>
+				<IconRender
+					variant='arrow_back'
+					className={styles["notifications__pag-arrow"]}
+					onClick={event => changePageHandler(event, "back")}
+				/>
+				<li
+					className={currentPage === 1 ? classesPagItemActive : classPagItem}
+					onClick={event => changePageHandler(event)}>
 					1
 				</li>
 				{maxPage >= 2 && (
 					<li
-						className={currentPage === 2 ? classesPagItemActive : classPagItem}>
+						className={currentPage === 2 ? classesPagItemActive : classPagItem}
+						onClick={event => changePageHandler(event)}>
 						{((maxPage >= 2 && currentPage <= 3) || [4, 5].includes(maxPage)) &&
 							"2"}
 						{maxPage >= 6 && currentPage >= 4 && "..."}
@@ -70,7 +103,8 @@ const NotificationList = ({ notifications }) => {
 							(currentPage + 2 <= maxPage && ![1, 2].includes(currentPage))
 								? classesPagItemActive
 								: classPagItem
-						}>
+						}
+						onClick={event => changePageHandler(event)}>
 						{middlePagNumberLower && "3"}
 						{middlePagNumberHigher && !middlePagNumberLower && currentPage}
 						{!middlePagNumberHigher &&
@@ -88,7 +122,8 @@ const NotificationList = ({ notifications }) => {
 							(maxPage === 4 && currentPage === maxPage)
 								? classesPagItemActive
 								: classPagItem
-						}>
+						}
+						onClick={event => changePageHandler(event)}>
 						{[4, 5].includes(maxPage) && maxPage <= 5 && "4"}
 						{currentPage + 2 < maxPage && maxPage > 6 && "..."}
 						{[currentPage + 2, currentPage + 1, currentPage].includes(
@@ -104,10 +139,17 @@ const NotificationList = ({ notifications }) => {
 							currentPage === maxPage && maxPage >= 5
 								? classesPagItemActive
 								: classPagItem
-						}>
+						}
+						onClick={event => changePageHandler(event)}>
 						{maxPage >= 5 && maxPage}
 					</li>
 				)}
+
+				<IconRender
+					variant='arrow_next'
+					className={styles["notifications__pag-arrow"]}
+					onClick={event => changePageHandler(event, "next")}
+				/>
 			</ul>
 		</ul>
 	);

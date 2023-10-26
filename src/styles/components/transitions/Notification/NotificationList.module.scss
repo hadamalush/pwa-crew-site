@@ -25,7 +25,7 @@
 
 		&:hover {
 			color: $secondary-color;
-			transform: scale(1.2);
+			transform: scale(1.05);
 		}
 
 		&--active {
@@ -46,6 +46,19 @@
 			font-weight: bold;
 
 			background-color: $background-primary;
+		}
+	}
+
+	&__pag-arrow {
+		margin: auto 0;
+		cursor: pointer;
+
+		svg {
+			transition: color 0.3s;
+		}
+
+		&:hover svg {
+			color: $secondary-color;
 		}
 	}
 }
