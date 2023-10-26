@@ -9,7 +9,7 @@ const NotificationList = ({ notifications }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [notifiPerPage, setNotifiPerPage] = useState(4);
 
-	console.log(currentPage);
+	console.log(notifications);
 
 	const keys = Object.keys(notifications);
 	const allNotices = Object.values(notifications);
