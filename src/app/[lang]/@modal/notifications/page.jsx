@@ -1,16 +1,20 @@
 import ModalParallel from "@/components/transitions/Modal/ModalParallel";
+import { getServerSession } from "next-auth";
+import { cache } from "react";
 
 // import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 // import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 // import ModalDelete from "@/components/Tools/DeleteModal";
 
-export default function DeleteEventModal({ searchParams, ...props }) {
-	// let dict, dictNotifi;
+export default async function DeleteEventModal({ searchParams, ...props }) {
+	let dict, dictNotifi;
 
-	// const notifications = await getData();
+	const session = await getServerSession();
+	const email = session?.user?.email;
 
-	// console.log(notifications);
+	const notifications = await getData(email);
 
+	console.log("NO I JEST: ", notifications);
 	// try {
 	// 	dict = await getDictionaryElements(lang);
 	// 	dictNotifi = await getDictionaryNotifi(lang);
@@ -19,26 +23,26 @@ export default function DeleteEventModal({ searchParams, ...props }) {
 	// }
 
 	return <ModalParallel>dasdasdasdsadsad</ModalParallel>;
-	// return <div>csdc</div>;
 }
 
-// const getData = async () => {
-// 	let notifications;
+const getData = cache(async email => {
+	const timestamp = Date.now();
+	const apiUrl = `http://localhost:3000//api/getNotifications?timestamp=${timestamp}&email=${
+		email || null
+	}`;
+	let notifications;
 
-// 	try {
-// 		const response = await fetch(
-// 			"http://localhost:3000//api/getNotifications",
-// 			{
-// 				cache: "no-store",
-// 			}
-// 		);
+	try {
+		const response = await fetch(apiUrl, {
+			next: { revalidate: 0 },
+		});
 
-// 		// notifications = response.json();
+		const data = await response.json();
 
-// 		// console.log(data);
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
+		notifications = data?.notifications;
+	} catch (err) {
+		console.log(err);
+	}
 
-// 	return notificationsModal;
-// };
+	return notifications;
+});

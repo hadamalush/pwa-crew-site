@@ -6,63 +6,42 @@
 // 	oneDownloadBuffersMegaNz,
 // } from "@/lib/storage/storage";
 // import { ObjectId } from "mongodb";
-import { getServerSession } from "next-auth";
+import { connectDbMongo, findDocument } from "@/lib/mongodb";
+import { NextResponse } from "next/server";
 // import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(request) {
-	const session = await getServerSession();
+	const url = new URL(request.url);
+	const email = url.searchParams.get("email");
+	let client, notifications;
 
-	console.log("SESSION :", session);
+	if (!email) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
 
-	// let client, result;
-	// try {
-	// 	client = await connectDatabaseEvents();
-	// } catch (error) {
-	// 	console.log(error);
-	// }
+	try {
+		client = await connectDbMongo("Users");
+	} catch (error) {
+		console.log(error);
+		return NextResponse.json({ error: "Unauthorized" }, { status: 400 });
+	}
 
-	// try {
-	// 	result = await findDocument(client, "AllEvents", { _id: modifiedEventId });
+	try {
+		notifications = await findDocument(client, "Notifications", {
+			email: email,
+		});
+	} catch (error) {
+		console.log(error);
+		return NextResponse.json(
+			{ error: "Something went wrong" },
+			{ status: 400 }
+		);
+	}
 
-	// 	if (!result)
-	// 		return NextResponse.json(
-	// 			{
-	// 				error: notification.trl_err_eventTitle,
-	// 			},
-	// 			{ status: 404 }
-	// 		);
-	// } catch (error) {
-	// 	return NextResponse.json(
-	// 		{ error: "Something went wrong" },
-	// 		{ status: 404 }
-	// 	);
-	// }
-
-	// const storage = generalConfig.downloadImageStorageEvent;
-	// let uploadStorage = storage[0];
-
-	// if (!result[`image_src_${storage[0]}`]) {
-	// 	uploadStorage = storage[1];
-	// }
-
-	// try {
-	// 	if (uploadStorage === "mega") {
-	// 		const buffer = await oneDownloadBuffersMegaNz(result.image_src_mega);
-	// 		result.image_src_mega = oneConvertFromBuffersToBase64(buffer);
-	// 	}
-	// } catch (err) {
-	// 	return NextResponse.json(
-	// 		{ error: "Something went wrong" },
-	// 		{ status: 404 }
-	// 	);
-	// }
-
-	// const targetSrc = result[`image_src_${uploadStorage}`];
-
-	// return NextResponse.json(
-	// 	{ message: { targetSrc, uploadStorage, ...result } },
-	// 	{ status: 200 }
-	// );
+	return NextResponse.json(
+		{ notifications: notifications?.notifications },
+		{ status: 200 }
+	);
 }

@@ -23,10 +23,7 @@ export default async function RootLayout({
 		return null;
 	}
 	const lang = params.lang;
-
 	const dict = await getDictionaryElements(lang);
-
-	console.log(modal);
 
 	const navTranslation = {
 		trl_home: dict.navigation.home,
@@ -52,7 +49,6 @@ export default async function RootLayout({
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
 						{modal}
-
 						{children}
 						<Footer />
 					</ReduxProvider>
