@@ -6,7 +6,6 @@ import ButtonMain from "../../Button/ButtonMain";
 import TextareaFormik from "../../Input/TextareaFormik";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { generalConfig } from "@/config/gerenalConfig";
@@ -23,7 +22,16 @@ import { setIsVisible } from "@/global/modal-slice";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
+const FormikEvent = ({
+	className,
+	style,
+	dict,
+	lang,
+	trl_error,
+	scroll,
+	searchParams,
+	variant,
+}) => {
 	const dispatch = useDispatch();
 	const dataEvent = useSelector(state => state.modal.dataModal);
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
@@ -62,8 +70,6 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 		dispatch(loading(true));
 		const file = values.fileImg;
 		const uploadStorage = generalConfig.uploadImageStorageEvent;
-
-		console.log(file);
 
 		let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 
@@ -173,7 +179,9 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 			}
 		}
 
-		const apiLinkDependsVariant = variant ? "/api/editEvent" : "/api/addEvent";
+		const apiLinkDependsVariant = variant
+			? `/api/editEvent?eventLink=${searchParams?.event}`
+			: "/api/addEvent";
 
 		try {
 			const response = await fetch(apiLinkDependsVariant, {
@@ -222,7 +230,7 @@ const FormikEvent = ({ className, dict, lang, trl_error, scroll, variant }) => {
 	};
 
 	return (
-		<FormContainerBlur>
+		<FormContainerBlur style={style || null}>
 			<Formik
 				initialValues={initialValuesForm}
 				onSubmit={addEventhandler}

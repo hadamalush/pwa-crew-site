@@ -1,18 +1,22 @@
 import { NextResponse } from "next/server";
 import {
 	connectDatabaseEvents,
+	connectDbMongo,
 	findDocument,
 	updateDocument,
 } from "@/lib/mongodb";
 import { getServerSession } from "next-auth";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { ObjectId } from "mongodb";
+import { addNotification } from "@/lib/crud";
 
 export const PATCH = async request => {
 	const session = await getServerSession();
 	const data = await request.json();
 	const { lang } = data;
 	const dict = await getDictionaryNotifi(lang);
+	const url = new URL(request.url);
+	const eventLink = url.searchParams.get("eventLink");
 
 	const notification = {
 		trl_err_401: dict.notifications.err_401,
@@ -75,7 +79,7 @@ export const PATCH = async request => {
 		);
 	}
 
-	let client;
+	let client, clientNotifi;
 
 	try {
 		client = await connectDatabaseEvents();
@@ -135,6 +139,28 @@ export const PATCH = async request => {
 			},
 			{ status: 428 }
 		);
+	}
+
+	try {
+		clientNotifi = await connectDbMongo("Users");
+	} catch (error) {
+		console.log(error);
+		console.log("Failed connection to users databse.");
+	}
+
+	const dataNotifi = {
+		email: email,
+		actionTextPL: "Edytowano wydarzenie.",
+		actionTextEN: "Edited the event",
+		href: eventLink + "#section_detail-item",
+		title: title,
+		action: "edit",
+	};
+
+	try {
+		await addNotification(clientNotifi, "Notifications", dataNotifi);
+	} catch (err) {
+		console.log("Failed to add notification");
 	}
 
 	client.close();

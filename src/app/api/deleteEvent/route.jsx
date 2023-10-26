@@ -1,19 +1,23 @@
 import { NextResponse } from "next/server";
 import {
 	connectDatabaseEvents,
+	connectDbMongo,
 	deleteDocument,
 	findDocument,
-	updateDocument,
 } from "@/lib/mongodb";
 import { getServerSession } from "next-auth";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { ObjectId } from "mongodb";
+import { addNotification } from "@/lib/crud";
 
 export const DELETE = async request => {
 	const session = await getServerSession();
 	const data = await request.json();
 	const { lang, id } = data;
 	const dict = await getDictionaryNotifi(lang);
+
+	const url = new URL(request.url);
+	const eventTitle = url.searchParams.get("title");
 
 	const notification = {
 		trl_err_401: dict.notifications.err_401,
@@ -40,7 +44,7 @@ export const DELETE = async request => {
 		);
 	}
 
-	let client;
+	let client, clientNotifi;
 
 	try {
 		client = await connectDatabaseEvents();
@@ -82,6 +86,27 @@ export const DELETE = async request => {
 			},
 			{ status: 428 }
 		);
+	}
+
+	try {
+		clientNotifi = await connectDbMongo("Users");
+	} catch (error) {
+		console.log(error);
+		console.log("Failed connection to users databse.");
+	}
+
+	const dataNotifi = {
+		email: email,
+		actionTextPL: "Usunięto wydarzenie.",
+		actionTextEN: "Deleted event",
+		title: eventTitle || null,
+		action: "delete",
+	};
+
+	try {
+		await addNotification(clientNotifi, "Notifications", dataNotifi);
+	} catch (err) {
+		console.log("Failed to add notification");
 	}
 
 	client.close();

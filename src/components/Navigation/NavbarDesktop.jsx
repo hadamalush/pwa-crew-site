@@ -58,7 +58,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	];
 
 	const dropdownItemsAvatar = [
-		{ title: trl_notifications, href: "/" },
+		{ title: trl_notifications, href: "/notifications" },
 		{ title: trl_settings, href: "/" },
 		{ title: trl_signOut, href: "/", onClick: logoutHandler },
 	];

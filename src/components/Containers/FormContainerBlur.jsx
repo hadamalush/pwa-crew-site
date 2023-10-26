@@ -8,10 +8,10 @@ import styles from "../../styles/components/Containers/FormContainerBlur.module.
  * @returns This component returns div.
  */
 
-const FormContainerBlur = ({ id, className, children, ...props }) => {
+const FormContainerBlur = ({ id, style, className, children, ...props }) => {
 	const classes = `${styles.container} ${className || ""}`;
 	return (
-		<div className={classes} id={id}>
+		<div className={classes} style={style || null} id={id}>
 			{children}
 		</div>
 	);

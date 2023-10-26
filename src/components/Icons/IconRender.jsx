@@ -91,6 +91,8 @@ const IconRender = ({ onClick, ...props }) => {
 				return icons.quotes;
 			case "arrow_back":
 				return icons.arrow_back;
+			case "arrow_next":
+				return icons.arrow_next;
 			case "code":
 				return icons.code;
 			case "flagPL":
@@ -105,6 +107,12 @@ const IconRender = ({ onClick, ...props }) => {
 				return icons.moon;
 			case "cross":
 				return icons.cross;
+			case "create":
+				return icons.create;
+			case "delete":
+				return icons.delete;
+			case "edit":
+				return icons.edit;
 			default:
 				return null;
 		}
