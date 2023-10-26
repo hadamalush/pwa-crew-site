@@ -40,21 +40,30 @@ const ModalParallel = React.memo(({ className, children, small, lang }) => {
 	}, []);
 
 	useEffect(() => {
-		if (isVisible === "close" || isVisible === "close-no-refresh") {
+		if (
+			isVisible === "close" ||
+			isVisible === "close-no-refresh" ||
+			isVisible === "close-hard"
+		) {
 			closeModalHandler();
 		}
 	}, [isVisible]);
 
 	const closeModalHandler = useCallback(event => {
+		const refresh = isVisible === "close";
+		const noRefresh = isVisible === "close-no-refresh";
+		const closeHard = isVisible === "close-hard";
+
 		dispatch(setIsVisible({ isVisible: false }));
 		const styleBody = document.createElement("style");
 		styleBody.innerHTML = ":root,body { overflow-y: visible; }";
 		document.head.appendChild(styleBody);
 
-		const timer = setTimeout(() => {
-			const refresh = isVisible === "close";
-			const noRefresh = isVisible === "close-no-refresh";
+		if (closeHard) return;
 
+		const timer = setTimeout(() => {
+			console.log("refresh: ", noRefresh);
+			console.log(refresh);
 			dispatch(setDataModal({ dataModal: null }));
 			clearTimeout(timer);
 			router.back();

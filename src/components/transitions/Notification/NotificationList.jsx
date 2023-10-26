@@ -2,14 +2,14 @@
 
 import NotificationItem from "./NotificationItem";
 import styles from "../../../styles/components/transitions/Notification/NotificationList.module.scss";
-import { useState } from "react";
 import IconRender from "@/components/Icons/IconRender";
+import { useState } from "react";
 
 const NotificationList = ({ notifications }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [notifiPerPage, setNotifiPerPage] = useState(4);
 
-	console.log(notifications);
+	if (!notifications) return null;
 
 	const keys = Object.keys(notifications);
 	const allNotices = Object.values(notifications);
@@ -34,7 +34,6 @@ const NotificationList = ({ notifications }) => {
 	let i = 0;
 
 	const changePageHandler = (event, action) => {
-		console.log(action);
 		if (action) {
 			if (action === "back" && currentPage === 1) return;
 			else if (action === "back") {
