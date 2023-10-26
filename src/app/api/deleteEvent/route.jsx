@@ -100,6 +100,7 @@ export const DELETE = async request => {
 		actionTextPL: "Usunięto wydarzenie.",
 		actionTextEN: "Deleted event",
 		title: eventTitle || null,
+		action: "delete",
 	};
 
 	try {

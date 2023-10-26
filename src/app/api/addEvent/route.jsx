@@ -127,6 +127,7 @@ export const POST = async request => {
 		actionTextEN: "Created event",
 		href: eventLink,
 		title: title,
+		action: "create",
 	};
 
 	try {

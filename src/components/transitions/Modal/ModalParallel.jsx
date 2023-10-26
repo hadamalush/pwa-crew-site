@@ -14,7 +14,7 @@ import { setDataModal, setIsVisible } from "@/global/modal-slice";
  * @returns {JSX.Element} Returns the whole modal with animations.
  */
 
-const ModalParallel = React.memo(({ className, children, lang }) => {
+const ModalParallel = React.memo(({ className, children, small, lang }) => {
 	const isVisible = useSelector(state => state.modal.isVisible);
 	const dispatch = useDispatch();
 	const router = useRouter();
@@ -23,7 +23,9 @@ const ModalParallel = React.memo(({ className, children, lang }) => {
 		? `${styles.bg} ${styles["bg__visibility"]}`
 		: `${styles.bg}`;
 	const classes = isVisible
-		? `${styles.modal} ${styles.modal__visibility} ${className || ""}`
+		? `${styles.modal} ${styles.modal__visibility} ${
+				small && styles.modal__small
+		  } ${className || ""}`
 		: `${styles.modal} ${className || ""}`;
 
 	useEffect(() => {

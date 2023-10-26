@@ -105,6 +105,12 @@ const IconRender = ({ onClick, ...props }) => {
 				return icons.moon;
 			case "cross":
 				return icons.cross;
+			case "create":
+				return icons.create;
+			case "delete":
+				return icons.delete;
+			case "edit":
+				return icons.edit;
 			default:
 				return null;
 		}

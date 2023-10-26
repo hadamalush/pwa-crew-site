@@ -25,7 +25,7 @@ export default async function DeleteEventModal({
 	};
 
 	return (
-		<ModalParallel>
+		<ModalParallel small={true}>
 			<ModalDelete
 				lang={lang}
 				dict={translationModalDelete}

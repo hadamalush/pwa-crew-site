@@ -1,0 +1,71 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.notice {
+	position: relative;
+	display: flex;
+	padding: 3em 2em;
+
+	&::before {
+		@include position(absolute, null, null, 0, 50%, 1);
+		transform: translateX(-50%);
+		content: "";
+		width: 100%;
+		height: 2px;
+		background-color: #005b41;
+	}
+
+	&:last-of-type::before {
+		content: none;
+	}
+
+	&__hover {
+		cursor: pointer;
+	}
+
+	&:hover {
+		background-color: #2926265e;
+	}
+
+	&__content {
+		width: 80%;
+	}
+
+	&__text {
+		padding: 0 0 0.5em;
+		color: $tertiary-color;
+	}
+
+	&__date {
+		font-size: 1.4rem;
+	}
+
+	&__heading,
+	&__icon {
+		&--create {
+			color: $tool-color-primary;
+		}
+
+		&--delete {
+			color: $tool-color-secondary;
+		}
+
+		&--edit {
+			color: $tool-color-tertiary;
+		}
+	}
+
+	.notice__icon {
+		@include flex(column, null, center);
+		align-items: center;
+		width: 3em;
+	}
+
+	@include media-query(mediumScreen) {
+		padding: 3em 6em;
+
+		&::before {
+			width: 80%;
+		}
+	}
+}

@@ -15,10 +15,10 @@
 }
 
 .modal {
-	@include position(absolute, 50%, null, null, 50%, 500);
+	@include position(absolute, null, null, 0, 50%, 500);
 	width: 100%;
 	max-width: 500px;
-	padding: 1em 0.3em;
+	padding-bottom: 1em;
 	transform: translate(-50%, 200%);
 	overflow: hidden;
 	border-radius: 5px;
@@ -27,11 +27,17 @@
 	transition: transform 0.3s;
 
 	&__visibility {
+		transform: translate(-50%, 0);
+	}
+
+	&__small {
+		@include position(absolute, 50%, null, null, 50%, 500);
 		transform: translate(-50%, -50%);
+		bottom: unset;
 	}
 
 	&__quit {
-		@include position(absolute, 2rem, null, null, 2rem, 1);
+		@include position(absolute, 2rem, null, null, 2rem, 3);
 		cursor: pointer;
 
 		svg {
@@ -47,7 +53,9 @@
 	&__content {
 		@include flex(row, null, center);
 		overflow-y: auto;
-		max-height: 60rem;
+		overflow-x: hidden;
+		max-height: 98.5vh;
+		padding-top: 3em;
 
 		&::-webkit-scrollbar {
 			width: 2px;
@@ -58,6 +66,31 @@
 		}
 		&::-webkit-scrollbar-track {
 			background: transparent;
+		}
+	}
+
+	&::before {
+		@include position(absolute, 0, 0, null, 0, 2);
+		content: "";
+		height: 6em;
+		background-color: #171717;
+	}
+
+	@include media-query(mediumScreen) {
+		@include position(absolute, 50%, null, null, 50%, 500);
+		transform: translate(-50%, 200%);
+		bottom: unset;
+
+		&__visibility {
+			transform: translate(-50%, -50%);
+		}
+
+		&__content {
+			max-height: 60rem;
+		}
+
+		&__content {
+			max-height: 60rem;
 		}
 	}
 }

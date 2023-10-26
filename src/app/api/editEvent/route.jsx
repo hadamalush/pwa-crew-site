@@ -154,6 +154,7 @@ export const PATCH = async request => {
 		actionTextEN: "Edited the event",
 		href: eventLink + "#section_detail-item",
 		title: title,
+		action: "edit",
 	};
 
 	try {

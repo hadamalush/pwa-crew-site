@@ -1,4 +1,5 @@
 import ModalParallel from "@/components/transitions/Modal/ModalParallel";
+import NotificationList from "@/components/transitions/Notification/NotificationList";
 import { getServerSession } from "next-auth";
 import { cache } from "react";
 
@@ -14,7 +15,6 @@ export default async function DeleteEventModal({ searchParams, ...props }) {
 
 	const notifications = await getData(email);
 
-	console.log("NO I JEST: ", notifications);
 	// try {
 	// 	dict = await getDictionaryElements(lang);
 	// 	dictNotifi = await getDictionaryNotifi(lang);
@@ -22,7 +22,11 @@ export default async function DeleteEventModal({ searchParams, ...props }) {
 	// 	console.log(err);
 	// }
 
-	return <ModalParallel>dasdasdasdsadsad</ModalParallel>;
+	return (
+		<ModalParallel>
+			<NotificationList notifications={notifications} />
+		</ModalParallel>
+	);
 }
 
 const getData = cache(async email => {

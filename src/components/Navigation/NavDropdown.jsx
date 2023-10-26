@@ -22,6 +22,7 @@ const NavDropdown = ({ dropdownItems, className, ...props }) => {
 					<li key={i}>
 						<Link
 							href={href}
+							scroll={false}
 							onClick={item.onClick || ""}
 							className={styles["dropdown__item"]}>
 							{item.title}

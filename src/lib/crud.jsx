@@ -30,6 +30,7 @@ export const addNotification = async (client, collection, data) => {
 		action_text_en: data?.actionTextEN,
 		title: data?.title,
 		href: data?.href,
+		action: data?.action,
 		createdDate: new Date(),
 	};
 
