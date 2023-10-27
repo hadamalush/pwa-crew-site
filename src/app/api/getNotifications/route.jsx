@@ -20,9 +20,14 @@ export async function GET(request) {
 	}
 
 	try {
-		notifications = await findDocument(client, "Notifications", {
-			email: email,
-		});
+		notifications = await findDocument(
+			client,
+			"Notifications",
+			{
+				email: email,
+			},
+			"reverse"
+		);
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json(

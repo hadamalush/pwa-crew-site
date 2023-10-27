@@ -101,6 +101,7 @@ export const DELETE = async request => {
 		actionTextEN: "Deleted event",
 		title: eventTitle || null,
 		action: "delete",
+		owner: email,
 		status: "new",
 	};
 

@@ -42,6 +42,7 @@
 
 	&__heading,
 	&__icon {
+		position: relative;
 		&--create {
 			color: $tool-color-primary;
 		}
@@ -52,6 +53,24 @@
 
 		&--edit {
 			color: $tool-color-tertiary;
+		}
+	}
+
+	&__icon--new {
+		&::before {
+			@include position(absolute, null, null, 0, 50%, 1);
+			content: "NEW";
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-weight: bold;
+			font-size: 1.4rem;
+			width: 4rem;
+			border-radius: 2px;
+			height: 2rem;
+			transform: translateX(-50%);
+			background-color: #005b41;
+			color: $primary-color;
 		}
 	}
 

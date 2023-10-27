@@ -4,7 +4,7 @@ import styles from "../../../styles/components/transitions/Notification/Notifica
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setDataModal, setIsVisible } from "@/global/modal-slice";
+import { setIsVisible } from "@/global/modal-slice";
 
 const NotificationItem = ({
 	action,
@@ -13,6 +13,8 @@ const NotificationItem = ({
 	title,
 	href,
 	createdDate,
+	status,
+	owner,
 }) => {
 	const lang = "en";
 
@@ -29,7 +31,7 @@ const NotificationItem = ({
 	}`;
 	const classesIcon = `${styles["notice__icon"]} ${
 		styles[`notice__icon--${action}`]
-	}`;
+	} ${status === "new" && styles[`notice__icon--new`]}`;
 
 	const changePageHandler = () => {
 		if (href) {
@@ -48,6 +50,7 @@ const NotificationItem = ({
 				</h3>
 				{title && <p className={styles["notice__text"]}>{title}</p>}
 				<time className={styles["notice__date"]}>{date}</time>
+				{/* <p>Owner: {owner}</p> */}
 			</div>
 			<IconRender variant={action} className={classesIcon} />
 		</li>

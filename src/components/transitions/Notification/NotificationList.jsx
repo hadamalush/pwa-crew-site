@@ -7,19 +7,34 @@ import { useState } from "react";
 
 const NotificationList = ({ notifications }) => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [notifiPerPage, setNotifiPerPage] = useState(5);
-
-	console.log(notifications);
+	const [notifiPerPage, setNotifiPerPage] = useState(2);
 
 	if (!notifications) return null;
 
 	const keys = Object.keys(notifications);
 	const allNotices = Object.values(notifications);
+	let n = 0;
+
+	const noticesWithKeys = allNotices.map(item => {
+		n++;
+		return { id: keys[n - 1], ...item };
+	});
+
+	const sortedNotifications = noticesWithKeys.sort((a, b) => {
+		if (new Date(a.createdDate) > new Date(b.createdDate)) {
+			return -1;
+		}
+		if (new Date(a.createdDate) < new Date(b.createdDate)) {
+			return +1;
+		}
+		return 0;
+	});
+
 	const maxPage = Math.ceil(allNotices.length / notifiPerPage);
 
 	const lastNotifiIndex = currentPage * notifiPerPage;
 	const firstNotifiIndex = lastNotifiIndex - notifiPerPage;
-	const currentsNotifications = allNotices.slice(
+	const currentsNotifications = sortedNotifications.slice(
 		firstNotifiIndex,
 		lastNotifiIndex
 	);
@@ -32,8 +47,6 @@ const NotificationList = ({ notifications }) => {
 		(currentPage === 4 && maxPage === currentPage);
 	const middlePagNumberHigher =
 		currentPage > 3 && maxPage >= 6 && currentPage + 3 <= maxPage;
-
-	let i = 0;
 
 	const changePageHandler = (event, action) => {
 		if (action) {
@@ -62,11 +75,9 @@ const NotificationList = ({ notifications }) => {
 		<ul className={styles.notifications}>
 			<h2 className={styles["notifications__heading"]}>Powiadomienia</h2>
 			{currentsNotifications.map(notif => {
-				i++;
-
 				return (
 					<NotificationItem
-						key={keys[i - 1]}
+						key={notif.id}
 						action={notif.action}
 						actionTextPL={notif.action_text_pl}
 						actionTextEN={notif.action_text_en}

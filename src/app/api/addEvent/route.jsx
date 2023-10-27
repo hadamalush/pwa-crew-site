@@ -128,10 +128,12 @@ export const POST = async request => {
 		href: eventLink,
 		title: title,
 		action: "create",
+		owner: email,
+		status: "new",
 	};
 
 	try {
-		await addNotification(clientNotifi, "Notifications", dataNotifi);
+		await addNotification(clientNotifi, "Notifications", dataNotifi, true);
 	} catch (err) {
 		console.log("Failed to add notification");
 	}

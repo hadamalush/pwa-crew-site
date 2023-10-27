@@ -108,7 +108,6 @@ export const updateDocument = async (
 export const updateAllDocuments = async (client, collection, document, key) => {
 	const db = client.db();
 
-	console.log("ROBIMY2");
 	console.log(collection, " | ", document, " | ", key);
 	const result = await db.collection(collection).updateMany(
 		{},
