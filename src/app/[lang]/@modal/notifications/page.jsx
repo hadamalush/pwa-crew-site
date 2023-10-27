@@ -13,6 +13,8 @@ export default async function NotificationModal({ searchParams, ...props }) {
 
 	const notifications = await getData(email);
 
+	console.log("pyk");
+
 	// try {
 	// 	dict = await getDictionaryElements(lang);
 	// 	dictNotifi = await getDictionaryNotifi(lang);

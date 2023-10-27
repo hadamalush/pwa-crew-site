@@ -22,7 +22,6 @@ const HomeStartContent = ({
 	return (
 		<WrapperStart className={classes}>
 			<div className={styles["introduction__text"]}>
-				<Link href='/notifications'>dasdsad</Link>
 				<h1 className={styles["introduction__h1"]}>{title}</h1>
 				<p className={styles["introduction__text"]}>{text}</p>
 				<LinkAsBtn href={`${isLoginLink}`}>{isLoginLinkNameBtn}</LinkAsBtn>
