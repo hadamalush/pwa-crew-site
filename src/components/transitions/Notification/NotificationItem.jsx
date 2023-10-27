@@ -33,14 +33,10 @@ const NotificationItem = ({
 
 	const changePageHandler = () => {
 		if (href) {
-			console.log(href);
-
-			const link =
-				"/events/Agari-65387dc437612ea20952a580?refresh=true#section_detail-item";
-
-			dispatch(setIsVisible({ isVisible: "close-hard" }));
-
-			router.replace(link);
+			dispatch(setIsVisible({ isVisible: "close-no-refresh" }));
+			setTimeout(() => {
+				router.push(href);
+			}, 1000);
 		}
 	};
 
