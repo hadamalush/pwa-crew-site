@@ -24,7 +24,7 @@ export default async function NotificationModal({ searchParams, ...props }) {
 
 	return (
 		<ModalParallel>
-			<NotificationList notifications={notifications} />
+			{/* <NotificationList notifications={notifications} /> */}
 		</ModalParallel>
 	);
 }
