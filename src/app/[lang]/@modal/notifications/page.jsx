@@ -1,17 +1,17 @@
-import ModalParallel from "@/components/transitions/Modal/ModalParallel";
-import NotificationList from "@/components/transitions/Notification/NotificationList";
-import { getServerSession } from "next-auth";
-import { cache } from "react";
+// import ModalParallel from "@/components/transitions/Modal/ModalParallel";
+// import NotificationList from "@/components/transitions/Notification/NotificationList";
+// import { getServerSession } from "next-auth";
+// import { cache } from "react";
 
 // import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
 // import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 // import ModalDelete from "@/components/Tools/DeleteModal";
 
 export default async function NotificationModal({ searchParams, ...props }) {
-	let dict, dictNotifi;
+	// let dict, dictNotifi;
 
-	const session = await getServerSession();
-	const email = session?.user?.email;
+	// const session = await getServerSession();
+	// const email = session?.user?.email;
 
 	// const notifications = await getData(email);
 
