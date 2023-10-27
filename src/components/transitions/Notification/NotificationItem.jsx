@@ -2,6 +2,9 @@
 import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../styles/components/transitions/Notification/NotificationItem.module.scss";
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setDataModal, setIsVisible } from "@/global/modal-slice";
 
 const NotificationItem = ({
 	action,
@@ -14,6 +17,8 @@ const NotificationItem = ({
 	const lang = "en";
 
 	const date = format(new Date(createdDate), "yyyy-MM-dd");
+	const router = useRouter();
+	const dispatch = useDispatch();
 
 	const classes = href
 		? `${styles.notice} ${styles["notice__hover"]}`
@@ -26,8 +31,17 @@ const NotificationItem = ({
 		styles[`notice__icon--${action}`]
 	}`;
 
+	const changePageHandler = () => {
+		if (href) {
+			dispatch(setIsVisible({ isVisible: "close-no-refresh" }));
+			setTimeout(() => {
+				router.push(href);
+			}, 1000);
+		}
+	};
+
 	return (
-		<li className={classes}>
+		<li className={classes} onClick={event => changePageHandler(event)}>
 			<div className={styles["notice__content"]}>
 				<h3 className={classesHeading}>
 					{lang === "en" ? actionTextEN : actionTextPL}
