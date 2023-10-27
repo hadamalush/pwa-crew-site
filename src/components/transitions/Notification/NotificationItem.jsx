@@ -4,7 +4,7 @@ import styles from "../../../styles/components/transitions/Notification/Notifica
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setIsVisible } from "@/global/modal-slice";
+import { setDataModal, setIsVisible } from "@/global/modal-slice";
 
 const NotificationItem = ({
 	action,
@@ -33,9 +33,14 @@ const NotificationItem = ({
 
 	const changePageHandler = () => {
 		if (href) {
+			console.log(href);
+
+			const link =
+				"/events/Agari-65387dc437612ea20952a580?refresh=true#section_detail-item";
+
 			dispatch(setIsVisible({ isVisible: "close-hard" }));
 
-			router.push(href);
+			router.replace(link);
 		}
 	};
 

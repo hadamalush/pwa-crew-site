@@ -7,7 +7,7 @@ import { cache } from "react";
 // import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 // import ModalDelete from "@/components/Tools/DeleteModal";
 
-export default async function DeleteEventModal({ searchParams, ...props }) {
+export default async function NotificationModal({ searchParams, ...props }) {
 	let dict, dictNotifi;
 
 	const session = await getServerSession();

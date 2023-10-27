@@ -3,7 +3,7 @@ import ImageFill from "../Image/ImageFill";
 import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
@@ -52,7 +52,10 @@ const EventItem = ({
 	const replacedTitle = title.replaceAll(" ", "-");
 	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 	const dispatch = useDispatch();
+	const router = useRouter();
 	const params = useParams();
+	const searchedParams = useSearchParams();
+	const refreshParam = searchedParams.get("refresh");
 
 	passiveSupport({
 		listeners: [
@@ -76,6 +79,10 @@ const EventItem = ({
 	} = dict;
 
 	useEffect(() => {
+		if (refreshParam) {
+			console.log("refresh");
+			router.refresh();
+		}
 		if (isMediumScreen) {
 			return window.scrollBy(0, -70);
 		}
