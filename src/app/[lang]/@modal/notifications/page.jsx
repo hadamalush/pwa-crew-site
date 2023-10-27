@@ -1,28 +1,17 @@
 import ModalParallel from "@/components/transitions/Modal/ModalParallel";
 import NotificationList from "@/components/transitions/Notification/NotificationList";
 import { getServerSession } from "next-auth";
-import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
-import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { cache } from "react";
 
-export default async function NotificationModal({ searchParams, ...props }) {
-	let dict, dictNotifi;
-
+export default async function NotificationModal({ params: { lang } }) {
 	const session = await getServerSession();
 	const email = session?.user?.email;
 
 	const notifications = await getData(email);
 
-	// try {
-	// 	dict = await getDictionaryElements(lang);
-	// 	dictNotifi = await getDictionaryNotifi(lang);
-	// } catch (err) {
-	// 	console.log(err);
-	// }
-
 	return (
 		<ModalParallel>
-			<NotificationList notifications={notifications} />
+			<NotificationList notifications={notifications} lang={lang} />
 		</ModalParallel>
 	);
 }

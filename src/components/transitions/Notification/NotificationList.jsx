@@ -1,13 +1,13 @@
 "use client";
 
 import NotificationItem from "./NotificationItem";
-import styles from "../../../styles/components/transitions/Notification/NotificationList.module.scss";
 import IconRender from "@/components/Icons/IconRender";
+import styles from "../../../styles/components/transitions/Notification/NotificationList.module.scss";
 import { useState } from "react";
 
-const NotificationList = ({ notifications }) => {
+const NotificationList = ({ notifications, lang }) => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [notifiPerPage, setNotifiPerPage] = useState(2);
+	const [notifiPerPage, setNotifiPerPage] = useState(5);
 
 	if (!notifications) return null;
 
@@ -71,6 +71,11 @@ const NotificationList = ({ notifications }) => {
 		setCurrentPage(enteredPage);
 	};
 
+	const changePerPageHandler = quantity => {
+		setNotifiPerPage(quantity);
+		setCurrentPage(1);
+	};
+
 	return (
 		<ul className={styles.notifications}>
 			<h2 className={styles["notifications__heading"]}>Powiadomienia</h2>
@@ -86,6 +91,7 @@ const NotificationList = ({ notifications }) => {
 						status={notif?.status}
 						owner={notif.owner}
 						createdDate={notif.createdDate}
+						lang={lang}
 					/>
 				);
 			})}
@@ -158,12 +164,39 @@ const NotificationList = ({ notifications }) => {
 						{maxPage >= 5 && maxPage}
 					</li>
 				)}
-
 				<IconRender
 					variant='arrow_next'
 					className={styles["notifications__pag-arrow"]}
 					onClick={event => changePageHandler(event, "next")}
 				/>
+			</ul>
+
+			<ul className={styles.notifications__pagOptions}>
+				<li
+					className={styles["notifications__pagOptions-item"]}
+					onClick={() => changePerPageHandler(1)}>
+					1
+				</li>
+				<li
+					className={styles["notifications__pagOptions-item"]}
+					onClick={() => changePerPageHandler(5)}>
+					5
+				</li>
+				<li
+					className={styles["notifications__pagOptions-item"]}
+					onClick={() => changePerPageHandler(10)}>
+					10
+				</li>
+				<li
+					className={styles["notifications__pagOptions-item"]}
+					onClick={() => changePerPageHandler(25)}>
+					25
+				</li>
+				<li
+					className={styles["notifications__pagOptions-item"]}
+					onClick={() => changePerPageHandler(50)}>
+					50
+				</li>
 			</ul>
 		</ul>
 	);

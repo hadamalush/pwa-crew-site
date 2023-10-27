@@ -15,10 +15,10 @@ const NotificationItem = ({
 	createdDate,
 	status,
 	owner,
+	lang,
 }) => {
-	const lang = "en";
-
-	const date = format(new Date(createdDate), "yyyy-MM-dd");
+	const date = format(new Date(createdDate), " yyyy-MM-dd ");
+	const time = format(new Date(createdDate), "HH:mm ");
 	const router = useRouter();
 	const dispatch = useDispatch();
 
@@ -49,8 +49,14 @@ const NotificationItem = ({
 					{lang === "en" ? actionTextEN : actionTextPL}
 				</h3>
 				{title && <p className={styles["notice__text"]}>{title}</p>}
-				<time className={styles["notice__date"]}>{date}</time>
-				{/* <p>Owner: {owner}</p> */}
+				<time className={styles["notice__date"]}>
+					{date}
+					<span className={styles["notice__date--time"]}> {time}</span>
+				</time>
+				<p className={styles["notice__owner"]}>
+					{lang === "en" ? "Owner: " : "Właściciel: "}{" "}
+					<span className={styles["notice__owner--name"]}>{owner}</span>
+				</p>
 			</div>
 			<IconRender variant={action} className={classesIcon} />
 		</li>

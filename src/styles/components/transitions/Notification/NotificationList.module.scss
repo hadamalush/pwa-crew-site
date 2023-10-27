@@ -49,8 +49,8 @@
 		}
 	}
 
-	&__pag-arrow {
-		margin: auto 0;
+	.notifications__pag-arrow {
+		margin: auto 3em;
 		cursor: pointer;
 
 		svg {
@@ -59,6 +59,18 @@
 
 		&:hover svg {
 			color: $secondary-color;
+		}
+	}
+
+	&__pagOptions {
+		display: flex;
+		justify-content: center;
+
+		&-item {
+			margin-top: 1em;
+			padding: 0.7em;
+			font-size: 1.4rem;
+			cursor: pointer;
 		}
 	}
 }

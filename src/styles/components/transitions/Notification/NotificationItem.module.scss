@@ -38,6 +38,23 @@
 
 	&__date {
 		font-size: 1.4rem;
+
+		&--time {
+			margin-left: 1rem;
+			font-weight: bold;
+		}
+	}
+
+	&__owner {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		font-size: 1.4rem;
+		margin-top: 0.2em;
+
+		&--name {
+			color: $tertiary-color;
+		}
 	}
 
 	&__heading,
