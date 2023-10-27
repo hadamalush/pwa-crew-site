@@ -3,6 +3,7 @@ import WrapperStart from "../transitions/Wrappers/WrapperStart";
 import LinkAsBtn from "../transitions/Link/LinkAsBtn";
 import styles from "../../styles/components/Content/HomeStartContent.module.scss";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const HomeStartContent = ({
 	title,
@@ -21,6 +22,7 @@ const HomeStartContent = ({
 	return (
 		<WrapperStart className={classes}>
 			<div className={styles["introduction__text"]}>
+				<Link href='/notifications'>dasdsad</Link>
 				<h1 className={styles["introduction__h1"]}>{title}</h1>
 				<p className={styles["introduction__text"]}>{text}</p>
 				<LinkAsBtn href={`${isLoginLink}`}>{isLoginLinkNameBtn}</LinkAsBtn>

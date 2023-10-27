@@ -23,11 +23,12 @@ export default async function NotificationModal({ searchParams, ...props }) {
 	// }
 
 	return (
-		<ModalParallel>
-			{/* <NotificationList notifications={notifications} /> */}
-		</ModalParallel>
+		// <ModalParallel>
+		<div>dasdsad</div>
 	);
 }
+// {/* <NotificationList notifications={notifications} /> */}
+// {/* </ModalParallel> */}
 
 // const getData = cache(async email => {
 // 	const timestamp = Date.now();
