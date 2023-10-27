@@ -19,9 +19,9 @@ export default async function RootLayout({
 	modal,
 	...props
 }) {
-	// if (!params) {
-	// 	return null;
-	// }
+	if (!params) {
+		return null;
+	}
 
 	const lang = params.lang;
 	const dict = await getDictionaryElements(lang);
