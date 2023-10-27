@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const NotificationList = ({ notifications }) => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [notifiPerPage, setNotifiPerPage] = useState(4);
+	const [notifiPerPage, setNotifiPerPage] = useState(5);
 
 	if (!notifications) return null;
 
@@ -124,11 +124,11 @@ const NotificationList = ({ notifications }) => {
 						}
 						onClick={event => changePageHandler(event)}>
 						{[4, 5].includes(maxPage) && maxPage <= 5 && "4"}
-						{currentPage + 2 < maxPage && maxPage > 6 && "..."}
+						{currentPage + 2 < maxPage && maxPage >= 6 && "..."}
 						{[currentPage + 2, currentPage + 1, currentPage].includes(
 							maxPage
 						) &&
-							maxPage >= 5 &&
+							maxPage >= 6 &&
 							maxPage - 1}
 					</li>
 				)}
