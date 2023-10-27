@@ -1,16 +1,7 @@
-// import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
-// import { generalConfig } from "@/config/gerenalConfig";
-// import { connectDatabaseEvents, findDocument } from "@/lib/mongodb";
-// import {
-// 	oneConvertFromBuffersToBase64,
-// 	oneDownloadBuffersMegaNz,
-// } from "@/lib/storage/storage";
-// import { ObjectId } from "mongodb";
 import { connectDbMongo, findDocument } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
-// import { NextResponse } from "next/server";
 
-export const revalidate = 0;
+export const revalidate = 10;
 
 export async function GET(request) {
 	const url = new URL(request.url);

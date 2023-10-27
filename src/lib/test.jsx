@@ -1,6 +1,9 @@
-const test = () => {
-    console.log('check');
-    return <p>razdwa</p>
-}
+let Array = [];
 
-export default test;
+export const addToArray = item => {
+	Array = [...Array, item];
+
+	console.log(Array);
+};
+
+export default Array;

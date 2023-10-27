@@ -155,10 +155,11 @@ export const PATCH = async request => {
 		href: eventLink + "#section_detail-item",
 		title: title,
 		action: "edit",
+		status: "new",
 	};
 
 	try {
-		await addNotification(clientNotifi, "Notifications", dataNotifi);
+		await addNotification(clientNotifi, "Notifications", dataNotifi, true);
 	} catch (err) {
 		console.log("Failed to add notification");
 	}

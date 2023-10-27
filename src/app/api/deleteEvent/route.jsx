@@ -101,10 +101,11 @@ export const DELETE = async request => {
 		actionTextEN: "Deleted event",
 		title: eventTitle || null,
 		action: "delete",
+		status: "new",
 	};
 
 	try {
-		await addNotification(clientNotifi, "Notifications", dataNotifi);
+		await addNotification(clientNotifi, "Notifications", dataNotifi, true);
 	} catch (err) {
 		console.log("Failed to add notification");
 	}

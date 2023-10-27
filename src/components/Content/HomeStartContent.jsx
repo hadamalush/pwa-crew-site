@@ -3,7 +3,6 @@ import WrapperStart from "../transitions/Wrappers/WrapperStart";
 import LinkAsBtn from "../transitions/Link/LinkAsBtn";
 import styles from "../../styles/components/Content/HomeStartContent.module.scss";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 
 const HomeStartContent = ({
 	title,

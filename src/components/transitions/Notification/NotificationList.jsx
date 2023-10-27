@@ -9,6 +9,8 @@ const NotificationList = ({ notifications }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [notifiPerPage, setNotifiPerPage] = useState(5);
 
+	console.log(notifications);
+
 	if (!notifications) return null;
 
 	const keys = Object.keys(notifications);
@@ -70,6 +72,8 @@ const NotificationList = ({ notifications }) => {
 						actionTextEN={notif.action_text_en}
 						title={notif.title}
 						href={notif.href}
+						status={notif?.status}
+						owner={notif.owner}
 						createdDate={notif.createdDate}
 					/>
 				);

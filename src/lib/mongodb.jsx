@@ -105,6 +105,23 @@ export const updateDocument = async (
 	return updatedDocument;
 };
 
+export const updateAllDocuments = async (client, collection, document, key) => {
+	const db = client.db();
+
+	console.log("ROBIMY2");
+	console.log(collection, " | ", document, " | ", key);
+	const result = await db.collection(collection).updateMany(
+		{},
+		{
+			$set: {
+				[`notifications.${key}`]: document,
+			},
+		}
+	);
+
+	return result;
+};
+
 export const deleteDocument = async (client, collection, document) => {
 	const db = client.db();
 	const deletedDocument = db.collection(collection).deleteOne(document);

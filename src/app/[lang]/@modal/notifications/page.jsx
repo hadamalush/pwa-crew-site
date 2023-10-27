@@ -13,8 +13,6 @@ export default async function NotificationModal({ searchParams, ...props }) {
 
 	const notifications = await getData(email);
 
-	console.log("pyk");
-
 	// try {
 	// 	dict = await getDictionaryElements(lang);
 	// 	dictNotifi = await getDictionaryNotifi(lang);
@@ -31,14 +29,14 @@ export default async function NotificationModal({ searchParams, ...props }) {
 
 const getData = cache(async email => {
 	const timestamp = Date.now();
-	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/getNotifications?timestamp=${timestamp}&email=${
+	const apiUrl = `http://localhost:3000/api/getNotifications?timestamp=${timestamp}&email=${
 		email || null
 	}`;
 	let notifications;
 
 	try {
 		const response = await fetch(apiUrl, {
-			next: { revalidate: 0 },
+			next: { revalidate: 10 },
 		});
 
 		const data = await response.json();

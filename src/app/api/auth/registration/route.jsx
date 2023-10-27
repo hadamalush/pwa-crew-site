@@ -146,6 +146,7 @@ export async function POST(request) {
 		actionTextPL: "Zarejestrowałeś się pomyślnie.",
 		actionTextEN: "Registered success",
 		action: "create",
+		status: "new",
 	};
 
 	try {
