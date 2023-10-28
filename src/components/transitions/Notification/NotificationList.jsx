@@ -3,11 +3,15 @@
 import NotificationItem from "./NotificationItem";
 import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../styles/components/transitions/Notification/NotificationList.module.scss";
+import { setCookie } from "@/lib/cookies";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const NotificationList = ({ notifications, lang }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [notifiPerPage, setNotifiPerPage] = useState(5);
+	const { data: session } = useSession();
+	const email = session?.user?.email;
 
 	if (!notifications) return null;
 
@@ -48,6 +52,16 @@ const NotificationList = ({ notifications, lang }) => {
 	const middlePagNumberHigher =
 		currentPage > 3 && maxPage >= 6 && currentPage + 3 <= maxPage;
 
+	const changeStatusNoticesHandler = async () => {
+		setCookie("newNotices", 0);
+
+		await fetch("/api/editStatusNotifications", {
+			method: "PATCH",
+			headers: { "Content-type": "application/json" },
+			body: JSON.stringify(email),
+		});
+	};
+
 	const changePageHandler = (event, action) => {
 		if (action) {
 			if (action === "back" && currentPage === 1) return;
@@ -81,6 +95,11 @@ const NotificationList = ({ notifications, lang }) => {
 			<h2 className={styles["notifications__heading"]}>
 				{lang === "en" ? "Notifications" : "Powiadomienia"}
 			</h2>
+			<button
+				onClick={changeStatusNoticesHandler}
+				className={styles["notifications__btn"]}>
+				{lang === "en" ? "Mark as read" : "Oznacz jako przeczytane"}
+			</button>
 			{currentsNotifications.map(notif => {
 				return (
 					<NotificationItem

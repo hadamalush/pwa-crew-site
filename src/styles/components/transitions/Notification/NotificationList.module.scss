@@ -1,4 +1,5 @@
 @import "../../../transitions/variables";
+@import "../../../mixins/mixins";
 
 .notifications {
 	width: 100%;
@@ -8,6 +9,30 @@
 		margin-bottom: 0.5em;
 		text-align: center;
 		color: $secondary-color;
+	}
+
+	&__btn {
+		@include borderIn(4px, 1px, 0);
+		display: block;
+		margin: 0 auto;
+		position: relative;
+		border: none;
+		width: max-content;
+		max-width: 30rem;
+		padding: 14px 26px;
+		font-size: 1.4rem;
+		font-weight: bold;
+		transition: transform 0.3s, color 0.3s;
+		text-align: center;
+		color: $primary-color;
+		border-radius: 3px;
+		background-color: transparent;
+		cursor: pointer;
+
+		&:hover {
+			transform: scale(1.04);
+			color: $secondary-color;
+		}
 	}
 
 	&__pag {

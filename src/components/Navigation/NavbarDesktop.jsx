@@ -171,7 +171,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 
 			{session && (
 				<Avatar className={styles["avatar"]}>
-					{quantityNewNotices && (
+					{quantityNewNotices && quantityNewNotices !== "0" && (
 						<span className={styles.avatar__notices}>{quantityNewNotices}</span>
 					)}
 					<NavDropdown

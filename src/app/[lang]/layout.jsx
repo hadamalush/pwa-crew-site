@@ -7,7 +7,6 @@ import Notification from "@/components/transitions/Notification/Notification";
 import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
-import { cache } from "react";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
