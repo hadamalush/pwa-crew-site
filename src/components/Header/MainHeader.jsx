@@ -11,7 +11,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { loading } from "@/global/notification-slice";
 
-const MainHeader = ({ dict, lang, ...props }) => {
+import { setCookie } from "@/lib/cookies";
+
+const MainHeader = ({ dict, lang, quantityNotices, ...props }) => {
 	const { data: session, status } = useSession();
 	const [isLight, setIsLight] = useState(false);
 	const isLoading = useSelector(state => state.notification.isLoading);
@@ -21,8 +23,11 @@ const MainHeader = ({ dict, lang, ...props }) => {
 	let pathname = usePathname();
 
 	useEffect(() => {
+		(async () => {
+			setCookie("newNotices", quantityNotices);
+		})();
 		dispatch(loading(false));
-	}, [pathname]);
+	}, [pathname, quantityNotices]);
 
 	if (pathname.startsWith("/pl") || pathname.startsWith("/en")) {
 		pathname = pathname.replace(/^\/(pl|en)/, "");

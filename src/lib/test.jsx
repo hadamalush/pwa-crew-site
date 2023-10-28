@@ -1,9 +1,6 @@
-let Array = [];
+"use server";
+import { cookies } from "next/headers";
 
-export const addToArray = item => {
-	Array = [...Array, item];
-
-	console.log(Array);
-};
-
-export default Array;
+export async function create(data) {
+	cookies().set("blabla", "blabla", { maxAge: 111 });
+}

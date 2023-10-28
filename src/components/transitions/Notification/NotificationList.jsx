@@ -78,7 +78,9 @@ const NotificationList = ({ notifications, lang }) => {
 
 	return (
 		<ul className={styles.notifications}>
-			<h2 className={styles["notifications__heading"]}>Powiadomienia</h2>
+			<h2 className={styles["notifications__heading"]}>
+				{lang === "en" ? "Notifications" : "Powiadomienia"}
+			</h2>
 			{currentsNotifications.map(notif => {
 				return (
 					<NotificationItem

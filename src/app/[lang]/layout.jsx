@@ -7,6 +7,7 @@ import Notification from "@/components/transitions/Notification/Notification";
 import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
+import { cache } from "react";
 
 export const metadata = {
 	title: "PwaCrew - najlepsza muzyka",
@@ -40,13 +41,26 @@ export default async function RootLayout({
 	};
 
 	const session = await getServerSession();
+	const email = session?.user?.email;
+	let quantityNotices;
+
+	if (email) {
+		const result = await getData(email);
+		quantityNotices = result?.message;
+
+		console.log(quantityNotices);
+	}
 
 	return (
 		<html lang={lang}>
 			<body>
 				<SessionProvider session={session}>
 					<ReduxProvider>
-						<MainHeader dict={navTranslation} lang={lang} />
+						<MainHeader
+							dict={navTranslation}
+							lang={lang}
+							quantityNotices={quantityNotices}
+						/>
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
 						{modal}
@@ -58,3 +72,25 @@ export default async function RootLayout({
 		</html>
 	);
 }
+
+const getData = cache(async email => {
+	const timestamp = Date.now();
+	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/getStatusNotifications?timestamp=${timestamp}&email=${
+		email || null
+	}`;
+	let quantityNotices;
+
+	try {
+		const response = await fetch(apiUrl, {
+			next: { revalidate: 600 },
+		});
+
+		if (response.ok) {
+			quantityNotices = response.json();
+		}
+	} catch (err) {
+		console.log(err);
+	}
+
+	return quantityNotices;
+});

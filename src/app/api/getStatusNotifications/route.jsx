@@ -1,7 +1,7 @@
 import { connectDbMongo, findDocument } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
-export const revalidate = 10;
+export const revalidate = 600;
 
 export async function GET(request) {
 	const url = new URL(request.url);
@@ -31,8 +31,14 @@ export async function GET(request) {
 		);
 	}
 
+	const quantityNotices = Object.values(notifications?.notifications).filter(
+		item => item.status === "new"
+	).length;
+
 	return NextResponse.json(
-		{ notifications: notifications?.notifications },
-		{ status: 200 }
+		{ message: quantityNotices },
+		{
+			status: 200,
+		}
 	);
 }
