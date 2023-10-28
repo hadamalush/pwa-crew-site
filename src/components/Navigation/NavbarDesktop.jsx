@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
+import { getCookie } from "@/lib/cookies";
 
 const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const { data: session, status } = useSession();
@@ -27,6 +28,40 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 
 	const classes = `${styles.nav} ${className || ""}`;
 	const classesNavItemActive = `${styles["nav__item"]} ${styles["nav__item--active"]}`;
+
+	// useEffect(() => {
+	// 	let isCheck;
+	// 	let dateNotices;
+
+	// 	(async () => {
+	// 		dateNotices = await getCookie("dateNotices");
+	// 		const newNotices = await getCookie("newNotices");
+	// 		setQuantityNewNotices(newNotices?.value);
+
+	// 		if (dateNotices) {
+	// 			const currentDate = new Date();
+	// 			isCheck = currentDate > new Date(dateNotices.value).getTime() + 600000;
+	// 		}
+	// 	})().then(async () => {
+	// 		if ((email && isCheck) || !dateNotices) {
+	// 			const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
+	// 			let result;
+
+	// 			try {
+	// 				const response = await fetch(apiUrl);
+
+	// 				if (response.ok) {
+	// 					result = await response.json();
+	// 				}
+	// 			} catch (err) {
+	// 				return;
+	// 			}
+
+	// 			setCookie("newNotices", result?.message);
+	// 			setCookie("dateNotices", new Date());
+	// 		}
+	// 	});
+	// }, [pathname]);
 
 	const isActivePathEvents = new RegExp(
 		`${lang}/(events|events/new-event)`

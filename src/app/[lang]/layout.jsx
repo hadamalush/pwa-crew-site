@@ -41,26 +41,13 @@ export default async function RootLayout({
 	};
 
 	const session = await getServerSession();
-	const email = session?.user?.email;
-	let quantityNotices;
-
-	if (email) {
-		const result = await getData(email);
-		quantityNotices = result?.message;
-
-		console.log(quantityNotices);
-	}
 
 	return (
 		<html lang={lang}>
 			<body>
 				<SessionProvider session={session}>
 					<ReduxProvider>
-						<MainHeader
-							dict={navTranslation}
-							lang={lang}
-							quantityNotices={quantityNotices}
-						/>
+						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
 						{modal}
@@ -72,26 +59,3 @@ export default async function RootLayout({
 		</html>
 	);
 }
-
-const getData = cache(async email => {
-	let quantityNotices;
-
-	const timestamp = Date.now();
-	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/getStatusNotifications?timestamp=${timestamp}&email=${
-		email || null
-	}`;
-
-	try {
-		const response = await fetch(apiUrl, {
-			next: { revalidate: 6000 },
-		});
-
-		if (response.ok) {
-			quantityNotices = response.json();
-		}
-	} catch (err) {
-		console.log(err);
-	}
-
-	return quantityNotices;
-});
