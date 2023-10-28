@@ -6,12 +6,15 @@ import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
-import { getCookie } from "@/lib/cookies";
+import { getCookie, setCookie } from "@/lib/cookies";
+import { useEffect, useState } from "react";
 
 const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const { data: session, status } = useSession();
 	const pathname = usePathname();
 	const dispatch = useDispatch();
+	const [quantityNewNotices, setQuantityNewNotices] = useState(null);
+	const email = session?.user?.email;
 
 	const {
 		trl_home,
@@ -29,39 +32,40 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const classes = `${styles.nav} ${className || ""}`;
 	const classesNavItemActive = `${styles["nav__item"]} ${styles["nav__item--active"]}`;
 
-	// useEffect(() => {
-	// 	let isCheck;
-	// 	let dateNotices;
+	useEffect(() => {
+		let isCheck;
+		let dateNotices;
 
-	// 	(async () => {
-	// 		dateNotices = await getCookie("dateNotices");
-	// 		const newNotices = await getCookie("newNotices");
-	// 		setQuantityNewNotices(newNotices?.value);
+		(async () => {
+			dateNotices = await getCookie("dateNotices");
+			const newNotices = await getCookie("newNotices");
+			setQuantityNewNotices(newNotices?.value);
 
-	// 		if (dateNotices) {
-	// 			const currentDate = new Date();
-	// 			isCheck = currentDate > new Date(dateNotices.value).getTime() + 600000;
-	// 		}
-	// 	})().then(async () => {
-	// 		if ((email && isCheck) || !dateNotices) {
-	// 			const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
-	// 			let result;
+			if (dateNotices) {
+				const currentDate = new Date();
+				isCheck = currentDate > new Date(dateNotices.value).getTime() + 600000;
+			}
+		})().then(async () => {
+			if ((email && isCheck) || !dateNotices) {
+				console.log("dasdsad");
+				const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
+				let result;
 
-	// 			try {
-	// 				const response = await fetch(apiUrl);
+				try {
+					const response = await fetch(apiUrl);
 
-	// 				if (response.ok) {
-	// 					result = await response.json();
-	// 				}
-	// 			} catch (err) {
-	// 				return;
-	// 			}
+					if (response.ok) {
+						result = await response.json();
+					}
+				} catch (err) {
+					return;
+				}
 
-	// 			setCookie("newNotices", result?.message);
-	// 			setCookie("dateNotices", new Date());
-	// 		}
-	// 	});
-	// }, [pathname]);
+				setCookie("newNotices", result?.message);
+				setCookie("dateNotices", new Date());
+			}
+		});
+	}, [pathname]);
 
 	const isActivePathEvents = new RegExp(
 		`${lang}/(events|events/new-event)`
@@ -93,7 +97,11 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	];
 
 	const dropdownItemsAvatar = [
-		{ title: trl_notifications, href: "/notifications" },
+		{
+			title: trl_notifications,
+			href: "/notifications",
+			notices: quantityNewNotices,
+		},
 		{ title: trl_settings, href: "/" },
 		{ title: trl_signOut, href: "/", onClick: logoutHandler },
 	];
@@ -163,6 +171,9 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 
 			{session && (
 				<Avatar className={styles["avatar"]}>
+					{quantityNewNotices && (
+						<span className={styles.avatar__notices}>{quantityNewNotices}</span>
+					)}
 					<NavDropdown
 						className={styles["avatar__dropdown"]}
 						dropdownItems={dropdownItemsAvatar}

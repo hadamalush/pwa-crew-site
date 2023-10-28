@@ -12,6 +12,7 @@
 	background-color: $background-nav;
 
 	li {
+		position: relative;
 		box-shadow: $boxshadow-septenary;
 	}
 
@@ -24,5 +25,14 @@
 		&:hover {
 			color: $secondary-color;
 		}
+	}
+
+	&__notices {
+		@include position(absolute, 50%, 1em, null, null, 1);
+		transform: translateY(-50%);
+		padding: 0.2em;
+		font-size: 1.3rem;
+		border-radius: 2px;
+		background-color: $background-octonary;
 	}
 }

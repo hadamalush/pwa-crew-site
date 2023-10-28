@@ -27,6 +27,9 @@ const NavDropdown = ({ dropdownItems, className, ...props }) => {
 							className={styles["dropdown__item"]}>
 							{item.title}
 						</Link>
+						{item?.notices && (
+							<span className={styles.dropdown__notices}>{item.notices}</span>
+						)}
 					</li>
 				);
 			})}

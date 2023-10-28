@@ -5,57 +5,21 @@ import NavbarMobile from "../Navigation/NavbarMobile";
 import IconRender from "../Icons/IconRender";
 import styles from "../../styles/components/Header/MainHeader.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { loading } from "@/global/notification-slice";
-import { getCookie, setCookie } from "@/lib/cookies";
 
 const MainHeader = ({ dict, lang, ...props }) => {
-	const { data: session, status } = useSession();
 	const [isLight, setIsLight] = useState(false);
 	const isLoading = useSelector(state => state.notification.isLoading);
 	const dispatch = useDispatch();
-	const email = session?.user?.email;
-	const [quantityNewNotices, setQuantityNewNotices] = useState(0);
 
 	const router = useRouter();
 	let pathname = usePathname();
 
 	useEffect(() => {
-		let isCheck;
-		let dateNotices;
 		dispatch(loading(false));
-
-		(async () => {
-			dateNotices = await getCookie("dateNotices");
-			const newNotices = await getCookie("newNotices");
-			setQuantityNewNotices(newNotices?.value);
-
-			if (dateNotices) {
-				const currentDate = new Date();
-				isCheck = currentDate > new Date(dateNotices.value).getTime() + 600000;
-			}
-		})().then(async () => {
-			if ((email && isCheck) || !dateNotices) {
-				const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
-				let result;
-
-				try {
-					const response = await fetch(apiUrl);
-
-					if (response.ok) {
-						result = await response.json();
-					}
-				} catch (err) {
-					return;
-				}
-
-				setCookie("newNotices", result?.message);
-				setCookie("dateNotices", new Date());
-			}
-		});
 	}, [pathname]);
 
 	if (pathname.startsWith("/pl") || pathname.startsWith("/en")) {
@@ -94,7 +58,6 @@ const MainHeader = ({ dict, lang, ...props }) => {
 					dict={dict}
 					lang={lang}
 				/>
-				{quantityNewNotices && quantityNewNotices}
 				<NavbarMobile dict={dict} lang={lang} />
 				<IconRender
 					variant={isLight ? "moon" : "sun"}

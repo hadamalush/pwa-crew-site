@@ -52,6 +52,14 @@
 }
 
 .avatar {
+	&__notices {
+		@include position(absolute, 0.2em, 0, null, null, 1);
+		padding: 0.2em;
+		font-size: 1.3rem;
+		border-radius: 2px;
+		background-color: $background-octonary;
+	}
+
 	&__dropdown {
 		right: -2rem;
 		bottom: -9.5em;
