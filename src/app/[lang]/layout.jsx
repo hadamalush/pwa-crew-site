@@ -74,15 +74,16 @@ export default async function RootLayout({
 }
 
 const getData = cache(async email => {
+	let quantityNotices;
+
 	const timestamp = Date.now();
 	const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/getStatusNotifications?timestamp=${timestamp}&email=${
 		email || null
 	}`;
-	let quantityNotices;
 
 	try {
 		const response = await fetch(apiUrl, {
-			next: { revalidate: 600 },
+			next: { revalidate: 6000 },
 		});
 
 		if (response.ok) {
