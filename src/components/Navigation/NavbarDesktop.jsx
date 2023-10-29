@@ -102,7 +102,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 			href: "/notifications",
 			notices: quantityNewNotices,
 		},
-		{ title: trl_settings, href: "/" },
+		{ title: trl_settings, href: "/settings" },
 		{ title: trl_signOut, href: "/", onClick: logoutHandler },
 	];
 

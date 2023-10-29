@@ -89,6 +89,13 @@
 			"textSecond": "Please contact the administrator."
 		}
 	},
+	"settings": {
+		"title": "Settings",
+		"changePassword": "Change password",
+		"changeEmail": "Change email",
+		"changeAvatar": "Change avatar",
+		"btn_confirm": "Confirm"
+	},
 	"events": {
 		"title": "Events",
 		"btn_createEvent": "Create event",

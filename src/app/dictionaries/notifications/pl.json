@@ -45,6 +45,9 @@
 			"err_429": "Zbyt wiele prób. Spróbuj ponownie za 24h.",
 			"successChanged": "Hasło zostało zmienione.",
 			"successSent": "Wysłaliśmy do Ciebie link resetujący hasło."
+		},
+		"settings": {
+			"success": "Zmieniono ustawienia"
 		}
 	}
 }

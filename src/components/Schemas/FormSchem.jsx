@@ -21,7 +21,7 @@ const message = {
 	},
 	en: {
 		wrongEmail: "Please provide a valid email address!",
-		passMin: "The password must have at least 7 char.",
+		passMin: "At least 7 character.",
 		passStrong: "Min. 1 char. ,1 num, 1 upper. and lower",
 		passIdentical: "Passwords must be udentical",
 		terms: "You must accept the terms.",
@@ -217,6 +217,54 @@ export const eventSchema = (lang, variant) => {
 			.max(300, messageEvent[lang].descriptionMax)
 			.required(message[lang].required),
 		fileImg: fileImgDependsVariant,
+	});
+};
+
+export const settingsSchema = lang => {
+	const messageSettings = {
+		pl: {
+			allowedFormats: "Dozwolone formaty: jpg, jpeg, png, webp",
+			illegalSign: "Niedozwolony znak",
+		},
+		en: {
+			allowedFormats: "Allowed formats: jpg, jpeg, png, webp",
+			illegalSign: "Illegal character",
+		},
+	};
+	const fileValid = yup.mixed().when("file", (val, schema) => {
+		if (val?.length > 0) {
+			return yup
+				.mixed()
+				.test("fileSize", messageSettings[lang].fileMaxSize, function (value) {
+					if (value?.size) {
+						return value?.size <= 4 * 1024 * 1024;
+					}
+					return true;
+				})
+				.test(
+					"fileType",
+					messageSettings[lang].allowedFormats,
+					function (value) {
+						if (value?.type) {
+							return SUPPORTED_FORMATS.includes(value.type);
+						}
+						return true;
+					}
+				);
+		} else {
+			return yup.mixed().notRequired();
+		}
+	});
+
+	return yup.object().shape({
+		email: yup.string().email(message[lang].wrongEmail),
+
+		password: yup
+			.string()
+			.min(7, message[lang].passMin)
+			.matches(passwordRules, message[lang].passStrong),
+
+		fileImg: fileValid,
 	});
 };
 

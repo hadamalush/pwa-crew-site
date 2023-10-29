@@ -1,0 +1,70 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.settings {
+	animation: show 0.6s;
+	transform-origin: right;
+	transition: transform 0.6s;
+	&::before {
+		@include position(absolute, 0, 0, 0, 0, -1);
+		content: "";
+	}
+
+	&__user {
+		width: 100%;
+		text-align: center;
+	}
+
+	&__avatar {
+		@include position(relative, unset, unset, unset, unset);
+		display: block;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		cursor: unset;
+	}
+
+	&__email {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	form {
+		width: 28rem;
+		margin: 0 auto;
+		padding: 5em 0;
+	}
+
+	h1 {
+		font-size: 3rem;
+		text-align: center;
+		color: $secondary-color;
+	}
+	label {
+		display: block;
+		width: 100%;
+		font-size: 1.4rem;
+	}
+
+	label + div {
+		margin-top: 0;
+	}
+
+	button {
+		margin: 2em 0 1em;
+	}
+
+	@include media-query(foldScreen) {
+		form {
+			width: 26rem;
+		}
+	}
+
+	@include media-query(mediumScreen) {
+		form {
+			width: 30rem;
+		}
+	}
+}

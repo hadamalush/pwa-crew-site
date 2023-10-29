@@ -47,6 +47,9 @@
 			"err_429": "Too many attempts. Try again in 24 hours.",
 			"successChanged": "The password has been changed.",
 			"successSent": "We have sent you a password reset link."
+		},
+		"settings": {
+			"success": "Settings changed"
 		}
 	}
 }
