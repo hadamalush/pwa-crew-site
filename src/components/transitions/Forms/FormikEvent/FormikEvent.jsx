@@ -13,6 +13,7 @@ import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
 import { setIsVisible } from "@/global/modal-slice";
+import { getCookie, setCookie } from "@/lib/cookies";
 
 /**
  * @description This component returns form for event.
@@ -77,7 +78,6 @@ const FormikEvent = ({
 
 		if ((variant && values.fileImg) || !variant) {
 			//UPLOAD FILE TO CLOUDINARY
-			// https://pwa-crew-site-demo.vercel.app/api/upload/cloudinary?filename=${file.name}
 
 			if (uploadStorage === "cloudinary" || uploadStorage === "all") {
 				try {
@@ -213,6 +213,14 @@ const FormikEvent = ({
 
 			if (variant) {
 				dispatch(setIsVisible({ isVisible: "close" }));
+			}
+
+			const receivedNotices = await getCookie("newNotices");
+
+			if (receivedNotices) {
+				const quantityNotices = parseInt(receivedNotices?.value);
+
+				await setCookie("newNotices", quantityNotices + 1);
 			}
 
 			return;

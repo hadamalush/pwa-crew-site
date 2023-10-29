@@ -6,6 +6,7 @@ import styles from "../../styles/components/transitions/Modal/ModalDelete.module
 import { useDispatch } from "react-redux";
 import { loading, showResult } from "@/global/notification-slice";
 import { setIsVisible } from "@/global/modal-slice";
+import { getCookie, setCookie } from "@/lib/cookies";
 
 const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 	const dispatch = useDispatch();
@@ -55,6 +56,14 @@ const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 			dispatch(setIsVisible({ isVisible: "close" }));
 
 			return;
+		}
+
+		const receivedNotices = await getCookie("newNotices");
+
+		if (receivedNotices) {
+			const quantityNotices = parseInt(receivedNotices?.value);
+
+			await setCookie("newNotices", quantityNotices + 1);
 		}
 
 		dispatch(setIsVisible({ isVisible: "close-no-refresh" }));

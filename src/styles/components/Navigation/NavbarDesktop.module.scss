@@ -55,6 +55,8 @@
 	&__notices {
 		@include position(absolute, 0.2em, 0, null, null, 1);
 		padding: 0.2em;
+		width: 2.5rem;
+		text-align: center;
 		font-size: 1.3rem;
 		border-radius: 2px;
 		background-color: $background-octonary;

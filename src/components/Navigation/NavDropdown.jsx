@@ -28,7 +28,9 @@ const NavDropdown = ({ dropdownItems, className, ...props }) => {
 							{item.title}
 						</Link>
 						{item?.notices && item?.notices !== "0" && (
-							<span className={styles.dropdown__notices}>{item.notices}</span>
+							<span className={styles.dropdown__notices}>
+								{item.notices.length >= 3 ? "99+" : item.notices}
+							</span>
 						)}
 					</li>
 				);
