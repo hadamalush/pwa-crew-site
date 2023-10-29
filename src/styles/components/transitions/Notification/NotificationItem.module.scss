@@ -6,6 +6,12 @@
 	display: flex;
 	padding: 3em 2em;
 
+	&__link {
+		width: 100%;
+		height: 100%;
+		display: flex;
+	}
+
 	&::before {
 		@include position(absolute, null, null, 0, 50%, 1);
 		transform: translateX(-50%);

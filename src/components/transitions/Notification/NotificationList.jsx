@@ -11,6 +11,7 @@ const NotificationList = ({ notifications, lang }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [notifiPerPage, setNotifiPerPage] = useState(5);
 	const { data: session } = useSession();
+	const [status, setStatus] = useState(true);
 	const email = session?.user?.email;
 
 	if (!notifications) return null;
@@ -60,6 +61,8 @@ const NotificationList = ({ notifications, lang }) => {
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(email),
 		});
+
+		setStatus(false);
 	};
 
 	const changePageHandler = (event, action) => {
@@ -101,6 +104,8 @@ const NotificationList = ({ notifications, lang }) => {
 				{lang === "en" ? "Mark as read" : "Oznacz jako przeczytane"}
 			</button>
 			{currentsNotifications.map(notif => {
+				const statusNotif = notif?.status === "new" && status;
+
 				return (
 					<NotificationItem
 						key={notif.id}
@@ -109,7 +114,7 @@ const NotificationList = ({ notifications, lang }) => {
 						actionTextEN={notif.action_text_en}
 						title={notif.title}
 						href={notif.href}
-						status={notif?.status}
+						status={statusNotif}
 						owner={notif.owner}
 						createdDate={notif.createdDate}
 						lang={lang}

@@ -1,9 +1,9 @@
 "use client";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "../../../styles/components/transitions/Notification/Notification.module.scss";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { reset } from "@/global/notification-slice";
-import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 
 const Notification = () => {

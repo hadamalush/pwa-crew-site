@@ -10,7 +10,7 @@ export default async function NotificationModal({ params: { lang } }) {
 	const notifications = await getData(email);
 
 	return (
-		<ModalParallel>
+		<ModalParallel path='notifications'>
 			<NotificationList notifications={notifications} lang={lang} />
 		</ModalParallel>
 	);
