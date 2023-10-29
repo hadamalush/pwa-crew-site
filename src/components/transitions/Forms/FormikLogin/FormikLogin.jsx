@@ -51,11 +51,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 		} else if (isMediumScreen) {
 			window.scrollTo(0, 0);
 		}
-
-		if (status === "authenticated" && session) {
-			router.push("/");
-		}
-	}, [session, status]);
+	}, []);
 
 	const changeWebstiteHandler = (event, path) => {
 		event.preventDefault();
@@ -100,6 +96,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 		}
 		dispatch(loading(false));
 		dispatch(showResult({ message: trl_welcome, variant: "success" }));
+		router.push("/");
 	};
 
 	return (
