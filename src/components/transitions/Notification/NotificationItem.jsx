@@ -31,7 +31,7 @@ const NotificationItem = ({
 
 	return (
 		<li className={classes}>
-			<Link href={href} className={styles.notice__link}>
+			<Link href={href ? href : "#"} className={styles.notice__link}>
 				<div className={styles["notice__content"]}>
 					<h3 className={classesHeading}>
 						{lang === "en" ? actionTextEN : actionTextPL}

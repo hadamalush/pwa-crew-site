@@ -2,8 +2,8 @@
 import ImgBgBlur from "../Image/ImgBgBlur";
 import IconRender from "@/components/Icons/IconRender";
 import styles from "../../../styles/components/transitions/Modal/Modal.module.scss";
-import React, { useCallback, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setDataModal, setIsVisible } from "@/global/modal-slice";
 import { handleScroll } from "@/lib/helper";
