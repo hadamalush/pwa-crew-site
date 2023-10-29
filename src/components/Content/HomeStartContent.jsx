@@ -3,6 +3,9 @@ import WrapperStart from "../transitions/Wrappers/WrapperStart";
 import LinkAsBtn from "../transitions/Link/LinkAsBtn";
 import styles from "../../styles/components/Content/HomeStartContent.module.scss";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const HomeStartContent = ({
 	title,
@@ -14,9 +17,18 @@ const HomeStartContent = ({
 	...props
 }) => {
 	const { data: session, status } = useSession();
+	const params = useSearchParams();
 	const isLoginLink = !session ? "/registration" : "/events";
 	const isLoginLinkNameBtn = !session ? btn_registration : btn_events;
 	const classes = `${styles.introduction} ${className || ""}`;
+	const refresh = params.get("refresh");
+	const router = useRouter();
+
+	useEffect(() => {
+		if (refresh === "true") {
+			router.refresh();
+		}
+	}, [refresh]);
 
 	return (
 		<WrapperStart className={classes}>

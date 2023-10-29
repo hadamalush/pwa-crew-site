@@ -96,7 +96,7 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 		}
 		dispatch(loading(false));
 		dispatch(showResult({ message: trl_welcome, variant: "success" }));
-		router.push("/");
+		router.push("/?refresh=true");
 	};
 
 	return (
