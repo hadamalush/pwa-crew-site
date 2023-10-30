@@ -3,7 +3,7 @@ import Link from "next/link";
 import IconRender from "../Icons/IconRender";
 import NavOptions from "./NavOptions";
 import styles from "../../styles/components/Navigation/NavbarMobile.module.scss";
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
@@ -32,7 +32,7 @@ const settingsReducer = (state, action) => {
 const NavbarMobile = ({ dict, lang }) => {
 	const dispatch = useDispatch();
 	const pathname = usePathname();
-	const session = useSession();
+	const { data: session } = useSession();
 
 	const [eventsState, dispatchEvents] = useReducer(eventsReducer, {
 		visible: false,
@@ -50,6 +50,10 @@ const NavbarMobile = ({ dict, lang }) => {
 		trl_login,
 		trl_chat,
 		trl_createEvent,
+		trl_notifications,
+		trl_settings,
+		trl_signOut,
+		trl_account,
 	} = dict;
 
 	const isActiveEventsPath = new RegExp(
@@ -73,20 +77,20 @@ const NavbarMobile = ({ dict, lang }) => {
 
 	const optionsSettings = [
 		{
-			title: "Notifications",
+			title: trl_notifications,
 			href: "/notifications",
 			imgSrc: "/images/options/option-events.webp",
 		},
 		{
-			title: "Settings",
-			href: "/settings",
-			imgSrc: "/images/options/option-new-event.webp",
-		},
-		{
-			title: "Logout",
+			title: trl_signOut,
 			href: "/",
 			imgSrc: "/images/options/option-new-event.webp",
 			onClick: signOut,
+		},
+		{
+			title: trl_settings,
+			href: "/settings",
+			imgSrc: "/images/options/option-new-event.webp",
 		},
 	];
 
@@ -162,7 +166,7 @@ const NavbarMobile = ({ dict, lang }) => {
 				</li>
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/events'
+						href={settingsState.visible ? "#" : "/events"}
 						className={isActiveEventsPath ? isActive : styles["nav__link"]}
 						onClick={
 							settingsState.visible
@@ -207,17 +211,17 @@ const NavbarMobile = ({ dict, lang }) => {
 
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/login'
+						href={eventsState.visible ? "#" : "/login"}
 						className={
 							pathname === `/${lang}/login` ? isActive : styles["nav__link"]
 						}
 						onClick={
-							eventsState.visible
+							eventsState.visible || !session
 								? null
 								: e => showOptionsMenuHandler(e, "settings")
 						}>
 						<IconRender variant='user' />
-						<p>{trl_login}</p>
+						<p>{session ? trl_account : trl_login}</p>
 					</Link>
 
 					{settingsState.visible && (

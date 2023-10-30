@@ -12,7 +12,8 @@
 			"createEvent": "Create event",
 			"notifications": "Notifications",
 			"settings": "Settings",
-			"signOut": "Sign out"
+			"signOut": "SignOut",
+			"account": "Account"
 		}
 	},
 	"contact": {
