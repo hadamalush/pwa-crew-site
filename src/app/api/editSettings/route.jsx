@@ -152,9 +152,9 @@ export const POST = async request => {
 		}
 	}
 
-	clientEvent.close();
-	clientNotifi.close();
-	client.close();
+	clientEvent && clientEvent.close();
+	clientNotifi && clientNotifi.close();
+	client && client.close();
 	return NextResponse.json(
 		{ message: notification.trl_success },
 		{ status: 200 }

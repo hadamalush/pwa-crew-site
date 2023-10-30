@@ -107,6 +107,24 @@ const FormikAccount = ({ className, dict, lang, ...props }) => {
 			);
 			return;
 		}
+
+		if (email || imgLink) {
+			const newSession = {
+				...session,
+				user: {
+					...session?.user,
+					...(email && { email: email }),
+					...(imgLink && { picture: imgLink }),
+				},
+			};
+
+			try {
+				await update(newSession);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+
 		dispatch(loading(false));
 		dispatch(
 			showResult({
@@ -114,22 +132,6 @@ const FormikAccount = ({ className, dict, lang, ...props }) => {
 				variant: "success",
 			})
 		);
-
-		if (email) {
-			const newSession = {
-				...session,
-				user: {
-					...session?.user,
-					email: email,
-				},
-			};
-
-			try {
-				const result = await update({ email: email });
-			} catch (err) {
-				console.log(err);
-			}
-		}
 
 		router.push("/");
 	};

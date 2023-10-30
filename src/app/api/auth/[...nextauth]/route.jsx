@@ -9,9 +9,19 @@ export const authOptions = {
 		strategy: "jwt",
 	},
 	callbacks: {
-		jwt({ token, trigger, session }) {
-			if (trigger === "update" && session?.email) {
-				token.email = session.email;
+		jwt({ token, user, trigger, session }) {
+			console.log(session);
+			if (
+				(trigger === "update" && session?.user?.email) ||
+				session?.user?.picture
+			) {
+				token.email = session.user?.email;
+				token.picture = session.user?.picture;
+			}
+
+			if (user && trigger === "signIn") {
+				token.email = user.email;
+				token.picture = user.picture;
 			}
 			return token;
 		},
@@ -47,7 +57,7 @@ export const authOptions = {
 				}
 
 				client.close();
-				return { email: user.email };
+				return { email: user.email, picture: user?.avatarImg };
 			},
 		}),
 	],

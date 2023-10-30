@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "../../../styles/components/transitions/Avatar/Avatar.module.scss";
+import { useSession } from "next-auth/react";
 
 /**
  *
@@ -9,10 +10,17 @@ import styles from "../../../styles/components/transitions/Avatar/Avatar.module.
  */
 const Avatar = ({ className, children, ...props }) => {
 	const classes = `${styles.avatar} ${className || ""}`;
+	const { data: session } = useSession();
+
+	const sessionAvatar = session?.user?.image;
+	const imageAvatar = sessionAvatar
+		? sessionAvatar
+		: "/images/profil/anonymous.jpg";
+
 	return (
 		<div className={classes}>
 			<Image
-				src='/images/profil/anonymous.jpg'
+				src={imageAvatar}
 				height={50}
 				width={50}
 				alt='Zdjęcie profilowe'
