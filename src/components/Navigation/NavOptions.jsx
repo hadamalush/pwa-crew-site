@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
  * @param {String} className Enter className as string.
  * @param {String} imgSrc Enter image source as string.
  * @param {Boolean} animationQuit Enter varible with boolean. When true then animation close will start.
- * @param {Array} options Enter array with objects. Object should includes title and href properties. For example: [{title: 'Events', href: '/events'}] Those properties are type string.
+ * @param {Array} options Enter array with objects. Object should includes title, href, imgSrc and optional onClick properties. For example: [{title: 'Events', href: '/events', imgSrc: "/images/options/option-events.webp", onClick: signOut}] Those properties are type string.
  * @param {Function} onClickCross Enter function which remove NavOptions from structure.
  * @returns {JSX.Element} Return the whole component with options menu. Prefer mobile devices.
  */
@@ -25,7 +25,7 @@ const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 	const classesGeneral = `${styles.menu} ${className || ""}`;
 	let i = 0;
 
-	const closeMenuHandler = (loadingAnimation, path) => {
+	const closeMenuHandler = (loadingAnimation, path, onClick) => {
 		if (loadingAnimation && !pathname.includes(path)) dispatch(loading(true));
 
 		const items = document.querySelectorAll(`.${styles["menu__item"]}`);
@@ -35,7 +35,9 @@ const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 		itemExit.classList.add(styles["menu__cutout--inVisible"]);
 		items.forEach(item => item.classList.add(styles["menu__item--reverse"]));
 
-		setTimeout(() => onClickCross(), 600);
+		setTimeout(() => {
+			onClickCross(), onClick && onClick();
+		}, 600);
 	};
 
 	if (animationQuit) {
@@ -63,7 +65,9 @@ const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 						<Link
 							href={item.href}
 							className={styles["menu__item-link"]}
-							onClick={() => closeMenuHandler(true, item.href)}></Link>
+							onClick={() =>
+								closeMenuHandler(true, item.href, item.onClick && item.onClick)
+							}></Link>
 						<ImageFill
 							src={item.imgSrc}
 							className={styles["menu__item-hexagon"]}

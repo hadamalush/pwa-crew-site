@@ -7,7 +7,7 @@ import { useReducer, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const eventsReducer = (state, action) => {
 	if (action.type === "EVENTS_VISIBLE") {
@@ -86,6 +86,7 @@ const NavbarMobile = ({ dict, lang }) => {
 			title: "Logout",
 			href: "/",
 			imgSrc: "/images/options/option-new-event.webp",
+			onClick: signOut,
 		},
 	];
 
@@ -143,9 +144,10 @@ const NavbarMobile = ({ dict, lang }) => {
 		}
 
 		if (variant === "settings") {
-			dispatchEvents({ type: "EVENTS_UNVISIBLE" });
+			dispatchSettings({ type: "SETTINGS_UNVISIBLE" });
 		}
 	};
+
 	return (
 		<nav className={styles.nav}>
 			<ul className={styles["nav__list"]}>
@@ -162,7 +164,11 @@ const NavbarMobile = ({ dict, lang }) => {
 					<Link
 						href='/events'
 						className={isActiveEventsPath ? isActive : styles["nav__link"]}
-						onClick={e => showOptionsMenuHandler(e, "events")}>
+						onClick={
+							settingsState.visible
+								? null
+								: e => showOptionsMenuHandler(e, "events")
+						}>
 						<IconRender variant='calendar' />
 						<p>{trl_events}</p>
 					</Link>
@@ -205,7 +211,11 @@ const NavbarMobile = ({ dict, lang }) => {
 						className={
 							pathname === `/${lang}/login` ? isActive : styles["nav__link"]
 						}
-						onClick={e => showOptionsMenuHandler(e, "settings")}>
+						onClick={
+							eventsState.visible
+								? null
+								: e => showOptionsMenuHandler(e, "settings")
+						}>
 						<IconRender variant='user' />
 						<p>{trl_login}</p>
 					</Link>
