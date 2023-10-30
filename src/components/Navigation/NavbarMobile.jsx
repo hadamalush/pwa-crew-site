@@ -7,6 +7,7 @@ import { useReducer, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
+import { useSession } from "next-auth/react";
 
 const eventsReducer = (state, action) => {
 	if (action.type === "EVENTS_VISIBLE") {
@@ -20,18 +21,19 @@ const eventsReducer = (state, action) => {
 
 const settingsReducer = (state, action) => {
 	if (action.type === "SETTINGS_VISIBLE") {
-		return { visible: !state.visible, isAnimation: true };
-	}
-	if (action.type === "SETTINGS_UNVISIBLE") {
-		return { visible: !state.visible, isAnimation: false };
+		return { visible: !state.visible, isAnimation: state.isAnimation };
+	} else if (action.type === "SETTINGS_ANIMATION") {
+		return { visible: state.visible, isAnimation: action.isAnimation };
+	} else if (action.type === "SETTINGS_UNVISIBLE") {
+		return { visible: false, isAnimation: state.isAnimation };
 	}
 };
 
 const NavbarMobile = ({ dict, lang }) => {
-	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
-	const [isAnimationQuit, setIsAnimationQuit] = useState(false);
 	const dispatch = useDispatch();
 	const pathname = usePathname();
+	const session = useSession();
+
 	const [eventsState, dispatchEvents] = useReducer(eventsReducer, {
 		visible: false,
 		isAnimation: false,
@@ -40,10 +42,6 @@ const NavbarMobile = ({ dict, lang }) => {
 		visible: false,
 		isAnimation: false,
 	});
-
-	// dispatchSettings({ type: "SETTINGS_VISIBLE" });
-
-	// console.log(settingsState.visible);
 
 	const {
 		trl_home,
@@ -72,42 +70,49 @@ const NavbarMobile = ({ dict, lang }) => {
 			imgSrc: "/images/options/option-new-event.webp",
 		},
 	];
-	console.log(eventsState);
+
+	const optionsSettings = [
+		{
+			title: "Notifications",
+			href: "/notifications",
+			imgSrc: "/images/options/option-events.webp",
+		},
+		{
+			title: "Settings",
+			href: "/settings",
+			imgSrc: "/images/options/option-new-event.webp",
+		},
+		{
+			title: "Logout",
+			href: "/",
+			imgSrc: "/images/options/option-new-event.webp",
+		},
+	];
 
 	const showOptionsMenuHandler = (e, variant) => {
 		e.preventDefault();
 
 		if (variant === "events" && eventsState.visible) {
-			console.log(eventsState);
-
 			dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: true });
-
-			console.log(eventsState);
-			// setIsAnimationQuit(true);
 
 			setTimeout(() => {
 				dispatchEvents({ type: "EVENTS_VISIBLE" });
-				// setIsOptionsMenuVisible(!isOptionsMenuVisible);
+			}, 600);
+		} else if (variant === "settings" && settingsState.visible) {
+			dispatchSettings({ type: "SETTINGS_ANIMATION", isAnimation: true });
+
+			setTimeout(() => {
+				dispatchSettings({ type: "SETTINGS_VISIBLE" });
 			}, 600);
 		} else {
-			dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: false });
-			dispatchEvents({ type: "EVENTS_VISIBLE" });
-			// setIsAnimationQuit(false);
-			// setIsOptionsMenuVisible(!isOptionsMenuVisible);
+			if (variant === "events") {
+				dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: false });
+				dispatchEvents({ type: "EVENTS_VISIBLE" });
+			} else {
+				dispatchSettings({ type: "SETTINGS_ANIMATION", isAnimation: false });
+				dispatchSettings({ type: "SETTINGS_VISIBLE" });
+			}
 		}
-
-		// if (isOptionsMenuVisible) {
-
-		// 	setIsAnimationQuit(true);
-
-		// 	setTimeout(() => {
-		// 		setIsOptionsMenuVisible(!isOptionsMenuVisible);
-		// 	}, 600);
-
-		// } else {
-		// 	setIsAnimationQuit(false);
-		// 	setIsOptionsMenuVisible(!isOptionsMenuVisible);
-		// }
 	};
 
 	const closeOptionsHandler = path => {
@@ -115,11 +120,19 @@ const NavbarMobile = ({ dict, lang }) => {
 			dispatch(loading(true));
 		}
 
-		if (isOptionsMenuVisible) {
-			setIsAnimationQuit(true);
+		if (eventsState.visible) {
+			dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: true });
 
 			setTimeout(() => {
-				setIsOptionsMenuVisible(!isOptionsMenuVisible);
+				dispatchEvents({ type: "EVENTS_VISIBLE" });
+			}, 600);
+		}
+
+		if (settingsState.visible) {
+			dispatchSettings({ type: "SETTINGS_ANIMATION", isAnimation: true });
+
+			setTimeout(() => {
+				dispatchSettings({ type: "SETTINGS_VISIBLE" });
 			}, 600);
 		}
 	};
@@ -128,7 +141,10 @@ const NavbarMobile = ({ dict, lang }) => {
 		if (variant === "events") {
 			dispatchEvents({ type: "EVENTS_UNVISIBLE" });
 		}
-		// setIsOptionsMenuVisible(false);
+
+		if (variant === "settings") {
+			dispatchEvents({ type: "EVENTS_UNVISIBLE" });
+		}
 	};
 	return (
 		<nav className={styles.nav}>
@@ -189,10 +205,19 @@ const NavbarMobile = ({ dict, lang }) => {
 						className={
 							pathname === `/${lang}/login` ? isActive : styles["nav__link"]
 						}
-						onClick={() => closeOptionsHandler(`/${lang}/login`)}>
+						onClick={e => showOptionsMenuHandler(e, "settings")}>
 						<IconRender variant='user' />
 						<p>{trl_login}</p>
 					</Link>
+
+					{settingsState.visible && (
+						<NavOptions
+							className={styles["nav__item-options"]}
+							animationQuit={settingsState.isAnimation}
+							options={optionsSettings}
+							onClickCross={() => removeOptionsFromStructureHandler("settings")}
+						/>
+					)}
 				</li>
 			</ul>
 		</nav>
