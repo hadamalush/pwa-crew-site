@@ -21,7 +21,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		trl_events,
 		trl_contact,
 		trl_login,
-		trl_chat,
+		trl_aboutUs,
 		trl_allEvents,
 		trl_createEvent,
 		trl_notifications,
@@ -165,7 +165,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 					)}
 					{session && (
 						<Link href='/#team' className={styles["nav__item"]}>
-							{trl_chat}
+							{trl_aboutUs}
 						</Link>
 					)}
 				</li>

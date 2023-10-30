@@ -187,7 +187,7 @@ const NavbarMobile = ({ dict, lang }) => {
 					)}
 				</li>
 
-				<li className={styles["nav__item"]}>
+				{/* <li className={styles["nav__item"]}>
 					<Link
 						href='/'
 						className={pathname === "/chat" ? isActive : styles["nav__link"]}
@@ -195,7 +195,7 @@ const NavbarMobile = ({ dict, lang }) => {
 						<IconRender variant='chat' />
 						<p>{trl_chat}</p>
 					</Link>
-				</li>
+				</li> */}
 
 				<li className={styles["nav__item"]}>
 					<Link
