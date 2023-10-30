@@ -79,18 +79,18 @@ const NavbarMobile = ({ dict, lang }) => {
 		{
 			title: trl_notifications,
 			href: "/notifications",
-			imgSrc: "/images/options/option-events.webp",
+			imgSrc: "/images/options/option-notifications.webp",
 		},
 		{
 			title: trl_signOut,
 			href: "/",
-			imgSrc: "/images/options/option-new-event.webp",
+			imgSrc: "/images/options/option-signout.webp",
 			onClick: signOut,
 		},
 		{
 			title: trl_settings,
 			href: "/settings",
-			imgSrc: "/images/options/option-new-event.webp",
+			imgSrc: "/images/options/option-settings.webp",
 		},
 	];
 

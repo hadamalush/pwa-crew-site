@@ -133,7 +133,9 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 							</time>
 						</div>
 						<h3>{carouselItem.title}</h3>
-						<Link href='/'>Dowiedz się więcej </Link>
+						<Link href='/'>
+							{lang === "en" ? "Find out more" : "Dowiedz się więcej"}
+						</Link>
 					</CarouselItem>
 				);
 			})}

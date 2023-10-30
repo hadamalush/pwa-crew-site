@@ -15,7 +15,7 @@ const Avatar = ({ className, children, ...props }) => {
 	const sessionAvatar = session?.user?.image;
 	const imageAvatar = sessionAvatar
 		? sessionAvatar
-		: "/images/profil/anonymous.jpg";
+		: "/images/profil/anonymous.webp";
 
 	return (
 		<div className={classes}>

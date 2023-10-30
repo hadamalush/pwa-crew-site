@@ -22,7 +22,7 @@ const BackgroundImageGeneral = ({ lang }) => {
 		<div className={classes} id='hero'>
 			<Image
 				alt='Crowd on the concert'
-				src='/images/header/concert.jpg'
+				src='/images/header/concert.webp'
 				priority={true}
 				fill
 				sizes='100vw'
