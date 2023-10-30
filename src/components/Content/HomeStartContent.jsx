@@ -30,6 +30,8 @@ const HomeStartContent = ({
 		}
 	}, [refresh]);
 
+	console.log(session);
+
 	return (
 		<WrapperStart className={classes}>
 			<div className={styles["introduction__text"]}>

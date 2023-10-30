@@ -8,8 +8,23 @@ export const authOptions = {
 	session: {
 		strategy: "jwt",
 	},
-	pages: {
-		signIn: "/logowanie",
+	callbacks: {
+		jwt({ token, user, trigger, session }) {
+			console.log(session);
+			if (
+				(trigger === "update" && session?.user?.email) ||
+				session?.user?.picture
+			) {
+				token.email = session.user?.email;
+				token.picture = session.user?.picture;
+			}
+
+			if (user && trigger === "signIn") {
+				token.email = user.email;
+				token.picture = user.picture;
+			}
+			return token;
+		},
 	},
 	providers: [
 		CredentialsProvider({
@@ -42,7 +57,7 @@ export const authOptions = {
 				}
 
 				client.close();
-				return { email: user.email };
+				return { email: user.email, picture: user?.avatarImg };
 			},
 		}),
 	],
