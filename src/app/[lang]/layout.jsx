@@ -37,6 +37,7 @@ export default async function RootLayout({
 		trl_notifications: dict.navigation.dropdown.notifications,
 		trl_settings: dict.navigation.dropdown.settings,
 		trl_signOut: dict.navigation.dropdown.signOut,
+		trl_account: dict.navigation.dropdown.account,
 	};
 
 	const session = await getServerSession();

@@ -3,16 +3,45 @@ import Link from "next/link";
 import IconRender from "../Icons/IconRender";
 import NavOptions from "./NavOptions";
 import styles from "../../styles/components/Navigation/NavbarMobile.module.scss";
-import { useState } from "react";
+import { useReducer } from "react";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
+import { signOut, useSession } from "next-auth/react";
+
+const eventsReducer = (state, action) => {
+	if (action.type === "EVENTS_VISIBLE") {
+		return { visible: !state.visible, isAnimation: state.isAnimation };
+	} else if (action.type === "EVENTS_ANIMATION") {
+		return { visible: state.visible, isAnimation: action.isAnimation };
+	} else if (action.type === "EVENTS_UNVISIBLE") {
+		return { visible: false, isAnimation: state.isAnimation };
+	}
+};
+
+const settingsReducer = (state, action) => {
+	if (action.type === "SETTINGS_VISIBLE") {
+		return { visible: !state.visible, isAnimation: state.isAnimation };
+	} else if (action.type === "SETTINGS_ANIMATION") {
+		return { visible: state.visible, isAnimation: action.isAnimation };
+	} else if (action.type === "SETTINGS_UNVISIBLE") {
+		return { visible: false, isAnimation: state.isAnimation };
+	}
+};
 
 const NavbarMobile = ({ dict, lang }) => {
-	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
-	const [isAnimationQuit, setIsAnimationQuit] = useState(false);
 	const dispatch = useDispatch();
 	const pathname = usePathname();
+	const { data: session } = useSession();
+
+	const [eventsState, dispatchEvents] = useReducer(eventsReducer, {
+		visible: false,
+		isAnimation: false,
+	});
+	const [settingsState, dispatchSettings] = useReducer(settingsReducer, {
+		visible: false,
+		isAnimation: false,
+	});
 
 	const {
 		trl_home,
@@ -21,6 +50,10 @@ const NavbarMobile = ({ dict, lang }) => {
 		trl_login,
 		trl_chat,
 		trl_createEvent,
+		trl_notifications,
+		trl_settings,
+		trl_signOut,
+		trl_account,
 	} = dict;
 
 	const isActiveEventsPath = new RegExp(
@@ -42,18 +75,48 @@ const NavbarMobile = ({ dict, lang }) => {
 		},
 	];
 
-	const showOptionsMenuHandler = e => {
+	const optionsSettings = [
+		{
+			title: trl_notifications,
+			href: "/notifications",
+			imgSrc: "/images/options/option-events.webp",
+		},
+		{
+			title: trl_signOut,
+			href: "/",
+			imgSrc: "/images/options/option-new-event.webp",
+			onClick: signOut,
+		},
+		{
+			title: trl_settings,
+			href: "/settings",
+			imgSrc: "/images/options/option-new-event.webp",
+		},
+	];
+
+	const showOptionsMenuHandler = (e, variant) => {
 		e.preventDefault();
 
-		if (isOptionsMenuVisible) {
-			setIsAnimationQuit(true);
+		if (variant === "events" && eventsState.visible) {
+			dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: true });
 
 			setTimeout(() => {
-				setIsOptionsMenuVisible(!isOptionsMenuVisible);
+				dispatchEvents({ type: "EVENTS_VISIBLE" });
+			}, 600);
+		} else if (variant === "settings" && settingsState.visible) {
+			dispatchSettings({ type: "SETTINGS_ANIMATION", isAnimation: true });
+
+			setTimeout(() => {
+				dispatchSettings({ type: "SETTINGS_VISIBLE" });
 			}, 600);
 		} else {
-			setIsAnimationQuit(false);
-			setIsOptionsMenuVisible(!isOptionsMenuVisible);
+			if (variant === "events") {
+				dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: false });
+				dispatchEvents({ type: "EVENTS_VISIBLE" });
+			} else {
+				dispatchSettings({ type: "SETTINGS_ANIMATION", isAnimation: false });
+				dispatchSettings({ type: "SETTINGS_VISIBLE" });
+			}
 		}
 	};
 
@@ -62,18 +125,33 @@ const NavbarMobile = ({ dict, lang }) => {
 			dispatch(loading(true));
 		}
 
-		if (isOptionsMenuVisible) {
-			setIsAnimationQuit(true);
+		if (eventsState.visible) {
+			dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: true });
 
 			setTimeout(() => {
-				setIsOptionsMenuVisible(!isOptionsMenuVisible);
+				dispatchEvents({ type: "EVENTS_VISIBLE" });
+			}, 600);
+		}
+
+		if (settingsState.visible) {
+			dispatchSettings({ type: "SETTINGS_ANIMATION", isAnimation: true });
+
+			setTimeout(() => {
+				dispatchSettings({ type: "SETTINGS_VISIBLE" });
 			}, 600);
 		}
 	};
 
-	const removeOptionsFromStructureHandler = () => {
-		setIsOptionsMenuVisible(false);
+	const removeOptionsFromStructureHandler = variant => {
+		if (variant === "events") {
+			dispatchEvents({ type: "EVENTS_UNVISIBLE" });
+		}
+
+		if (variant === "settings") {
+			dispatchSettings({ type: "SETTINGS_UNVISIBLE" });
+		}
 	};
+
 	return (
 		<nav className={styles.nav}>
 			<ul className={styles["nav__list"]}>
@@ -88,19 +166,23 @@ const NavbarMobile = ({ dict, lang }) => {
 				</li>
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/events'
+						href={settingsState.visible ? "#" : "/events"}
 						className={isActiveEventsPath ? isActive : styles["nav__link"]}
-						onClick={showOptionsMenuHandler}>
+						onClick={
+							settingsState.visible
+								? null
+								: e => showOptionsMenuHandler(e, "events")
+						}>
 						<IconRender variant='calendar' />
 						<p>{trl_events}</p>
 					</Link>
 
-					{isOptionsMenuVisible && (
+					{eventsState.visible && (
 						<NavOptions
 							className={styles["nav__item-options"]}
-							animationQuit={isAnimationQuit}
+							animationQuit={eventsState.isAnimation}
 							options={optionsEvents}
-							onClickCross={removeOptionsFromStructureHandler}
+							onClickCross={() => removeOptionsFromStructureHandler("events")}
 						/>
 					)}
 				</li>
@@ -129,14 +211,27 @@ const NavbarMobile = ({ dict, lang }) => {
 
 				<li className={styles["nav__item"]}>
 					<Link
-						href='/login'
+						href={eventsState.visible ? "#" : "/login"}
 						className={
 							pathname === `/${lang}/login` ? isActive : styles["nav__link"]
 						}
-						onClick={() => closeOptionsHandler(`/${lang}/login`)}>
+						onClick={
+							eventsState.visible || !session
+								? null
+								: e => showOptionsMenuHandler(e, "settings")
+						}>
 						<IconRender variant='user' />
-						<p>{trl_login}</p>
+						<p>{session ? trl_account : trl_login}</p>
 					</Link>
+
+					{settingsState.visible && (
+						<NavOptions
+							className={styles["nav__item-options"]}
+							animationQuit={settingsState.isAnimation}
+							options={optionsSettings}
+							onClickCross={() => removeOptionsFromStructureHandler("settings")}
+						/>
+					)}
 				</li>
 			</ul>
 		</nav>

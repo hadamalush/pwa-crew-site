@@ -106,11 +106,11 @@
 
 	&__item:nth-child(2) {
 		transform: translate(145%, -50%);
-		animation-name: move-right;
+		animation-name: move-left;
 	}
 	&__item:nth-child(3) {
 		transform: translate(-240%, -50%);
-		animation-name: move-left;
+		animation-name: move-right;
 	}
 
 	&__item:nth-child(4) {

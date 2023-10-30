@@ -6,7 +6,7 @@ import InputFormikFile from "../../Input/InputFormikFile";
 import Avatar from "../../Avatar/Avatar";
 import styles from "../../../../styles/components/transitions/Forms/FormikAccount.module.scss";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { settingsSchema } from "@/components/Schemas/FormSchem";
@@ -25,8 +25,6 @@ const FormikAccount = ({ className, dict, lang, ...props }) => {
 	const dispatch = useDispatch(showResult);
 	const { data: session, update } = useSession();
 	const sessionEmail = session?.user?.email;
-
-	console.log("PO REFRESHU:", session);
 
 	const classes = `${styles.settings} ${className || ""}`;
 
