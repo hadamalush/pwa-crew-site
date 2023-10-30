@@ -3,16 +3,47 @@ import Link from "next/link";
 import IconRender from "../Icons/IconRender";
 import NavOptions from "./NavOptions";
 import styles from "../../styles/components/Navigation/NavbarMobile.module.scss";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
+
+const eventsReducer = (state, action) => {
+	if (action.type === "EVENTS_VISIBLE") {
+		return { visible: !state.visible, isAnimation: state.isAnimation };
+	} else if (action.type === "EVENTS_ANIMATION") {
+		return { visible: state.visible, isAnimation: action.isAnimation };
+	} else if (action.type === "EVENTS_UNVISIBLE") {
+		return { visible: false, isAnimation: state.isAnimation };
+	}
+};
+
+const settingsReducer = (state, action) => {
+	if (action.type === "SETTINGS_VISIBLE") {
+		return { visible: !state.visible, isAnimation: true };
+	}
+	if (action.type === "SETTINGS_UNVISIBLE") {
+		return { visible: !state.visible, isAnimation: false };
+	}
+};
 
 const NavbarMobile = ({ dict, lang }) => {
 	const [isOptionsMenuVisible, setIsOptionsMenuVisible] = useState(false);
 	const [isAnimationQuit, setIsAnimationQuit] = useState(false);
 	const dispatch = useDispatch();
 	const pathname = usePathname();
+	const [eventsState, dispatchEvents] = useReducer(eventsReducer, {
+		visible: false,
+		isAnimation: false,
+	});
+	const [settingsState, dispatchSettings] = useReducer(settingsReducer, {
+		visible: false,
+		isAnimation: false,
+	});
+
+	// dispatchSettings({ type: "SETTINGS_VISIBLE" });
+
+	// console.log(settingsState.visible);
 
 	const {
 		trl_home,
@@ -41,20 +72,42 @@ const NavbarMobile = ({ dict, lang }) => {
 			imgSrc: "/images/options/option-new-event.webp",
 		},
 	];
+	console.log(eventsState);
 
-	const showOptionsMenuHandler = e => {
+	const showOptionsMenuHandler = (e, variant) => {
 		e.preventDefault();
 
-		if (isOptionsMenuVisible) {
-			setIsAnimationQuit(true);
+		if (variant === "events" && eventsState.visible) {
+			console.log(eventsState);
+
+			dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: true });
+
+			console.log(eventsState);
+			// setIsAnimationQuit(true);
 
 			setTimeout(() => {
-				setIsOptionsMenuVisible(!isOptionsMenuVisible);
+				dispatchEvents({ type: "EVENTS_VISIBLE" });
+				// setIsOptionsMenuVisible(!isOptionsMenuVisible);
 			}, 600);
 		} else {
-			setIsAnimationQuit(false);
-			setIsOptionsMenuVisible(!isOptionsMenuVisible);
+			dispatchEvents({ type: "EVENTS_ANIMATION", isAnimation: false });
+			dispatchEvents({ type: "EVENTS_VISIBLE" });
+			// setIsAnimationQuit(false);
+			// setIsOptionsMenuVisible(!isOptionsMenuVisible);
 		}
+
+		// if (isOptionsMenuVisible) {
+
+		// 	setIsAnimationQuit(true);
+
+		// 	setTimeout(() => {
+		// 		setIsOptionsMenuVisible(!isOptionsMenuVisible);
+		// 	}, 600);
+
+		// } else {
+		// 	setIsAnimationQuit(false);
+		// 	setIsOptionsMenuVisible(!isOptionsMenuVisible);
+		// }
 	};
 
 	const closeOptionsHandler = path => {
@@ -71,8 +124,11 @@ const NavbarMobile = ({ dict, lang }) => {
 		}
 	};
 
-	const removeOptionsFromStructureHandler = () => {
-		setIsOptionsMenuVisible(false);
+	const removeOptionsFromStructureHandler = variant => {
+		if (variant === "events") {
+			dispatchEvents({ type: "EVENTS_UNVISIBLE" });
+		}
+		// setIsOptionsMenuVisible(false);
 	};
 	return (
 		<nav className={styles.nav}>
@@ -90,17 +146,17 @@ const NavbarMobile = ({ dict, lang }) => {
 					<Link
 						href='/events'
 						className={isActiveEventsPath ? isActive : styles["nav__link"]}
-						onClick={showOptionsMenuHandler}>
+						onClick={e => showOptionsMenuHandler(e, "events")}>
 						<IconRender variant='calendar' />
 						<p>{trl_events}</p>
 					</Link>
 
-					{isOptionsMenuVisible && (
+					{eventsState.visible && (
 						<NavOptions
 							className={styles["nav__item-options"]}
-							animationQuit={isAnimationQuit}
+							animationQuit={eventsState.isAnimation}
 							options={optionsEvents}
-							onClickCross={removeOptionsFromStructureHandler}
+							onClickCross={() => removeOptionsFromStructureHandler("events")}
 						/>
 					)}
 				</li>

@@ -10,7 +10,6 @@ export const authOptions = {
 	},
 	callbacks: {
 		jwt({ token, user, trigger, session }) {
-			console.log(session);
 			if (
 				(trigger === "update" && session?.user?.email) ||
 				session?.user?.picture
