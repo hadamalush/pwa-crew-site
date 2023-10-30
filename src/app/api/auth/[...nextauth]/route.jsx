@@ -8,8 +8,13 @@ export const authOptions = {
 	session: {
 		strategy: "jwt",
 	},
-	pages: {
-		signIn: "/logowanie",
+	callbacks: {
+		jwt({ token, trigger, session }) {
+			if (trigger === "update" && session?.email) {
+				token.email = session.email;
+			}
+			return token;
+		},
 	},
 	providers: [
 		CredentialsProvider({

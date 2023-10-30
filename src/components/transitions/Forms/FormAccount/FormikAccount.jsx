@@ -6,7 +6,7 @@ import InputFormikFile from "../../Input/InputFormikFile";
 import Avatar from "../../Avatar/Avatar";
 import styles from "../../../../styles/components/transitions/Forms/FormikAccount.module.scss";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { settingsSchema } from "@/components/Schemas/FormSchem";
@@ -23,8 +23,10 @@ import { showResult, loading } from "@/global/notification-slice";
 const FormikAccount = ({ className, dict, lang, ...props }) => {
 	const router = useRouter();
 	const dispatch = useDispatch(showResult);
-	const { data: session } = useSession();
-	const email = session?.user?.email;
+	const { data: session, update } = useSession();
+	const sessionEmail = session?.user?.email;
+
+	console.log("PO REFRESHU:", session);
 
 	const classes = `${styles.settings} ${className || ""}`;
 
@@ -41,7 +43,7 @@ const FormikAccount = ({ className, dict, lang, ...props }) => {
 		const email = values.email;
 		const password = values.password;
 		const file = values.fileImg;
-		let imgLink;
+		let imgLink, data;
 
 		if (!email && !password && !file) {
 			return;
@@ -112,6 +114,23 @@ const FormikAccount = ({ className, dict, lang, ...props }) => {
 				variant: "success",
 			})
 		);
+
+		if (email) {
+			const newSession = {
+				...session,
+				user: {
+					...session?.user,
+					email: email,
+				},
+			};
+
+			try {
+				const result = await update({ email: email });
+			} catch (err) {
+				console.log(err);
+			}
+		}
+
 		router.push("/");
 	};
 
@@ -131,7 +150,7 @@ const FormikAccount = ({ className, dict, lang, ...props }) => {
 							<h1>{trl_title}</h1>
 							<div className={styles.settings__user}>
 								<Avatar className={styles.settings__avatar} />
-								<p className={styles.settings__email}>{email}</p>
+								<p className={styles.settings__email}>{sessionEmail}</p>
 							</div>
 							<InputFormik
 								name='email'

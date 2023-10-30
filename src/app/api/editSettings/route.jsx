@@ -1,20 +1,18 @@
 import { NextResponse } from "next/server";
 import {
-	connectDatabaseEvents,
 	connectDbMongo,
 	findDocument,
+	updateAllDocuments,
 	updateDocument,
 } from "@/lib/mongodb";
 import { getServerSession } from "next-auth";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
-import { ObjectId } from "mongodb";
-import { addNotification } from "@/lib/crud";
+import { authOptions } from "../auth/[...nextauth]/route";
+import { cryptPassword } from "@/lib/crypt";
 
 export const POST = async request => {
-	const session = await getServerSession();
-
-	console.log(session);
-	const email = session?.user?.email;
+	const session = await getServerSession(authOptions);
+	const currentEmail = session?.user?.email;
 	const data = await request.json();
 	const { lang } = data;
 	const dict = await getDictionaryNotifi(lang);
@@ -35,16 +33,20 @@ export const POST = async request => {
 		);
 	}
 
-	const { title, password, imgLink } = data;
+	const { email, password, imgLink } = data;
 
-	if (!title && !password && !imgLink) {
+	if (!email && !password && !imgLink) {
 		return NextResponse.json(
 			{ error: notification.trl_err_422 },
 			{ status: 422 }
 		);
 	}
 
-	let client;
+	let client, user;
+	const filters = {
+		user: { email: currentEmail },
+		events: { user_email: currentEmail },
+	};
 
 	try {
 		client = await connectDbMongo("Auth");
@@ -55,13 +57,10 @@ export const POST = async request => {
 		);
 	}
 
-	const filter = { email: email };
-
-	let user;
-
 	try {
-		eventItem = await findDocument(client, "User", filter);
+		user = await findDocument(client, "Users", filters.user);
 	} catch (error) {
+		console.log(error);
 		client.close();
 		return NextResponse.json(
 			{ error: notification.trl_generalError + " - 404" },
@@ -69,71 +68,92 @@ export const POST = async request => {
 		);
 	}
 
-	console.log(user);
+	if (!user) {
+		client.close();
+		return NextResponse.json(
+			{ error: notification.trl_err_401_unAuth },
+			{ status: 401 }
+		);
+	}
+	let hashedPassword;
 
-	return;
+	if (password) {
+		hashedPassword = await cryptPassword(password);
+	}
 
-	// if (eventItem.user_email !== email) {
-	// 	client.close();
-	// 	return NextResponse.json(
-	// 		{ error: notification.trl_err_401_unAuth },
-	// 		{ status: 401 }
-	// 	);
-	// }
+	const update = {
+		$set: {
+			...(email && { email: email }),
+			...(password && { password: hashedPassword }),
+			...(imgLink && { avatarImg: imgLink }),
+		},
+	};
 
-	// const update = {
-	// 	$set: {
-	// 		user_email: email,
-	// 		title,
-	// 		town,
-	// 		code_post: codePost,
-	// 		street,
-	// 		date,
-	// 		time,
-	// 		description: description,
-	// 		...(imageSrcVercelBlob && {
-	// 			image_src_vercelBlob: imageSrcVercelBlob,
-	// 		}),
-	// 		...(imageSrcMega && { image_src_mega: imageSrcMega }),
-	// 		...(imageSrcCld && { image_src_cloudinary: imageSrcCld }),
-	// 	},
-	// };
+	try {
+		await updateDocument(client, "Users", filters.user, update);
+	} catch (err) {
+		client.close();
+		return NextResponse.json(
+			{
+				error: notification.trl_generalError + " - 428",
+			},
+			{ status: 428 }
+		);
+	}
 
-	// try {
-	// 	await updateDocument(client, "AllEvents", filter, update);
-	// } catch (err) {
-	// 	client.close();
-	// 	return NextResponse.json(
-	// 		{
-	// 			error: notification.trl_generalError + " - 428",
-	// 		},
-	// 		{ status: 428 }
-	// 	);
-	// }
+	let clientEvent, clientNotifi;
+	if (email) {
+		try {
+			clientEvent = await connectDbMongo("Events");
+		} catch (error) {
+			return NextResponse.json(
+				{ error: notification.trl_err_500 },
+				{ status: 500 }
+			);
+		}
 
-	// try {
-	// 	clientNotifi = await connectDbMongo("Users");
-	// } catch (error) {
-	// 	console.log(error);
-	// 	console.log("Failed connection to users databse.");
-	// }
+		try {
+			await updateAllDocuments(clientEvent, "AllEvents", filters.events, {
+				$set: { user_email: email },
+			});
+		} catch (err) {
+			clientEvent.close();
+			return NextResponse.json(
+				{
+					error: notification.trl_generalError + " - 428",
+				},
+				{ status: 428 }
+			);
+		}
 
-	// const dataNotifi = {
-	// 	email: email,
-	// 	actionTextPL: "Edytowano wydarzenie.",
-	// 	actionTextEN: "Edited the event",
-	// 	href: eventLink + "#section_detail-item",
-	// 	title: title,
-	// 	action: "edit",
-	// 	status: "new",
-	// };
+		try {
+			clientNotifi = await connectDbMongo("Users");
+		} catch (error) {
+			return NextResponse.json(
+				{ error: notification.trl_err_500 },
+				{ status: 500 }
+			);
+		}
 
-	// try {
-	// 	await addNotification(clientNotifi, "Notifications", dataNotifi, true);
-	// } catch (err) {
-	// 	console.log("Failed to add notification");
-	// }
+		try {
+			await updateDocument(clientNotifi, "Notifications", filters.user, {
+				$set: {
+					email: email,
+				},
+			});
+		} catch (err) {
+			clientNotifi.close();
+			return NextResponse.json(
+				{
+					error: notification.trl_generalError + " - 428",
+				},
+				{ status: 428 }
+			);
+		}
+	}
 
+	clientEvent.close();
+	clientNotifi.close();
 	client.close();
 	return NextResponse.json(
 		{ message: notification.trl_success },

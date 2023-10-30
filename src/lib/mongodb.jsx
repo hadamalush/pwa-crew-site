@@ -105,7 +105,24 @@ export const updateDocument = async (
 	return updatedDocument;
 };
 
-export const updateAllDocuments = async (client, collection, document, key) => {
+export const updateAllDocuments = async (
+	client,
+	collection,
+	filter,
+	document
+) => {
+	const db = client.db();
+	const result = await db.collection(collection).updateMany(filter, document);
+
+	return result;
+};
+
+export const updateAllNestedDocuments = async (
+	client,
+	collection,
+	document,
+	key
+) => {
 	const db = client.db();
 
 	console.log(collection, " | ", document, " | ", key);

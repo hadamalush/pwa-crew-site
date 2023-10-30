@@ -17,7 +17,7 @@ export default async function SettingsModal({ params: { lang } }) {
 	};
 
 	return (
-		<ModalParallel>
+		<ModalParallel path='settings'>
 			<FormikAccount dict={translations} lang={lang} />
 		</ModalParallel>
 	);

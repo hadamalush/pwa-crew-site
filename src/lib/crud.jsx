@@ -1,7 +1,7 @@
 import {
 	findDocument,
 	insertDocument,
-	updateAllDocuments,
+	updateAllNestedDocuments,
 	updateDocument,
 } from "./mongodb";
 import { nanoid } from "nanoid";
@@ -58,7 +58,7 @@ export const addNotification = async (client, collection, data, all) => {
 		return result;
 	}
 	if (all) {
-		const result = await updateAllDocuments(
+		const result = await updateAllNestedDocuments(
 			client,
 			collection,
 			newNotification,
