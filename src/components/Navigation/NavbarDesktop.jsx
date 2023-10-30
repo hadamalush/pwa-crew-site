@@ -10,7 +10,7 @@ import { getCookie, setCookie } from "@/lib/cookies";
 import { useEffect, useState } from "react";
 
 const NavbarDesktop = ({ dict, lang, className, ...props }) => {
-	const { data: session, status } = useSession();
+	const { data: session } = useSession();
 	const pathname = usePathname();
 	const dispatch = useDispatch();
 	const [quantityNewNotices, setQuantityNewNotices] = useState(null);
@@ -154,7 +154,9 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 							href='/login'
 							onClick={() => animationHandler(`/${lang}/login`)}
 							className={
-								pathname === `/${lang}/login`
+								pathname.includes("login") ||
+								pathname.includes("registration") ||
+								pathname.includes("forgot-password")
 									? classesNavItemActive
 									: styles["nav__item"]
 							}>
@@ -162,7 +164,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 						</Link>
 					)}
 					{session && (
-						<Link href='/' className={styles["nav__item"]}>
+						<Link href='/#team' className={styles["nav__item"]}>
 							{trl_chat}
 						</Link>
 					)}

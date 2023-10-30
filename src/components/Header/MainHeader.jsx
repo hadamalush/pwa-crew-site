@@ -9,10 +9,12 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { loading } from "@/global/notification-slice";
+import { useSession } from "next-auth/react";
 
 const MainHeader = ({ dict, lang, ...props }) => {
-	const [isLight, setIsLight] = useState(false);
+	// const [isLight, setIsLight] = useState(false);
 	const isLoading = useSelector(state => state.notification.isLoading);
+	const { data: session } = useSession();
 	const dispatch = useDispatch();
 
 	const router = useRouter();
@@ -29,6 +31,13 @@ const MainHeader = ({ dict, lang, ...props }) => {
 	const classesHeader = !isLoading
 		? `${styles.header}`
 		: `${styles.header} ${styles.loading}`;
+	const classesGlob = session
+		? styles["header__glob"]
+		: `${styles["header__glob"]} ${styles["header__glob--right"]} `;
+	const classesListLeagueages = session
+		? styles["header__leanguages"]
+		: `${styles["header__leanguages"]} ${styles["header__leanguages--right"]} `;
+
 	const classesLangIsActive = `${styles["header__leanguages-item"]} ${styles["header__leanguages-item--active"]}`;
 
 	const changeLanguageHandler = async language => {
@@ -45,9 +54,9 @@ const MainHeader = ({ dict, lang, ...props }) => {
 		}
 	};
 
-	const changeThemeHandler = () => {
-		setIsLight(!isLight);
-	};
+	// const changeThemeHandler = () => {
+	// 	setIsLight(!isLight);
+	// };
 
 	return (
 		<>
@@ -59,13 +68,13 @@ const MainHeader = ({ dict, lang, ...props }) => {
 					lang={lang}
 				/>
 				<NavbarMobile dict={dict} lang={lang} />
-				<IconRender
+				{/* <IconRender
 					variant={isLight ? "moon" : "sun"}
 					className={styles["header__theme-switcher"]}
 					onClick={changeThemeHandler}
-				/>
-				<IconRender variant='glob' className={styles["header__glob"]} />
-				<ul className={styles["header__leanguages"]}>
+				/> */}
+				<IconRender variant='glob' className={classesGlob} />
+				<ul className={classesListLeagueages}>
 					<li
 						className={
 							lang === "en"
