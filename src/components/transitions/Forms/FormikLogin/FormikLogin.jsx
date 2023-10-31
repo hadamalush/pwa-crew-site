@@ -4,14 +4,15 @@ import ButtonMain from "../../Button/ButtonMain";
 import InputFormik from "../../Input/InputFormik";
 import FormContainerBlur from "@/components/Containers/FormContainerBlur";
 import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
-import { usePathname, useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
 import { loginSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
+import { setCookie } from "@/lib/cookies";
 
 /**
  * @description This component returns form for login.
@@ -92,7 +93,22 @@ const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
 					variant: "warning",
 				})
 			);
+			return;
 		}
+
+		try {
+			const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
+			const response = await fetch(apiUrl);
+			const data = await response.json();
+
+			if (response.ok) {
+				setCookie("newNotices", data?.message);
+				setCookie("dateNotices", new Date());
+			}
+		} catch (err) {
+			console.log(err);
+		}
+
 		dispatch(loading(false));
 		dispatch(showResult({ message: trl_welcome, variant: "success" }));
 		router.push("/?refresh=true");

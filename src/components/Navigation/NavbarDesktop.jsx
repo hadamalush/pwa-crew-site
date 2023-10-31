@@ -47,7 +47,6 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 			}
 		})().then(async () => {
 			if ((email && isCheck) || !dateNotices) {
-				console.log("dasdsad");
 				const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
 				let result;
 
