@@ -5,12 +5,12 @@ import InputFormik from "../../Input/InputFormik";
 import InputFormikFile from "../../Input/InputFormikFile";
 import Avatar from "../../Avatar/Avatar";
 import styles from "../../../../styles/components/transitions/Forms/FormikAccount.module.scss";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { settingsSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
+import { closeModalWithAnimation } from "@/global/modal-slice";
 
 /**
  * @description This component returns form for contact.
@@ -21,8 +21,7 @@ import { showResult, loading } from "@/global/notification-slice";
  */
 
 const FormikAccount = ({ className, dict, lang, ...props }) => {
-	const router = useRouter();
-	const dispatch = useDispatch(showResult);
+	const dispatch = useDispatch();
 	const { data: session, update } = useSession();
 	const sessionEmail = session?.user?.email;
 
@@ -131,7 +130,7 @@ const FormikAccount = ({ className, dict, lang, ...props }) => {
 			})
 		);
 
-		router.push("/");
+		closeModalWithAnimation(dispatch);
 	};
 
 	return (

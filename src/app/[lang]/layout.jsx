@@ -4,9 +4,11 @@ import Footer from "@/components/Footer/Footer";
 import BackgroundImageGeneral from "@/components/transitions/Background/BackgroundImageGeneral";
 import SessionProvider from "./SessionProvider";
 import Notification from "@/components/transitions/Notification/Notification";
+import ModalHandlerServer from "@/components/transitions/Modal/ModalHandlerServer";
 import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
+import { getDictionaryNotifi } from "../dictionaries/notifications/dictionaries";
 
 export const metadata = {
 	title: "PwaCrew - the best music",
@@ -26,6 +28,8 @@ export default async function RootLayout({
 
 	const lang = params.lang;
 	const dict = await getDictionaryElements(lang);
+	const dictNotifi = await getDictionaryNotifi(lang);
+	const session = await getServerSession();
 
 	const navTranslation = {
 		trl_home: dict.navigation.home,
@@ -58,7 +62,42 @@ export default async function RootLayout({
 		trl_copyright: dict.footer.copyright,
 	};
 
-	const session = await getServerSession();
+	const translationModalDelete = {
+		trl_title: dict.events.deleteEvent.title,
+		trl_btn_delete: dict.events.deleteEvent.btn_delete,
+		trl_btn_cancel: dict.events.deleteEvent.btn_cancel,
+		trl_err: dictNotifi.notifications.deleteEvent.generalError,
+	};
+
+	const translationModalEditEvent = {
+		trl_title: dict.events.editEvent.form.title,
+		trl_eventTitle: dict.events.newEvent.form.eventTitle,
+		trl_town: dict.events.newEvent.form.town,
+		trl_codePost: dict.events.newEvent.form.codePost,
+		trl_street: dict.events.newEvent.form.street,
+		trl_date: dict.events.newEvent.form.date,
+		trl_startTime: dict.events.newEvent.form.startTime,
+		trl_picture: dict.events.newEvent.form.picture,
+		trl_eventDesc: dict.events.newEvent.form.eventDesc,
+		trl_btn_createEvent: dict.events.editEvent.form.btn_confirm,
+	};
+
+	const translationModalSettings = {
+		trl_title: dict.settings.title,
+		trl_changeEmail: dict.settings.changeEmail,
+		trl_changePassword: dict.settings.changePassword,
+		trl_changeAvatar: dict.settings.changeAvatar,
+		trl_btn_confirm: dict.settings.btn_confirm,
+		trl_error: dictNotifi.notifications.generalError,
+	};
+
+	const dictModals = {
+		modalDeleteEvent: translationModalDelete,
+		modalEditEvent: translationModalEditEvent,
+		modalSettings: translationModalSettings,
+	};
+
+	const trl_error = dictNotifi.notifications.newEvent.generalError;
 
 	return (
 		<html lang={lang}>
@@ -68,6 +107,11 @@ export default async function RootLayout({
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
+						<ModalHandlerServer
+							lang={lang}
+							dict={dictModals}
+							trl_err={trl_error}
+						/>
 						{modal}
 						{children}
 						<Footer dict={footerTranslation} />

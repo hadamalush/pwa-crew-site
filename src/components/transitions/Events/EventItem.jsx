@@ -7,7 +7,12 @@ import { useParams } from "next/navigation";
 import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
-import { setDataModal } from "@/global/modal-slice";
+import {
+	setDataModal,
+	setDataRootModal,
+	setIsVisibleRoot,
+	setParams,
+} from "@/global/modal-slice";
 
 /**
  *
@@ -111,8 +116,8 @@ const EventItem = ({
 
 	const loadDataModalHandler = () => {
 		dispatch(
-			setDataModal({
-				dataModal: {
+			setDataRootModal({
+				dataRootModal: {
 					title,
 					town,
 					codePost,
@@ -124,6 +129,13 @@ const EventItem = ({
 				},
 			})
 		);
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventEditModal" }));
+		dispatch(setParams({ params: { event: eventLink } }));
+	};
+
+	const showModalHandler = () => {
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventDeleteModal" }));
+		dispatch(setParams({ params: { title: title, id: id } }));
 	};
 
 	return (
@@ -160,18 +172,12 @@ const EventItem = ({
 					scroll={true}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
-
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
-						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/delete?event=${id}&title=${title}`}
-							scroll={false}>
+						<LinkAsBtn href='#' scroll={false} onClick={showModalHandler}>
 							{trl_btnDelete}
 						</LinkAsBtn>
-						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/edit?event=${eventLink}`}
-							scroll={false}
-							onClick={loadDataModalHandler}>
+						<LinkAsBtn href='#' scroll={false} onClick={loadDataModalHandler}>
 							{trl_btnEdit}
 						</LinkAsBtn>
 					</div>

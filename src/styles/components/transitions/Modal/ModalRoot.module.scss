@@ -1,0 +1,113 @@
+@import "../../../transitions/variables";
+@import "../../../mixins/mixins";
+
+.bg {
+	@include position(fixed, 0, 0, 0, 0, 1500);
+	background-color: $background-octonary;
+	transition: visibility 0.3s, opacity 0.3s;
+	opacity: hidden;
+	animation: show 0.2s;
+
+	&__hidden {
+		animation: hidden 0.2s forwards;
+	}
+}
+
+.modal {
+	@include position(absolute, 50%, null, null, 50%, 500);
+	width: 100%;
+	max-width: 500px;
+	padding-bottom: 1em;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	border-radius: 5px;
+	box-shadow: $boxshadow-primary;
+	background-color: $background-primary;
+	transition: transform 0.3s;
+
+	// &__visibility {
+	// 	transform: translate(-50%, 0);
+	// }
+
+	// &__small {
+	// 	@include position(absolute, 50%, null, null, 50%, 500);
+	// 	transform: translate(-50%, -50%);
+	// 	bottom: unset;
+	// }
+
+	&__quit {
+		@include position(absolute, 2rem, null, null, 2rem, 3);
+		cursor: pointer;
+
+		svg {
+			transition: transform 0.3s, color 0.3s;
+		}
+
+		&:hover svg {
+			transform: rotate(180deg);
+			color: $secondary-color;
+		}
+	}
+
+	&__content {
+		@include flex(row, null, center);
+		overflow-y: auto;
+		overflow-x: hidden;
+		max-height: 98.5vh;
+		padding-top: 3em;
+
+		&::-webkit-scrollbar {
+			width: 2px;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: 2px;
+			background: rgba(71, 70, 70, 0.808);
+		}
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+	}
+
+	&::before {
+		@include position(absolute, 0, 0, null, 0, 2);
+		content: "";
+		height: 6em;
+		background-color: #171717;
+	}
+
+	@include media-query(mediumScreen) {
+		// @include position(absolute, 50%, null, null, 50%, 500);
+		// transform: translate(-50%, 200%);
+		// bottom: unset;
+
+		&__visibility {
+			transform: translate(-50%, -50%);
+		}
+
+		&__content {
+			max-height: 60rem;
+		}
+
+		&__content {
+			max-height: 60rem;
+		}
+	}
+}
+
+@keyframes show {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes hidden {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}

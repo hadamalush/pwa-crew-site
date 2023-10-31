@@ -3,6 +3,8 @@ import IconRender from "@/components/Icons/IconRender";
 import Link from "next/link";
 import styles from "../../../styles/components/transitions/Notification/NotificationItem.module.scss";
 import { format } from "date-fns";
+import { closeModalWithAnimation } from "@/global/modal-slice";
+import { useDispatch } from "react-redux";
 
 const NotificationItem = ({
 	action,
@@ -15,6 +17,7 @@ const NotificationItem = ({
 	owner,
 	lang,
 }) => {
+	const dispatch = useDispatch();
 	const date = format(new Date(createdDate), " yyyy-MM-dd ");
 	const time = format(new Date(createdDate), "HH:mm ");
 
@@ -29,9 +32,16 @@ const NotificationItem = ({
 		styles[`notice__icon--${action}`]
 	} ${status && styles[`notice__icon--new`]}`;
 
+	const closeModalHandler = () => {
+		closeModalWithAnimation(dispatch);
+	};
+
 	return (
 		<li className={styles.notice}>
-			<Link href={href ? href : "#"} className={classesLink}>
+			<Link
+				href={href ? href : "#"}
+				className={classesLink}
+				onClick={href && closeModalHandler}>
 				<div className={styles["notice__content"]}>
 					<h3 className={classesHeading}>
 						{lang === "en" ? actionTextEN : actionTextPL}

@@ -3,60 +3,57 @@
 import ButtonMain from "../transitions/Button/ButtonMain";
 import Heading from "../transitions/Elements/Heading";
 import styles from "../../styles/components/transitions/Modal/ModalDelete.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loading, showResult } from "@/global/notification-slice";
-import { setIsVisible } from "@/global/modal-slice";
+import { closeModalWithAnimation } from "@/global/modal-slice";
 import { getCookie, setCookie } from "@/lib/cookies";
 
-const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
+const ModalDelete = ({ className, lang, dict, hSize }) => {
 	const dispatch = useDispatch();
+	const params = useSelector(state => state.modal.params);
 
-	const itemId = searchParams?.event;
+	const itemId = params?.id;
 	const { trl_title, trl_btn_delete, trl_btn_cancel, trl_err } = dict;
 
 	const actionHandler = async cancel => {
+		if (cancel) {
+			closeModalWithAnimation(dispatch);
+			return;
+		}
+
 		dispatch(loading(true));
 		let data;
 
-		if (!cancel) {
-			try {
-				const response = await fetch(
-					`/api/deleteEvent?title=${searchParams?.title}`,
-					{
-						method: "DELETE",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ id: itemId, lang }),
-					}
-				);
+		try {
+			const response = await fetch(`/api/deleteEvent?title=${params?.title}`, {
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id: itemId, lang }),
+			});
 
-				data = await response.json();
+			data = await response.json();
 
-				if (!response.ok) {
-					dispatch(loading(false));
-					dispatch(showResult({ message: data.error, variant: "warning" }));
-					return;
-				}
-			} catch (err) {
+			if (!response.ok) {
 				dispatch(loading(false));
-				dispatch(
-					showResult({
-						message: trl_err,
-						variant: "warning",
-					})
-				);
+				dispatch(showResult({ message: data.error, variant: "warning" }));
+				return;
 			}
-
+		} catch (err) {
+			dispatch(loading(false));
 			dispatch(
 				showResult({
-					message: data.message,
-					variant: "success",
+					message: trl_err,
+					variant: "warning",
 				})
 			);
-
-			dispatch(setIsVisible({ isVisible: "close" }));
-
-			return;
 		}
+
+		dispatch(
+			showResult({
+				message: data.message,
+				variant: "success",
+			})
+		);
 
 		const receivedNotices = await getCookie("newNotices");
 
@@ -66,7 +63,7 @@ const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
 			await setCookie("newNotices", quantityNotices + 1);
 		}
 
-		dispatch(setIsVisible({ isVisible: "close-no-refresh" }));
+		closeModalWithAnimation(dispatch);
 	};
 
 	return (

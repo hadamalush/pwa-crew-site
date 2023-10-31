@@ -6,10 +6,12 @@ import styles from "../../../styles/components/transitions/Notification/Notifica
 import { setCookie } from "@/lib/cookies";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
 
-const NotificationList = ({ notifications, lang }) => {
+const NotificationList = ({ lang }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [notifiPerPage, setNotifiPerPage] = useState(5);
+	const notifications = useSelector(state => state.modal.dataRootModal);
 	const { data: session } = useSession();
 	const [status, setStatus] = useState(true);
 	const email = session?.user?.email;

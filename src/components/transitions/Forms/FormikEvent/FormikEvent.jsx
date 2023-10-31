@@ -10,9 +10,10 @@ import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
-import { setIsVisible } from "@/global/modal-slice";
+
 import { getCookie, setCookie } from "@/lib/cookies";
 import { useRouter } from "next/navigation";
+import { closeModalWithAnimation } from "@/global/modal-slice";
 
 /**
  * @description This component returns form for event.
@@ -22,18 +23,11 @@ import { useRouter } from "next/navigation";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikEvent = ({
-	className,
-	style,
-	dict,
-	lang,
-	trl_error,
-	searchParams,
-	variant,
-}) => {
+const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const dataEvent = useSelector(state => state.modal.dataModal);
+	const dataEvent = useSelector(state => state.modal.dataRootModal);
+	const params = useSelector(state => state.modal.params);
 
 	const {
 		trl_title,
@@ -171,7 +165,7 @@ const FormikEvent = ({
 		}
 
 		const apiLinkDependsVariant = variant
-			? `/api/editEvent?eventLink=${searchParams?.event}`
+			? `/api/editEvent?eventLink=${params?.event}`
 			: "/api/addEvent";
 
 		try {
@@ -196,18 +190,17 @@ const FormikEvent = ({
 
 			const data = await response.json();
 
-			console.log(data);
-
 			if (!response.ok) {
 				dispatch(loading(false));
 				dispatch(showResult({ message: data.error, variant: "warning" }));
 				return;
 			}
+
 			dispatch(loading(false));
 			dispatch(showResult({ message: data.message, variant: "success" }));
 
 			if (variant) {
-				dispatch(setIsVisible({ isVisible: "close" }));
+				closeModalWithAnimation(dispatch);
 			}
 
 			const receivedNotices = await getCookie("newNotices");
@@ -215,7 +208,9 @@ const FormikEvent = ({
 			if (receivedNotices) {
 				const quantityNotices = parseInt(receivedNotices?.value);
 
-				await setCookie("newNotices", quantityNotices + 1);
+				const ressult = await setCookie("newNotices", quantityNotices + 1);
+
+				console.log(ressult);
 			}
 
 			!variant && data.link && router.push(data.link);
