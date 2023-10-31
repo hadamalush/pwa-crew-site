@@ -1,6 +1,5 @@
 "use client";
 import IconRender from "@/components/Icons/IconRender";
-import ImgBgBlur from "../Image/ImgBgBlur";
 import styles from "../../../styles/components/transitions/Modal/ModalRoot.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -36,10 +35,6 @@ const ModalRoot = ({ children }) => {
 					variant='cross'
 					className={styles["modal__quit"]}
 					onClick={closeModalHandler}
-				/>
-				<ImgBgBlur
-					src={"/images/background/background-events.webp"}
-					className={styles["modal__imgBlur"]}
 				/>
 				<div className={styles["modal__content"]}>{children}</div>
 			</div>

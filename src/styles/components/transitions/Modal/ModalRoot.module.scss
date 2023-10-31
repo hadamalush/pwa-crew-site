@@ -23,17 +23,7 @@
 	border-radius: 5px;
 	box-shadow: $boxshadow-primary;
 	background-color: $background-primary;
-	transition: transform 0.3s;
-
-	// &__visibility {
-	// 	transform: translate(-50%, 0);
-	// }
-
-	// &__small {
-	// 	@include position(absolute, 50%, null, null, 50%, 500);
-	// 	transform: translate(-50%, -50%);
-	// 	bottom: unset;
-	// }
+	animation: show 0.3s;
 
 	&__quit {
 		@include position(absolute, 2rem, null, null, 2rem, 3);

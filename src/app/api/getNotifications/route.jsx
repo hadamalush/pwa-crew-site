@@ -2,8 +2,6 @@ import { connectDbMongo, findDocument } from "@/lib/mongodb";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export const revalidate = 10;
-
 export async function GET(request) {
 	const session = await getServerSession();
 	const email = session?.user?.email;

@@ -1,5 +1,5 @@
 "use client";
-import ModalRoot from "./ModalRoot";
+// import ModalRoot from "./ModalRoot";
 // import ModalDelete from "@/components/Tools/DeleteModal";
 // import FormikEvent from "../Forms/FormikEvent/FormikEvent";
 // import FormikAccount from "../Forms/FormAccount/FormikAccount";
@@ -19,6 +19,7 @@ const NotificationList = dynamic(() =>
 );
 const FormikEvent = dynamic(() => import("../Forms/FormikEvent/FormikEvent"));
 const ModalDelete = dynamic(() => import("../../Tools/DeleteModal"));
+const ModalRoot = dynamic(() => import("../../transitions/Modal/ModalRoot"));
 
 const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	const isVisible = useSelector(state => state.modal.isVisibleRoot);

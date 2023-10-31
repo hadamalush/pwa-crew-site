@@ -10,7 +10,6 @@ import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
-
 import { getCookie, setCookie } from "@/lib/cookies";
 import { useRouter } from "next/navigation";
 import { closeModalWithAnimation } from "@/global/modal-slice";
@@ -53,6 +52,9 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
 		description: variant ? dataEvent?.description : "",
 		fileImg: "",
 	};
+	const classesForm = variant
+		? `${styles.form} ${styles.form__animation}`
+		: styles.form;
 
 	const addEventhandler = async values => {
 		dispatch(loading(true));
@@ -236,7 +238,7 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
 				className={styles.form}>
 				{({ setFieldValue, setFieldTouched, isSubmitting, ...props }) => {
 					return (
-						<Form className={styles.form} id='form'>
+						<Form className={classesForm} id='form'>
 							<h1>{trl_title}</h1>
 
 							<InputFormik
