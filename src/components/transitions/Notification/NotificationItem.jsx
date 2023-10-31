@@ -1,8 +1,8 @@
 "use client";
 import IconRender from "@/components/Icons/IconRender";
+import Link from "next/link";
 import styles from "../../../styles/components/transitions/Notification/NotificationItem.module.scss";
 import { format } from "date-fns";
-import Link from "next/link";
 
 const NotificationItem = ({
 	action,
@@ -18,9 +18,9 @@ const NotificationItem = ({
 	const date = format(new Date(createdDate), " yyyy-MM-dd ");
 	const time = format(new Date(createdDate), "HH:mm ");
 
-	const classes = href
-		? `${styles.notice} ${styles["notice__hover"]}`
-		: styles.notice;
+	const classesLink = href
+		? `${styles.notice__link} ${styles["notice__link--hover"]}`
+		: styles.notice__link;
 
 	const classesHeading = `${styles["notice__heading"]} ${
 		styles[`notice__heading--${action}`]
@@ -30,8 +30,8 @@ const NotificationItem = ({
 	} ${status && styles[`notice__icon--new`]}`;
 
 	return (
-		<li className={classes}>
-			<Link href={href ? href : "#"} className={styles.notice__link}>
+		<li className={styles.notice}>
+			<Link href={href ? href : "#"} className={classesLink}>
 				<div className={styles["notice__content"]}>
 					<h3 className={classesHeading}>
 						{lang === "en" ? actionTextEN : actionTextPL}
