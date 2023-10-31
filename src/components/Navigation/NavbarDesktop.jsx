@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
 import { getCookie, setCookie } from "@/lib/cookies";
 import { useEffect, useState } from "react";
-import { setIsVisibleRoot } from "@/global/modal-slice";
+import { setDataRootModal, setIsVisibleRoot } from "@/global/modal-slice";
 
 const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const { data: session } = useSession();
@@ -83,9 +83,32 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		}
 	};
 
-	const showModalHandler = e => {
+	const showSettingsHandler = e => {
 		e.preventDefault();
 		dispatch(setIsVisibleRoot({ isVisibleRoot: "settingsModal" }));
+	};
+
+	const showNotificationsHandler = async e => {
+		e.preventDefault();
+
+		let notifications;
+
+		try {
+			const response = await fetch("api/getNotifications");
+
+			const data = await response.json();
+
+			notifications = data?.notifications;
+		} catch (err) {
+			console.log(err);
+		}
+
+		dispatch(
+			setDataRootModal({
+				dataRootModal: notifications,
+			})
+		);
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "notificationsModal" }));
 	};
 
 	const dropdownItemsEvents = [
@@ -104,10 +127,11 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const dropdownItemsAvatar = [
 		{
 			title: trl_notifications,
-			href: "/notifications",
+			href: "#",
 			notices: quantityNewNotices,
+			onClick: showNotificationsHandler,
 		},
-		{ title: trl_settings, href: "#", onClick: showModalHandler },
+		{ title: trl_settings, href: "#", onClick: showSettingsHandler },
 		{ title: trl_signOut, href: "/", onClick: logoutHandler },
 	];
 

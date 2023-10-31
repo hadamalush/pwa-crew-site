@@ -6,13 +6,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FormikEvent from "../Forms/FormikEvent/FormikEvent";
 import FormikAccount from "../Forms/FormAccount/FormikAccount";
+import NotificationList from "../Notification/NotificationList";
 
 const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	const isVisible = useSelector(state => state.modal.isVisibleRoot);
 	const dispatch = useDispatch();
 	const { modalDeleteEvent, modalEditEvent, modalSettings } = dict;
-
-	// const [animation, setAnimation] = useState(false);
 
 	useEffect(() => {
 		if (!isVisible) {
@@ -20,20 +19,15 @@ const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 		}
 	}, [isVisible]);
 
-	// useEffect(() => {
-	// 	if (isVisible) {
-	// 		setTimeout(() => {
-	// 			setAnimation(true);
-	// 		}, 100);
-	// 	}
-	// });
-
 	return (
 		<>
 			{isVisible && (
 				<ModalRoot>
 					{isVisible === "settingsModal" && (
 						<FormikAccount dict={modalSettings} lang={lang} />
+					)}
+					{isVisible === "notificationsModal" && (
+						<NotificationList lang={lang} />
 					)}
 					{isVisible === "eventDeleteModal" && (
 						<ModalDelete lang={lang} dict={modalDeleteEvent} hSize='h2' />
