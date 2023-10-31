@@ -12,6 +12,7 @@ import { eventSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
 import { setIsVisible } from "@/global/modal-slice";
 import { getCookie, setCookie } from "@/lib/cookies";
+import { useRouter } from "next/navigation";
 
 /**
  * @description This component returns form for event.
@@ -30,6 +31,7 @@ const FormikEvent = ({
 	searchParams,
 	variant,
 }) => {
+	const router = useRouter();
 	const dispatch = useDispatch();
 	const dataEvent = useSelector(state => state.modal.dataModal);
 
@@ -194,6 +196,8 @@ const FormikEvent = ({
 
 			const data = await response.json();
 
+			console.log(data);
+
 			if (!response.ok) {
 				dispatch(loading(false));
 				dispatch(showResult({ message: data.error, variant: "warning" }));
@@ -213,6 +217,8 @@ const FormikEvent = ({
 
 				await setCookie("newNotices", quantityNotices + 1);
 			}
+
+			!variant && data.link && router.push(data.link);
 
 			return;
 		} catch (error) {

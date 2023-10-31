@@ -140,7 +140,7 @@ export const POST = async request => {
 
 	client.close();
 	return NextResponse.json(
-		{ message: notification.trl_success },
+		{ message: notification.trl_success, link: eventLink },
 		{ status: 200 }
 	);
 };
