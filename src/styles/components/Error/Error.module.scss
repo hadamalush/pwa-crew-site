@@ -27,6 +27,7 @@ main .error {
 	}
 
 	@include media-query(mediumScreen) {
+		scroll-margin-top: 70px;
 		&__link {
 			margin: 0 0.5em;
 		}

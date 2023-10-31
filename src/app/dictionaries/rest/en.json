@@ -133,6 +133,11 @@
 			"address": "Address",
 			"description": "Description"
 		},
+		"error": {
+			"title": "Event not found.",
+			"text": "The event was probably deleted by the owner.",
+			"linkPrev": "Previous page"
+		},
 		"newEvent": {
 			"wp_content": {
 				"title": "Add with ease.",

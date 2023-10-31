@@ -15,7 +15,9 @@ export const authOptions = {
 				session?.user?.picture
 			) {
 				token.email = session.user?.email;
-				token.picture = session.user?.picture;
+				token.picture = session?.user?.picture
+					? session?.user?.picture
+					: session.user?.image;
 			}
 
 			if (user && trigger === "signIn") {

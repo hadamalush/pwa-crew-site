@@ -133,6 +133,11 @@
 			"address": "Adres",
 			"description": "Opis"
 		},
+		"error": {
+			"title": "Nie znaleziono takiego wydarzenia.",
+			"text": "Wydarzenie prawdopodobnie zostało usunięte przez właściciela.",
+			"linkPrev": "Poprzednia strona"
+		},
 		"newEvent": {
 			"wp_content": {
 				"title": "Dodawaj z łatwością.",
