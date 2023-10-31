@@ -9,10 +9,6 @@ const initialStateModal = {
 	isHideRoot: false,
 };
 
-/**
- * @param {Boolean} setIsVisibleRoot Th
- */
-
 const modal = createSlice({
 	name: "modal",
 	initialState: initialStateModal,

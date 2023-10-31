@@ -5,14 +5,10 @@ import Heading from "../transitions/Elements/Heading";
 import styles from "../../styles/components/transitions/Modal/ModalDelete.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { loading, showResult } from "@/global/notification-slice";
-import {
-	closeModalWithAnimation,
-	setIsHideRoot,
-	setIsVisibleRoot,
-} from "@/global/modal-slice";
+import { closeModalWithAnimation } from "@/global/modal-slice";
 import { getCookie, setCookie } from "@/lib/cookies";
 
-const ModalDelete = ({ className, lang, dict, searchParams, hSize }) => {
+const ModalDelete = ({ className, lang, dict, hSize }) => {
 	const dispatch = useDispatch();
 	const params = useSelector(state => state.modal.params);
 

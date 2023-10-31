@@ -69,6 +69,36 @@ export default async function RootLayout({
 		trl_err: dictNotifi.notifications.deleteEvent.generalError,
 	};
 
+	const translationModalEditEvent = {
+		trl_title: dict.events.editEvent.form.title,
+		trl_eventTitle: dict.events.newEvent.form.eventTitle,
+		trl_town: dict.events.newEvent.form.town,
+		trl_codePost: dict.events.newEvent.form.codePost,
+		trl_street: dict.events.newEvent.form.street,
+		trl_date: dict.events.newEvent.form.date,
+		trl_startTime: dict.events.newEvent.form.startTime,
+		trl_picture: dict.events.newEvent.form.picture,
+		trl_eventDesc: dict.events.newEvent.form.eventDesc,
+		trl_btn_createEvent: dict.events.editEvent.form.btn_confirm,
+	};
+
+	const translationModalSettings = {
+		trl_title: dict.settings.title,
+		trl_changeEmail: dict.settings.changeEmail,
+		trl_changePassword: dict.settings.changePassword,
+		trl_changeAvatar: dict.settings.changeAvatar,
+		trl_btn_confirm: dict.settings.btn_confirm,
+		trl_error: dictNotifi.notifications.generalError,
+	};
+
+	const dictModals = {
+		modalDeleteEvent: translationModalDelete,
+		modalEditEvent: translationModalEditEvent,
+		modalSettings: translationModalSettings,
+	};
+
+	const trl_error = dictNotifi.notifications.newEvent.generalError;
+
 	return (
 		<html lang={lang}>
 			<body>
@@ -77,7 +107,11 @@ export default async function RootLayout({
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
-						<ModalHandlerServer lang={lang} dict={translationModalDelete} />
+						<ModalHandlerServer
+							lang={lang}
+							dict={dictModals}
+							trl_err={trl_error}
+						/>
 						{modal}
 						{children}
 						<Footer dict={footerTranslation} />

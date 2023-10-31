@@ -9,6 +9,7 @@ import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
 import {
 	setDataModal,
+	setDataRootModal,
 	setIsVisibleRoot,
 	setParams,
 } from "@/global/modal-slice";
@@ -115,8 +116,8 @@ const EventItem = ({
 
 	const loadDataModalHandler = () => {
 		dispatch(
-			setDataModal({
-				dataModal: {
+			setDataRootModal({
+				dataRootModal: {
 					title,
 					town,
 					codePost,
@@ -128,10 +129,12 @@ const EventItem = ({
 				},
 			})
 		);
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventEditModal" }));
+		dispatch(setParams({ params: { event: eventLink } }));
 	};
 
 	const showModalHandler = () => {
-		dispatch(setIsVisibleRoot({ isVisibleRoot: true }));
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventDeleteModal" }));
 		dispatch(setParams({ params: { title: title, id: id } }));
 	};
 
@@ -174,10 +177,7 @@ const EventItem = ({
 						<LinkAsBtn href='#' scroll={false} onClick={showModalHandler}>
 							{trl_btnDelete}
 						</LinkAsBtn>
-						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/edit?event=${eventLink}`}
-							scroll={false}
-							onClick={loadDataModalHandler}>
+						<LinkAsBtn href='#' scroll={false} onClick={loadDataModalHandler}>
 							{trl_btnEdit}
 						</LinkAsBtn>
 					</div>

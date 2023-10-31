@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
 import { getCookie, setCookie } from "@/lib/cookies";
 import { useEffect, useState } from "react";
+import { setIsVisibleRoot } from "@/global/modal-slice";
 
 const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const { data: session } = useSession();
@@ -82,6 +83,11 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		}
 	};
 
+	const showModalHandler = e => {
+		e.preventDefault();
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "settingsModal" }));
+	};
+
 	const dropdownItemsEvents = [
 		{
 			title: trl_allEvents,
@@ -101,7 +107,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 			href: "/notifications",
 			notices: quantityNewNotices,
 		},
-		{ title: trl_settings, href: "/settings" },
+		{ title: trl_settings, href: "#", onClick: showModalHandler },
 		{ title: trl_signOut, href: "/", onClick: logoutHandler },
 	];
 
