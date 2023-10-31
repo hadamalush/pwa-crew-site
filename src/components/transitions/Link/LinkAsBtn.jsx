@@ -17,6 +17,7 @@ const LinkAsBtn = ({
 	...props
 }) => {
 	const [isAnimation, setIsAnimation] = useState(false);
+	const isLoading = useSelector(state => state.notification.isLoading);
 
 	const pathname = usePathname();
 	const dispatch = useDispatch();
@@ -25,17 +26,19 @@ const LinkAsBtn = ({
 		setIsAnimation(false);
 	}, [pathname]);
 
-	const classesLink = isAnimation
-		? `${styles.link} ${styles["link__transparent"]}`
-		: styles.link;
+	const classesLink =
+		isAnimation && isLoading
+			? `${styles.link} ${styles["link__transparent"]}`
+			: styles.link;
 
 	const classes = variant
 		? `${styles.link}  ${styles[variant]} ${className || ""}`
 		: `${classesLink}  ${className || ""} `;
 
-	const classesSpan = isAnimation
-		? `${styles["link__border"]} ${styles["rotating-border"]}`
-		: styles["link__border"];
+	const classesSpan =
+		isAnimation && isLoading
+			? `${styles["link__border"]} ${styles["rotating-border"]}`
+			: styles["link__border"];
 
 	const animationHandler = e => {
 		dispatch(loading(true));

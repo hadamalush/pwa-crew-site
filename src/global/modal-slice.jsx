@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialStateModal = {
-	isVisible: false,
 	dataModal: null,
-	isVisibleRoot: false,
 	dataRootModal: null,
+	params: null,
+	isVisible: false,
+	isVisibleRoot: false,
+	isHideRoot: false,
 };
+
+/**
+ * @param {Boolean} setIsVisibleRoot Th
+ */
 
 const modal = createSlice({
 	name: "modal",
@@ -23,14 +29,28 @@ const modal = createSlice({
 		},
 		setIsVisibleRoot: (state, action) => {
 			state.isVisibleRoot = action.payload.isVisibleRoot;
+			state.isHideRoot = false;
+		},
+		setIsHideRoot: (state, action) => {
+			state.isHideRoot = action.payload.isHideRoot;
+		},
+		setParams: (state, action) => {
+			state.params = action.payload.params;
 		},
 	},
 });
+
+export const closeModalWithAnimation = dispatch => {
+	dispatch(setIsHideRoot({ isHideRoot: true }));
+	setTimeout(() => dispatch(setIsVisibleRoot({ isVisibleRoot: false })), 200);
+};
 
 export const {
 	setDataModal,
 	setIsVisible,
 	setDataRootModal,
 	setIsVisibleRoot,
+	setIsHideRoot,
+	setParams,
 } = modal.actions;
 export default modal.reducer;

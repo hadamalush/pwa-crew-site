@@ -7,7 +7,11 @@ import { useParams } from "next/navigation";
 import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
-import { setDataModal, setIsVisibleRoot } from "@/global/modal-slice";
+import {
+	setDataModal,
+	setIsVisibleRoot,
+	setParams,
+} from "@/global/modal-slice";
 
 /**
  *
@@ -128,6 +132,7 @@ const EventItem = ({
 
 	const showModalHandler = () => {
 		dispatch(setIsVisibleRoot({ isVisibleRoot: true }));
+		dispatch(setParams({ params: { title: title, id: id } }));
 	};
 
 	return (
@@ -164,12 +169,9 @@ const EventItem = ({
 					scroll={true}>
 					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
 				</LinkAsBtn>
-				<button onClick={showModalHandler}>modal</button>
 				{isOwner && isDescription && (
 					<div className={styles["event__btns"]}>
-						<LinkAsBtn
-							href={`/events/${replacedTitle}-${id}/delete?event=${id}&title=${title}`}
-							scroll={false}>
+						<LinkAsBtn href='#' scroll={false} onClick={showModalHandler}>
 							{trl_btnDelete}
 						</LinkAsBtn>
 						<LinkAsBtn

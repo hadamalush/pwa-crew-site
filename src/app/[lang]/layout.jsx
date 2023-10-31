@@ -8,6 +8,7 @@ import ModalHandlerServer from "@/components/transitions/Modal/ModalHandlerServe
 import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
+import { getDictionaryNotifi } from "../dictionaries/notifications/dictionaries";
 
 export const metadata = {
 	title: "PwaCrew - the best music",
@@ -27,6 +28,7 @@ export default async function RootLayout({
 
 	const lang = params.lang;
 	const dict = await getDictionaryElements(lang);
+	const dictNotifi = await getDictionaryNotifi(lang);
 	const session = await getServerSession();
 
 	const navTranslation = {
@@ -60,6 +62,13 @@ export default async function RootLayout({
 		trl_copyright: dict.footer.copyright,
 	};
 
+	const translationModalDelete = {
+		trl_title: dict.events.deleteEvent.title,
+		trl_btn_delete: dict.events.deleteEvent.btn_delete,
+		trl_btn_cancel: dict.events.deleteEvent.btn_cancel,
+		trl_err: dictNotifi.notifications.deleteEvent.generalError,
+	};
+
 	return (
 		<html lang={lang}>
 			<body>
@@ -68,7 +77,7 @@ export default async function RootLayout({
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
-						<ModalHandlerServer lang={lang} />
+						<ModalHandlerServer lang={lang} dict={translationModalDelete} />
 						{modal}
 						{children}
 						<Footer dict={footerTranslation} />

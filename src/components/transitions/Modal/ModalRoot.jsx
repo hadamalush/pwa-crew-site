@@ -2,14 +2,14 @@
 import IconRender from "@/components/Icons/IconRender";
 import ImgBgBlur from "../Image/ImgBgBlur";
 import styles from "../../../styles/components/transitions/Modal/ModalRoot.module.scss";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { setIsVisibleRoot } from "@/global/modal-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { closeModalWithAnimation } from "@/global/modal-slice";
 import { handleScroll } from "@/lib/helper";
 
 const ModalRoot = ({ children }) => {
 	const dispatch = useDispatch();
-	const [isHide, setIsHide] = useState(false);
+	const isHide = useSelector(state => state.modal.isHideRoot);
 
 	useEffect(() => {
 		if (isHide) {
@@ -22,8 +22,7 @@ const ModalRoot = ({ children }) => {
 	const classesBg = isHide ? `${styles.bg} ${styles.bg__hidden}` : styles.bg;
 
 	const closeModalHandler = () => {
-		setIsHide(true);
-		setTimeout(() => dispatch(setIsVisibleRoot(false)), 200);
+		closeModalWithAnimation(dispatch);
 	};
 
 	const modalClickHandler = event => {

@@ -1,12 +1,21 @@
 "use client";
 import ModalRoot from "./ModalRoot";
 import ModalDelete from "@/components/Tools/DeleteModal";
+import { loading } from "@/global/notification-slice";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const ModalHandlerServer = ({ lang }) => {
+const ModalHandlerServer = ({ lang, dict }) => {
 	const isVisible = useSelector(state => state.modal.isVisibleRoot);
+	const dispatch = useDispatch();
+
 	// const [animation, setAnimation] = useState(false);
+
+	useEffect(() => {
+		if (!isVisible) {
+			dispatch(loading(false));
+		}
+	}, [isVisible]);
 
 	const translation = {
 		trl_title: "czy chcesz na pewno usunac? ",
@@ -27,7 +36,7 @@ const ModalHandlerServer = ({ lang }) => {
 		<>
 			{isVisible && (
 				<ModalRoot>
-					<ModalDelete lang={lang} dict={translation} hSize='h2' />
+					<ModalDelete lang={lang} dict={dict} hSize='h2' />
 				</ModalRoot>
 			)}
 		</>
