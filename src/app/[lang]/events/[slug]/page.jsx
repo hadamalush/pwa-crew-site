@@ -3,7 +3,6 @@ import EventItem from "@/components/transitions/Events/EventItem";
 import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
-import { cache } from "react";
 
 const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const dict = await getDictionaryElements(lang);
@@ -13,7 +12,6 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
 	try {
 		event = await getEvent(eventId, lang);
 	} catch (err) {
-		console.log("EORRRRRRRRRRRRRR");
 		console.log(err);
 	}
 

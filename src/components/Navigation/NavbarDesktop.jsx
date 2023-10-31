@@ -91,7 +91,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		},
 		{
 			title: trl_createEvent,
-			href: "/events/new-event",
+			href: "/events/new-event#form",
 			onClick: () => animationHandler(`/${lang}/events/new-event`),
 		},
 	];

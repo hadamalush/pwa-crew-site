@@ -23,7 +23,6 @@ import { showResult, loading } from "@/global/notification-slice";
  */
 
 const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
-	const { data: session, status } = useSession();
 	const router = useRouter();
 	const dispatch = useDispatch();
 

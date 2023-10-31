@@ -13,4 +13,8 @@
 	@include media-query(foldScreen) {
 		width: 26rem;
 	}
+
+	@include media-query(mediumScreen) {
+		scroll-margin-top: 70px;
+	}
 }

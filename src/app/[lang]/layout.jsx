@@ -9,8 +9,9 @@ import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
 
 export const metadata = {
-	title: "PwaCrew - najlepsza muzyka",
-	description: "PwaCrew - najlepsza muzyka",
+	title: "PwaCrew - the best music",
+	description:
+		"Welcome to our music concert website, where you can add, edit, and browse the latest music events. Register to receive notifications about upcoming concerts by your favorite artists. Edit your events and stay up-to-date with the latest music news. Join our music community and enjoy unforgettable concerts!",
 };
 
 export default async function RootLayout({

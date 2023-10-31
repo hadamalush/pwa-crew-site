@@ -5,9 +5,7 @@ import InputFormikFile from "../../Input/InputFormikFile";
 import ButtonMain from "../../Button/ButtonMain";
 import TextareaFormik from "../../Input/TextareaFormik";
 import styles from "../../../../styles/components/transitions/Forms/FormikEvent.module.scss";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useMediaQuery } from "react-responsive";
 import { generalConfig } from "@/config/gerenalConfig";
 import { Formik, Form } from "formik";
 import { eventSchema } from "@/components/Schemas/FormSchem";
@@ -29,13 +27,11 @@ const FormikEvent = ({
 	dict,
 	lang,
 	trl_error,
-	scroll,
 	searchParams,
 	variant,
 }) => {
 	const dispatch = useDispatch();
 	const dataEvent = useSelector(state => state.modal.dataModal);
-	const isMediumScreen = useMediaQuery({ minWidth: 768 });
 
 	const {
 		trl_title,
@@ -61,11 +57,6 @@ const FormikEvent = ({
 		description: variant ? dataEvent?.description : "",
 		fileImg: "",
 	};
-
-	useEffect(() => {
-		if (isMediumScreen && scroll !== "block")
-			window.scrollTo(window.scrollX, window.scrollY - 70);
-	}, []);
 
 	const addEventhandler = async values => {
 		dispatch(loading(true));

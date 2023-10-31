@@ -25,6 +25,7 @@ main .section-detail {
 	}
 
 	@include media-query(mediumScreen) {
+		scroll-margin-top: 70px;
 		padding-top: 5em;
 	}
 }
