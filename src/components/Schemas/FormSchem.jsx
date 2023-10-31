@@ -128,7 +128,7 @@ export const eventSchema = (lang, variant) => {
 			streetMax: "Maksimum 57 znaków",
 			dateMin: "Nie można ustawić daty wstecz.",
 			descriptionMin: "Minimum 50 znaków.",
-			descriptionMax: "Minimum 300 znaków.",
+			descriptionMax: "Minimum 800 znaków.",
 			fileMaxSize: "Maksymalny rozmiar pliku to 4 MB",
 			allowedFormats: "Dozwolone formaty: jpg, jpeg, png, webp",
 			illegalSign: "Niedozwolony znak",
@@ -144,7 +144,7 @@ export const eventSchema = (lang, variant) => {
 			streetMax: "Maximum 57 characters",
 			dateMin: "Date cannot be set backwards.",
 			descriptionMin: "Minimum 50 characters.",
-			descriptionMax: "Minimum 300 characters.",
+			descriptionMax: "Minimum 800 characters.",
 			fileMaxSize: "The maximum file size is 4 MB",
 			allowedFormats: "Allowed formats: jpg, jpeg, png, webp",
 			illegalSign: "Illegal character",
@@ -214,7 +214,7 @@ export const eventSchema = (lang, variant) => {
 		description: yup
 			.string()
 			.min(50, messageEvent[lang].descriptionMin)
-			.max(300, messageEvent[lang].descriptionMax)
+			.max(800, messageEvent[lang].descriptionMax)
 			.required(message[lang].required),
 		fileImg: fileImgDependsVariant,
 	});
