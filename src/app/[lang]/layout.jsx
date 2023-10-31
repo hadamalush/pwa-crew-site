@@ -4,6 +4,7 @@ import Footer from "@/components/Footer/Footer";
 import BackgroundImageGeneral from "@/components/transitions/Background/BackgroundImageGeneral";
 import SessionProvider from "./SessionProvider";
 import Notification from "@/components/transitions/Notification/Notification";
+import ModalHandlerServer from "@/components/transitions/Modal/ModalHandlerServer";
 import { ReduxProvider } from "@/global/provider";
 import { getServerSession } from "next-auth";
 import { getDictionaryElements } from "../dictionaries/rest/dictionaries";
@@ -26,6 +27,7 @@ export default async function RootLayout({
 
 	const lang = params.lang;
 	const dict = await getDictionaryElements(lang);
+	const session = await getServerSession();
 
 	const navTranslation = {
 		trl_home: dict.navigation.home,
@@ -58,8 +60,6 @@ export default async function RootLayout({
 		trl_copyright: dict.footer.copyright,
 	};
 
-	const session = await getServerSession();
-
 	return (
 		<html lang={lang}>
 			<body>
@@ -68,6 +68,7 @@ export default async function RootLayout({
 						<MainHeader dict={navTranslation} lang={lang} />
 						<BackgroundImageGeneral lang={lang} />
 						<Notification />
+						<ModalHandlerServer lang={lang} />
 						{modal}
 						{children}
 						<Footer dict={footerTranslation} />
