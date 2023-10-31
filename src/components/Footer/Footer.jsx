@@ -7,61 +7,75 @@ import Link from "next/link";
 import SocialMedia from "../transitions/SocialMedia/SocialMedia";
 import styles from "../../styles/components/Footer/Footer.module.scss";
 
-const Footer = props => {
+const Footer = ({ props, dict }) => {
+	const {
+		trl_title,
+		trl_text,
+		trl_emailPlaceholder,
+		trl_btnSubscribe,
+		trl_navTitle,
+		trl_navLink1,
+		trl_navLink2,
+		trl_navLink3,
+		trl_navLink4,
+		trl_eventsTitle,
+		trl_eventsLink1,
+		trl_eventsLink2,
+		trl_addressTitle,
+		trl_copyright,
+	} = dict;
+
 	return (
 		<footer className={styles.footer}>
-			<h3>Dołącz do nas!</h3>
+			<h3>{trl_title}</h3>
 			<form className={styles.newsletter}>
-				<label htmlFor='email-newsletter'>
-					Dołącz do naszego newslettera, aby być na bieżąco z naszymi koncertami
-					i wydarzeniami hip-hopowymi!
-				</label>
+				<label htmlFor='email-newsletter'>{trl_text}</label>
 				<WrapperInput>
 					<Input
 						type='text'
 						name='email-newsletter'
 						id='email-newsletter'
-						placeholder='Podaj adres email'
+						placeholder={trl_emailPlaceholder}
 					/>
 					<IconRender variant='email' />
 				</WrapperInput>
-				<ButtonMain>Subskrybuj</ButtonMain>
+				<ButtonMain>{trl_btnSubscribe}</ButtonMain>
 			</form>
 
 			<div className={styles["footer__box"]}>
-				<h5>Navigation</h5>
+				<h5>{trl_navTitle}</h5>
 				<ul>
 					<li>
 						<Link href='#' scroll={true}>
-							Home
+							{trl_navLink1}
 						</Link>
 					</li>
 					<li>
-						<Link href='#team'>O nas</Link>
+						<Link href='#team'>{trl_navLink2}</Link>
 					</li>
 					<li>
-						<Link href='#'>Kolekcja</Link>
+						<Link href='#history'>{trl_navLink3}</Link>
 					</li>
 					<li>
-						<Link href='/contact'>Kontakt</Link>
+						<Link href='/contact'>{trl_navLink4}</Link>
 					</li>
 				</ul>
 			</div>
 
 			<div className={styles["footer__box"]}>
-				<h5>Wydarzenia</h5>
+				<h5>{trl_eventsTitle}</h5>
 				<ul>
 					<li>
-						<Link href='/events'>Wszystkie wydarzenia</Link>
+						<Link href='/events'>{trl_eventsLink1}</Link>
 					</li>
 					<li>
-						<Link href='/events/new-event#form'>Utwórz wydarzenie</Link>
+						<Link href='/events/new-event#form'>{trl_eventsLink2}</Link>
 					</li>
 				</ul>
 			</div>
 
 			<div className={styles["footer__box"]}>
-				<h5>Address</h5>
+				<h5>{trl_addressTitle}</h5>
 				<address className={styles["footer__address"]}>
 					<ul>
 						<li>
@@ -92,7 +106,7 @@ const Footer = props => {
 				<SocialMedia />
 			</div>
 
-			<p>&copy; 2023 PwaCrew - Wszystkie prawa zastrzeżone</p>
+			<p>&copy; {trl_copyright}</p>
 		</footer>
 	);
 };

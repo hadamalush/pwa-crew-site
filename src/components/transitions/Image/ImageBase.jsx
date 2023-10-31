@@ -3,10 +3,10 @@
 export function ImageBase() {
 	const ALL_Images = {
 		man: "/images/mainContent/man-on-the-stage.jpg",
-		baker: "/images/mainContent/card/baker.jpg",
-		david: "/images/mainContent/card/david.jpg",
-		marian: "/images/mainContent/card/marian.jpg",
-		neo: "/images/mainContent/card/neo.jpg",
+		baker: "/images/mainContent/baker.webp",
+		david: "/images/mainContent/david.webp",
+		marian: "/images/mainContent/marian.webp",
+		neo: "/images/mainContent/neo.webp",
 		concert: "/images/header/concert.jpg",
 	};
 

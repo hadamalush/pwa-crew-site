@@ -61,7 +61,7 @@ export const POST = async request => {
 		!time ||
 		!description ||
 		description.length < 50 ||
-		description.length > 300 ||
+		description.length > 800 ||
 		(!imageSrcVercelBlob && !imageSrcMega && !imageSrcCld) ||
 		inputDate < currentDate
 	) {
@@ -140,7 +140,7 @@ export const POST = async request => {
 
 	client.close();
 	return NextResponse.json(
-		{ message: notification.trl_success },
+		{ message: notification.trl_success, link: eventLink },
 		{ status: 200 }
 	);
 };

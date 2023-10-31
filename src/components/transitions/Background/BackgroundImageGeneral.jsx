@@ -19,19 +19,16 @@ const BackgroundImageGeneral = ({ lang }) => {
 	const classes = !isPath ? styles.hero : `${styles.hero} ${styles.filter}`;
 
 	return (
-		<>
-			<div className={classes} id='hero'>
-				<Image
-					alt='Crowd on the concert'
-					src='/images/header/concert.jpg'
-					priority={true}
-					fill
-					sizes='100vw'
-				/>
-
-				{!isPath && <div className={styles["hero__bg"]}></div>}
-			</div>
-		</>
+		<div className={classes} id='hero'>
+			<Image
+				alt='Crowd on the concert'
+				src='/images/header/concert.webp'
+				priority={true}
+				fill
+				sizes='100vw'
+			/>
+			{!isPath && <span className={styles["hero__bg"]}></span>}
+		</div>
 	);
 };
 

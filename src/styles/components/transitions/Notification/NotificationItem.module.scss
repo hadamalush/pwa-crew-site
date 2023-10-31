@@ -10,6 +10,11 @@
 		width: 100%;
 		height: 100%;
 		display: flex;
+		cursor: default;
+
+		&--hover {
+			cursor: pointer;
+		}
 	}
 
 	&::before {
@@ -23,10 +28,6 @@
 
 	&:last-of-type::before {
 		content: none;
-	}
-
-	&__hover {
-		cursor: pointer;
 	}
 
 	&:hover {

@@ -4,7 +4,6 @@ import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
@@ -47,12 +46,11 @@ const EventItem = ({
 	...props
 }) => {
 	const { data: session } = useSession();
+	const dispatch = useDispatch();
+	const params = useParams();
 
 	const isOwner = owner === session?.user.email;
 	const replacedTitle = title.replaceAll(" ", "-");
-	const isMediumScreen = useMediaQuery({ minWidth: 768 });
-	const dispatch = useDispatch();
-	const params = useParams();
 
 	passiveSupport({
 		listeners: [
@@ -74,12 +72,6 @@ const EventItem = ({
 		trl_btnEdit,
 		trl_btnPreviousPage,
 	} = dict;
-
-	useEffect(() => {
-		if (isMediumScreen) {
-			return window.scrollBy(0, -70);
-		}
-	}, []);
 
 	let isDescription;
 	const eventLink = `/events/${replacedTitle}-${id}#section_detail-item`;

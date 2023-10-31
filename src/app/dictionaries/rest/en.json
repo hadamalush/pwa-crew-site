@@ -6,6 +6,7 @@
 		"login": "Login",
 		"logout": "Logout",
 		"chat": "Chat",
+		"aboutUs": "About us",
 
 		"dropdown": {
 			"allEvents": "All events",
@@ -15,6 +16,28 @@
 			"signOut": "SignOut",
 			"account": "Account"
 		}
+	},
+	"footer": {
+		"title": "Join us",
+		"text": "Join our newsletter to stay up to date with our hip-hop concerts and events!",
+		"emailPlaceholder": "Enter email address",
+		"btnSubscribe": "Subscribe",
+		"nav": {
+			"title": "Navigation",
+			"link1": "Home",
+			"link2": "About us",
+			"link3": "Story hip-hop",
+			"link4": "Contact"
+		},
+		"events": {
+			"title": "Events",
+			"link1": "All events",
+			"link2": "Create event"
+		},
+		"address": {
+			"title": "Address"
+		},
+		"copyright": "2023 PwaCrew - Music with passion"
 	},
 	"contact": {
 		"wp_content": {
@@ -109,6 +132,11 @@
 			"startEvent": "Start of the event",
 			"address": "Address",
 			"description": "Description"
+		},
+		"error": {
+			"title": "Event not found.",
+			"text": "The event was probably deleted by the owner.",
+			"linkPrev": "Previous page"
 		},
 		"newEvent": {
 			"wp_content": {

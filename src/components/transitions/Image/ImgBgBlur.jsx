@@ -11,7 +11,7 @@ import styles from "../../../styles/components/transitions/Image/ImageBgBlur.mod
 const ImgBgBlur = ({ className, src }) => {
 	return (
 		<span className={`${styles.img} ${className || ""}`}>
-			<Image src={src} fill alt='Background with blur.' />
+			<Image src={src} sizes='100vw' fill alt='Background with blur.' />
 		</span>
 	);
 };

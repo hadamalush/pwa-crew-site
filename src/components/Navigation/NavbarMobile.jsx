@@ -79,18 +79,18 @@ const NavbarMobile = ({ dict, lang }) => {
 		{
 			title: trl_notifications,
 			href: "/notifications",
-			imgSrc: "/images/options/option-events.webp",
+			imgSrc: "/images/options/option-notifications.webp",
 		},
 		{
 			title: trl_signOut,
 			href: "/",
-			imgSrc: "/images/options/option-new-event.webp",
+			imgSrc: "/images/options/option-signout.webp",
 			onClick: signOut,
 		},
 		{
 			title: trl_settings,
 			href: "/settings",
-			imgSrc: "/images/options/option-new-event.webp",
+			imgSrc: "/images/options/option-settings.webp",
 		},
 	];
 
@@ -187,7 +187,7 @@ const NavbarMobile = ({ dict, lang }) => {
 					)}
 				</li>
 
-				<li className={styles["nav__item"]}>
+				{/* <li className={styles["nav__item"]}>
 					<Link
 						href='/'
 						className={pathname === "/chat" ? isActive : styles["nav__link"]}
@@ -195,7 +195,7 @@ const NavbarMobile = ({ dict, lang }) => {
 						<IconRender variant='chat' />
 						<p>{trl_chat}</p>
 					</Link>
-				</li>
+				</li> */}
 
 				<li className={styles["nav__item"]}>
 					<Link

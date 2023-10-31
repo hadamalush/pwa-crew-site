@@ -137,6 +137,10 @@
 		.header &__glob {
 			right: 10rem;
 
+			&--right {
+				right: 2rem;
+			}
+
 			svg {
 				width: 3rem;
 			}
@@ -144,6 +148,10 @@
 
 		&__leanguages {
 			right: 10rem;
+
+			&--right {
+				right: 2rem;
+			}
 		}
 
 		&__logo {

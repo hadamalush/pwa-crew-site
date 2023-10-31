@@ -1,7 +1,7 @@
 "use client";
 import styles from "../../../styles/components/transitions/Image/ImageRender.module.scss";
-import { ImageBase } from "./ImageBase";
 import Image from "next/image";
+import { ImageBase } from "./ImageBase";
 
 export default function ImageLoader(props) {
 	const classes = `${styles.img} ${props.className}`;

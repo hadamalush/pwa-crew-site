@@ -69,7 +69,7 @@ export const PATCH = async request => {
 		!time ||
 		!description ||
 		description.length < 50 ||
-		description.length > 300 ||
+		description.length > 800 ||
 		!eventId ||
 		inputDate < currentDate
 	) {

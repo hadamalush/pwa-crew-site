@@ -1,24 +1,36 @@
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import EventItem from "@/components/transitions/Events/EventItem";
 import ImgBgBlur from "@/components/transitions/Image/ImgBgBlur";
+import ErrorHandle from "@/components/Error/Error";
 import styles from "../../../../styles/components/Pages/EventPage.module.scss";
 import { getDictionaryElements } from "@/app/dictionaries/rest/dictionaries";
-import { cache } from "react";
 
 const EventPage = async ({ params: { slug, lang }, edit }) => {
 	const dict = await getDictionaryElements(lang);
+
+	const translationErr = {
+		title: dict.events.error.title,
+		text: dict.events.error.text,
+		linkName: dict.events.error.linkPrev,
+	};
 
 	const eventId = slug.substring(slug.lastIndexOf("-") + 1);
 	let event;
 	try {
 		event = await getEvent(eventId, lang);
 	} catch (err) {
-		console.log("EORRRRRRRRRRRRRR");
 		console.log(err);
 	}
 
 	if (!event || event.error) {
-		throw new Error(event.error);
+		return (
+			<ErrorHandle
+				hSize='h2'
+				title={translationErr.title}
+				text={translationErr.text}
+				linkFirst={translationErr.linkName}
+			/>
+		);
 	}
 
 	const {

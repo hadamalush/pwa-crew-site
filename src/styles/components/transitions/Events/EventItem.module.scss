@@ -159,6 +159,7 @@
 	}
 
 	@include media-query(mediumScreen) {
+		scroll-margin-top: 70px;
 		&__text p {
 			padding: 1em 5em;
 		}

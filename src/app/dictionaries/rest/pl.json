@@ -6,6 +6,7 @@
 		"login": "Zaloguj",
 		"logout": "Wyloguj",
 		"chat": "Chat",
+		"aboutUs": "O nas",
 
 		"dropdown": {
 			"allEvents": "Wszystkie wydarzenia",
@@ -15,6 +16,28 @@
 			"signOut": "Wyloguj",
 			"account": "Konto"
 		}
+	},
+	"footer": {
+		"title": "Dołącz do nas",
+		"text": "Dołącz do naszego newslettera, aby być na bieżąco z naszymi koncertami i wydarzeniami hip-hopowymi!",
+		"emailPlaceholder": "Podaj adres email",
+		"btnSubscribe": "Subskrybuj",
+		"nav": {
+			"title": "Nawigacja",
+			"link1": "Home",
+			"link2": "O nas",
+			"link3": "Historia hip-hopu",
+			"link4": "Kontakt"
+		},
+		"events": {
+			"title": "Wydarzenia",
+			"link1": "Wszystkie wydarzenia",
+			"link2": "Utwórz wydazenie"
+		},
+		"address": {
+			"title": "Adres"
+		},
+		"copyright": "2023 PwaCrew - Muzyka z pasją"
 	},
 	"contact": {
 		"wp_content": {
@@ -109,6 +132,11 @@
 			"startEvent": "Start wydarzenia",
 			"address": "Adres",
 			"description": "Opis"
+		},
+		"error": {
+			"title": "Nie znaleziono takiego wydarzenia.",
+			"text": "Wydarzenie prawdopodobnie zostało usunięte przez właściciela.",
+			"linkPrev": "Poprzednia strona"
 		},
 		"newEvent": {
 			"wp_content": {

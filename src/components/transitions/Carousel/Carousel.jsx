@@ -116,6 +116,8 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 				const day = format(date, "dd");
 				const year = format(date, "yyyy");
 				const styles = carouselItems[i];
+				const replacedTitle = carouselItem.title.replaceAll(" ", "-");
+				const eventLink = `/events/${replacedTitle}-${carouselItem.id}#section_detail-item`;
 
 				i++;
 				return (
@@ -133,7 +135,9 @@ const Carousel = ({ btn_checkEvents, btn_createEvents, events, lang }) => {
 							</time>
 						</div>
 						<h3>{carouselItem.title}</h3>
-						<Link href='/'>Dowiedz się więcej </Link>
+						<Link href={eventLink}>
+							{lang === "en" ? "Find out more" : "Dowiedz się więcej"}
+						</Link>
 					</CarouselItem>
 				);
 			})}

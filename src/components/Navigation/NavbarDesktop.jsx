@@ -10,7 +10,7 @@ import { getCookie, setCookie } from "@/lib/cookies";
 import { useEffect, useState } from "react";
 
 const NavbarDesktop = ({ dict, lang, className, ...props }) => {
-	const { data: session, status } = useSession();
+	const { data: session } = useSession();
 	const pathname = usePathname();
 	const dispatch = useDispatch();
 	const [quantityNewNotices, setQuantityNewNotices] = useState(null);
@@ -21,7 +21,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		trl_events,
 		trl_contact,
 		trl_login,
-		trl_chat,
+		trl_aboutUs,
 		trl_allEvents,
 		trl_createEvent,
 		trl_notifications,
@@ -47,7 +47,6 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 			}
 		})().then(async () => {
 			if ((email && isCheck) || !dateNotices) {
-				console.log("dasdsad");
 				const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
 				let result;
 
@@ -91,7 +90,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		},
 		{
 			title: trl_createEvent,
-			href: "/events/new-event",
+			href: "/events/new-event#form",
 			onClick: () => animationHandler(`/${lang}/events/new-event`),
 		},
 	];
@@ -154,7 +153,9 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 							href='/login'
 							onClick={() => animationHandler(`/${lang}/login`)}
 							className={
-								pathname === `/${lang}/login`
+								pathname.includes("login") ||
+								pathname.includes("registration") ||
+								pathname.includes("forgot-password")
 									? classesNavItemActive
 									: styles["nav__item"]
 							}>
@@ -162,8 +163,8 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 						</Link>
 					)}
 					{session && (
-						<Link href='/' className={styles["nav__item"]}>
-							{trl_chat}
+						<Link href='/#team' className={styles["nav__item"]}>
+							{trl_aboutUs}
 						</Link>
 					)}
 				</li>

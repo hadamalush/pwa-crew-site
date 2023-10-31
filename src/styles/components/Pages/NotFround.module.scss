@@ -1,0 +1,26 @@
+@import "../../transitions/variables";
+@import "../../mixins/mixins";
+
+.error {
+	@include position(flex, null, center);
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 5em 2em 10em;
+	color: $secondary-color;
+	min-height: 50rem;
+
+	&__heading {
+		width: 100%;
+		max-height: max-content;
+		text-align: center;
+		font-size: 3.5rem;
+	}
+
+	&__text {
+		width: 100%;
+		align-self: flex-start;
+		margin: 0.5em 0 3em;
+		text-align: center;
+		color: $tertiary-color;
+	}
+}
