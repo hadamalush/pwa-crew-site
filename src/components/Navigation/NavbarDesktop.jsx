@@ -94,7 +94,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 		let notifications;
 
 		try {
-			const response = await fetch("api/getNotifications");
+			const response = await fetch("/api/getNotifications");
 
 			const data = await response.json();
 

@@ -30,7 +30,7 @@ const MainHeader = ({ dict, lang, ...props }) => {
 
 	const classesHeader = !isLoading
 		? `${styles.header}`
-		: `${styles.header} ${styles.loading}`;
+		: `${styles.header} ${styles.loading || ""}`;
 	const classesGlob = session
 		? styles["header__glob"]
 		: `${styles["header__glob"]} ${styles["header__glob--right"]} `;

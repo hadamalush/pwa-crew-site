@@ -1,12 +1,24 @@
 "use client";
 import ModalRoot from "./ModalRoot";
-import ModalDelete from "@/components/Tools/DeleteModal";
+// import ModalDelete from "@/components/Tools/DeleteModal";
+// import FormikEvent from "../Forms/FormikEvent/FormikEvent";
+// import FormikAccount from "../Forms/FormAccount/FormikAccount";
+// import NotificationList from "../Notification/NotificationList";
+import dynamic from "next/dynamic";
 import { loading } from "@/global/notification-slice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FormikEvent from "../Forms/FormikEvent/FormikEvent";
-import FormikAccount from "../Forms/FormAccount/FormikAccount";
-import NotificationList from "../Notification/NotificationList";
+import { setDataRootModal } from "@/global/modal-slice";
+
+const FormikAccount = dynamic(() =>
+	import("../Forms/FormAccount/FormikAccount")
+);
+
+const NotificationList = dynamic(() =>
+	import("../Notification/NotificationList")
+);
+const FormikEvent = dynamic(() => import("../Forms/FormikEvent/FormikEvent"));
+const ModalDelete = dynamic(() => import("../../Tools/DeleteModal"));
 
 const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	const isVisible = useSelector(state => state.modal.isVisibleRoot);
@@ -16,6 +28,7 @@ const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	useEffect(() => {
 		if (!isVisible) {
 			dispatch(loading(false));
+			dispatch(setDataRootModal({ dataRootModal: null }));
 		}
 	}, [isVisible]);
 
