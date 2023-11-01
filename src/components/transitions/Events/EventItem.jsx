@@ -4,7 +4,6 @@ import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
 import {
