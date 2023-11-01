@@ -23,8 +23,10 @@ const LinkAsBtn = ({
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setIsAnimation(false);
-	}, [pathname]);
+		if (!isLoading) {
+			setIsAnimation(false);
+		}
+	}, [pathname, isLoading]);
 
 	const classesLink =
 		isAnimation && isLoading

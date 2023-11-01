@@ -4,7 +4,6 @@ import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useMediaQuery } from "react-responsive";
 import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
 import {
@@ -136,6 +135,7 @@ const EventItem = ({
 	const showModalHandler = () => {
 		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventDeleteModal" }));
 		dispatch(setParams({ params: { title: title, id: id } }));
+		dispatch(setDataRootModal({ dataRootModal: true }));
 	};
 
 	return (

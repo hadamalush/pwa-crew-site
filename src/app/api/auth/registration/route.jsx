@@ -103,7 +103,7 @@ export async function POST(request) {
 	try {
 		clientActivationLinks = await connectDbMongo("ActivationLinks");
 		const generatedIdLink = await generationIdLink(ip, userAgent);
-		const linkPrefix = "activation";
+		const linkPrefix = `${lang}/activation`;
 
 		const resultOfCreatedActivationLink = await insertDocumentWithTTL(
 			clientActivationLinks,

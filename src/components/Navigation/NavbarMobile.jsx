@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { loading } from "@/global/notification-slice";
 import { signOut, useSession } from "next-auth/react";
+import { setDataRootModal, setIsVisibleRoot } from "@/global/modal-slice";
 
 const eventsReducer = (state, action) => {
 	if (action.type === "EVENTS_VISIBLE") {
@@ -48,7 +49,7 @@ const NavbarMobile = ({ dict, lang }) => {
 		trl_events,
 		trl_contact,
 		trl_login,
-		trl_chat,
+		// trl_chat,
 		trl_createEvent,
 		trl_notifications,
 		trl_settings,
@@ -75,11 +76,41 @@ const NavbarMobile = ({ dict, lang }) => {
 		},
 	];
 
+	const showSettingsHandler = e => {
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "settingsModal" }));
+		dispatch(setDataRootModal({ dataRootModal: true }));
+	};
+
+	const showNotificationsHandler = async e => {
+		let notifications;
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "notificationsModal" }));
+
+		try {
+			const response = await fetch("/api/getNotifications");
+
+			const data = await response.json();
+
+			notifications = data?.notifications;
+		} catch (err) {
+			console.log(err);
+		}
+
+		dispatch(
+			setDataRootModal({
+				dataRootModal: notifications,
+			})
+		);
+	};
+
 	const optionsSettings = [
 		{
 			title: trl_notifications,
 			href: "/notifications",
 			imgSrc: "/images/options/option-notifications.webp",
+			onClick: e => {
+				e.preventDefault();
+				showNotificationsHandler();
+			},
 		},
 		{
 			title: trl_signOut,
@@ -91,6 +122,10 @@ const NavbarMobile = ({ dict, lang }) => {
 			title: trl_settings,
 			href: "/settings",
 			imgSrc: "/images/options/option-settings.webp",
+			onClick: e => {
+				e.preventDefault();
+				showSettingsHandler();
+			},
 		},
 	];
 

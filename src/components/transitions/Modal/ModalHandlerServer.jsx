@@ -1,9 +1,4 @@
 "use client";
-import ModalRoot from "./ModalRoot";
-// import ModalDelete from "@/components/Tools/DeleteModal";
-// import FormikEvent from "../Forms/FormikEvent/FormikEvent";
-// import FormikAccount from "../Forms/FormAccount/FormikAccount";
-// import NotificationList from "../Notification/NotificationList";
 import dynamic from "next/dynamic";
 import { loading } from "@/global/notification-slice";
 import { useEffect } from "react";
@@ -19,6 +14,7 @@ const NotificationList = dynamic(() =>
 );
 const FormikEvent = dynamic(() => import("../Forms/FormikEvent/FormikEvent"));
 const ModalDelete = dynamic(() => import("../../Tools/DeleteModal"));
+const ModalRoot = dynamic(() => import("../../transitions/Modal/ModalRoot"));
 
 const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	const isVisible = useSelector(state => state.modal.isVisibleRoot);
@@ -28,14 +24,14 @@ const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	useEffect(() => {
 		if (!isVisible) {
 			dispatch(loading(false));
-			dispatch(setDataRootModal({ dataRootModal: null }));
+			dispatch(setDataRootModal({ dataRootModal: false }));
 		}
 	}, [isVisible]);
 
 	return (
 		<>
 			{isVisible && (
-				<ModalRoot>
+				<ModalRoot lang={lang}>
 					{isVisible === "settingsModal" && (
 						<FormikAccount dict={modalSettings} lang={lang} />
 					)}

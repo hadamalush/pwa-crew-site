@@ -16,12 +16,7 @@ export const metadata = {
 		"Welcome to our music concert website, where you can add, edit, and browse the latest music events. Register to receive notifications about upcoming concerts by your favorite artists. Edit your events and stay up-to-date with the latest music news. Join our music community and enjoy unforgettable concerts!",
 };
 
-export default async function RootLayout({
-	children,
-	params,
-	modal,
-	...props
-}) {
+export default async function RootLayout({ children, params, ...props }) {
 	if (!params) {
 		return null;
 	}
@@ -112,7 +107,7 @@ export default async function RootLayout({
 							dict={dictModals}
 							trl_err={trl_error}
 						/>
-						{modal}
+						{/* {modal} */}
 						{children}
 						<Footer dict={footerTranslation} />
 					</ReduxProvider>

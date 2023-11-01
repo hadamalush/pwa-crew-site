@@ -65,8 +65,12 @@ const NavOptions = ({ className, animationQuit, options, onClickCross }) => {
 						<Link
 							href={item.href}
 							className={styles["menu__item-link"]}
-							onClick={() =>
-								closeMenuHandler(true, item.href, item.onClick && item.onClick)
+							onClick={e =>
+								closeMenuHandler(
+									true,
+									item.href,
+									item.onClick && item.onClick(e)
+								)
 							}></Link>
 						<ImageFill
 							src={item.imgSrc}

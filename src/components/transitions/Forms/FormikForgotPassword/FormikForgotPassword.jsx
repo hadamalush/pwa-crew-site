@@ -102,7 +102,7 @@ const FormikForgotPassword = ({
 			  };
 
 		try {
-			const response = await fetch("/api/auth/resetPassword", {
+			const response = await fetch(`/api/auth/resetPassword`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(sendData),
