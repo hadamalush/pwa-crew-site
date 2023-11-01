@@ -78,10 +78,12 @@ const NavbarMobile = ({ dict, lang }) => {
 
 	const showSettingsHandler = e => {
 		dispatch(setIsVisibleRoot({ isVisibleRoot: "settingsModal" }));
+		dispatch(setDataRootModal({ dataRootModal: true }));
 	};
 
 	const showNotificationsHandler = async e => {
 		let notifications;
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "notificationsModal" }));
 
 		try {
 			const response = await fetch("/api/getNotifications");
@@ -98,7 +100,6 @@ const NavbarMobile = ({ dict, lang }) => {
 				dataRootModal: notifications,
 			})
 		);
-		dispatch(setIsVisibleRoot({ isVisibleRoot: "notificationsModal" }));
 	};
 
 	const optionsSettings = [

@@ -4,8 +4,6 @@ import { NextResponse } from "next/server";
 export async function PATCH(request) {
 	const email = await request.json();
 
-	console.log(email);
-
 	let client, notifications;
 
 	if (!email) {

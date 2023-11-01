@@ -125,7 +125,6 @@ export const updateAllNestedDocuments = async (
 ) => {
 	const db = client.db();
 
-	console.log(collection, " | ", document, " | ", key);
 	const result = await db.collection(collection).updateMany(
 		{},
 		{

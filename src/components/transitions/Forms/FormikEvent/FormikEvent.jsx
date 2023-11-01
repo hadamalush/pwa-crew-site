@@ -210,9 +210,7 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
 			if (receivedNotices) {
 				const quantityNotices = parseInt(receivedNotices?.value);
 
-				const ressult = await setCookie("newNotices", quantityNotices + 1);
-
-				console.log(ressult);
+				await setCookie("newNotices", quantityNotices + 1);
 			}
 
 			!variant && data.link && router.push(data.link);

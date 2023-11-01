@@ -16,7 +16,8 @@
 .modal {
 	@include position(absolute, 50%, null, null, 50%, 500);
 	width: 100%;
-	max-width: 500px;
+	max-width: 50rem;
+	min-height: 20rem;
 	padding-bottom: 1em;
 	transform: translate(-50%, -50%);
 	overflow: hidden;
@@ -58,6 +59,38 @@
 		}
 	}
 
+	&__loading {
+		@include position(absolute, 57%, null, null, null, 1);
+		font-size: 2rem;
+		font-weight: bold;
+		color: $secondary-color;
+
+		&--dots,
+		&::before,
+		&::after {
+			@include position(absolute, null, 0, 0.4rem);
+			content: "";
+			height: 4px;
+			width: 4px;
+			border-radius: 50%;
+			background-color: $secondary-color;
+			animation: animationDots 1s infinite;
+		}
+
+		&--dots {
+			right: -0.7rem;
+		}
+
+		&::before {
+			right: -1.4rem;
+			animation-delay: 0.2s;
+		}
+		&::after {
+			right: -2.1rem;
+			animation-delay: 0.4s;
+		}
+	}
+
 	&::before {
 		@include position(absolute, 0, 0, null, 0, 2);
 		content: "";
@@ -66,14 +99,6 @@
 	}
 
 	@include media-query(mediumScreen) {
-		// @include position(absolute, 50%, null, null, 50%, 500);
-		// transform: translate(-50%, 200%);
-		// bottom: unset;
-
-		&__visibility {
-			transform: translate(-50%, -50%);
-		}
-
 		&__content {
 			max-height: 60rem;
 		}
@@ -99,5 +124,14 @@
 	}
 	to {
 		opacity: 0;
+	}
+}
+
+@keyframes animationDots {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
 	}
 }

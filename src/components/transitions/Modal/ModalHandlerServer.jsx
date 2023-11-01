@@ -31,7 +31,7 @@ const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	return (
 		<>
 			{isVisible && (
-				<ModalRoot>
+				<ModalRoot lang={lang}>
 					{isVisible === "settingsModal" && (
 						<FormikAccount dict={modalSettings} lang={lang} />
 					)}

@@ -135,6 +135,7 @@ const EventItem = ({
 	const showModalHandler = () => {
 		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventDeleteModal" }));
 		dispatch(setParams({ params: { title: title, id: id } }));
+		dispatch(setDataRootModal({ dataRootModal: true }));
 	};
 
 	return (

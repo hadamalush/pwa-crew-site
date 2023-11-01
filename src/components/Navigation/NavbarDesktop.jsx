@@ -86,12 +86,14 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 	const showSettingsHandler = e => {
 		e.preventDefault();
 		dispatch(setIsVisibleRoot({ isVisibleRoot: "settingsModal" }));
+		dispatch(setDataRootModal({ dataRootModal: true }));
 	};
 
 	const showNotificationsHandler = async e => {
 		e.preventDefault();
 
 		let notifications;
+		dispatch(setIsVisibleRoot({ isVisibleRoot: "notificationsModal" }));
 
 		try {
 			const response = await fetch("/api/getNotifications");
@@ -108,7 +110,6 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
 				dataRootModal: notifications,
 			})
 		);
-		dispatch(setIsVisibleRoot({ isVisibleRoot: "notificationsModal" }));
 	};
 
 	const dropdownItemsEvents = [

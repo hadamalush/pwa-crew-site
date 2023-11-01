@@ -7,8 +7,6 @@ export async function GET(request) {
 	const email = session?.user?.email;
 	let client, notifications;
 
-	console.log(email);
-
 	if (!email) {
 		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 	}
