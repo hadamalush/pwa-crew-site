@@ -24,7 +24,7 @@ const ModalHandlerServer = ({ lang, trl_err, dict }) => {
 	useEffect(() => {
 		if (!isVisible) {
 			dispatch(loading(false));
-			dispatch(setDataRootModal({ dataRootModal: null }));
+			dispatch(setDataRootModal({ dataRootModal: false }));
 		}
 	}, [isVisible]);
 

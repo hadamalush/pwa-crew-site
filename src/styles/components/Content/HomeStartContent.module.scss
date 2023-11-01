@@ -3,20 +3,48 @@
 
 .introduction {
 	&__h1 {
-		width: 100%;
-		text-align: center;
-		font-size: 2.5rem;
+		position: relative;
 		margin-top: 1em;
+		font-size: 2.5rem;
+		overflow: hidden;
+		text-align: center;
 		color: $secondary-color;
+
+		&--pl {
+			white-space: nowrap;
+			animation: typing-pl 2s steps(15) forwards;
+		}
+
+		&--en {
+			white-space: nowrap;
+			animation: typing-en 2s steps(13) forwards;
+		}
+	}
+
+	&__loader {
+		width: max-content;
+		position: relative;
+		margin: 0 auto;
+		&::before {
+			content: "";
+			z-index: 1000;
+			position: absolute;
+			top: 0;
+			right: -1rem;
+			width: 2px;
+			height: 100%;
+			background-color: $secondary-color;
+			animation: blinkCursor 0.8s steps(3) infinite;
+		}
 	}
 
 	&__text {
 		padding: 1em 0 3em;
-		text-shadow: 2px 2px 5px black;
-		text-align: center;
-		letter-spacing: 1px;
 		font-style: italic;
+		letter-spacing: 1px;
 		white-space: pre-line;
+		text-align: center;
+		text-shadow: 2px 2px 5px black;
 	}
 
 	a {
@@ -35,6 +63,64 @@
 	@include media-query(largeScreen) {
 		&__h1 {
 			font-size: 4rem;
+		}
+	}
+}
+
+@keyframes blinkCursor {
+	0%,
+	75% {
+		opacity: 1;
+	}
+	76%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes typing-pl {
+	0%,
+	30% {
+		width: 0;
+	}
+	90%,
+	100% {
+		width: 215.95px;
+	}
+}
+
+@keyframes typing-en {
+	0%,
+	30% {
+		width: 0;
+	}
+	90%,
+	100% {
+		width: 193.73px;
+	}
+}
+
+@include media-query(largeScreen) {
+	@keyframes typing-pl {
+		0%,
+		30% {
+			width: 0;
+		}
+		90%,
+		100% {
+			width: 360.53px;
+		}
+	}
+
+	@keyframes typing-en {
+		0%,
+		30% {
+			width: 0;
+		}
+
+		90%,
+		100% {
+			width: 302.17px;
 		}
 	}
 }

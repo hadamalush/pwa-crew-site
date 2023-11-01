@@ -14,6 +14,7 @@ const HomeStartContent = ({
 	btn_events,
 	btn_cooperation,
 	className,
+	lang,
 	...props
 }) => {
 	const { data: session, status } = useSession();
@@ -23,6 +24,11 @@ const HomeStartContent = ({
 	const classes = `${styles.introduction} ${className || ""}`;
 	const refresh = params.get("refresh");
 	const router = useRouter();
+	const classesTitle = `${styles["introduction__h1"]} ${
+		lang === "pl"
+			? styles["introduction__h1--pl"]
+			: styles["introduction__h1--en"]
+	}`;
 
 	useEffect(() => {
 		if (refresh === "true") {
@@ -33,7 +39,9 @@ const HomeStartContent = ({
 	return (
 		<WrapperStart className={classes}>
 			<div className={styles["introduction__text"]}>
-				<h1 className={styles["introduction__h1"]}>{title}</h1>
+				<div className={styles["introduction__loader"]}>
+					<h1 className={classesTitle}>{title}</h1>
+				</div>
 				<p className={styles["introduction__text"]}>{text}</p>
 				<LinkAsBtn href={`${isLoginLink}`}>{isLoginLinkNameBtn}</LinkAsBtn>
 				<LinkAsBtn href='/contact'>{btn_cooperation}</LinkAsBtn>
