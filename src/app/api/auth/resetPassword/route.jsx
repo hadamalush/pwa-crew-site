@@ -57,7 +57,7 @@ export const POST = async request => {
 			subject: "Link resetujący hasło na stronie PwaCrew.",
 			text: "Otrzymaliśmy zgłoszenie odnośnie zresetowania hasła. Jeżeli to nie byłeś Ty, zignoruj tą wiadomość. \n Link ważny 24h. Poniżej znajduje się link.",
 		};
-		const linkPrefix = "forgot-password";
+		const linkPrefix = `${lang}/forgot-password`;
 
 		try {
 			generatedIdLink = await generationIdLink(ip, userAgent);
