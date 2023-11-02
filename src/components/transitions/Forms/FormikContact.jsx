@@ -1,10 +1,10 @@
 "use client";
-import FormContainerBlur from "@/components/Containers/FormContainerBlur";
-import ButtonMain from "../../Button/ButtonMain";
-import InputFormik from "../../Input/InputFormik";
-import TextareaFormik from "../../Input/TextareaFormik";
-import IconRender from "@/components/Icons/IconRender";
-import styles from "../../../../styles/components/transitions/Forms/FormikContact.module.scss";
+import FormContainerBlur from "@/components/transitions/Containers/FormContainerBlur";
+import ButtonMain from "../Button/ButtonMain";
+import InputFormik from "../Input/InputFormik";
+import TextareaFormik from "../Input/TextareaFormik";
+import IconRender from "@/components/transitions/Icons/IconRender";
+import styles from "../../../styles/components/transitions/Forms/FormikContact.module.scss";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";

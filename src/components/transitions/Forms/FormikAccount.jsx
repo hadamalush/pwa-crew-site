@@ -1,10 +1,10 @@
 "use client";
-import FormContainerBlur from "@/components/Containers/FormContainerBlur";
-import ButtonMain from "../../Button/ButtonMain";
-import InputFormik from "../../Input/InputFormik";
-import InputFormikFile from "../../Input/InputFormikFile";
-import Avatar from "../../Avatar/Avatar";
-import styles from "../../../../styles/components/transitions/Forms/FormikAccount.module.scss";
+import FormContainerBlur from "@/components/transitions/Containers/FormContainerBlur";
+import ButtonMain from "../Button/ButtonMain";
+import InputFormik from "../Input/InputFormik";
+import InputFormikFile from "../Input/InputFormikFile";
+import Avatar from "../Avatar/Avatar";
+import styles from "../../../styles/components/transitions/Forms/FormikAccount.module.scss";
 import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";

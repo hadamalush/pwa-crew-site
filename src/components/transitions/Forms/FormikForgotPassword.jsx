@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import ButtonMain from "../../Button/ButtonMain";
-import InputFormik from "../../Input/InputFormik";
-import FormContainerBlur from "@/components/Containers/FormContainerBlur";
-import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
+import ButtonMain from "../Button/ButtonMain";
+import InputFormik from "../Input/InputFormik";
+import FormContainerBlur from "@/components/transitions/Containers/FormContainerBlur";
+import styles from "../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";

@@ -1,10 +1,10 @@
 "use client";
-import FormContainerBlur from "@/components/Containers/FormContainerBlur";
+import FormContainerBlur from "@/components/transitions/Containers/FormContainerBlur";
 import Link from "next/link";
-import ButtonMain from "../../Button/ButtonMain";
-import CheckboxFormik from "../../Input/CheckboxFormik";
-import InputFormik from "../../Input/InputFormik";
-import styles from "../../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
+import ButtonMain from "../Button/ButtonMain";
+import CheckboxFormik from "../Input/CheckboxFormik";
+import InputFormik from "../Input/InputFormik";
+import styles from "../../../styles/components/transitions/Forms/CommonLoginRegister.module.scss";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
