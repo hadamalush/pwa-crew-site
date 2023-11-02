@@ -10,10 +10,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Formik, Form } from "formik";
-import {
-	forgotLinkSchema,
-	forgotNewPasswordSchema,
-} from "@/components/Schemas/FormSchem";
+import { forgotLinkSchema, forgotNewPasswordSchema } from "@/components/Schemas/FormSchem";
 import { showResult, loading } from "@/global/notification-slice";
 
 /**
@@ -25,183 +22,164 @@ import { showResult, loading } from "@/global/notification-slice";
  * @returns Reuturns the whole form component. Should be wrapped with WrapperFormWithContent. However if you want you can pass this component without that wrapper.
  */
 
-const FormikForgotPassword = ({
-	resetId,
-	dict,
-	trl_error,
-	lang,
-	className,
-	...props
-}) => {
-	const { data: session, status } = useSession();
-	const router = useRouter();
-	const dispatch = useDispatch();
+const FormikForgotPassword = ({ resetId, dict, trl_error, lang, className, ...props }) => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-	const {
-		trl_title,
-		trl_email,
-		trl_btnReset,
-		trl_question,
-		trl_questionLink,
-		trl_newPassword,
-		trl_confirmPassword,
-		trl_code,
-		trl_btnChange,
-	} = dict;
+  const {
+    trl_title,
+    trl_email,
+    trl_btnReset,
+    trl_question,
+    trl_questionLink,
+    trl_newPassword,
+    trl_confirmPassword,
+    trl_code,
+    trl_btnChange,
+  } = dict;
 
-	const classes = `${styles["logreg-box"]} ${className || ""}`;
-	const isMediumScreen = useMediaQuery({
-		query: "(min-width: 768px)",
-	});
+  const classes = `${styles["logreg-box"]} ${className || ""}`;
+  const isMediumScreen = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
 
-	useEffect(() => {
-		if (!isMediumScreen) {
-			window.scrollTo(0, 70);
-		}
-		if (status === "authenticated" && session) {
-			router.push("/");
-		}
-	}, [session, status]);
+  useEffect(() => {
+    if (!isMediumScreen) {
+      window.scrollTo(0, 70);
+    }
+    if (status === "authenticated" && session) {
+      router.push("/");
+    }
+  }, [session, status]);
 
-	//resetForm - it is for check which page is now, for choose right api/route and right form.
-	const resetForm = resetId ? true : false;
+  //resetForm - it is for check which page is now, for choose right api/route and right form.
+  const resetForm = resetId ? true : false;
 
-	const schema = resetForm
-		? forgotNewPasswordSchema(lang)
-		: forgotLinkSchema(lang);
+  const schema = resetForm ? forgotNewPasswordSchema(lang) : forgotLinkSchema(lang);
 
-	const changeWebstiteHandler = async event => {
-		event.preventDefault();
+  const changeWebstiteHandler = async (event) => {
+    event.preventDefault();
 
-		const form = document
-			.getElementById("form")
-			.classList.toggle(styles.active);
+    const form = document.getElementById("form").classList.toggle(styles.active);
 
-		setTimeout(() => {
-			router.push("/registration");
-		}, 500);
-	};
+    setTimeout(() => {
+      router.push("/registration");
+    }, 500);
+  };
 
-	const onSubmit = async values => {
-		dispatch(loading(true));
+  const onSubmit = async (values) => {
+    dispatch(loading(true));
+    const { email, password, confirmPassword, code } = values;
+    let data;
 
-		const email = values?.email;
-		const password = values?.password;
-		const confirmPassword = values?.confirmPassword;
-		const code = values?.code;
-		let data;
+    const sendData = !resetForm
+      ? { email: email, status: resetForm, lang }
+      : {
+          password: password,
+          confirmPassword: confirmPassword,
+          code: code,
+          status: resetForm,
+          lang,
+        };
 
-		const sendData = !resetForm
-			? { email: email, status: resetForm, lang }
-			: {
-					password: password,
-					confirmPassword: confirmPassword,
-					code: code,
-					status: resetForm,
-					lang,
-			  };
+    try {
+      const response = await fetch(`/api/auth/resetPassword`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sendData),
+      });
 
-		try {
-			const response = await fetch(`/api/auth/resetPassword`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(sendData),
-			});
+      data = await response.json();
 
-			data = await response.json();
+      if (!response.ok) {
+        dispatch(loading(false));
+        dispatch(
+          showResult({
+            message: data.error,
+            variant: "warning",
+          })
+        );
+        return;
+      }
+    } catch (error) {
+      dispatch(loading(false));
+      dispatch(
+        showResult({
+          message: trl_error,
+          variant: "warning",
+        })
+      );
+      return;
+    }
+    dispatch(loading(false));
+    dispatch(
+      showResult({
+        message: data.message,
+        variant: "success",
+      })
+    );
 
-			if (!response.ok) {
-				dispatch(loading(false));
-				dispatch(
-					showResult({
-						message: data.error,
-						variant: "warning",
-					})
-				);
-				return;
-			}
-		} catch (error) {
-			dispatch(loading(false));
-			dispatch(
-				showResult({
-					message: trl_error,
-					variant: "warning",
-				})
-			);
-			return;
-		}
-		dispatch(loading(false));
-		dispatch(
-			showResult({
-				message: data.message,
-				variant: "success",
-			})
-		);
+    router.push("/");
+  };
 
-		router.push("/");
-	};
+  return (
+    <FormContainerBlur className={classes} id="form">
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          confirmPassword: "",
+          code: resetId,
+        }}
+        onSubmit={onSubmit}
+        validationSchema={schema}
+      >
+        {({ isSubmitting, ...props }) => (
+          <Form>
+            <h1>{trl_title}</h1>
 
-	return (
-		<FormContainerBlur className={classes} id='form'>
-			<Formik
-				initialValues={{
-					email: "",
-					password: "",
-					confirmPassword: "",
-					code: resetId,
-				}}
-				onSubmit={onSubmit}
-				validationSchema={schema}>
-				{({ isSubmitting, ...props }) => (
-					<Form>
-						<h1>{trl_title}</h1>
+            {!resetForm && (
+              <InputFormik
+                name="email"
+                placeholder={trl_email}
+                aria-label={trl_email}
+                type="text"
+              />
+            )}
+            {resetForm && (
+              <>
+                <InputFormik
+                  name="password"
+                  placeholder={trl_newPassword}
+                  aria-label={trl_newPassword}
+                  type="password"
+                />
+                <InputFormik
+                  name="confirmPassword"
+                  placeholder={trl_confirmPassword}
+                  aria-label={trl_confirmPassword}
+                  type="password"
+                />
+                <InputFormik name="code" placeholder={trl_code} aria-label={trl_code} type="text" />
+              </>
+            )}
 
-						{!resetForm && (
-							<InputFormik
-								name='email'
-								placeholder={trl_email}
-								aria-label={trl_email}
-								type='text'
-							/>
-						)}
-						{resetForm && (
-							<>
-								<InputFormik
-									name='password'
-									placeholder={trl_newPassword}
-									aria-label={trl_newPassword}
-									type='password'
-								/>
-								<InputFormik
-									name='confirmPassword'
-									placeholder={trl_confirmPassword}
-									aria-label={trl_confirmPassword}
-									type='password'
-								/>
-								<InputFormik
-									name='code'
-									placeholder={trl_code}
-									aria-label={trl_code}
-									type='text'
-								/>
-							</>
-						)}
+            <ButtonMain type="submit" animation={!isSubmitting}>
+              {resetForm ? trl_btnChange : trl_btnReset}
+            </ButtonMain>
 
-						<ButtonMain type='submit' animation={!isSubmitting}>
-							{resetForm ? trl_btnChange : trl_btnReset}
-						</ButtonMain>
-
-						<p>
-							{trl_question}
-							<Link href='/registration' onClick={changeWebstiteHandler}>
-								{trl_questionLink}
-							</Link>
-						</p>
-					</Form>
-				)}
-			</Formik>
-		</FormContainerBlur>
-	);
+            <p>
+              {trl_question}
+              <Link href="/registration" onClick={changeWebstiteHandler}>
+                {trl_questionLink}
+              </Link>
+            </p>
+          </Form>
+        )}
+      </Formik>
+    </FormContainerBlur>
+  );
 };
 
 export default FormikForgotPassword;

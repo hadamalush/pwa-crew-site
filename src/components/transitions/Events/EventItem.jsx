@@ -4,14 +4,8 @@ import LinkAsBtn from "../Link/LinkAsBtn";
 import styles from "../../../styles/components/transitions/Events/EventItem.module.scss";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { passiveSupport } from "passive-events-support/src/utils";
 import { useDispatch } from "react-redux";
-import {
-	setDataModal,
-	setDataRootModal,
-	setIsVisibleRoot,
-	setParams,
-} from "@/global/modal-slice";
+import { setDataRootModal, setIsVisibleRoot, setParams } from "@/global/modal-slice";
 
 /**
  *
@@ -33,158 +27,138 @@ import {
  */
 
 const EventItem = ({
-	className,
-	title,
-	date,
-	town,
-	street,
-	codePost,
-	time,
-	image,
-	upload,
-	description,
-	id,
-	lang,
-	dict,
-	owner,
-	...props
+  className,
+  title,
+  date,
+  town,
+  street,
+  codePost,
+  time,
+  image,
+  upload,
+  description,
+  id,
+  lang,
+  dict,
+  owner,
+  ...props
 }) => {
-	const { data: session } = useSession();
-	const dispatch = useDispatch();
-	const params = useParams();
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+  const params = useParams();
 
-	const isOwner = owner === session?.user.email;
-	const replacedTitle = title.replaceAll(" ", "-");
+  const isOwner = owner === session?.user.email;
+  const replacedTitle = title.replaceAll(" ", "-");
 
-	passiveSupport({
-		listeners: [
-			{
-				element: "document-fragment",
-				event: "touchstart",
-				passive: false,
-			},
-		],
-	});
+  //dictionary elements EventItem
+  const {
+    trl_startEvent,
+    trl_address,
+    trl_description,
+    trl_btnEventDetails,
+    trl_btnDelete,
+    trl_btnEdit,
+    trl_btnPreviousPage,
+  } = dict;
 
-	//dictionary elements EventItem
-	const {
-		trl_startEvent,
-		trl_address,
-		trl_description,
-		trl_btnEventDetails,
-		trl_btnDelete,
-		trl_btnEdit,
-		trl_btnPreviousPage,
-	} = dict;
+  let isDescription;
+  const eventLink = `/events/${replacedTitle}-${id}#section_detail-item`;
 
-	let isDescription;
-	const eventLink = `/events/${replacedTitle}-${id}#section_detail-item`;
+  if (params?.slug) {
+    const slug = params.slug;
+    const eventId = slug.substring(slug.lastIndexOf("-") + 1);
+    isDescription = id === eventId;
+  }
 
-	if (params?.slug) {
-		const slug = params.slug;
-		const eventId = slug.substring(slug.lastIndexOf("-") + 1);
-		isDescription = id === eventId;
-	}
+  const urlLink_dependsPath = isDescription ? `/events#${"E" + id}` : eventLink;
 
-	const urlLink_dependsPath = isDescription ? `/events#${"E" + id}` : eventLink;
+  const classDNone = styles["event__element-invisible"];
 
-	const classDNone = styles["event__element-invisible"];
+  const classEvent = {
+    details: isDescription ? `${styles.event} ${styles["event--details"]}` : styles.event,
+    address: isDescription ? styles["event__address"] : `${styles["event__address"]} ${classDNone}`,
+    time: isDescription ? "" : classDNone,
+    text: isDescription ? styles["event__text"] : `${styles["event__text"]} ${classDNone}`,
+    img: isDescription
+      ? `${styles["event__img"]} ${styles["event__img--isSmall"]}`
+      : styles["event__img"],
+    link:
+      isDescription && isOwner
+        ? `${styles["event__link-details"]} ${styles["event__link-details--isowner"]}`
+        : styles["event__link-details"],
+  };
 
-	const classEvent = {
-		details: isDescription
-			? `${styles.event} ${styles["event--details"]}`
-			: styles.event,
-		address: isDescription
-			? styles["event__address"]
-			: `${styles["event__address"]} ${classDNone}`,
-		time: isDescription ? "" : classDNone,
-		text: isDescription
-			? styles["event__text"]
-			: `${styles["event__text"]} ${classDNone}`,
-		img: isDescription
-			? `${styles["event__img"]} ${styles["event__img--isSmall"]}`
-			: styles["event__img"],
-		link:
-			isDescription && isOwner
-				? `${styles["event__link-details"]} ${styles["event__link-details--isowner"]}`
-				: styles["event__link-details"],
-	};
+  const imageSrc = upload === "mega" ? `data:image/webp;base64,${image}` : image;
 
-	const imageSrc =
-		upload === "mega" ? `data:image/webp;base64,${image}` : image;
+  const loadDataModalHandler = () => {
+    dispatch(
+      setDataRootModal({
+        dataRootModal: {
+          title,
+          town,
+          codePost,
+          street,
+          date,
+          time,
+          description,
+          id,
+        },
+      })
+    );
+    dispatch(setIsVisibleRoot({ isVisibleRoot: "eventEditModal" }));
+    dispatch(setParams({ params: { event: eventLink } }));
+  };
 
-	const loadDataModalHandler = () => {
-		dispatch(
-			setDataRootModal({
-				dataRootModal: {
-					title,
-					town,
-					codePost,
-					street,
-					date,
-					time,
-					description,
-					id,
-				},
-			})
-		);
-		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventEditModal" }));
-		dispatch(setParams({ params: { event: eventLink } }));
-	};
+  const showModalHandler = () => {
+    dispatch(setIsVisibleRoot({ isVisibleRoot: "eventDeleteModal" }));
+    dispatch(setParams({ params: { title: title, id: id } }));
+    dispatch(setDataRootModal({ dataRootModal: true }));
+  };
 
-	const showModalHandler = () => {
-		dispatch(setIsVisibleRoot({ isVisibleRoot: "eventDeleteModal" }));
-		dispatch(setParams({ params: { title: title, id: id } }));
-		dispatch(setDataRootModal({ dataRootModal: true }));
-	};
+  return (
+    <li className={classEvent.details} id={"E" + id}>
+      <ImageFill
+        src={imageSrc}
+        alt={title}
+        sizes="(max-width: 568px) 80vw, (min-width: 568px) 30vw"
+        className={classEvent.img}
+      />
 
-	return (
-		<li className={classEvent.details} id={"E" + id}>
-			<ImageFill
-				src={imageSrc}
-				alt={title}
-				sizes='(max-width: 568px) 80vw, (min-width: 568px) 30vw'
-				className={classEvent.img}
-			/>
-
-			<div className={styles["event__informations"]}>
-				<h2>{title}</h2>
-				<address className={classEvent.address}>
-					<h3>{trl_address}</h3>
-					<p>{town}</p>
-					<p>{codePost}</p>
-					<p>{street}</p>
-				</address>
-				<time className={`${styles["event__time"]}`}>
-					<h3>{trl_startEvent}</h3>
-					<p>{date}</p>
-					<p className={classEvent.time}>{time}</p>
-				</time>
-			</div>
-			<div className={classEvent.text}>
-				<h3>{trl_description}</h3>
-				<p>{description}</p>
-			</div>
-			<div className={styles["event__tools"]}>
-				<LinkAsBtn
-					href={urlLink_dependsPath}
-					className={classEvent.link}
-					scroll={true}>
-					{isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
-				</LinkAsBtn>
-				{isOwner && isDescription && (
-					<div className={styles["event__btns"]}>
-						<LinkAsBtn href='#' scroll={false} onClick={showModalHandler}>
-							{trl_btnDelete}
-						</LinkAsBtn>
-						<LinkAsBtn href='#' scroll={false} onClick={loadDataModalHandler}>
-							{trl_btnEdit}
-						</LinkAsBtn>
-					</div>
-				)}
-			</div>
-		</li>
-	);
+      <div className={styles["event__informations"]}>
+        <h2>{title}</h2>
+        <address className={classEvent.address}>
+          <h3>{trl_address}</h3>
+          <p>{town}</p>
+          <p>{codePost}</p>
+          <p>{street}</p>
+        </address>
+        <time className={`${styles["event__time"]}`}>
+          <h3>{trl_startEvent}</h3>
+          <p>{date}</p>
+          <p className={classEvent.time}>{time}</p>
+        </time>
+      </div>
+      <div className={classEvent.text}>
+        <h3>{trl_description}</h3>
+        <p>{description}</p>
+      </div>
+      <div className={styles["event__tools"]}>
+        <LinkAsBtn href={urlLink_dependsPath} className={classEvent.link} scroll={true}>
+          {isDescription ? trl_btnPreviousPage : trl_btnEventDetails}
+        </LinkAsBtn>
+        {isOwner && isDescription && (
+          <div className={styles["event__btns"]}>
+            <LinkAsBtn href="#" scroll={false} onClick={showModalHandler}>
+              {trl_btnDelete}
+            </LinkAsBtn>
+            <LinkAsBtn href="#" scroll={false} onClick={loadDataModalHandler}>
+              {trl_btnEdit}
+            </LinkAsBtn>
+          </div>
+        )}
+      </div>
+    </li>
+  );
 };
 
 export default EventItem;

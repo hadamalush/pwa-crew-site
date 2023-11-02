@@ -23,140 +23,131 @@ import { useEffect } from "react";
  */
 
 const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
-	const router = useRouter();
-	const dispatch = useDispatch();
-	const {
-		trl_title,
-		trl_email,
-		trl_password,
-		trl_confirmPassword,
-		trl_terms,
-		trl_btn,
-		trl_question,
-		trl_questionLink,
-	} = dict;
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const {
+    trl_title,
+    trl_email,
+    trl_password,
+    trl_confirmPassword,
+    trl_terms,
+    trl_btn,
+    trl_question,
+    trl_questionLink,
+  } = dict;
 
-	const classes = `${styles["logreg-box"]} ${className}`;
-	const isMediumScreen = useMediaQuery({
-		query: "(min-width: 768px)",
-	});
+  const classes = `${styles["logreg-box"]} ${className}`;
+  const isMediumScreen = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
 
-	useEffect(() => {
-		if (!isMediumScreen) {
-			window.scrollTo(0, 70);
-		}
-	}, []);
+  useEffect(() => {
+    if (!isMediumScreen) {
+      window.scrollTo(0, 70);
+    }
+  }, []);
 
-	const changeWebstiteHandler = async event => {
-		event.preventDefault();
+  const changeWebstiteHandler = async (event) => {
+    event.preventDefault();
 
-		const form = document
-			.getElementById("form")
-			.classList.toggle(styles.active);
+    const form = document.getElementById("form").classList.toggle(styles.active);
 
-		setTimeout(() => {
-			router.push("login");
-		}, 500);
-	};
+    setTimeout(() => {
+      router.push("login");
+    }, 500);
+  };
 
-	const onSubmit = async (values, actions) => {
-		dispatch(loading(true));
-		const email = values.email;
-		const password = values.password;
-		const confirmPassword = values.confirmPassword;
-		const terms = values.terms;
-		let data;
+  const onSubmit = async (values, actions) => {
+    dispatch(loading(true));
+    const { email, password, confirmPassword, terms } = values;
+    let data;
 
-		try {
-			const response = await fetch("/api/auth/registration", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password, confirmPassword, terms, lang }),
-			});
+    try {
+      const response = await fetch("/api/auth/registration", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, confirmPassword, terms, lang }),
+      });
 
-			data = await response.json();
+      data = await response.json();
 
-			if (!response.ok) {
-				dispatch(loading(false));
-				dispatch(
-					showResult({
-						message: data.message,
-						variant: "warning",
-					})
-				);
-				return;
-			}
-		} catch (error) {
-			dispatch(loading(false));
-			dispatch(
-				showResult({
-					message: trl_error,
-					variant: "warning",
-				})
-			);
-		}
-		dispatch(loading(false));
-		dispatch(
-			showResult({
-				message: data.message,
-				variant: "success",
-			})
-		);
+      if (!response.ok) {
+        dispatch(loading(false));
+        dispatch(
+          showResult({
+            message: data.message,
+            variant: "warning",
+          })
+        );
+        return;
+      }
+    } catch (error) {
+      dispatch(loading(false));
+      dispatch(
+        showResult({
+          message: trl_error,
+          variant: "warning",
+        })
+      );
+    }
+    dispatch(loading(false));
+    dispatch(
+      showResult({
+        message: data.message,
+        variant: "success",
+      })
+    );
 
-		router.push("/login");
-	};
+    router.push("/login");
+  };
 
-	return (
-		<FormContainerBlur className={classes} id='form'>
-			<Formik
-				initialValues={{
-					email: "",
-					password: "",
-					confirmPassword: "",
-					terms: false,
-				}}
-				onSubmit={onSubmit}
-				validationSchema={registerSchema(lang)}>
-				{({ isSubmitting, ...props }) => (
-					<Form>
-						<h1>{trl_title}</h1>
+  return (
+    <FormContainerBlur className={classes} id="form">
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          confirmPassword: "",
+          terms: false,
+        }}
+        onSubmit={onSubmit}
+        validationSchema={registerSchema(lang)}
+      >
+        {({ isSubmitting, ...props }) => (
+          <Form>
+            <h1>{trl_title}</h1>
 
-						<InputFormik
-							name='email'
-							placeholder={trl_email}
-							aria-label={trl_email}
-							type='text'
-						/>
-						<InputFormik
-							name='password'
-							placeholder={trl_password}
-							aria-label={trl_password}
-							type='password'
-						/>
-						<InputFormik
-							name='confirmPassword'
-							placeholder={trl_confirmPassword}
-							aria-label={trl_confirmPassword}
-							type='password'
-						/>
+            <InputFormik name="email" placeholder={trl_email} aria-label={trl_email} type="text" />
+            <InputFormik
+              name="password"
+              placeholder={trl_password}
+              aria-label={trl_password}
+              type="password"
+            />
+            <InputFormik
+              name="confirmPassword"
+              placeholder={trl_confirmPassword}
+              aria-label={trl_confirmPassword}
+              type="password"
+            />
 
-						<CheckboxFormik name='terms' label={trl_terms} type='checkbox' />
+            <CheckboxFormik name="terms" label={trl_terms} type="checkbox" />
 
-						<ButtonMain type='submit' animation={!isSubmitting}>
-							{trl_btn}
-						</ButtonMain>
+            <ButtonMain type="submit" animation={!isSubmitting}>
+              {trl_btn}
+            </ButtonMain>
 
-						<p>
-							{trl_question}
-							<Link href='/login' onClick={changeWebstiteHandler}>
-								{trl_questionLink}
-							</Link>
-						</p>
-					</Form>
-				)}
-			</Formik>
-		</FormContainerBlur>
-	);
+            <p>
+              {trl_question}
+              <Link href="/login" onClick={changeWebstiteHandler}>
+                {trl_questionLink}
+              </Link>
+            </p>
+          </Form>
+        )}
+      </Formik>
+    </FormContainerBlur>
+  );
 };
 
 export default FormikRegister;

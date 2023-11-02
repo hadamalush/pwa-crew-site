@@ -24,152 +24,139 @@ import { setCookie } from "@/lib/cookies";
  */
 
 const FormikLogin = ({ className, dict, dictNotifi, lang, ...props }) => {
-	const router = useRouter();
-	const dispatch = useDispatch();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-	const {
-		trl_title,
-		trl_email,
-		trl_password,
-		trl_forgotPass,
-		trl_btn,
-		trl_question,
-		trl_questionLink,
-	} = dict;
+  const {
+    trl_title,
+    trl_email,
+    trl_password,
+    trl_forgotPass,
+    trl_btn,
+    trl_question,
+    trl_questionLink,
+  } = dict;
 
-	const { trl_err_404, trl_err_422, trl_generalError, trl_welcome } =
-		dictNotifi;
+  const { trl_err_404, trl_err_422, trl_generalError, trl_welcome } = dictNotifi;
 
-	const classes = `${styles["logreg-box"]} ${className || ""}`;
-	const isMediumScreen = useMediaQuery({
-		query: "(min-width: 768px)",
-	});
+  const classes = `${styles["logreg-box"]} ${className || ""}`;
+  const isMediumScreen = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
 
-	useEffect(() => {
-		if (!isMediumScreen) {
-			window.scrollTo(0, 70);
-		} else if (isMediumScreen) {
-			window.scrollTo(0, 0);
-		}
-	}, []);
+  useEffect(() => {
+    if (!isMediumScreen) {
+      window.scrollTo(0, 70);
+    } else if (isMediumScreen) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
-	const changeWebstiteHandler = (event, path) => {
-		event.preventDefault();
+  const changeWebstiteHandler = (event, path) => {
+    event.preventDefault();
 
-		const form = document
-			.getElementById("form")
-			.classList.toggle(styles.active);
+    const form = document.getElementById("form").classList.toggle(styles.active);
 
-		setTimeout(() => {
-			router.push(path);
-		}, 500);
-	};
+    setTimeout(() => {
+      router.push(path);
+    }, 500);
+  };
 
-	const onSubmit = async values => {
-		const email = values.email;
-		const password = values.password;
-		dispatch(loading(true));
+  const onSubmit = async (values) => {
+    const { email, password } = values;
+    dispatch(loading(true));
 
-		try {
-			const response = await signIn("credentials", {
-				redirect: false,
-				email: email,
-				password: password,
-				lang: lang,
-			});
+    try {
+      const response = await signIn("credentials", {
+        redirect: false,
+        email: email,
+        password: password,
+        lang: lang,
+      });
 
-			const selectedErr = response.error === "404" ? trl_err_404 : trl_err_422;
+      const selectedErr = response.error === "404" ? trl_err_404 : trl_err_422;
 
-			if (response.error) {
-				dispatch(loading(false));
-				dispatch(showResult({ message: selectedErr, variant: "warning" }));
-				return;
-			}
-		} catch (error) {
-			dispatch(loading(false));
-			dispatch(
-				showResult({
-					message: trl_generalError,
-					variant: "warning",
-				})
-			);
-			return;
-		}
+      if (response.error) {
+        dispatch(loading(false));
+        dispatch(showResult({ message: selectedErr, variant: "warning" }));
+        return;
+      }
+    } catch (error) {
+      dispatch(loading(false));
+      dispatch(
+        showResult({
+          message: trl_generalError,
+          variant: "warning",
+        })
+      );
+      return;
+    }
 
-		try {
-			const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
-			const response = await fetch(apiUrl);
-			const data = await response.json();
+    try {
+      const apiUrl = `/api/getStatusNotifications?email=${email || null}`;
+      const response = await fetch(apiUrl);
+      const data = await response.json();
 
-			if (response.ok) {
-				setCookie("newNotices", data?.message);
-				setCookie("dateNotices", new Date());
-			}
-		} catch (err) {
-			console.log(err);
-		}
+      if (response.ok) {
+        setCookie("newNotices", data?.message);
+        setCookie("dateNotices", new Date());
+      }
+    } catch (err) {
+      console.log(err);
+    }
 
-		dispatch(loading(false));
-		dispatch(showResult({ message: trl_welcome, variant: "success" }));
-		router.push("/?refresh=true");
-	};
+    dispatch(loading(false));
+    dispatch(showResult({ message: trl_welcome, variant: "success" }));
+    router.push("/?refresh=true");
+  };
 
-	return (
-		<FormContainerBlur className={classes} id='form'>
-			<Formik
-				initialValues={{
-					email: "",
-					password: "",
-				}}
-				onSubmit={onSubmit}
-				validationSchema={loginSchema(lang)}>
-				{({ isSubmitting, ...props }) => (
-					<Form>
-						<h1>{trl_title}</h1>
+  return (
+    <FormContainerBlur className={classes} id="form">
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        onSubmit={onSubmit}
+        validationSchema={loginSchema(lang)}
+      >
+        {({ isSubmitting, ...props }) => (
+          <Form>
+            <h1>{trl_title}</h1>
 
-						<InputFormik
-							name='email'
-							placeholder={trl_email}
-							aria-label={trl_email}
-							type='text'
-						/>
-						<InputFormik
-							name='password'
-							placeholder={trl_password}
-							aria-label={trl_password}
-							type='password'
-						/>
+            <InputFormik name="email" placeholder={trl_email} aria-label={trl_email} type="text" />
+            <InputFormik
+              name="password"
+              placeholder={trl_password}
+              aria-label={trl_password}
+              type="password"
+            />
 
-						<Link
-							href={"/forgot-password"}
-							onClick={event =>
-								changeWebstiteHandler(event, "/forgot-password")
-							}>
-							{trl_forgotPass}
-						</Link>
+            <Link
+              href={"/forgot-password"}
+              onClick={(event) => changeWebstiteHandler(event, "/forgot-password")}
+            >
+              {trl_forgotPass}
+            </Link>
 
-						<ButtonMain
-							type='submit'
-							disabled={isSubmitting}
-							animation={!isSubmitting}>
-							{trl_btn}
-						</ButtonMain>
+            <ButtonMain type="submit" disabled={isSubmitting} animation={!isSubmitting}>
+              {trl_btn}
+            </ButtonMain>
 
-						<p>
-							{trl_question}
-							<Link
-								href='/registration'
-								onClick={event =>
-									changeWebstiteHandler(event, "/registration")
-								}>
-								{trl_questionLink}
-							</Link>
-						</p>
-					</Form>
-				)}
-			</Formik>
-		</FormContainerBlur>
-	);
+            <p>
+              {trl_question}
+              <Link
+                href="/registration"
+                onClick={(event) => changeWebstiteHandler(event, "/registration")}
+              >
+                {trl_questionLink}
+              </Link>
+            </p>
+          </Form>
+        )}
+      </Formik>
+    </FormContainerBlur>
+  );
 };
 
 export default FormikLogin;
