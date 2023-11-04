@@ -51,7 +51,7 @@ export default async function Home({ params: { lang } }) {
           <h4>{dict.section_aboutus.card_1.title}</h4>
           <ImageLoader
             alt="Mężczyzna grający na gitarze, na koncercie"
-            variant="baker"
+            variant="basia"
             sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
           />
           <h5> {dict.section_aboutus.card_1.desc_title} </h5>
@@ -81,7 +81,7 @@ export default async function Home({ params: { lang } }) {
           <h4>{dict.section_aboutus.card_4.title}</h4>
           <ImageLoader
             alt="Mężczyzna grający na gitarze, na koncercie"
-            variant="david"
+            variant="alicja"
             sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
           />
           <h5> {dict.section_aboutus.card_4.desc_title} </h5>

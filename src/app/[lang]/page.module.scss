@@ -2,206 +2,206 @@
 @import "../../styles/mixins/mixins";
 
 .main {
-	min-height: 100vh;
-	width: 100vw;
+  min-height: 100vh;
+  width: 100vw;
 }
 
 .history {
-	@include flex(column);
-	max-width: 250rem;
-	padding: 15em 3em 10em;
-	margin: 0 auto;
+  @include flex(column);
+  max-width: 250rem;
+  padding: 15em 3em 10em;
+  margin: 0 auto;
 
-	h3 {
-		@include position(absolute, 5rem, 50%, null, null, 10);
-		transform: translateX(50%);
-		text-align: center;
-		color: $primary-color;
-		text-shadow: $text-shadow-tertiary;
-	}
+  h3 {
+    @include position(absolute, 5rem, 50%, null, null, 10);
+    transform: translateX(50%);
+    text-align: center;
+    color: $primary-color;
+    text-shadow: $text-shadow-tertiary;
+  }
 
-	> div {
-		&:before {
-			transform: none;
-		}
+  > div {
+    &:before {
+      transform: none;
+    }
 
-		&:hover:before {
-			transform: scale(1.05);
-		}
-	}
+    &:hover:before {
+      transform: scale(1.05);
+    }
+  }
 
-	> div > div {
-		width: 4rem;
-		color: $secondary-color;
-	}
+  > div > div {
+    width: 4rem;
+    color: $secondary-color;
+  }
 
-	> div > h4 {
-		padding: 0.2em 0 2em;
-		letter-spacing: 0.2rem;
-		color: $secondary-color;
-	}
+  > div > h4 {
+    padding: 0.2em 0 2em;
+    letter-spacing: 0.2rem;
+    color: $secondary-color;
+  }
 
-	> div:nth-child(3) {
-		margin: 4em 0;
-	}
+  > div:nth-child(3) {
+    margin: 4em 0;
+  }
 
-	@include media-query(foldScreen) {
-		div:first-of-type {
-			margin-top: 2em;
-		}
-	}
+  @include media-query(foldScreen) {
+    div:first-of-type {
+      margin-top: 2em;
+    }
+  }
 
-	@include media-query(smallScreen) {
-		> div {
-			&::before {
-				transform: skew(-7deg);
-			}
+  @include media-query(smallScreen) {
+    > div {
+      &::before {
+        transform: skew(-7deg);
+      }
 
-			&:hover:before {
-				transform: skew(-7deg) scale(1.05);
-			}
-		}
-	}
+      &:hover:before {
+        transform: skew(-7deg) scale(1.05);
+      }
+    }
+  }
 
-	@include media-query(mediumScreen) {
-		scroll-margin-top: 70px;
-		padding: 15em 5em 10em;
-	}
+  @include media-query(mediumScreen) {
+    scroll-margin-top: 70px;
+    padding: 15em 5em 10em;
+  }
 
-	@include media-query(largeScreen) {
-		flex-direction: row;
+  @include media-query(largeScreen) {
+    flex-direction: row;
 
-		> div:nth-child(3) {
-			margin: 0 2em;
-		}
-	}
+    > div:nth-child(3) {
+      margin: 0 2em;
+    }
+  }
 
-	@include media-query(hugeScreen) {
-		padding: 15em 10em 10em;
-		> div {
-			padding: 3em 3em;
-		}
-		> h3 {
-			font-size: 3.2rem;
-		}
+  @include media-query(hugeScreen) {
+    padding: 15em 10em 10em;
+    > div {
+      padding: 3em 3em;
+    }
+    > h3 {
+      font-size: 3.2rem;
+    }
 
-		> div > h4 {
-			font-size: 2.4rem;
-		}
+    > div > h4 {
+      font-size: 2.4rem;
+    }
 
-		> div > p {
-			font-size: 1.6rem;
-			padding: 0 5em 2em;
-		}
-	}
+    > div > p {
+      font-size: 1.6rem;
+      padding: 0 3em 2em;
+    }
+  }
 }
 
 .aboutus {
-	@include flex(column, null, center);
-	position: relative;
-	flex-wrap: wrap;
-	max-width: 250rem;
-	margin: 0 auto;
-	gap: 5rem;
-	background-color: $section-bg-primary;
+  @include flex(column, null, center);
+  position: relative;
+  flex-wrap: wrap;
+  max-width: 250rem;
+  margin: 0 auto;
+  gap: 5rem;
+  background-color: $section-bg-primary;
 
-	&::before {
-		content: "";
-		@include position(absolute, 0, -500rem, 0, -500rem);
-		background-color: $section-bg-primary;
-	}
+  &::before {
+    content: "";
+    @include position(absolute, 0, -500rem, 0, -500rem);
+    background-color: $section-bg-primary;
+  }
 
-	& > div {
-		display: grid;
-		grid-template-rows: 1fr 3rem 9rem;
-		min-height: 40rem;
-		min-width: 25rem;
-		margin-bottom: 5rem;
-		padding: 0;
-		margin: 0;
-		overflow: hidden;
-		border-bottom-left-radius: 10px;
-		border-top-right-radius: 10px;
+  & > div {
+    display: grid;
+    grid-template-rows: 1fr 3rem 9rem;
+    min-height: 40rem;
+    min-width: 25rem;
+    margin-bottom: 5rem;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
 
-		img {
-			position: absolute;
-			transition: transform 1s;
-		}
+    img {
+      position: absolute;
+      transition: transform 1s;
+    }
 
-		&:hover img {
-			transform: scale(1.2);
-		}
-	}
+    &:hover img {
+      transform: scale(1.2);
+    }
+  }
 
-	> h3 {
-		@include position(absolute, 5rem, 50%, null, null, 10);
-		transform: translateX(50%);
-		text-align: center;
-		color: $primary-color;
-		text-shadow: $text-shadow-tertiary;
-	}
+  > h3 {
+    @include position(absolute, 5rem, 50%, null, null, 10);
+    transform: translateX(50%);
+    text-align: center;
+    color: $primary-color;
+    text-shadow: $text-shadow-tertiary;
+  }
 
-	> div > h4 {
-		@include position(relative, null, null, null, null, 10);
-		margin-top: 20px;
-		font-size: 2rem;
-		font-style: italic;
-		text-shadow: 1px 1px 1px black;
-		color: $secondary-color;
-	}
+  > div > h4 {
+    @include position(relative, null, null, null, null, 10);
+    margin-top: 20px;
+    font-size: 2rem;
+    font-style: italic;
+    text-shadow: 1px 1px 1px black;
+    color: $secondary-color;
+  }
 
-	> div > h5 {
-		position: relative;
-		height: max-content;
-		margin-top: auto;
-		z-index: 6;
-		font-size: 1.4rem;
-		color: #ebdbbe;
-	}
+  > div > h5 {
+    position: relative;
+    height: max-content;
+    margin-top: auto;
+    z-index: 6;
+    font-size: 1.4rem;
+    color: #ebdbbe;
+  }
 
-	> div > p {
-		position: relative;
-		font-size: 1.3rem;
-		z-index: 5;
-		height: max-content;
-		padding: 1em 2em;
-		align-self: flex-end;
-	}
+  > div > p {
+    position: relative;
+    font-size: 1.3rem;
+    z-index: 5;
+    height: max-content;
+    padding: 1em 2em;
+    align-self: flex-end;
+  }
 
-	@include media-query(mediumScreen) {
-		scroll-margin-top: 70px;
-		flex-direction: row;
-		> div {
-			flex-basis: 40%;
-		}
-	}
+  @include media-query(mediumScreen) {
+    scroll-margin-top: 70px;
+    flex-direction: row;
+    > div {
+      flex-basis: 40%;
+    }
+  }
 
-	@include media-query(x-largeScreen) {
-		> div > h5 {
-			font-size: 2rem;
-			margin-top: 0.6em;
-		}
+  @include media-query(x-largeScreen) {
+    > div > h5 {
+      font-size: 2rem;
+      margin-top: 0.6em;
+    }
 
-		> div > p {
-			font-size: 1.6rem;
-			padding: 0 1em 1em;
-		}
-	}
+    > div > p {
+      font-size: 1.6rem;
+      padding: 0 1em 1em;
+    }
+  }
 
-	@include media-query(hugeScreen) {
-		> h3 {
-			font-size: 3.2rem;
-		}
+  @include media-query(hugeScreen) {
+    > h3 {
+      font-size: 3.2rem;
+    }
 
-		> div > h4 {
-			font-size: 2.8rem;
-		}
+    > div > h4 {
+      font-size: 2.8rem;
+    }
 
-		> div > p {
-			padding: 0 3em 2em;
-		}
-		> div {
-			min-height: 50rem;
-		}
-	}
+    > div > p {
+      padding: 0 3em 2em;
+    }
+    > div {
+      min-height: 50rem;
+    }
+  }
 }
