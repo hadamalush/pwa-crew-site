@@ -6,8 +6,8 @@ export function ImageBase() {
     baker: "/images/mainContent/baker.webp",
     david: "/images/mainContent/david.webp",
     marian: "/images/mainContent/marian.webp",
-    basia: "/images/mainContent/basia.webp",
-    alicja: "/images/mainContent/alicja.webp",
+    basia: "/images/mainContent/Basia.webp",
+    alicja: "/images/mainContent/Alicja.webp",
     neo: "/images/mainContent/neo.webp",
     concert: "/images/header/concert.jpg",
   };
