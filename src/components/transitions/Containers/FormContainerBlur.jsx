@@ -1,4 +1,4 @@
-import styles from "../../styles/components/Containers/FormContainerBlur.module.scss";
+import styles from "../../../styles/components/Containers/FormContainerBlur.module.scss";
 
 /**
  * @description It is container which should be connect with WrapperFormWithConntent ,this component is a child of that component.
@@ -9,12 +9,12 @@ import styles from "../../styles/components/Containers/FormContainerBlur.module.
  */
 
 const FormContainerBlur = ({ id, style, className, children, ...props }) => {
-	const classes = `${styles.container} ${className || ""}`;
-	return (
-		<div className={classes} style={style || null} id={id}>
-			{children}
-		</div>
-	);
+  const classes = `${styles.container} ${className || ""}`;
+  return (
+    <div className={classes} style={style || null} id={id}>
+      {children}
+    </div>
+  );
 };
 
 export default FormContainerBlur;

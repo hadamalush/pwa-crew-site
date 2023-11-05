@@ -1,47 +1,47 @@
 {
-	"start_content": {
-		"title": "Only good rap",
-		"text": "I rap as much as \nI can at any time of the day",
-		"btn_registration": "Registration",
-		"btn_events": "Events",
-		"btn_cooperation": "Collaboration"
-	},
-	"section_history": {
-		"section_title": "A little about Hip-Hop",
-		"card_1": {
-			"title": "History of Hip-Hop",
-			"text": "Hip-hop was born in the Bronx in the 1970s as a subculture of young people, combining music, dance, graffiti and rap. Today it is a global phenomenon shaping culture and society."
-		},
-		"card_2": {
-			"title": "Hip-Hop Values",
-			"text": "Hip-hop is not just music, it is also a philosophy of life. It encompasses values such as self-knowledge, self-expression and fighting against social injustice."
-		},
-		"card_3": {
-			"title": "Great Hip-Hop Artists",
-			"text": "Hip-hop is a genre that has given birth to many unforgettable artists, from Tupac Shakur and Notorious B.I.G. to Kendrick Lamar and Cardi B. Their music inspires and raises public awareness."
-		}
-	},
-	"section_aboutus": {
-		"section_title": "Our team",
-		"card_1": {
-			"title": "Marian",
-			"desc_title": "Legendary striker.",
-			"text": "A hip-hop legend, complex beats are his games. He has the magic to create, which makes him unmatched on the scene."
-		},
-		"card_2": {
-			"title": "Baker",
-			"desc_title": "Fast flow, street poetry.",
-			"text": "A prodigious talent, he raps with passion and speed, like a street poet. His lyrics are the essence of life on the streets of the city, without wrapping it in cotton."
-		},
-		"card_3": {
-			"title": "Neo",
-			"desc_title": "Technological vibe.",
-			"text": "Hiphop of the future, he rhymes about technology and social change. His flow is as futuristic as his lyrics, which flow like a stream of data."
-		},
-		"card_4": {
-			"title": "David",
-			"desc_title": "Life stories, deep lyrics.",
-			"text": "He tells life stories, and there is a depth of emotion in his raps. David's words penetrate the soul, conveying real experiences from the streets."
-		}
-	}
+  "start_content": {
+    "title": "Musical dreams",
+    "text": "Create unforgettable concert events\n and share your musical passion",
+    "btn_registration": "Registration",
+    "btn_events": "Events",
+    "btn_cooperation": "Collaboration"
+  },
+  "section_history": {
+    "section_title": "A little about Music",
+    "card_1": {
+      "title": "Music History",
+      "text": "Music has a long and fascinating history, dating back thousands of years. From primitive instruments and folk songs to modern musical genres, music has always been an important part of culture and society."
+    },
+    "card_2": {
+      "title": "Music Values",
+      "text": "Music has an extraordinary power to influence people. It can evoke different emotions, inspire, uplift and unite people. It is an expression of self-expression and a way to communicate without words."
+    },
+    "card_3": {
+      "title": "Great Music Artists",
+      "text": "The history of music is full of unforgettable artists who have left a lasting mark on the world of music. From classical composers such as Ludwig van Beethoven and Wolfgang Amadeus Mozart to rock icons such as The Beatles and Queen."
+    }
+  },
+  "section_aboutus": {
+    "section_title": "Our team",
+    "card_1": {
+      "title": "Basia",
+      "desc_title": "Legendary striker.",
+      "text": "Rock legend, complicated rhymes are her games. He has the magic of creation, which makes him unrivaled on stage."
+    },
+    "card_2": {
+      "title": "Baker",
+      "desc_title": "Fast flow, street poetry.",
+      "text": "A prodigious talent, he raps with passion and speed, like a street poet. His lyrics are the essence of life on the streets of the city."
+    },
+    "card_3": {
+      "title": "Neo",
+      "desc_title": "Technological vibe.",
+      "text": "Hiphop of the future, he rhymes about technology and social change. His flow is as futuristic as his lyrics, which flow like a stream of data."
+    },
+    "card_4": {
+      "title": "Alicja",
+      "desc_title": "Life stories, deep lyrics.",
+      "text": "She tells stories from real life, and there is a depth of emotion in her songs. Alicia's words penetrate the soul, conveying real experiences from the mountains"
+    }
+  }
 }
