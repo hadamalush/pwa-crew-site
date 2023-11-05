@@ -50,7 +50,7 @@ export default async function Home({ params: { lang } }) {
         <Card variant={"normal"}>
           <h4>{dict.section_aboutus.card_1.title}</h4>
           <ImageLoader
-            alt="Mężczyzna grający na gitarze, na koncercie"
+            alt="Woman in the background of mountains"
             variant="basia"
             sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
           />
@@ -60,7 +60,7 @@ export default async function Home({ params: { lang } }) {
         <Card variant={"normal"}>
           <h4>{dict.section_aboutus.card_2.title}</h4>
           <ImageLoader
-            alt="Mężczyzna grający na gitarze, na koncercie"
+            alt="Man with a microphone"
             variant="marian"
             sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
           />
@@ -70,7 +70,7 @@ export default async function Home({ params: { lang } }) {
         <Card variant={"normal"}>
           <h4>{dict.section_aboutus.card_3.title}</h4>
           <ImageLoader
-            alt="Mężczyzna grający na gitarze, na koncercie"
+            alt="Mechanical brain surgery on a guy sitting in a chair"
             variant="neo"
             sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
           />
@@ -80,7 +80,7 @@ export default async function Home({ params: { lang } }) {
         <Card variant={"normal"}>
           <h4>{dict.section_aboutus.card_4.title}</h4>
           <ImageLoader
-            alt="Mężczyzna grający na gitarze, na koncercie"
+            alt="Woman against the background of the wall"
             variant="alicja"
             sizes={"(max-width: 768px) 90vw, (min-width: 1200px) 40vw"}
           />
