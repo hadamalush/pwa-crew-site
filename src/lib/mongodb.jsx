@@ -1,68 +1,65 @@
 import { MongoClient } from "mongodb";
 
 export async function connectDatabase() {
-	const client = await MongoClient.connect(
-		`mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/Auth?retryWrites=true&w=majority`
-	);
+  const client = await MongoClient.connect(
+    `mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/Auth?retryWrites=true&w=majority`
+  );
 
-	return client;
+  return client;
 }
 
-export const connectDbMongo = async database => {
-	const client = await MongoClient.connect(
-		`mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/${database}?retryWrites=true&w=majority`
-	);
+export const connectDbMongo = async (database) => {
+  const client = await MongoClient.connect(
+    `mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/${database}?retryWrites=true&w=majority`
+  );
 
-	return client;
+  return client;
 };
 
 export async function connectDatabaseEvents() {
-	const client = await MongoClient.connect(
-		`mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/Events?retryWrites=true&w=majority`
-	);
+  const client = await MongoClient.connect(
+    `mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/Events?retryWrites=true&w=majority`
+  );
 
-	return client;
+  return client;
 }
 
 export async function insertDocument(client, collection, document) {
-	const db = client.db();
+  const db = client.db();
 
-	const result = await db.collection(collection).insertOne(document);
+  const result = await db.collection(collection).insertOne(document);
 
-	return result;
+  return result;
 }
 
 let dbCached = null;
 
 export async function connectDb() {
-	if (dbCached) {
-		dbCached = dbCached;
-		return dbCached;
-	}
+  if (dbCached) {
+    dbCached = dbCached;
+    return dbCached;
+  }
 
-	const client = await connectDatabaseEvents();
-	const db = client.db();
-	dbCached = db;
+  const client = await connectDatabaseEvents();
+  const db = client.db();
+  dbCached = db;
 
-	return db;
+  return db;
 }
 
 export async function findDocument(client, collection, document) {
-	const db = client.db();
-	const existingDocument = await db.collection(collection).findOne(document);
+  const db = client.db();
+  const existingDocument = await db.collection(collection).findOne(document);
 
-	return existingDocument;
+  return existingDocument;
 }
 
 export const createCollectionWithTTL = async (client, nameCollection) => {
-	const collection = client.db().collection(nameCollection);
+  const collection = client.db().collection(nameCollection);
 
-	const result = await collection.createIndex(
-		{ createdAt: 1 },
-		{ expireAfterSeconds: 1800 }
-	);
+  const result = await collection.createIndex({ createdAt: 1 }, { expireAfterSeconds: 1800 });
 
-	return result;
+  return result;
 };
 
 /**
@@ -74,72 +71,50 @@ export const createCollectionWithTTL = async (client, nameCollection) => {
  * @returns Return result.
  */
 
-export const insertDocumentWithTTL = async (
-	client,
-	nameCollection,
-	document,
-	expireTime
-) => {
-	const db = client.db();
+export const insertDocumentWithTTL = async (client, nameCollection, document, expireTime) => {
+  const db = client.db();
 
-	await db
-		.collection(nameCollection)
-		.createIndex({ createdAt: 1 }, { expireAfterSeconds: expireTime });
+  await db
+    .collection(nameCollection)
+    .createIndex({ createdAt: 1 }, { expireAfterSeconds: expireTime });
 
-	const result = await db.collection(nameCollection).insertOne(document);
+  const result = await db.collection(nameCollection).insertOne(document);
 
-	return result;
+  return result;
 };
 
-export const updateDocument = async (
-	client,
-	collection,
-	filter,
-	documentUpdate
-) => {
-	const db = client.db();
-	const updatedDocument = await db
-		.collection(collection)
-		.updateOne(filter, documentUpdate);
+export const updateDocument = async (client, collection, filter, documentUpdate) => {
+  const db = client.db();
+  const updatedDocument = await db.collection(collection).updateOne(filter, documentUpdate);
 
-	return updatedDocument;
+  return updatedDocument;
 };
 
-export const updateAllDocuments = async (
-	client,
-	collection,
-	filter,
-	document
-) => {
-	const db = client.db();
-	const result = await db.collection(collection).updateMany(filter, document);
+export const updateAllDocuments = async (client, collection, filter, document) => {
+  const db = client.db();
+  const result = await db.collection(collection).updateMany(filter, document);
 
-	return result;
+  return result;
 };
 
-export const updateAllNestedDocuments = async (
-	client,
-	collection,
-	document,
-	key
-) => {
-	const db = client.db();
+export const updateAllNestedDocuments = async (client, collection, document, key) => {
+  const db = client.db();
 
-	const result = await db.collection(collection).updateMany(
-		{},
-		{
-			$set: {
-				[`notifications.${key}`]: document,
-			},
-		}
-	);
+  const result = await db.collection(collection).updateMany(
+    {},
+    {
+      $set: {
+        [`notifications.${key}`]: document,
+      },
+    }
+  );
 
-	return result;
+  return result;
 };
 
 export const deleteDocument = async (client, collection, document) => {
-	const db = client.db();
-	const deletedDocument = db.collection(collection).deleteOne(document);
+  const db = client.db();
+  const deletedDocument = db.collection(collection).deleteOne(document);
 
-	return deletedDocument;
+  return deletedDocument;
 };
