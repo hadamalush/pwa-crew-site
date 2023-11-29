@@ -65,7 +65,10 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
     try {
       const response = await fetch("/api/auth/registration", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+        },
         body: JSON.stringify({ email, password, confirmPassword, terms, lang }),
       });
 
