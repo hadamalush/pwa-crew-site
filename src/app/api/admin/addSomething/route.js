@@ -21,18 +21,6 @@ export async function POST(req) {
     return cors(req, NextResponse.json({ message: "You don't have access" }, { status: 403 }));
   }
 
-  //   console.log(decoded);
-
-  //   console.log(decoded);
-
-  //
-  //   const secret = process.env.JWT_SECRET;
-  //   const secret = "blablabla";
-
-  //   console.log("token: ", token);
-  //   console.log("secret: ", secret);
-  //   const decoded = jwt.verify(token, secret);
-
   return cors(
     req,
     new Response("dsad", {

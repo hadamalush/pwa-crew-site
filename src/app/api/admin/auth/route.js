@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 import cors from "@/lib/admin/core";
-import { cryptPassword, verifyPassword } from "@/lib/crypt";
+import { verifyPassword } from "@/lib/crypt";
 import { connectDbAdmin } from "@/lib/mongoose";
 import ms from "ms";
-
 import Auth from "@/lib/models/user";
+import Token from "@/lib/models/token";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -12,7 +12,11 @@ export async function POST(req) {
 
   if (!email.trim() || !password.trim()) return;
 
-  await connectDbAdmin();
+  try {
+    await connectDbAdmin();
+  } catch (err) {
+    return cors(req, NextResponse.json({ message: "Something went wrong" }, { status: 500 }));
+  }
 
   const foundUser = await Auth.findOne({ email: email });
 
@@ -26,20 +30,36 @@ export async function POST(req) {
     return cors(req, NextResponse.json({ message: "Invalid user password" }, { status: 401 }));
   }
 
-  const payload = { email: foundUser.email };
-  const expiresIn = "15s";
+  const payload = {
+    email: foundUser.email,
+    avatar: foundUser.avatar,
+    username: foundUser.name,
+  };
+  const expiresIn = "15m";
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: Number(ms(expiresIn) / 1000),
   });
+  const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH);
 
-  console.log(token);
+  const newToken = new Token({ token: refreshToken });
+
+  await newToken.save();
 
   return cors(
     req,
-    new Response(token, {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    })
+    NextResponse.json(
+      {
+        accessToken: token,
+        refreshToken: refreshToken,
+        username: foundUser.name,
+        email: foundUser.email,
+        avatar: foundUser.avatar,
+      },
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    )
   );
 }
 

@@ -11,6 +11,9 @@ const userModel = new mongoose.Schema(
     name: {
       type: String,
     },
+    avatar: {
+      type: String,
+    },
   },
   { collection: "Auth" }
 );
