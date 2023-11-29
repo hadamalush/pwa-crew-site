@@ -40,7 +40,8 @@ export async function POST(req) {
         status: 200,
         headers: { "Content-Type": "application/json" },
       }
-    )
+    ),
+    { credentials: true }
   );
 }
 
@@ -49,6 +50,7 @@ export async function OPTIONS(request) {
     request,
     new Response(null, {
       status: 204,
-    })
+    }),
+    { credentials: true }
   );
 }

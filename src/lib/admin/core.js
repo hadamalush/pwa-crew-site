@@ -1,8 +1,9 @@
 const defaultOptions = {
-  origin: "*",
+  origin: "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
+  credentials: true,
 };
 
 function isOriginAllowed(origin, allowed) {
@@ -91,6 +92,7 @@ export default async function cors(req, res, options) {
   }
 
   // Handle the preflight request
+
   if (req.method === "OPTIONS") {
     if (opts.methods) {
       const methods = Array.isArray(opts.methods) ? opts.methods.join(",") : opts.methods;
