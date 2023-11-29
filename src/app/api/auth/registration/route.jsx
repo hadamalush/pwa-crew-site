@@ -15,7 +15,7 @@ import { addNotification } from "@/lib/crud";
 export async function POST(request) {
   const apikey = request.headers.get("authorization")?.split(" ")[1];
 
-  if (apikey !== process.env.NEXT_PUBLIC_API_KEY) {
+  if (!apikey || apikey !== process.env.NEXT_PUBLIC_API_KEY) {
     return NextResponse.json({ message: "No access!" }, { status: 422 });
   }
 
