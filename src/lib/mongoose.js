@@ -7,7 +7,6 @@ if (!cached) {
 }
 
 export async function connectDbAdmin() {
-  console.log("idzie");
   if (cached.conn) {
     return cached.conn;
   }
