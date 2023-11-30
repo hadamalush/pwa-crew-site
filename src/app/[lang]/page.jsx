@@ -5,6 +5,7 @@ import ImageLoader from "@/components/transitions/Image/ImageRender";
 import WrapperSection from "@/components/transitions/Wrappers/WrapperSection";
 import styles from "./page.module.scss";
 import { getDictionaryHome } from "../dictionaries/home/dictionaries";
+import Script from "next/script";
 
 export default async function Home({ params: { lang } }) {
   const dict = await getDictionaryHome(lang);
@@ -19,6 +20,18 @@ export default async function Home({ params: { lang } }) {
 
   return (
     <main>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-7DREEDL6C0" />
+      <Script id="google-analytics">
+        {`
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', 'G-7DREEDL6C0');
+       `}
+      </Script>
+
+      {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DREEDL6C0"></script> */}
+
       <HomeStartContent
         title={startContent.title}
         text={startContent.text}
