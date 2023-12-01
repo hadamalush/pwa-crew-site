@@ -8,7 +8,6 @@ import WrapperInput from "../Wrappers/WrapperInput";
 
 const InputFormik = ({ name, ...props }) => {
   const [field, meta] = useField(name);
-  const iconStyle = { color: "green" };
 
   return (
     <>
@@ -21,7 +20,6 @@ const InputFormik = ({ name, ...props }) => {
           </>
         )}
         <IconRender
-          // style={!meta.error && iconStyle}
           className={
             !meta.error ? styles["input-box__icon--valid"] : styles["input-box__icon--invalid"]
           }

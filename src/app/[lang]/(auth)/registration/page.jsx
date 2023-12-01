@@ -9,6 +9,7 @@ export default async function RegistrationPage({ params: { lang } }) {
   const regTranslation = {
     trl_title: dict.auth.registration.title,
     trl_email: dict.auth.registration.email,
+    trl_username: dict.auth.registration.username,
     trl_password: dict.auth.registration.password,
     trl_confirmPassword: dict.auth.registration.confirmPassword,
     trl_terms: dict.auth.registration.terms,

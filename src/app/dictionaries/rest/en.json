@@ -1,173 +1,174 @@
 {
-	"navigation": {
-		"home": "Home",
-		"events": "Events",
-		"contact": "Contact",
-		"login": "Login",
-		"logout": "Logout",
-		"chat": "Chat",
-		"aboutUs": "About us",
+  "navigation": {
+    "home": "Home",
+    "events": "Events",
+    "contact": "Contact",
+    "login": "Login",
+    "logout": "Logout",
+    "chat": "Chat",
+    "aboutUs": "About us",
 
-		"dropdown": {
-			"allEvents": "All events",
-			"createEvent": "Create event",
-			"notifications": "Notifications",
-			"settings": "Settings",
-			"signOut": "SignOut",
-			"account": "Account"
-		}
-	},
-	"footer": {
-		"title": "Join us",
-		"text": "Join our newsletter to stay up to date with our hip-hop concerts and events!",
-		"emailPlaceholder": "Enter email address",
-		"btnSubscribe": "Subscribe",
-		"nav": {
-			"title": "Navigation",
-			"link1": "Home",
-			"link2": "About us",
-			"link3": "Story hip-hop",
-			"link4": "Contact"
-		},
-		"events": {
-			"title": "Events",
-			"link1": "All events",
-			"link2": "Create event"
-		},
-		"address": {
-			"title": "Address"
-		},
-		"copyright": "2023 PwaCrew - Music with passion"
-	},
-	"contact": {
-		"wp_content": {
-			"title": "Do you have any questions?",
-			"textFirst": "Do you want to start cooperation?",
-			"textSecond": "Contact us now!",
-			"alt": "The person sitting on the chair at the table fills out the contact form. And there's a concert in the background."
-		},
-		"form": {
-			"title": "Contact Form",
-			"email": "Email",
-			"subject": "Subject",
-			"message": "Message",
-			"btn": "Send message"
-		}
-	},
-	"auth": {
-		"wp_content": {
-			"title": "Welcome!",
-			"textFirst": "Stay up to date!",
-			"textSecond": "Achieve success now!",
-			"alt": "A person sitting on a chair at a table fills out a contact form. And in the background is a concert."
-		},
+    "dropdown": {
+      "allEvents": "All events",
+      "createEvent": "Create event",
+      "notifications": "Notifications",
+      "settings": "Settings",
+      "signOut": "SignOut",
+      "account": "Account"
+    }
+  },
+  "footer": {
+    "title": "Join us",
+    "text": "Join our newsletter to stay up to date with our hip-hop concerts and events!",
+    "emailPlaceholder": "Enter email address",
+    "btnSubscribe": "Subscribe",
+    "nav": {
+      "title": "Navigation",
+      "link1": "Home",
+      "link2": "About us",
+      "link3": "Story hip-hop",
+      "link4": "Contact"
+    },
+    "events": {
+      "title": "Events",
+      "link1": "All events",
+      "link2": "Create event"
+    },
+    "address": {
+      "title": "Address"
+    },
+    "copyright": "2023 PwaCrew - Music with passion"
+  },
+  "contact": {
+    "wp_content": {
+      "title": "Do you have any questions?",
+      "textFirst": "Do you want to start cooperation?",
+      "textSecond": "Contact us now!",
+      "alt": "The person sitting on the chair at the table fills out the contact form. And there's a concert in the background."
+    },
+    "form": {
+      "title": "Contact Form",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "btn": "Send message"
+    }
+  },
+  "auth": {
+    "wp_content": {
+      "title": "Welcome!",
+      "textFirst": "Stay up to date!",
+      "textSecond": "Achieve success now!",
+      "alt": "A person sitting on a chair at a table fills out a contact form. And in the background is a concert."
+    },
 
-		"registration": {
-			"title": "Registration",
-			"email": "Email",
-			"password": "Password",
-			"confirmPassword": "Confrim password",
-			"terms": "Accepts the terms of the agreement",
-			"btn": "Register",
-			"question": "Do you have an account?",
-			"questionLink": "Login"
-		},
+    "registration": {
+      "title": "Registration",
+      "email": "Email",
+      "username": "Username",
+      "password": "Password",
+      "confirmPassword": "Confrim password",
+      "terms": "Accepts the terms of the agreement",
+      "btn": "Register",
+      "question": "Do you have an account?",
+      "questionLink": "Login"
+    },
 
-		"logging": {
-			"title": "Sign in",
-			"email": "Email",
-			"password": "Password",
-			"forgotPass": "Forgot password?",
-			"btn": "Login",
-			"question": "Don't have an account?",
-			"questionLink": "Sign up"
-		},
+    "logging": {
+      "title": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "forgotPass": "Forgot password?",
+      "btn": "Login",
+      "question": "Don't have an account?",
+      "questionLink": "Sign up"
+    },
 
-		"forgotPass": {
-			"title": "Did you forget your password?",
-			"email": "Email",
-			"btnReset": "Reset password",
-			"question": "Don't have an account?",
-			"questionLink": "Sign up"
-		},
+    "forgotPass": {
+      "title": "Did you forget your password?",
+      "email": "Email",
+      "btnReset": "Reset password",
+      "question": "Don't have an account?",
+      "questionLink": "Sign up"
+    },
 
-		"forgotResetPass": {
-			"newPassword": "New password",
-			"confirmPassword": "Confirm password",
-			"code": "Password reset code",
-			"btn": "Change password"
-		}
-	},
-	"activation": {
-		"btns": {
-			"btn_registration": "Registration",
-			"btn_events": "Events",
-			"btn_cooperation": "Collaboration"
-		},
-		"valid": {
-			"textFirst": "The account activation was successful.",
-			"textSecond": "Have a great day."
-		},
-		"inValid": {
-			"textFirst": "Account activation failed. ",
-			"textSecond": "Please contact the administrator."
-		}
-	},
-	"settings": {
-		"title": "Settings",
-		"changePassword": "Change password",
-		"changeEmail": "Change email",
-		"changeAvatar": "Change avatar",
-		"btn_confirm": "Confirm"
-	},
-	"events": {
-		"title": "Events",
-		"btn_createEvent": "Create event",
-		"btn_checkEvents": "Check events",
-		"event": {
-			"btn_seeDetails": "See details",
-			"btn_delete": "Delete",
-			"btn_edit": "Edit",
-			"btn_previousPage": "Previous page",
-			"startEvent": "Start of the event",
-			"address": "Address",
-			"description": "Description"
-		},
-		"error": {
-			"title": "Event not found.",
-			"text": "The event was probably deleted by the owner.",
-			"linkPrev": "Previous page"
-		},
-		"newEvent": {
-			"wp_content": {
-				"title": "Add with ease.",
-				"testFirst": "Promote with passion.",
-				"textSecond": "Your fun, our satisfaction!",
-				"alt": "People enjoying the concert in front of the big stage."
-			},
-			"form": {
-				"title": "Adding an event",
-				"eventTitle": "Event title",
-				"town": "Town",
-				"codePost": "Code post",
-				"street": "Street",
-				"date": "Date",
-				"startTime": "startTime",
-				"picture": "Picture",
-				"eventDesc": "Event description",
-				"btn_createEvent": "Create event"
-			}
-		},
-		"editEvent": {
-			"form": {
-				"title": "Editing an event",
-				"btn_confirm": "Confirm"
-			}
-		},
-		"deleteEvent": {
-			"title": "Are you sure you want to delete this event?",
-			"btn_delete": "Delete",
-			"btn_cancel": "Cancel"
-		}
-	}
+    "forgotResetPass": {
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "code": "Password reset code",
+      "btn": "Change password"
+    }
+  },
+  "activation": {
+    "btns": {
+      "btn_registration": "Registration",
+      "btn_events": "Events",
+      "btn_cooperation": "Collaboration"
+    },
+    "valid": {
+      "textFirst": "The account activation was successful.",
+      "textSecond": "Have a great day."
+    },
+    "inValid": {
+      "textFirst": "Account activation failed. ",
+      "textSecond": "Please contact the administrator."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "changePassword": "Change password",
+    "changeEmail": "Change email",
+    "changeAvatar": "Change avatar",
+    "btn_confirm": "Confirm"
+  },
+  "events": {
+    "title": "Events",
+    "btn_createEvent": "Create event",
+    "btn_checkEvents": "Check events",
+    "event": {
+      "btn_seeDetails": "See details",
+      "btn_delete": "Delete",
+      "btn_edit": "Edit",
+      "btn_previousPage": "Previous page",
+      "startEvent": "Start of the event",
+      "address": "Address",
+      "description": "Description"
+    },
+    "error": {
+      "title": "Event not found.",
+      "text": "The event was probably deleted by the owner.",
+      "linkPrev": "Previous page"
+    },
+    "newEvent": {
+      "wp_content": {
+        "title": "Add with ease.",
+        "testFirst": "Promote with passion.",
+        "textSecond": "Your fun, our satisfaction!",
+        "alt": "People enjoying the concert in front of the big stage."
+      },
+      "form": {
+        "title": "Adding an event",
+        "eventTitle": "Event title",
+        "town": "Town",
+        "codePost": "Code post",
+        "street": "Street",
+        "date": "Date",
+        "startTime": "startTime",
+        "picture": "Picture",
+        "eventDesc": "Event description",
+        "btn_createEvent": "Create event"
+      }
+    },
+    "editEvent": {
+      "form": {
+        "title": "Editing an event",
+        "btn_confirm": "Confirm"
+      }
+    },
+    "deleteEvent": {
+      "title": "Are you sure you want to delete this event?",
+      "btn_delete": "Delete",
+      "btn_cancel": "Cancel"
+    }
+  }
 }

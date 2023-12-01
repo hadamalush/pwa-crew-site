@@ -3,64 +3,73 @@
 // Registration Login, forgot-password forms
 
 .logreg-box {
-	transition: transform 0.6s;
-	transform-origin: right;
-	animation: show 0.6s;
+  transition: transform 0.6s;
+  transform-origin: right;
+  animation: show 0.6s;
 
-	&::before {
-		@include position(absolute, 0, 0, 0, 0, -1);
-		content: "";
-	}
+  .form__register {
+    > div {
+      margin: 3em 0;
+    }
+    > button {
+      margin: 0;
+    }
+  }
 
-	form {
-		width: 28rem;
-		margin: 0 auto;
-		padding: 5em 0;
-	}
+  &::before {
+    @include position(absolute, 0, 0, 0, 0, -1);
+    content: "";
+  }
 
-	h1 {
-		font-size: 3rem;
-		text-align: center;
-	}
+  form {
+    width: 28rem;
+    margin: 0 auto;
+    padding: 5em 0;
+  }
 
-	button {
-		margin: 2em 0 1em;
-	}
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
 
-	p {
-		display: flex;
-		justify-content: center;
-		margin-top: 2em;
+  button {
+    margin: 2em 0 1em;
+  }
 
-		a {
-			color: $secondary-color;
-			margin-left: 1em;
-		}
-	}
+  p {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
 
-	@include media-query(foldScreen) {
-		form {
-			width: 26rem;
-		}
-	}
+    a {
+      color: $secondary-color;
+      margin-left: 1em;
+    }
+  }
 
-	@include media-query(mediumScreen) {
-		form {
-			width: 30rem;
-		}
-	}
+  @include media-query(foldScreen) {
+    form {
+      width: 26rem;
+    }
+  }
+
+  @include media-query(mediumScreen) {
+    form {
+      width: 30rem;
+    }
+  }
 }
 
 @keyframes show {
-	from {
-		transform: scale(0, 1);
-	}
+  from {
+    transform: scale(0, 1);
+  }
 
-	to {
-		transform: scale(1);
-	}
+  to {
+    transform: scale(1);
+  }
 }
 
 .active {
-	transform: scale(0, 1);
+  transform: scale(0, 1);
 }
