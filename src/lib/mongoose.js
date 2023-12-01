@@ -3,31 +3,25 @@ import mongoose from "mongoose";
 let cached = global.mongoose;
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = global.mongoose = {};
 }
 
-export async function connectDbAdmin() {
-  if (cached.conn) {
-    return cached.conn;
+export async function connectDb(databaseName) {
+  if (cached[databaseName]) {
+    return cached[databaseName];
   }
 
-  if (!cached.promise) {
-    const opts = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    };
+  const opts = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  };
 
-    cached.promise = mongoose
-      .connect(
-        `mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/AdminB?retryWrites=true&w=majority`,
-        opts
-      )
-      .then((mongoose) => {
-        return mongoose;
-      });
-  }
-  cached.conn = await cached.promise;
-  return cached.conn;
+  cached[databaseName] = await mongoose.connect(
+    `mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/${databaseName}?retryWrites=true&w=majority`,
+    opts
+  );
+
+  return cached[databaseName];
 }
 
 export async function findDocumentMongoose(conn, collection, document) {

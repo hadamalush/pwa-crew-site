@@ -3,13 +3,13 @@ import cors from "@/lib/admin/core";
 import { NextResponse } from "next/server";
 import Token from "@/lib/models/token";
 import ms from "ms";
-import { connectDbAdmin } from "@/lib/mongoose";
+import { connectDb } from "@/lib/mongoose";
 
 export async function POST(req) {
   const { token } = await req.json();
   let accessToken;
 
-  await connectDbAdmin();
+  await connectDb("AdminB");
 
   const foundToken = await Token.findOne({ token: token });
 

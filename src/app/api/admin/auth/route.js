@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import cors from "@/lib/admin/core";
 import { verifyPassword } from "@/lib/crypt";
-import { connectDbAdmin } from "@/lib/mongoose";
+import { connectDb } from "@/lib/mongoose";
 import ms from "ms";
 import Auth from "@/lib/models/user";
 import Token from "@/lib/models/token";
@@ -14,7 +14,7 @@ export async function POST(req) {
   if (!email.trim() || !password.trim()) return;
 
   try {
-    await connectDbAdmin();
+    await connectDb("Admin");
   } catch (err) {
     return cors(req, NextResponse.json({ message: "Something went wrong" }, { status: 500 }));
   }

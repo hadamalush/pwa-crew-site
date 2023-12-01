@@ -1,12 +1,12 @@
 import cors from "@/lib/admin/core";
 import { NextResponse } from "next/server";
 import Token from "@/lib/models/token";
-import { connectDbAdmin } from "@/lib/mongoose";
+import { connectDb } from "@/lib/mongoose";
 
 export async function DELETE(req) {
   const { token } = await req.json();
 
-  await connectDbAdmin();
+  await connectDb("AdminB");
 
   const foundToken = await Token.findOne({ token: token });
 
