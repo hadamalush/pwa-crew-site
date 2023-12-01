@@ -4,6 +4,7 @@ import { connectDbAdmin } from "@/lib/mongoose";
 
 export async function GET(req) {
   let serverStatus;
+  //   console.log(req.headers.get(authorization));
   try {
     const client = await connectDbAdmin();
     const db = client.connection.db;
