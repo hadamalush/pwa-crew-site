@@ -3,46 +3,25 @@ import mongoose from "mongoose";
 let cached = global.mongoose;
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = global.mongoose = {
+    AdminB: { conn: null, promise: null },
+    Auth: { conn: null, promise: null },
+  };
 }
 
 export async function connectDb(databaseName) {
-  if (cached.conn && cached.conn.name === databaseName) {
-    return cached.conn;
+  if (cached[databaseName].conn) {
+    return cached[databaseName].conn;
   }
 
-  if (!cached.promise || cached.promise.name !== databaseName) {
+  if (!cached[databaseName].promise) {
     const uri = `mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
-    cached.promise = mongoose.createConnection(uri);
+    cached[databaseName].promise = mongoose.createConnection(uri);
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+  cached[databaseName].conn = await cached[databaseName].promise;
+  return cached[databaseName].conn;
 }
-
-// let cached = global.mongoose;
-
-// if (!cached) {
-//   cached = global.mongoose = { conn: null, promise: null };
-// }
-
-// export async function connectDb(databaseName) {
-//   if (cached.conn) {
-//     return cached.conn;
-//   }
-
-//   if (!cached.promise) {
-//     cached.promise = mongoose
-//       .connect(
-//         `mongodb+srv://poncyman:${process.env.MONGODB_PASS}@cluster0.fcgw1gl.mongodb.net/${databaseName}?retryWrites=true&w=majority`
-//       )
-//       .then((mongoose) => {
-//         return mongoose;
-//       });
-//   }
-//   cached.conn = await cached.promise;
-//   return cached.conn;
-// }
 
 export async function findDocumentMongoose(conn, collection, document) {
   const model = await conn.model(collection);

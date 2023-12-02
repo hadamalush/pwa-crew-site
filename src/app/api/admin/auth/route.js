@@ -3,8 +3,8 @@ import cors from "@/lib/admin/core";
 import { verifyPassword } from "@/lib/crypt";
 import { connectDb } from "@/lib/mongoose";
 import ms from "ms";
-import Auth, { userModelFn } from "@/lib/models/user";
-import Token, { tokenSchemaFn } from "@/lib/models/token";
+import { userModelFn } from "@/lib/models/user";
+import { tokenSchemaFn } from "@/lib/models/token";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -15,7 +15,8 @@ export async function POST(req) {
 
   try {
     const client = await connectDb("AdminB");
-    modelUser = await userModelFn(client);
+    modelUser = await userModelFn({ db: client, collection: "Auth" });
+
     modelToken = await tokenSchemaFn(client);
   } catch (err) {
     NextResponse.json({ message: "Database connection failure" }, { status: 502 });

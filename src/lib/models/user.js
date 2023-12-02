@@ -1,27 +1,24 @@
 import mongoose from "mongoose";
 
-export const userModel = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-    },
-    password: {
-      type: String,
-    },
-    name: {
-      type: String,
-    },
-    avatar: {
-      type: String,
-    },
-  },
-  { collection: "Auth" }
-);
-
-export const userModelFn = async (db) => {
+export const userModelFn = async ({ db, collection }) => {
   const client = await db;
+  const schema = new mongoose.Schema(
+    {
+      email: {
+        type: String,
+      },
+      password: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
+    },
+    { collection: collection }
+  );
 
-  return client.models.Auth || client.model("Auth", userModel);
+  return client.models[collection] || client.model(collection, schema);
 };
-
-export default mongoose.models.Auth || mongoose.model("Auth", userModel);

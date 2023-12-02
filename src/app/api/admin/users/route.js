@@ -1,14 +1,16 @@
 import cors from "@/lib/admin/core";
 import { NextResponse } from "next/server";
 import { connectDb } from "@/lib/mongoose";
-import User from "@/lib/models/user";
+import User, { userModelFn } from "@/lib/models/user";
 
 export async function GET(req) {
   let users;
 
   try {
-    await connectDb("Auth");
-    users = await User.find({});
+    const modelUser = await userModelFn({ db: connectDb("Auth"), collection: "Users" });
+    console.log(modelUser);
+
+    users = await modelUser.find({});
 
     console.log(users);
   } catch (err) {
