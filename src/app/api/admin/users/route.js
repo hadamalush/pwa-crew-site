@@ -1,14 +1,16 @@
 import cors from "@/lib/admin/core";
 import { NextResponse } from "next/server";
 import { connectDb } from "@/lib/mongoose";
+import User from "@/lib/models/user";
 
 export async function GET(req) {
-  let serverStatus;
-  //   console.log(req.headers.get(authorization));
+  let users;
+
   try {
-    const client = await connectDb("AdminB");
-    const db = client.connection.db;
-    serverStatus = await db.command({ serverStatus: 1 });
+    await connectDb("Auth");
+    users = await User.find({});
+
+    console.log(users);
   } catch (err) {
     NextResponse.json("Something went wrong ", {
       status: 403,
@@ -16,11 +18,9 @@ export async function GET(req) {
     });
   }
 
-  const connections = serverStatus.connections;
-
   return cors(
     req,
-    NextResponse.json(connections, {
+    NextResponse.json("users", {
       status: 200,
       headers: { "Content-Type": "application/json" },
     })

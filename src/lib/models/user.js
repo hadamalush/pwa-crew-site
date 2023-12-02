@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userModel = new mongoose.Schema(
+export const userModel = new mongoose.Schema(
   {
     email: {
       type: String,
@@ -17,5 +17,11 @@ const userModel = new mongoose.Schema(
   },
   { collection: "Auth" }
 );
+
+export const userModelFn = async (db) => {
+  const client = await db;
+
+  return client.models.Auth || client.model("Auth", userModel);
+};
 
 export default mongoose.models.Auth || mongoose.model("Auth", userModel);

@@ -5,9 +5,11 @@ import { connectDb } from "@/lib/mongoose";
 export async function GET(req) {
   let serverStatus;
   //   console.log(req.headers.get(authorization));
+
   try {
     const client = await connectDb("AdminB");
-    const db = client.connection.db;
+
+    const db = client.db;
     serverStatus = await db.command({ serverStatus: 1 });
   } catch (err) {
     NextResponse.json("Something went wrong ", {

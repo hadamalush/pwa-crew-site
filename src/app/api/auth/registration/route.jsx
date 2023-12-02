@@ -82,6 +82,7 @@ export async function POST(request) {
     await insertDocument(client, "Users", {
       email: email,
       password: hashedPassword,
+      username: title,
       isActivated: false,
       newsletter: false,
       createAt: new Date(),
