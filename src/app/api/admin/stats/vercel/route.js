@@ -3,21 +3,26 @@ import { NextResponse } from "next/server";
 import { list } from "@vercel/blob";
 
 export async function GET(req) {
-  let storageSpace;
   const { blobs } = await list();
-  //   console.log(req.headers.get(authorization));
 
-  //   const bla = ListCommandOptions;
+  let space = { limit: 0, convertedTotalSizeToMB: 0, used_percent: 0 };
 
-  const totalSize = blobs.reduce((total, item) => total + item.size, 0);
+  if (blobs) {
+    const totalSize = blobs.reduce((total, item) => total + item.size, 0);
+    const convertedTotalSizeToMB = parseFloat((totalSize / (1024 * 1024)).toFixed(2));
+    const limit = 250; // place in vercel blob entered statically , because unfortunately vercel does not yet share disk data
+    const used_percent = (convertedTotalSizeToMB / limit) * 100;
 
-  const convertedTotalSizeToMB = totalSize / (1024 * 1024);
-
-  console.log(convertedTotalSizeToMB);
+    space = {
+      limit,
+      usage: convertedTotalSizeToMB,
+      used_percent,
+    };
+  }
 
   return cors(
     req,
-    NextResponse.json("storageSpace", {
+    NextResponse.json(space, {
       status: 200,
       headers: { "Content-Type": "application/json" },
     })
