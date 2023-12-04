@@ -1,97 +1,97 @@
 @import "../../../transitions/variables";
 
 .input {
-	position: relative;
-	background-color: inherit;
-	border: 0;
-	border-bottom: 2px solid $primary-color;
-	padding: 1em 2em 0.5em;
-	width: 100%;
-	max-width: 30rem;
-	outline: none;
-	color: $primary-color;
-	font-size: 1.6rem;
-	&__icon {
-		display: inline-block;
-	}
+  position: relative;
+  background-color: inherit;
+  border: 0;
+  border-bottom: 2px solid $primary-color;
+  padding: 1em 2em 0.5em;
+  width: 100%;
+  max-width: 30rem;
+  outline: none;
+  color: $primary-color;
+  font-size: 1.6rem;
+  &__icon {
+    display: inline-block;
+  }
 
-	&::placeholder {
-		color: $primary-color;
-	}
+  &::placeholder {
+    color: $primary-color;
+  }
 }
 
 .input-box {
-	margin: 4em auto;
+  margin: 4em auto;
 
-	input[type="date"] {
-		&::-webkit-datetime-edit-text {
-			padding: 0 2rem;
-		}
-		&::-webkit-datetime-edit-month-field {
-			text-transform: uppercase;
-		}
-		&::-webkit-datetime-edit-day-field {
-			text-transform: uppercase;
-		}
-		&::-webkit-datetime-edit-year-field {
-			text-transform: uppercase;
-		}
-		&::-webkit-calendar-picker-indicator {
-			opacity: 0;
-		}
+  input[type="date"] {
+    &::-webkit-datetime-edit-text {
+      padding: 0 2rem;
+    }
+    &::-webkit-datetime-edit-month-field {
+      text-transform: uppercase;
+    }
+    &::-webkit-datetime-edit-day-field {
+      text-transform: uppercase;
+    }
+    &::-webkit-datetime-edit-year-field {
+      text-transform: uppercase;
+    }
+    &::-webkit-calendar-picker-indicator {
+      opacity: 0;
+    }
 
-		&::before {
-			content: "🔺";
-			position: absolute;
-			font-size: 2rem;
-			right: 3rem;
-			z-index: -1;
-		}
-	}
+    &::before {
+      content: "🔺";
+      position: absolute;
+      font-size: 2rem;
+      right: 3rem;
+      z-index: -1;
+    }
+  }
 
-	input[type="time"] {
-		&::-webkit-calendar-picker-indicator {
-			opacity: 0;
-		}
+  input[type="time"] {
+    &::-webkit-calendar-picker-indicator {
+      opacity: 0;
+    }
 
-		&::before {
-			content: "🔺";
-			position: absolute;
-			font-size: 2rem;
-			right: 3rem;
-			z-index: -1;
-		}
-	}
+    &::before {
+      content: "🔺";
+      position: absolute;
+      font-size: 2rem;
+      right: 3rem;
+      z-index: -1;
+    }
+  }
 
-	div:first-child {
-		position: absolute;
-		left: 0;
-		top: 55%;
-		transform: translateY(-50%);
-	}
+  div:first-child {
+    position: absolute;
+    left: 0;
+    top: 55%;
+    transform: translateY(-50%);
+  }
 
-	input ~ div {
-		position: absolute;
-		right: 0;
-		top: 50%;
-		font-weight: bold;
+  input ~ div {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-weight: bold;
 
-		width: 2.5em;
-		transform: translateY(-50%);
-	}
+    width: 2.5em;
+    transform: translateY(-50%);
+  }
 
-	&__error {
-		position: absolute;
-		font-size: 1.4rem;
-		color: red;
-		bottom: -1.5em;
-		text-shadow: 1px 1px 1px rgb(61, 43, 43);
-	}
+  &__error {
+    position: absolute;
+    font-size: 1.4rem;
+    color: red;
+    bottom: -1.5em;
+    text-shadow: 1px 1px 1px rgb(61, 43, 43);
+  }
 
-	&__icon--valid {
-		color: green;
-	}
-	&__icon--invalid {
-		color: red;
-	}
+  &__icon--valid {
+    color: green;
+  }
+  &__icon--invalid {
+    color: red;
+  }
 }

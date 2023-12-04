@@ -1,20 +1,27 @@
 import cors from "@/lib/admin/core";
 import { NextResponse } from "next/server";
-import Token from "@/lib/models/token";
-import { connectDbAdmin } from "@/lib/mongoose";
+import { tokenSchemaFn } from "@/lib/models/token";
+import { connectDb } from "@/lib/mongoose";
 
 export async function DELETE(req) {
   const { token } = await req.json();
+  let modelToken, foundToken;
 
-  await connectDbAdmin();
-
-  const foundToken = await Token.findOne({ token: token });
+  try {
+    modelToken = await tokenSchemaFn(connectDb("AdminB"));
+    foundToken = await modelToken.findOne({ token: token });
+  } catch (err) {
+    return cors(
+      req,
+      NextResponse.json({ message: "Database connection failure" }, { status: 502 })
+    );
+  }
 
   if (!foundToken) {
     return cors(req, NextResponse.json({ message: "You don't have access" }, { status: 403 }));
   }
 
-  const result = await Token.deleteOne({ token: token });
+  const result = await modelToken.deleteOne({ token: token });
 
   if (!result.acknowledged) {
     return cors(req, NextResponse.json({ message: "Something went wrong" }, { status: 404 }));

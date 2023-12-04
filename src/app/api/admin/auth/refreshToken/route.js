@@ -1,17 +1,23 @@
 import jwt from "jsonwebtoken";
 import cors from "@/lib/admin/core";
 import { NextResponse } from "next/server";
-import Token from "@/lib/models/token";
 import ms from "ms";
-import { connectDbAdmin } from "@/lib/mongoose";
+import { tokenSchemaFn } from "@/lib/models/token";
+import { connectDb } from "@/lib/mongoose";
 
 export async function POST(req) {
   const { token } = await req.json();
-  let accessToken;
+  let accessToken, modelToken, foundToken;
 
-  await connectDbAdmin();
-
-  const foundToken = await Token.findOne({ token: token });
+  try {
+    modelToken = await tokenSchemaFn(connectDb("AdminB"));
+    foundToken = await modelToken.findOne({ token: token });
+  } catch (err) {
+    return cors(
+      req,
+      NextResponse.json({ message: "Database connection failure" }, { status: 502 })
+    );
+  }
 
   if (!foundToken) {
     return cors(req, NextResponse.json({ message: "You don't have access" }, { status: 403 }));

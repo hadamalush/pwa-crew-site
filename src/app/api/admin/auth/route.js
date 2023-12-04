@@ -1,25 +1,28 @@
 import jwt from "jsonwebtoken";
 import cors from "@/lib/admin/core";
 import { verifyPassword } from "@/lib/crypt";
-import { connectDbAdmin } from "@/lib/mongoose";
+import { connectDb } from "@/lib/mongoose";
 import ms from "ms";
-import Auth from "@/lib/models/user";
-import Token from "@/lib/models/token";
+import { userModelFn } from "@/lib/models/user";
+import { tokenSchemaFn } from "@/lib/models/token";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
   const { email, password } = await req.json();
-  console.log("run");
 
   if (!email.trim() || !password.trim()) return;
+  let modelUser, modelToken;
 
   try {
-    await connectDbAdmin();
+    const client = await connectDb("AdminB");
+    modelUser = await userModelFn({ db: client, collection: "Auth" });
+
+    modelToken = await tokenSchemaFn(client);
   } catch (err) {
-    return cors(req, NextResponse.json({ message: "Something went wrong" }, { status: 500 }));
+    NextResponse.json({ message: "Database connection failure" }, { status: 502 });
   }
 
-  const foundUser = await Auth.findOne({ email: email });
+  const foundUser = await modelUser.findOne({ email: email });
 
   if (!foundUser) {
     return cors(req, NextResponse.json({ message: "User not found" }, { status: 422 }));
@@ -42,7 +45,7 @@ export async function POST(req) {
   });
   const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH);
 
-  const newToken = new Token({ token: refreshToken });
+  const newToken = new modelToken({ token: refreshToken });
 
   await newToken.save();
 

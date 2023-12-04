@@ -11,6 +11,7 @@ import { headers } from "next/headers";
 import { generationIdLink, sendActivationLink } from "@/lib/message/message";
 import { getDictionaryNotifi } from "@/app/dictionaries/notifications/dictionaries";
 import { addNotification } from "@/lib/crud";
+import { registerSchema } from "@/components/Schemas/FormSchem";
 
 export async function POST(request) {
   const apikey = request.headers.get("authorization")?.split(" ")[1];
@@ -23,7 +24,7 @@ export async function POST(request) {
   const ip = headers().get("x-forwarded-for");
   const userAgent = headers().get("user-agent");
 
-  const { email, password, confirmPassword, terms, lang } = data;
+  const { email, password, confirmPassword, title, terms, lang } = data;
   const dict = await getDictionaryNotifi(lang);
 
   const notification = {
@@ -35,14 +36,16 @@ export async function POST(request) {
     trl_success: dict.notifications.registration.success,
   };
 
-  if (
-    !email ||
-    !email.includes("@") ||
-    !password ||
-    password.trim().length < 7 ||
-    password !== confirmPassword ||
-    !terms
-  ) {
+  try {
+    await registerSchema(lang).validate({
+      email,
+      password,
+      confirmPassword,
+      title,
+      terms,
+    });
+  } catch (err) {
+    console.log(err);
     return NextResponse.json({ message: notification.trl_err_409 }, { status: 422 });
   }
 
@@ -79,7 +82,10 @@ export async function POST(request) {
     await insertDocument(client, "Users", {
       email: email,
       password: hashedPassword,
+      username: title,
       isActivated: false,
+      newsletter: false,
+      createAt: new Date(),
     });
   } catch (error) {
     client.close();

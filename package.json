@@ -19,6 +19,8 @@
     "date-fns": "^2.30.0",
     "encoding": "^0.1.13",
     "formik": "^2.4.5",
+    "google-auth-library": "^9.4.1",
+    "googleapis": "^129.0.0",
     "i": "^0.3.7",
     "jsonwebtoken": "^9.0.2",
     "megajs": "^1.1.4",

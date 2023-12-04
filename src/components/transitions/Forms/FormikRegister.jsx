@@ -33,6 +33,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
     trl_terms,
     trl_btn,
     trl_question,
+    trl_username,
     trl_questionLink,
   } = dict;
 
@@ -59,9 +60,9 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
 
   const onSubmit = async (values, actions) => {
     dispatch(loading(true));
-    const { email, password, confirmPassword, terms } = values;
+    const { email, title, password, confirmPassword, terms } = values;
     let data;
-
+    console.log(title);
     try {
       const response = await fetch("/api/auth/registration", {
         method: "POST",
@@ -69,7 +70,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
         },
-        body: JSON.stringify({ email, password, confirmPassword, terms, lang }),
+        body: JSON.stringify({ email, title, password, confirmPassword, terms, lang }),
       });
 
       data = await response.json();
@@ -109,6 +110,7 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
       <Formik
         initialValues={{
           email: "",
+          title: "",
           password: "",
           confirmPassword: "",
           terms: false,
@@ -117,9 +119,15 @@ const FormikRegister = ({ className, dict, lang, trl_error, ...props }) => {
         validationSchema={registerSchema(lang)}
       >
         {({ isSubmitting, ...props }) => (
-          <Form>
+          <Form className={styles.form__register}>
             <h1>{trl_title}</h1>
 
+            <InputFormik
+              name="title"
+              placeholder={trl_username}
+              aria-label={trl_username}
+              type="text"
+            />
             <InputFormik name="email" placeholder={trl_email} aria-label={trl_email} type="text" />
             <InputFormik
               name="password"

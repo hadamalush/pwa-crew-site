@@ -1,53 +1,53 @@
 {
-	"notifications": {
-		"generalError": "Niepowiodło się, spróbuj ponownie",
-		"err_400": "Nie znaleziono strony",
-		"err_401": "Musisz być zalogowany",
-		"err_401_unAuth": "Nieautoryzowany dostęp",
-		"err_404": "Nie znaleziono takiej strony",
-		"err_409": "Konflikt. Takie dane już istnieją",
-		"err_422": "Wrowadzone dane są nie prawidłowe",
-		"err_429": "Przekroczono limit, spróbuj ponownie za 30 minut",
-		"err_500": "Nie udało się połączyć z bazą danych",
+  "notifications": {
+    "generalError": "Niepowiodło się, spróbuj ponownie",
+    "err_400": "Nie znaleziono strony",
+    "err_401": "Musisz być zalogowany",
+    "err_401_unAuth": "Nieautoryzowany dostęp",
+    "err_404": "Nie znaleziono takiej strony",
+    "err_409": "Konflikt. Takie dane już istnieją",
+    "err_422": "Wrowadzone dane są nie prawidłowe",
+    "err_429": "Przekroczono limit, spróbuj ponownie za 30 minut",
+    "err_500": "Nie udało się połączyć z bazą danych",
 
-		"newEvent": {
-			"generalError": "Nie udało się utworzyć wydarzenia",
-			"success": "Dodano wydarzenie"
-		},
-		"editEvent": {
-			"generalError": "Nie udało się edytować wydarzenia",
-			"success": "Edytowano wydarzenie"
-		},
-		"deleteEvent": {
-			"generalError": "Nie udało się usunąć eventu",
-			"success": "Usunięto event"
-		},
-		"sendMessage": {
-			"success": "Wysłano wiadomość"
-		},
-		"eventPage": {
-			"generalError": "Coś poszło nie tak.",
-			"err_404_title": "Nie znaleziono takiego wydarzenia.",
-			"err_404_text": "Prawdopodobnie zostało usunięte przez właściciela."
-		},
-		"registration": {
-			"err_409": "Użytkownik z takim adresem email juz istnieje.",
-			"err_sendLink": "Zarejestrowany pomyślnie ,jednak nie udało się utworzyć linku aktywacyjnego. Wyślemy go do Ciebie ,jak najszybciej.",
-			"generalError": "Nie udało się dodać użytkownika.",
-			"success": "Zarejestrowano pomyślnie ,wysłaliśmy link rejestracyjny na Twój adres email."
-		},
-		"login": {
-			"err_404": "Nie znaleziono takiego użytkownika.",
-			"err_422": "Nie prawidłowe hasło.",
-			"welcome": "Witamy ponownie!"
-		},
-		"forgotPass": {
-			"err_429": "Zbyt wiele prób. Spróbuj ponownie za 24h.",
-			"successChanged": "Hasło zostało zmienione.",
-			"successSent": "Wysłaliśmy do Ciebie link resetujący hasło."
-		},
-		"settings": {
-			"success": "Zmieniono ustawienia"
-		}
-	}
+    "newEvent": {
+      "generalError": "Nie udało się utworzyć wydarzenia",
+      "success": "Dodano wydarzenie"
+    },
+    "editEvent": {
+      "generalError": "Nie udało się edytować wydarzenia",
+      "success": "Edytowano wydarzenie"
+    },
+    "deleteEvent": {
+      "generalError": "Nie udało się usunąć eventu",
+      "success": "Usunięto event"
+    },
+    "sendMessage": {
+      "success": "Wysłano wiadomość"
+    },
+    "eventPage": {
+      "generalError": "Coś poszło nie tak.",
+      "err_404_title": "Nie znaleziono takiego wydarzenia.",
+      "err_404_text": "Prawdopodobnie zostało usunięte przez właściciela."
+    },
+    "registration": {
+      "err_409": "Użytkownik z takim adresem email juz istnieje.",
+      "err_sendLink": "Zarejestrowany pomyślnie ,jednak nie udało się utworzyć linku aktywacyjnego. Wyślemy go do Ciebie ,jak najszybciej.",
+      "generalError": "Nie udało się dodać użytkownika.",
+      "success": "Zarejestrowano pomyślnie ,wysłaliśmy link rejestracyjny na Twój adres email."
+    },
+    "login": {
+      "err_404": "Nie znaleziono takiego użytkownika.",
+      "err_422": "Nie prawidłowe hasło.",
+      "welcome": "Witamy ponownie!"
+    },
+    "forgotPass": {
+      "err_429": "Zbyt wiele prób. Spróbuj ponownie za 24h.",
+      "successChanged": "Hasło zostało zmienione.",
+      "successSent": "Wysłaliśmy do Ciebie link resetujący hasło."
+    },
+    "settings": {
+      "success": "Zmieniono ustawienia"
+    }
+  }
 }
