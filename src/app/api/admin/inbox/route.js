@@ -9,6 +9,7 @@ export async function GET(req) {
     process.env.GOOGLE_CALLBACK_URI_GMAIL
   );
   let allMessages = [];
+  let messageData;
 
   try {
     oAuth2Client.setCredentials({
@@ -25,14 +26,18 @@ export async function GET(req) {
       for (let message of res.data.messages) {
         let newMsg = {};
 
-        const messageData = await gmail.users.messages.get({ userId: "me", id: message.id });
+        messageData = await gmail.users.messages.get({ userId: "me", id: message.id });
         newMsg.id = message.id;
         newMsg.description = messageData.data.snippet;
+        newMsg.date = new Date(Number(messageData.data.internalDate)).toString();
 
-        // Set owner
-        newMsg.owner = messageData.data.payload.headers
+        // Set email
+        const email = messageData.data.payload.headers
           .find((header) => header.name === "From")
           .value.match(/<(.*)>/)[1];
+
+        newMsg.owner = email;
+        newMsg.email = email;
 
         // Set subject
         newMsg.subject = messageData.data.payload.headers.find(
