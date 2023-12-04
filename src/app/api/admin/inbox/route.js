@@ -21,7 +21,11 @@ export async function GET(req) {
     const labels = ["INBOX", "SPAM", "TRASH"];
 
     for (let label of labels) {
-      const res = await gmail.users.messages.list({ userId: "me", labelIds: [label] });
+      const res = await gmail.users.messages.list({
+        userId: "me",
+        labelIds: [label],
+        maxResults: 15,
+      });
 
       for (let message of res.data.messages) {
         let newMsg = {};
