@@ -9,7 +9,7 @@ export async function GET(req) {
     process.env.GOOGLE_CALLBACK_URI_GMAIL
   );
   let allMessages = [];
-  let messageData;
+  let messageData, res;
 
   try {
     oAuth2Client.setCredentials({
@@ -18,63 +18,80 @@ export async function GET(req) {
 
     const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
 
-    const labels = ["INBOX", "SPAM", "TRASH"];
+    const labels = ["SPAM", "TRASH", "INBOX"];
 
-    for (let label of labels) {
-      const res = await gmail.users.messages.list({
-        userId: "me",
-        labelIds: [label],
-        maxResults: 15,
-      });
+    for (let i = 0; i < 3; i++) {
+      // console.log(label);
+      let hasNextPage = true;
+      let pageTokens = {};
 
-      for (let message of res.data.messages) {
-        let newMsg = {};
+      while (hasNextPage) {
+        res = await gmail.users.messages.list({
+          userId: "me",
+          labelIds: [labels[i]],
+          maxResults: 15,
+          pageToken: pageTokens[labels[i]] || null,
+        });
+        // console.log(res.data.messages);
 
-        messageData = await gmail.users.messages.get({ userId: "me", id: message.id });
-        newMsg.id = message.id;
-        newMsg.description = messageData.data.snippet;
-        newMsg.date = new Date(Number(messageData.data.internalDate)).toString();
+        for (let message of res.data.messages) {
+          let newMsg = {};
 
-        // Set email
-        const email = messageData.data.payload.headers
-          .find((header) => header.name === "From")
-          .value.match(/<(.*)>/)[1];
+          messageData = await gmail.users.messages.get({ userId: "me", id: message.id });
+          newMsg.id = message.id;
+          newMsg.description = messageData.data.snippet;
+          newMsg.date = new Date(Number(messageData.data.internalDate)).toString();
 
-        newMsg.owner = email;
-        newMsg.email = email;
+          // Set email
+          const email = messageData.data.payload.headers
+            .find((header) => header.name === "From")
+            .value.match(/<(.*)>/)[1];
 
-        // Set subject
-        newMsg.subject = messageData.data.payload.headers.find(
-          (header) => header.name === "Subject"
-        ).value;
+          newMsg.owner = email;
+          newMsg.email = email;
 
-        if (messageData.data.labelIds.includes("STARRED")) {
-          newMsg.isFeatured = true;
-        } else {
-          newMsg.isFeatured = false;
+          // Set subject
+          newMsg.subject = messageData.data.payload.headers.find(
+            (header) => header.name === "Subject"
+          ).value;
+
+          if (messageData.data.labelIds.includes("STARRED")) {
+            newMsg.isFeatured = true;
+          } else {
+            newMsg.isFeatured = false;
+          }
+          if (messageData.data.labelIds.includes("UNREAD")) {
+            newMsg.unRead = true;
+          } else {
+            newMsg.unRead = false;
+          }
+          if (messageData.data.labelIds.includes("SPAM")) {
+            newMsg.isInSpam = true;
+          } else {
+            newMsg.isInSpam = false;
+          }
+          if (messageData.data.labelIds.includes("TRASH")) {
+            newMsg.isInTrash = true;
+          } else {
+            newMsg.isInTrash = false;
+          }
+
+          allMessages.push(newMsg);
         }
-        if (messageData.data.labelIds.includes("UNREAD")) {
-          newMsg.unRead = true;
-        } else {
-          newMsg.unRead = false;
-        }
-        if (messageData.data.labelIds.includes("SPAM")) {
-          newMsg.isInSpam = true;
-        } else {
-          newMsg.isInSpam = false;
-        }
-        if (messageData.data.labelIds.includes("TRASH")) {
-          newMsg.isInTrash = true;
-        } else {
-          newMsg.isInTrash = false;
-        }
 
-        allMessages.push(newMsg);
+        if (res.data?.nextPageToken) {
+          pageTokens[labels[i]] = res?.data?.nextPageToken;
+        } else {
+          hasNextPage = false;
+        }
       }
     }
   } catch (err) {
     NextResponse.json({ message: "Something went wrong" }, { status: 502 });
   }
+
+  // console.log(res);
+  // console.log(messageData);
 
   return cors(
     req,
