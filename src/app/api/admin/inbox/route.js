@@ -4,7 +4,6 @@ import { google } from "googleapis";
 
 export async function POST(req) {
   const data = await req.json();
-  console.log(data);
 
   const label = data.label;
   const pageToken = data.pageToken;
@@ -78,7 +77,6 @@ export async function POST(req) {
     }
 
     if (res.data?.nextPageToken) {
-      // pageTokens[labels[i]] = res?.data?.nextPageToken;
       newPageToken = res.data.nextPageToken;
     }
   } catch (err) {
