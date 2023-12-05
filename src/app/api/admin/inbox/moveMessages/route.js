@@ -3,9 +3,7 @@ import { NextResponse } from "next/server";
 import { google } from "googleapis";
 
 export async function POST(req) {
-  const data = await req.json();
-  const { mode, messageId } = data;
-
+  const { mode, messages } = await req.json();
   const oAuth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_ID_CLIENT_GMAIL,
     process.env.GOOGLE_SECRET_CLIENT_GMAIL,
@@ -19,32 +17,35 @@ export async function POST(req) {
   const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
 
   try {
-    await gmail.users.messages.modify({
-      userId: "me",
-      id: messageId,
-      resource: {
-        ...(mode === "add" ? { addLabelIds: ["STARRED"] } : { removeLabelIds: ["STARRED"] }),
-      },
-    });
+    for (let messageId of messages) {
+      await gmail.users.messages.modify({
+        userId: "me",
+        id: messageId,
+        resource: {
+          addLabelIds: [mode.toUpperCase()],
+          ...(mode === "inbox" && { removeLabelIds: ["TRASH", "SPAM"] }),
+          ...(mode === "trash" && { removeLabelIds: ["SPAM"] }),
+          ...(mode === "spam" && { removeLabelIds: ["TRASH"] }),
+        },
+      });
+    }
   } catch (err) {
     return cors(
       req,
       NextResponse.json(
-        { error: "Error occurred can't mark as highlighted" },
+        { error: "Failed to move messages." },
         {
-          status: 200,
+          status: 504,
           headers: { "Content-Type": "application/json" },
         }
       )
     );
   }
 
-  const mess = mode === "add" ? "Marked as featured" : "Marked as unfeatured";
-
   return cors(
     req,
     NextResponse.json(
-      { message: mess },
+      { message: `Messages moved to ${mode}` },
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
