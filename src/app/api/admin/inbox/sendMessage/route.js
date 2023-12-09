@@ -1,8 +1,6 @@
 import cors from "@/lib/admin/core";
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
-import BrevoTransport from "nodemailer-brevo-transport";
 import * as yup from "yup";
 
 const emailSchema = yup.string().email().required();
@@ -11,6 +9,7 @@ const subjectSchema = yup.string().min(4);
 export const POST = async (req) => {
   const data = await req.json();
   const { emails, text, subject } = data;
+  console.log(emails, text, subject);
 
   for (let email of emails) {
     try {
@@ -72,16 +71,15 @@ export const POST = async (req) => {
     .replace(/\+/g, "-")
     .replace(/\//g, "_");
 
+  let res;
+
   try {
-    const res = await gmail.users.messages.send({
+    res = await gmail.users.messages.send({
       userId: "me",
       resource: {
-        // data: raw
         raw: raw,
       },
     });
-
-    console.log(res);
   } catch (err) {
     return cors(
       req,
@@ -91,10 +89,11 @@ export const POST = async (req) => {
       })
     );
   }
+  const msgId = res?.data?.id;
 
   return cors(
     req,
-    NextResponse.json("Message sent", {
+    NextResponse.json(msgId, {
       status: 200,
       headers: { "Content-Type": "application/json" },
     })

@@ -114,7 +114,6 @@ export async function POST(req) {
         }
 
         newMsg.to = foundTo;
-
         newMsg.isInSent = true;
       } else {
         newMsg.isInSent = false;
