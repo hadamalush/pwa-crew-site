@@ -4,7 +4,6 @@ import { google } from "googleapis";
 
 export async function POST(req) {
   const data = await req.json();
-  console.log(data);
 
   const label = data.label;
   const pageToken = data.pageToken;
@@ -35,18 +34,49 @@ export async function POST(req) {
     for (let message of res.data.messages) {
       let newMsg = {};
 
-      messageData = await gmail.users.messages.get({ userId: "me", id: message.id });
+      messageData = await gmail.users.messages.get({
+        userId: "me",
+        id: message.id,
+        format: "full",
+      });
       newMsg.id = message.id;
-      newMsg.description = messageData.data.snippet;
+      newMsg.description = messageData.data.snippet; //ok
       newMsg.date = new Date(Number(messageData.data.internalDate)).toString();
 
-      // Set email
-      const email = messageData.data.payload.headers
-        .find((header) => header.name === "From")
-        .value.match(/<(.*)>/)[1];
+      try {
+        if (messageData?.data?.payload?.parts && messageData?.data?.payload?.parts.length > 0) {
+          let text;
+          newMsg.textHTML = Buffer.from(
+            messageData.data.payload.parts[1].body.data,
+            "base64"
+          ).toString("utf-8");
 
-      newMsg.owner = email;
-      newMsg.email = email;
+          if (!text) {
+            try {
+              newMsg.textHTML = Buffer.from(
+                messageData.data.payload.parts[0].parts[1].body.data,
+                "base64"
+              ).toString("utf-8");
+            } catch (err) {
+              // console.log(err);
+            }
+          }
+        }
+      } catch (err) {
+        // console.log(err);
+      }
+
+      // Set email
+      let foundFrom = messageData.data.payload.headers.find(
+        (header) => header.name === "From"
+      ).value;
+
+      if (foundFrom.includes("<")) {
+        foundFrom = foundFrom.match(/<(.*)>/)[1];
+      }
+
+      newMsg.owner = foundFrom;
+      newMsg.email = foundFrom;
 
       // Set subject
       newMsg.subject = messageData.data.payload.headers.find(
@@ -73,12 +103,26 @@ export async function POST(req) {
       } else {
         newMsg.isInTrash = false;
       }
+      if (messageData.data.labelIds.includes("SENT")) {
+        const foundTo = messageData.data.payload.headers.find(
+          (header) => header.name === "To"
+        ).value;
+        if (foundTo.includes("<")) {
+          newMsg.to = foundTo.match(/<(.*)>/)[1];
+        } else {
+          newMsg.to = foundTo;
+        }
+
+        newMsg.to = foundTo;
+        newMsg.isInSent = true;
+      } else {
+        newMsg.isInSent = false;
+      }
 
       allMessages.push(newMsg);
     }
 
     if (res.data?.nextPageToken) {
-      // pageTokens[labels[i]] = res?.data?.nextPageToken;
       newPageToken = res.data.nextPageToken;
     }
   } catch (err) {

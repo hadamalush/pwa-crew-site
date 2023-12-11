@@ -13,18 +13,33 @@ export async function DELETE(req) {
   } catch (err) {
     return cors(
       req,
-      NextResponse.json({ message: "Database connection failure" }, { status: 502 })
+      NextResponse.json("Database connection failure", {
+        status: 502,
+        headers: { "Content-Type": "application/json" },
+      })
     );
   }
 
   if (!foundToken) {
-    return cors(req, NextResponse.json({ message: "You don't have access" }, { status: 403 }));
+    return cors(
+      req,
+      NextResponse.json(`You don't have access`, {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   const result = await modelToken.deleteOne({ token: token });
 
   if (!result.acknowledged) {
-    return cors(req, NextResponse.json({ message: "Something went wrong" }, { status: 404 }));
+    return cors(
+      req,
+      NextResponse.json("Something went wrong", {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   return cors(

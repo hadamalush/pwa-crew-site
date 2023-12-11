@@ -12,10 +12,13 @@ export async function GET(req) {
     const db = client.db;
     serverStatus = await db.command({ serverStatus: 1 });
   } catch (err) {
-    NextResponse.json("Something went wrong ", {
-      status: 403,
-      headers: { "Content-Type": "application/json" },
-    });
+    return cors(
+      req,
+      NextResponse.json("Something went wrong", {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   const connections = serverStatus.connections;

@@ -16,8 +16,13 @@ export async function GET(req) {
 
     info = await megaStorage.getAccountInfo();
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+    return cors(
+      req,
+      NextResponse.json("Unauthorized", {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   if (info) {

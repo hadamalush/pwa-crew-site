@@ -19,19 +19,37 @@ export async function POST(req) {
 
     modelToken = await tokenSchemaFn(client);
   } catch (err) {
-    NextResponse.json({ message: "Database connection failure" }, { status: 502 });
+    return cors(
+      req,
+      NextResponse.json("Database connection failure", {
+        status: 502,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   const foundUser = await modelUser.findOne({ email: email });
 
   if (!foundUser) {
-    return cors(req, NextResponse.json({ message: "User not found" }, { status: 422 }));
+    return cors(
+      req,
+      NextResponse.json("User not found", {
+        status: 422,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   const isValidPass = await verifyPassword(password, foundUser?.password);
 
   if (!isValidPass) {
-    return cors(req, NextResponse.json({ message: "Invalid user password" }, { status: 401 }));
+    return cors(
+      req,
+      NextResponse.json("Invalid user password", {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   const payload = {

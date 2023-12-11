@@ -24,10 +24,13 @@ export async function GET(req) {
       });
     }
   } catch (err) {
-    NextResponse.json("Something went wrong ", {
-      status: 403,
-      headers: { "Content-Type": "application/json" },
-    });
+    return cors(
+      req,
+      NextResponse.json("Something went wrong", {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   return cors(
