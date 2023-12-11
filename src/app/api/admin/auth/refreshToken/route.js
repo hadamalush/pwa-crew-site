@@ -15,18 +15,33 @@ export async function POST(req) {
   } catch (err) {
     return cors(
       req,
-      NextResponse.json({ message: "Database connection failure" }, { status: 502 })
+      NextResponse.json("Database connection failure", {
+        status: 502,
+        headers: { "Content-Type": "application/json" },
+      })
     );
   }
 
   if (!foundToken) {
-    return cors(req, NextResponse.json({ message: "You don't have access" }, { status: 403 }));
+    return cors(
+      req,
+      NextResponse.json(`You don't have access`, {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
   let payload;
 
   jwt.verify(token, process.env.JWT_REFRESH, (err, data) => {
     if (err) {
-      return cors(req, NextResponse.json({ message: "You don't have access" }, { status: 403 }));
+      return cors(
+        req,
+        NextResponse.json(`You don't have access`, {
+          status: 403,
+          headers: { "Content-Type": "application/json" },
+        })
+      );
     }
 
     const { email, avatar, username } = data;

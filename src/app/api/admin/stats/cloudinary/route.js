@@ -14,7 +14,13 @@ export async function GET(req) {
       secure: true,
     });
   } catch (err) {
-    return NextResponse.json({ error: "Failure cloudinary." }, { status: 304 });
+    return cors(
+      req,
+      NextResponse.json("Failure cloudinary", {
+        status: 304,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   try {
@@ -24,10 +30,13 @@ export async function GET(req) {
       }
     });
   } catch (err) {
-    return NextResponse.json("Something went wrong ", {
-      status: 503,
-      headers: { "Content-Type": "application/json" },
-    });
+    return cors(
+      req,
+      NextResponse.json("Something went wrong", {
+        status: 503,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
   }
 
   return cors(
