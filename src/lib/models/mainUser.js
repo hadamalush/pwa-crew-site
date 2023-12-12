@@ -13,6 +13,18 @@ export const userMainModelFn = async ({ db, collection }) => {
       username: {
         type: String,
       },
+      avatarSrc: {
+        type: String,
+      },
+      isActivated: {
+        type: Boolean,
+      },
+      newsletter: {
+        type: Boolean,
+      },
+      createAt: {
+        type: Date,
+      },
     },
     { collection: collection }
   );
