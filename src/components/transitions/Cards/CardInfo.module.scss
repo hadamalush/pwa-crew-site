@@ -16,6 +16,8 @@
   border-radius: 10px;
   border: solid;
   border-width: 0.5em;
+  overflow-x: hidden;
+
   border-color: $card-color-primary;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px,
     rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
@@ -25,6 +27,7 @@
     color: $secondary-color;
     text-align: center;
     padding-top: 0.5em;
+    padding: 0.6em 1em 0.3em;
   }
 
   &__text {
@@ -34,6 +37,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 3em;
 
     &::-webkit-scrollbar {
       width: 2px;
@@ -47,8 +51,9 @@
     }
 
     img {
-      object-fit: contain;
+      object-fit: cover;
       max-height: 30rem;
+      max-width: 100%;
     }
   }
 
@@ -96,7 +101,7 @@
   @include media-query(mediumScreen) {
     width: 50rem;
     min-height: 30rem;
-    max-height: 50rem;
+    max-height: 60rem;
     height: auto;
   }
 }

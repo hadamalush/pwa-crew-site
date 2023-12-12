@@ -4,15 +4,16 @@ import ButtonMain from "../Button/ButtonMain";
 import Heading from "../Elements/Heading";
 import styles from "./CardInfo.module.scss";
 
-const CardInfo = () => {
+const CardInfo = ({ data }) => {
   const [isOpenInfo, setIsOpenInfo] = useState(false);
   const checkboxRef = useRef();
-  const textHTML = `<p>siemano </p><img src='https://cdn.pixabay.com/photo/2023/11/06/02/16/butterfly-8368603_1280.jpg'/>`;
+  const { textHTML, id, title } = data;
 
   useEffect(() => {
-    const initialInfobox = JSON.parse(localStorage.getItem("infobox"))?.visibility;
+    const isVisibility = JSON.parse(localStorage.getItem("infobox"))?.visibility;
+    const infoId = JSON.parse(localStorage.getItem("infobox"))?.id;
 
-    if (initialInfobox || initialInfobox === undefined) {
+    if (((isVisibility || isVisibility === undefined) && data) || infoId !== id) {
       setIsOpenInfo(true);
     }
   }, []);
@@ -23,7 +24,7 @@ const CardInfo = () => {
     setIsOpenInfo(false);
 
     if (isNoMore) {
-      localStorage.setItem("infobox", JSON.stringify({ visibility: false }));
+      localStorage.setItem("infobox", JSON.stringify({ visibility: false, id: id }));
     }
   };
 
@@ -32,9 +33,12 @@ const CardInfo = () => {
       {isOpenInfo && (
         <div className={styles.card}>
           <Heading as="h2" className={styles.card__heading}>
-            Hello
+            {title && title}
           </Heading>
-          <div className={styles.card__text} dangerouslySetInnerHTML={{ __html: textHTML }}></div>
+          <div
+            className={styles.card__text}
+            dangerouslySetInnerHTML={{ __html: textHTML && textHTML }}
+          ></div>
           <form className={styles.card__action} onSubmit={handleCloseInfobox}>
             <div className={styles.card__mode}>
               <input

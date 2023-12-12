@@ -11,6 +11,8 @@ import CardInfo from "@/components/transitions/Cards/CardInfo";
 export default async function Home({ params: { lang } }) {
   const dict = await getDictionaryHome(lang);
 
+  const infoData = await getInfo();
+
   const startContent = {
     title: dict.start_content.title,
     text: dict.start_content.text,
@@ -21,7 +23,7 @@ export default async function Home({ params: { lang } }) {
 
   return (
     <>
-      <CardInfo />
+      <CardInfo data={infoData} />
       <main>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-7DREEDL6C0" />
         <Script id="google-analytics">
@@ -32,8 +34,6 @@ export default async function Home({ params: { lang } }) {
          gtag('config', 'G-7DREEDL6C0');
        `}
         </Script>
-
-        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DREEDL6C0"></script> */}
 
         <HomeStartContent
           title={startContent.title}
@@ -108,3 +108,23 @@ export default async function Home({ params: { lang } }) {
     </>
   );
 }
+
+const getInfo = async () => {
+  let data;
+
+  try {
+    const response = await fetch("http://localhost:3000/api/admin/settings/getAdditionalInfo", {
+      next: { revalidate: 3600 },
+    });
+
+    if (response.ok) {
+      data = await response.json();
+    } else {
+      data = null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  return data;
+};
