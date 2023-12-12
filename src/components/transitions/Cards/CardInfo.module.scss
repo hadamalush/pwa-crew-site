@@ -1,0 +1,102 @@
+@import "../../../styles/transitions/variables";
+@import "../../../styles/mixins/mixins";
+
+.card {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: $card-color-primary;
+  z-index: 9999;
+  border-radius: 10px;
+  border: solid;
+  border-width: 0.5em;
+  border-color: $card-color-primary;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+  &__heading {
+    color: $secondary-color;
+    text-align: center;
+    padding-top: 0.5em;
+  }
+
+  &__text {
+    width: 100%;
+    padding: 1em;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background: rgba(71, 70, 70, 0.808);
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    img {
+      object-fit: contain;
+      max-height: 30rem;
+    }
+  }
+
+  &__action {
+    width: 100%;
+    height: 10em;
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2em;
+  }
+
+  &__mode {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__label {
+    font-size: 1.4rem;
+    margin-left: 0.4rem;
+  }
+
+  &__checkbox {
+    padding-left: 50px;
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 0.4em;
+  }
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: rgba(71, 70, 70, 0.808);
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @include media-query(mediumScreen) {
+    width: 50rem;
+    min-height: 30rem;
+    max-height: 50rem;
+    height: auto;
+  }
+}
