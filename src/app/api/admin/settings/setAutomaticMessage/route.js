@@ -64,7 +64,7 @@ export async function POST(req) {
     );
   }
 
-  revalidatePath("/");
+  revalidatePath("/", "layout");
 
   return cors(
     req,
