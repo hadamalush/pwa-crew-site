@@ -2,71 +2,81 @@ import { NextResponse } from "next/server";
 import { generalConfig } from "@/config/gerenalConfig";
 const { connectDb } = require("@/lib/mongodb");
 const {
-	oneDownloadBuffersMegaNz,
-	oneConvertFromBuffersToBase64,
+  oneDownloadBuffersMegaNz,
+  oneConvertFromBuffersToBase64,
 } = require("@/lib/storage/storage");
 
 export const revalidate = 1200;
 
 export async function GET(request) {
-	// setting which storage should be using
-	const storage = generalConfig.downloadImageStorageEvent;
+  // setting which storage should be using
+  let dataStorage;
 
-	let result;
-	try {
-		const db = await connectDb();
+  try {
+    const resFeedback = await fetch("http://localhost:3000/api/admin/settings/getStorage", {
+      next: { revalidate: 3600 },
+    });
 
-		result = await db.collection("AllEvents").find().toArray();
-	} catch (error) {
-		console.log(error);
-	}
+    if (resFeedback.ok) {
+      dataStorage = await resFeedback.json();
+    } else {
+      dataStorage = null;
+    }
+  } catch (err) {
+    dataStorage = null;
+  }
 
-	const convertedEvenets = await Promise.all(
-		result.map(async event => {
-			let uploadStorage = storage[0];
+  const downloadDynamicStorage = dataStorage?.downloadStorages;
+  const storage = downloadDynamicStorage
+    ? downloadDynamicStorage
+    : generalConfig.downloadImageStorageEvent;
 
-			//If is empty using second storage
-			if (
-				!event[`image_src_${storage[0]}`] &&
-				event[`image_src_${storage[1]}`]
-			) {
-				uploadStorage = storage[1];
-			} else if (
-				!event[`image_src_${storage[0]}`] &&
-				!event[`image_src_${storage[1]}`]
-			) {
-				uploadStorage = storage[2];
-			}
+  let result;
+  try {
+    const db = await connectDb();
 
-			//Mega links need to download buffer and then convert to base64
+    result = await db.collection("AllEvents").find().toArray();
+  } catch (error) {
+    console.log(error);
+  }
 
-			try {
-				if (uploadStorage === "mega") {
-					const buffer = await oneDownloadBuffersMegaNz(event.image_src_mega);
-					event.image_src_mega = oneConvertFromBuffersToBase64(buffer);
-				}
-			} catch (err) {
-				//set default picture - info
-				console.log(err);
-			}
+  const convertedEvenets = await Promise.all(
+    result.map(async (event) => {
+      let uploadStorage = storage[0];
 
-			const targetSrc = event[`image_src_${uploadStorage}`];
+      //If is empty using second storage
+      if (!event[`image_src_${storage[0]}`] && event[`image_src_${storage[1]}`]) {
+        uploadStorage = storage[1];
+      } else if (!event[`image_src_${storage[0]}`] && !event[`image_src_${storage[1]}`]) {
+        uploadStorage = storage[2];
+      }
 
-			const { _id, image_src_mega, image_src_vercelBlob, ...rest } = event;
+      //Mega links need to download buffer and then convert to base64
 
-			return {
-				id: new Object(_id).toString(),
-				targetSrc: targetSrc,
-				upload: uploadStorage,
-				...rest,
-			};
-		})
-	);
+      try {
+        if (uploadStorage === "mega") {
+          const buffer = await oneDownloadBuffersMegaNz(event.image_src_mega);
+          event.image_src_mega = oneConvertFromBuffersToBase64(buffer);
+        }
+      } catch (err) {
+        //set default picture - info
+        console.log(err);
+      }
 
-	const response = NextResponse.json(
-		{ message: convertedEvenets },
-		{ status: 200 }
-	);
+      const targetSrc = event[`image_src_${uploadStorage}`];
 
-	return response;
+      const { _id, image_src_mega, image_src_vercelBlob, ...rest } = event;
+
+      return {
+        id: new Object(_id).toString(),
+        targetSrc: targetSrc,
+        upload: uploadStorage,
+        ...rest,
+      };
+    })
+  );
+
+  const response = NextResponse.json({ message: convertedEvenets }, { status: 200 });
+
+  return response;
 }

@@ -24,7 +24,7 @@ export async function POST(req) {
   }
 
   try {
-    modelFeedback = await feedbackModelFn({ db: connectDb("AdminB"), collection: "Settings" });
+    modelFeedback = await feedbackModelFn({ db: connectDb("AdminB"), collection: "Feedback" });
   } catch (err) {
     console.log(err);
     return cors(

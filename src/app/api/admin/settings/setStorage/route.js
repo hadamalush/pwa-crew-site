@@ -29,7 +29,7 @@ export async function POST(req) {
   const downloadStorages = [dataStorage.download1, dataStorage.download2, dataStorage.download3];
 
   try {
-    modelStorage = await storageModelFn({ db: connectDb("AdminB"), collection: "Settings" });
+    modelStorage = await storageModelFn({ db: connectDb("AdminB"), collection: "Storage" });
   } catch (err) {
     console.log(err);
     return cors(

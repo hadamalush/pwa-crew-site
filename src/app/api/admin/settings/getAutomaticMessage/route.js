@@ -8,7 +8,7 @@ export async function GET(request) {
   let info;
 
   try {
-    const modelUser = await feedbackModelFn({ db: connectDb("AdminB"), collection: "Settings" });
+    const modelUser = await feedbackModelFn({ db: connectDb("AdminB"), collection: "Feedback" });
 
     info = await modelUser.find({ mode: "feedback" });
 

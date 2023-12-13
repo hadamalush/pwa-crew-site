@@ -1,7 +1,6 @@
 import cors from "@/lib/admin/core";
 import { NextResponse } from "next/server";
 import { connectDb } from "@/lib/mongoose";
-import { cryptPassword } from "@/lib/crypt";
 import { infoModelFn } from "@/lib/models/info";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
@@ -21,7 +20,9 @@ export async function POST(req) {
   }
 
   try {
-    modelInfo = await infoModelFn({ db: connectDb("AdminB"), collection: "Settings" });
+    modelInfo = await infoModelFn({ db: connectDb("AdminB"), collection: "Info" });
+
+    console.log(modelInfo);
   } catch (err) {
     console.log(err);
     return cors(

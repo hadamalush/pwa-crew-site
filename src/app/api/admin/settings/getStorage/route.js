@@ -9,7 +9,7 @@ export async function GET(request) {
   let storageData;
 
   try {
-    const modelStorage = await storageModelFn({ db: connectDb("AdminB"), collection: "Settings" });
+    const modelStorage = await storageModelFn({ db: connectDb("AdminB"), collection: "Storage" });
 
     storageData = await modelStorage.find({ mode: "storage" });
 

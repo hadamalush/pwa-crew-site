@@ -7,7 +7,7 @@ export const revalidate = 3600;
 export async function GET(request) {
   let info;
   try {
-    const modelUser = await infoModelFn({ db: connectDb("AdminB"), collection: "Settings" });
+    const modelUser = await infoModelFn({ db: connectDb("AdminB"), collection: "Info" });
 
     info = await modelUser.find({ mode: "infobox" });
 
