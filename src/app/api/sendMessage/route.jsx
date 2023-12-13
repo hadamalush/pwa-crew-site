@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { generalConfig } from "@/config/gerenalConfig";
 import { headers } from "next/headers";
-
 import nodemailer from "nodemailer";
 import BrevoTransport from "nodemailer-brevo-transport";
 import { insertLimitByIp } from "@/lib/protection/protection";
@@ -11,6 +10,7 @@ export const POST = async (request) => {
   const ip = headers().get("x-forwarded-for");
   const { email, subject, message, lang } = await request.json();
   const dict = await getDictionaryNotifi(lang);
+  let dataFeedback;
 
   const notification = {
     trl_err_422: dict.notifications.err_422,
@@ -19,8 +19,26 @@ export const POST = async (request) => {
     trl_success: dict.notifications.sendMessage.success,
   };
 
-  const ourEmail = generalConfig.receiveEmailAddresContact;
-  const defaultFeedback = generalConfig.defaultReplyMessage;
+  try {
+    const resFeedback = await fetch(
+      "https://pwa-crew-site-demo.vercel.app/api/admin/settings/getAutomaticMessage",
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    if (resFeedback.ok) {
+      dataFeedback = await resFeedback.json();
+    } else {
+      dataFeedback = null;
+    }
+  } catch (err) {
+    console.log(err);
+    dataFeedback = null;
+  }
+
+  const ourEmail = dataFeedback ? dataFeedback?.email : generalConfig.receiveEmailAddresContact;
+  const defaultFeedback = dataFeedback ? dataFeedback?.textHTML : generalConfig.defaultReplyMessage;
 
   if (
     !email ||

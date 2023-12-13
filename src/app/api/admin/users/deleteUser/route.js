@@ -3,25 +3,13 @@ import { NextResponse } from "next/server";
 import { connectDb } from "@/lib/mongoose";
 import { userMainModelFn } from "@/lib/models/mainUser";
 
-export async function GET(req) {
-  let users;
+export async function POST(req) {
+  const { id } = await req.json();
 
   try {
     const modelUser = await userMainModelFn({ db: connectDb("Auth"), collection: "Users" });
 
-    users = await modelUser.find({});
-
-    if (users) {
-      users = users.map((user) => {
-        const newUser = {
-          ...user._doc,
-          id: user._id.toString(),
-        };
-        delete newUser._id;
-        delete newUser.password;
-        return newUser;
-      });
-    }
+    await modelUser.findOneAndDelete({ _id: id });
   } catch (err) {
     return cors(
       req,
@@ -34,7 +22,7 @@ export async function GET(req) {
 
   return cors(
     req,
-    NextResponse.json(users, {
+    NextResponse.json("User deleted", {
       status: 200,
       headers: { "Content-Type": "application/json" },
     })

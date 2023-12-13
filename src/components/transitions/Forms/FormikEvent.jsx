@@ -57,7 +57,28 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
   const addEventhandler = async (values) => {
     dispatch(loading(true));
     const file = values.fileImg;
-    const uploadStorage = generalConfig.uploadImageStorageEvent;
+
+    let dataStorage;
+
+    try {
+      const resFeedback = await fetch(
+        "https://pwa-crew-site-demo.vercel.app/api/admin/settings/getStorage"
+      );
+
+      if (resFeedback.ok) {
+        dataStorage = await resFeedback.json();
+      } else {
+        dataStorage = null;
+      }
+    } catch (err) {
+      dataStorage = null;
+    }
+
+    const uploadDynamicStorage = dataStorage?.uploadStorage;
+
+    const uploadStorage = uploadDynamicStorage
+      ? uploadDynamicStorage
+      : generalConfig.uploadImageStorageEvent;
 
     let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 
@@ -141,6 +162,7 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
             return;
           }
         } catch (error) {
+          console.log(error);
           if (!imgSrcMega) {
             dispatch(loading(false));
             dispatch(

@@ -56,12 +56,14 @@ const EventPage = async ({ params: { slug, lang }, edit }) => {
     trl_btnPreviousPage: dict.events.event.btn_previousPage,
   };
 
+  const imageSrc = uploadStorage === "mega" ? `data:image/webp;base64,${targetSrc}` : targetSrc;
+
   return (
     <WrapperSection className={styles["section-detail"]} id="section_detail-event">
       {event.message && (
         <>
           <h1>{title}</h1>
-          <ImgBgBlur src={targetSrc} className={styles["section-detail__img"]} />
+          <ImgBgBlur src={imageSrc} className={styles["section-detail__img"]} />
           <EventItem
             id={eventId}
             title={title}
