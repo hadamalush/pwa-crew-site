@@ -307,3 +307,11 @@ export const newUserSchema = yup.object().shape({
       "Password must be strong"
     ),
 });
+
+export const emailSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Address email is required")
+    .min(3, "At least 3 characters.")
+    .email("Pass valid address email"),
+});
