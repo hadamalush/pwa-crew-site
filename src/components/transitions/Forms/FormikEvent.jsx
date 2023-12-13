@@ -61,7 +61,9 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
     let dataStorage;
 
     try {
-      const resFeedback = await fetch("http://localhost:3000/api/admin/settings/getStorage");
+      const resFeedback = await fetch(
+        "https://pwa-crew-site-demo.vercel.app/api/admin/settings/getStorage"
+      );
 
       if (resFeedback.ok) {
         dataStorage = await resFeedback.json();

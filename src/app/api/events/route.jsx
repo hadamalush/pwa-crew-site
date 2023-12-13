@@ -13,9 +13,12 @@ export async function GET(request) {
   let dataStorage;
 
   try {
-    const resFeedback = await fetch("http://localhost:3000/api/admin/settings/getStorage", {
-      next: { revalidate: 3600 },
-    });
+    const resFeedback = await fetch(
+      "https://pwa-crew-site-demo.vercel.app/api/admin/settings/getStorage",
+      {
+        next: { revalidate: 3600 },
+      }
+    );
 
     if (resFeedback.ok) {
       dataStorage = await resFeedback.json();

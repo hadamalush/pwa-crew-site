@@ -113,9 +113,12 @@ const getInfo = async () => {
   let data;
 
   try {
-    const response = await fetch("http://localhost:3000/api/admin/settings/getAdditionalInfo", {
-      next: { revalidate: 3600 },
-    });
+    const response = await fetch(
+      "https://pwa-crew-site-demo.vercel.app/api/admin/settings/getAdditionalInfo",
+      {
+        next: { revalidate: 3600 },
+      }
+    );
 
     if (response.ok) {
       data = await response.json();

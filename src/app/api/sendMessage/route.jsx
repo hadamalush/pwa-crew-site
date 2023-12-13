@@ -21,7 +21,7 @@ export const POST = async (request) => {
 
   try {
     const resFeedback = await fetch(
-      "http://localhost:3000/api/admin/settings/getAutomaticMessage",
+      "https://pwa-crew-site-demo.vercel.app/api/admin/settings/getAutomaticMessage",
       {
         next: { revalidate: 3600 },
       }

@@ -42,7 +42,7 @@ const getData = cache(async (id) => {
   let data;
 
   const timestamp = Date.now();
-  const apiUrl = `http://localhost:3000/api/events?timestamp=${timestamp}`;
+  const apiUrl = `https://pwa-crew-site-demo.vercel.app/api/events?timestamp=${timestamp}`;
 
   try {
     const response = await fetch(apiUrl, {
