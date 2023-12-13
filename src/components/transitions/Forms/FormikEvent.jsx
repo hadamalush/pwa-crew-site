@@ -57,7 +57,26 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
   const addEventhandler = async (values) => {
     dispatch(loading(true));
     const file = values.fileImg;
-    const uploadStorage = generalConfig.uploadImageStorageEvent;
+
+    let dataStorage;
+
+    try {
+      const resFeedback = await fetch("http://localhost:3000/api/admin/settings/getStorage");
+
+      if (resFeedback.ok) {
+        dataStorage = await resFeedback.json();
+      } else {
+        dataStorage = null;
+      }
+    } catch (err) {
+      dataStorage = null;
+    }
+
+    const uploadDynamicStorage = dataStorage?.uploadStorage;
+
+    const uploadStorage = uploadDynamicStorage
+      ? uploadDynamicStorage
+      : generalConfig.uploadImageStorageEvent;
 
     let imgSrcVercelBlob, imgSrcMega, imgSrcCld;
 

@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { generalConfig } from "@/config/gerenalConfig";
 import { headers } from "next/headers";
-
 import nodemailer from "nodemailer";
 import BrevoTransport from "nodemailer-brevo-transport";
 import { insertLimitByIp } from "@/lib/protection/protection";
@@ -31,7 +30,6 @@ export const POST = async (request) => {
     if (resFeedback.ok) {
       dataFeedback = await resFeedback.json();
     } else {
-      console.log("TUAJ NULL");
       dataFeedback = null;
     }
   } catch (err) {
@@ -41,8 +39,6 @@ export const POST = async (request) => {
 
   const ourEmail = dataFeedback ? dataFeedback?.email : generalConfig.receiveEmailAddresContact;
   const defaultFeedback = dataFeedback ? dataFeedback?.textHTML : generalConfig.defaultReplyMessage;
-
-  console.log(ourEmail, defaultFeedback);
 
   if (
     !email ||
