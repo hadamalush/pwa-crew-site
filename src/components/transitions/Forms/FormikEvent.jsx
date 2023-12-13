@@ -160,6 +160,7 @@ const FormikEvent = ({ className, style, dict, lang, trl_error, variant }) => {
             return;
           }
         } catch (error) {
+          console.log(error);
           if (!imgSrcMega) {
             dispatch(loading(false));
             dispatch(

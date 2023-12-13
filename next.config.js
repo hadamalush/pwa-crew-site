@@ -5,7 +5,7 @@ const nextConfig = {
   },
   images: {
     domains: [
-      "9gncloqefz8xwgjl.public.blob.vercel-storage.com",
+      "4w11jf1advvxokik.public.blob.vercel-storage.com",
       "mega.nz",
       "res.cloudinary.com",
       "cdn.pixabay.com",

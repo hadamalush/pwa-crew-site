@@ -9,12 +9,22 @@ export async function POST(req) {
   let modelStorage;
 
   for (const storage in dataStorage) {
-    if (
-      !dataStorage[storage] ||
-      (dataStorage[storage] !== "cloudinary" &&
-        dataStorage[storage] !== "vercelBlob" &&
-        dataStorage[storage] !== "mega")
-    ) {
+    const reg =
+      dataStorage[storage] !== "cloudinary" &&
+      dataStorage[storage] !== "vercelBlob" &&
+      dataStorage[storage] !== "mega";
+
+    if (storage === "upload" && reg && dataStorage[storage] !== "all") {
+      return cors(
+        req,
+        NextResponse.json("Incorrect data", {
+          status: 422,
+          headers: { "Content-Type": "application/json" },
+        })
+      );
+    }
+
+    if ((!dataStorage[storage] || reg) && storage !== "upload") {
       return cors(
         req,
         NextResponse.json("Incorrect data", {
