@@ -6,6 +6,8 @@ const defaultOptions = {
   credentials: true,
 };
 
+// update 1
+
 function isOriginAllowed(origin, allowed) {
   return Array.isArray(allowed)
     ? allowed.some((o) => isOriginAllowed(origin, o))
