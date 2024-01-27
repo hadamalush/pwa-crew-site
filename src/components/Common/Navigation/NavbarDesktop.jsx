@@ -16,7 +16,7 @@ const NavbarDesktop = ({ dict, lang, className, ...props }) => {
   const dispatch = useDispatch();
   const [quantityNewNotices, setQuantityNewNotices] = useState(null);
   const email = session?.user?.email;
-
+  //update
   const {
     trl_home,
     trl_events,
